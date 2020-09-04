@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+# set -x
 
 helloearth(){
   echo /home/logic/_workspace/preactjs-playlist/scripts/update_shortcut.rc
@@ -45,11 +45,12 @@ start_string = '''
 
 end_string = '# update_by_dir_end'
 
-new_commands_string=new_commands_string+'''
-testing_shortcut(){
+new_commands_content=list(new_commands_content)+[
+  '''testing_shortcut(){
   echo testing_shortcut
 }
 '''
+]
 
 new_commands_string='\n'.join(
   [start_string]+list(new_commands_content)+[end_string]
