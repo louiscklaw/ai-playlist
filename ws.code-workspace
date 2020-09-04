@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../travis-playlist"
+		},
+		{
+			"path": "../../_del/github-pycaret-tryout"
+		},
+		{
+			"path": "../github-playlist"
+		}
+	],
+	"settings": {}
+}
