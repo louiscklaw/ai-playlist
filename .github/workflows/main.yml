@@ -1,9 +1,7 @@
 name: PyCaret AutoML Git Action
-
-on:
+on: 
   push :
-    branches: [ master ]
-
+    branches: [ master ]  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,21 +13,18 @@ jobs:
           DATASET: "juice"
           TARGET: "Purchase"
           USECASE: "classification"
-
-      # - name: Upload model.pkl
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: model
-      #     path: model.pkl
-
-      # - name: Upload exp_github_logs.csv
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: experiment-logs
-      #     path: exp_github_logs.csv
-
-      # - name: Upload logs.log
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: system-logs
-      #     path: logs.log
+      - name: Upload model.pkl
+        uses: actions/upload-artifact@v2
+        with: 
+          name: model
+          path: model.pkl
+      - name: Upload exp_github_logs.csv
+        uses: actions/upload-artifact@v2
+        with: 
+          name: experiment-logs
+          path: exp_github_logs.csv
+      - name: Upload logs.log
+        uses: actions/upload-artifact@v2
+        with: 
+          name: system-logs
+          path: logs.log
