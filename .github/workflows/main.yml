@@ -25,11 +25,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-        
+
       - name: PyCaret AutoML Git Action
         # You may pin to the exact commit or the version.
         # uses: pycaret/pycaret-git-actions@19455008effb8471c6e52c7dac861c8f38d1cf34
-        uses: pycaret/pycaret-git-actions@automl-pycaret2
+        uses: pycaret/pycaret-git-actions@automl
         with:
           # Dataset for Training
           DATASET: # default is juice
