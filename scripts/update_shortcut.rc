@@ -7,7 +7,10 @@ helloearth(){
 }
 
 update_shortcut(){
-  cp ../.env /tmp/.env
+  OWD=$PWD
+  cd /home/logic/_workspace/ai-playlist
+  TMP_DIR=$(mktemp -d)
+  cp ./.env $TMP_DIR/.env
 
 python3 << END
 import os,sys
@@ -69,8 +72,9 @@ with open('/tmp/.env','w') as fo:
 
 END
 
-  cp /tmp/.env ../.env
+  cp $TMP_DIR/.env ./.env
 
+  cd $OWD
 }
 
 new_from(){
