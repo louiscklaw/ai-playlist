@@ -18,7 +18,7 @@ cache:
 script:
   - echo "helloworld"
 
-import:
-  - credentials.yml
-  - .travis-stages.yml
-  - .travis-merger.yml
+# import:
+  # - credentials.yml
+  # - .travis-stages.yml
+  # - .travis-merger.yml
