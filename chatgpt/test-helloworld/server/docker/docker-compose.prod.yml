@@ -1,0 +1,31 @@
+# CREDIT: https://github.com/shren207/nextjs-docker-compose
+services:
+  test:
+    build: .
+    restart: always
+    volumes:
+      - $PWD/app:/app
+    working_dir: /app
+    # ports:
+    #   - 8080:8080
+    # command: sleep infinity
+    command: bash entry.sh
+
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.11tyhelloworld-http.rule=Host(`11tyhelloworld.iamon99.com`)'
+      - 'traefik.http.routers.11tyhelloworld-http.entrypoints=web'
+      - 'traefik.http.routers.11tyhelloworld-http.middlewares=11tyhelloworld-https'
+      - 'traefik.http.middlewares.11tyhelloworld-https.redirectscheme.scheme=https'
+      - 'traefik.http.routers.11tyhelloworld.rule=Host(`11tyhelloworld.iamon99.com`)'
+      - 'traefik.http.routers.11tyhelloworld.entrypoints=websecure'
+      - 'traefik.http.routers.11tyhelloworld.tls.certresolver=myresolver'
+      - 'traefik.http.services.11tyhelloworld.loadbalancer.server.port=8080'
+
+networks:
+  default:
+    external:
+      name: traefik-proxy-network
+
+volumes:
+  node_modules:
