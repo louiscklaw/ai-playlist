@@ -1,0 +1,13 @@
+{
+  "name": "tokenizer-tryout",
+  "version": "1.0.0",
+  "description": "huggingface helloworld",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gitUpdate": "git add . && git commit -m \"update tokenizer-tryout,\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
