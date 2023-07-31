@@ -16,4 +16,8 @@ npm i puppeteer-core \
 # node poe_send_and_reply_test1.js
 # node poe_send_and_reply.js
 # node express-helloworld.js
-node poe_test_preprompt/test1.js
+
+# NOTE: preprompt
+# node poe_test_preprompt/test1.js
+# node poe_test_preprompt/test2.js
+node poe_test_preprompt/test3.js

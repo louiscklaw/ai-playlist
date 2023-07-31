@@ -10,7 +10,7 @@ const { FIREFOX_DATA_DIR } = process.env;
 const { helloworld,
   initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
 } = require('../utils/poe.js');
-const { TEST_IMAGINE_LOUIS } = require('./prompt.js');
+const { TEST_CMHK_LOUIS } = require('./prompt.js');
 
 // helloworld();
 
@@ -44,17 +44,16 @@ const { TEST_IMAGINE_LOUIS } = require('./prompt.js');
 
 
   answer_idx++;
-  var reply = await questionAndAnswer(page,
-    TEST_IMAGINE_LOUIS(),
-    answer_idx);
+  var reply = await questionAndAnswer(page, TEST_CMHK_LOUIS(''), answer_idx);
   assert(reply.toLowerCase().indexOf('yes') >= 0, `reply failed reply:${reply}`);
-
 
   var reply = await questionAndAnswer(page, "What is this person name ?", answer_idx);
   assert(reply.toLowerCase().indexOf('is louis') >= 0, `reply failed, reply:${reply}`);
 
-  await page.waitForTimeout(9999 * 1000);
+  var reply = await questionAndAnswer(page, "Which subject is this person studied in ?", answer_idx);
+  assert(reply.toLowerCase().indexOf('electronic and communication engineering') >= 0, `reply failed, reply:${reply}`);
 
+  await page.waitForTimeout(9999 * 1000);
 
   console.log('test done');
 
