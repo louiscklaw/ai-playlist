@@ -136,9 +136,9 @@ async function questionAndAnswer(page, question, answer_idx) {
   var reply = await questionAndAnswer(page, "say 'hello 3' to me", answer_idx);
   assert(reply.toLowerCase().indexOf('hello 3') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 3')}`);
 
-  await page.waitForTimeout(9999 * 1000);
+  // await page.waitForTimeout(9999 * 1000);
 
-  console.log('test done'); z
+  console.log('test done'); 
 
   await page.close();
   await browser.close();
