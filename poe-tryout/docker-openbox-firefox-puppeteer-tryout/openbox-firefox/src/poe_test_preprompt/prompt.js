@@ -5,7 +5,7 @@ const CMHK_WORK_EXP = `Louis had worked in China Mobile Hong Kong with position 
 const SWIR_WORK_EXP = `Louis had worked in Sierrawireless with position Validation engineer and Senior Validation Engineer.`
 const TECH_STACK = `Louis like javascript programming, python programming, machine learning.`
 const HOBBIES_1 = `Louis do programming, electronic project (hardware/software) when he is free.`
-const HOBBIES_2 = `Louis love take photograph, hiking when free.`
+const HOBBIES_2 = `Louis love take photograph, go out for a walk when free.`
 
 const TEST_IMAGINE_LOUIS = (append = '') => `
 ${PREAMBLE}

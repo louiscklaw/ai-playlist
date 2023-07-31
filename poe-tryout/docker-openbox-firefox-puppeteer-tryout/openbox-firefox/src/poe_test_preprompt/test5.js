@@ -58,8 +58,12 @@ const { TEST_LOUIS_STACK } = require('./prompt.js');
   assert(reply.toLowerCase().indexOf('sierrawireless') >= 0, `reply failed, reply:${reply}`);
 
   var reply = await questionAndAnswer(page, "What louis love when louis free ?", answer_idx);
+  assert(reply.toLowerCase().indexOf('programming') >= 0, `reply failed, reply:${reply}`);
+  assert(reply.toLowerCase().indexOf('hardware') >= 0, `reply failed, reply:${reply}`);
+  assert(reply.toLowerCase().indexOf('software') >= 0, `reply failed, reply:${reply}`);
+  assert(reply.toLowerCase().indexOf('photographs') >= 0, `reply failed, reply:${reply}`);
 
-  await page.waitForTimeout(9999 * 1000);
+  // await page.waitForTimeout(9999 * 1000);
 
   console.log('test done');
 
