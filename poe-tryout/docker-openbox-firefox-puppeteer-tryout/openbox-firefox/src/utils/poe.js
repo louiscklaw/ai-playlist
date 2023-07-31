@@ -50,7 +50,16 @@ async function questionAndAnswer(page, question, answer_idx) {
   var current_answer_bubble_length = await countAnswerBubble(page);
   var new_answer_bubble_length = 0;
 
-  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', question, { delay: 0 });
+  var list_lines = question.split('\n');
+  for (var i = 0; i < list_lines.length; i++) {
+
+    await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', list_lines[i], { delay: 1 });
+    await page.keyboard.down('ShiftLeft');
+    await page.keyboard.down('Enter');
+    await page.keyboard.up('Enter');
+    await page.keyboard.up('ShiftLeft');
+
+  }
 
   console.log('wait for send button ready');
   await page.waitForSelector('button[class*="sendButton"]:not([disabled])');

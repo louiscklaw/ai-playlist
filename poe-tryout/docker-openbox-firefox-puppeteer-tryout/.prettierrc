@@ -20,13 +20,6 @@
         "*.html"
       ],
       "options": {}
-    },
-    {
-      "files": [
-        "*.{j,t}sx",
-        "*.{j,t}s"
-      ],
-      "options": {}
     }
   ]
 }

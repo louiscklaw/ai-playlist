@@ -22,4 +22,7 @@ npm i puppeteer-core \
 # node poe_test_preprompt/test2.js
 # node poe_test_preprompt/test3.js
 # node poe_test_preprompt/test4.js
-node poe_test_preprompt/test5.js
+# node poe_test_preprompt/test5.js
+# node summarize/test1.js
+# node summarize/test2.js
+node summarize/test3.js
