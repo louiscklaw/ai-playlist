@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+var assert = require('chai').assert
 
 async function initChatGptPage(page) {
   await page.goto('https://poe.com/ChatGPT');
