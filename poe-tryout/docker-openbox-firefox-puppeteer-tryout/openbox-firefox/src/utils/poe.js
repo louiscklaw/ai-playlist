@@ -7,7 +7,7 @@ async function clearChatHistory(page) {
   // NOTE: clear chat history
   // ChatBreakButton_button__
   await page.waitForSelector('textarea[placeholder="Talk to ChatGPT on Poe"]');
-  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', "start a new chat", { delay: 50 });
+  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', "Forget everything and start a fresh talk", { delay: 50 });
   await page.waitForSelector('[class*="sendButton"]');
   await page.evaluate(() => { document.querySelector('[class*="sendButton"]').click(); });
 
@@ -48,10 +48,13 @@ async function questionAndAnswer(page, question, answer_idx) {
   var current_answer_bubble_length = await countAnswerBubble(page);
   var new_answer_bubble_length = 0;
 
-  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', question, { delay: 50 });
-  await page.waitForSelector('[class*="sendButton"]')
+  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', question, { delay: 1 });
+
+  console.log('wait for send button ready');
+  await page.waitForSelector('button[class*="sendButton"]:not([disabled])');
+  console.log('press send button');
   await page?.evaluate(() => {
-    document.querySelector('[class*="sendButton"]').click()
+    document.querySelector('button[class*="sendButton"]:not([disabled])').click()
   })
 
   var reply = '...';
@@ -71,8 +74,20 @@ async function questionAndAnswer(page, question, answer_idx) {
   console.log({ current_answer_bubble_length, new_answer_bubble_length });
 
   // NOTE: wait for text type complete
-  await page.waitForTimeout(1 * 1000);
-  for (var countdown = 10; countdown > 0; countdown--) {
+  await page.waitForTimeout(3 * 1000);
+  var old_reply = '';
+  const isTheBotStillTyping = (reply, old_reply) => reply != old_reply  // return true if the bot is typing
+
+  var first_check = true;
+  const isFirstCheck = () => {
+    if (first_check) {
+      first_check = false;
+      return true;
+    }
+    return first_check
+  }
+
+  for (var countdown = 60; countdown > 0; countdown--) {
     reply = await page.evaluate((answer_idx) => {
       return document.querySelectorAll('[class*="Message_botMessageBubble__"]')
         .item(answer_idx)
@@ -80,10 +95,27 @@ async function questionAndAnswer(page, question, answer_idx) {
     }, new_answer_bubble_length - 1);
 
     if (countdown > 0 && reply.trim() == '...') {
+      // bot not answer yet
       console.log({ countdown, reply });
       await page.waitForTimeout(1 * 1000);
     } else {
-      break
+      if (isFirstCheck()) {
+        console.log('first check found');
+        old_reply = reply;
+        await page.waitForTimeout(1 * 1000);
+      } else {
+        // is the bot still typing ?
+        if (isTheBotStillTyping(reply, old_reply)) {
+          old_reply = reply;
+          console.log('bot still typing')
+          // console.log({ countdown, reply });
+          await page.waitForTimeout(3 * 1000);
+        } else {
+          // bot not typing
+          console.log('bot typing done')
+          break
+        }
+      }
     }
   }
 
