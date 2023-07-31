@@ -10,7 +10,7 @@ const { FIREFOX_DATA_DIR } = process.env;
 const { helloworld,
   initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
 } = require('../utils/poe.js');
-const { IMAGINE_LOUIS } = require('./prompt.js');
+const { TEST_IMAGINE_LOUIS } = require('./prompt.js');
 
 // helloworld();
 
@@ -45,7 +45,7 @@ const { IMAGINE_LOUIS } = require('./prompt.js');
 
   answer_idx++;
   var reply = await questionAndAnswer(page,
-    IMAGINE_LOUIS,
+    TEST_IMAGINE_LOUIS,
     answer_idx);
   assert(reply.toLowerCase().indexOf('yes') >= 0, `reply failed reply:${reply}`);
 
