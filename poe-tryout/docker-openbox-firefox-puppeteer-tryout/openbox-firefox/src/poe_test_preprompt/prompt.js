@@ -1,5 +1,6 @@
 const PREAMBLE = `Imagine a hypothetical person named Louis who lives in Hong Kong.`
-const POSTAMBLE = `When you are done, no need to reply me details. Reply me with yes.`
+const END_WITH_YES = `When you are done, no need to reply me details. Reply me with yes.`
+
 const STUDIES = `Louis graduated in the City University of Hong Kong with bachelor degree in Electronic and Communication Engineering.`
 const CMHK_WORK_EXP = `Louis had worked in China Mobile Hong Kong with position Engineer.`
 const SWIR_WORK_EXP = `Louis had worked in Sierrawireless with position Validation engineer and Senior Validation Engineer.`
@@ -10,7 +11,7 @@ const HOBBIES_2 = `Louis love take photograph, go out for a walk when free.`
 const TEST_IMAGINE_LOUIS = (append = '') => `
 ${PREAMBLE}
 ${append}
-${POSTAMBLE}
+${END_WITH_YES}
 `.trim().replace(/\n/g, '');
 
 const TEST_STUDENT_LOUIS = (append = '') =>
