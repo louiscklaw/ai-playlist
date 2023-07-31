@@ -1,0 +1,22 @@
+services:
+  openbox-firefox:
+    image: openbox-firefox-ubuntu
+    ports:
+      - 6080:6080
+      - 3000:3000
+    privileged: true
+    volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      - ./share/firefox-user-data:/share/firefox-user-data
+      - ./openbox-firefox/src:/app
+    environment:
+      - TZ=Asia/Hong_Kong
+
+  bait:
+    build: bait
+    volumes:
+      - ./bait/src:/app
+    working_dir: /app
+    ports:
+      - 8080:8080
+    # command: sleep infinity

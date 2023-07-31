@@ -1,0 +1,32 @@
+FROM openbox-firefox-ubuntu
+
+EXPOSE 5900
+
+ENV HOME /root
+ENV TZ Etc/UTC
+ENV SHELL /bin/bash
+ENV PS1='# '
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PASSWORD="root"
+
+RUN apt install -qqy \
+ supervisor \
+ openbox tint2 \
+ pcmanfm xfce4-terminal procps curl telnet iproute2
+
+# NOTE: vnc setup start
+RUN apt install -qqy \
+ tigervnc-standalone-server
+
+RUN mkdir -p /root/.vnc
+RUN echo 123456 | vncpasswd -f > /root/.vnc/passwd
+RUN chmod 600 /root/.vnc/passwd
+# NOTE: vnc setup done
+
+ADD etc/xdg/pcmanfm /root/.config/pcmanfm
+ADD etc /etc
+
+# # original openbox docker ends here
+
+# launch line
+# CMD ["/usr/bin/supervisord","-c","/etc/supervisord-screen.conf"]

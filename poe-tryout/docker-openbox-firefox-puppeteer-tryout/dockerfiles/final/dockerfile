@@ -1,0 +1,31 @@
+FROM openbox-firefox-ubuntu
+
+ARG ANDROID_API_LEVEL=25
+ENV ANDROID_API_LEVEL ${ANDROID_API_LEVEL}
+
+COPY ./etc/ /etc/
+
+ADD ./etc/run.sh /etc/run.sh
+RUN chmod +x /etc/run.sh
+
+# WORKDIR /root
+
+# NOTE: chrome may fail running root with user-data-dir and --no-sandbox option.
+# NOTE: finding out why
+
+
+# RUN useradd logic
+# RUN mkdir -p /home/logic
+# WORKDIR /home/logic
+# USER 1000:1000
+
+RUN groupadd logic
+RUN useradd -u 1000 -g logic -d /home/logic -s /bin/bash -p $(echo blablabla | openssl passwd -1 -stdin) logic
+WORKDIR /home/logic
+
+# RUN cp /root/.bashrc /home/logic/.bashrc
+# RUN touch /home/logic/.bashrc
+RUN chown 1000:1000 -R /home/logic
+# USER 1000:1000
+
+CMD ["/etc/run.sh"]

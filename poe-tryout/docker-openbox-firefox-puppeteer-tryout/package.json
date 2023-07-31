@@ -1,0 +1,14 @@
+{
+  "name": "docker-openbox-firefox-puppeteer-tryout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker_rebuild": "docker compose up -d",
+    "gitUpdate": "git add . && git commit -m\"update docker-openbox-firefox-puppeteer-tryout,\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
