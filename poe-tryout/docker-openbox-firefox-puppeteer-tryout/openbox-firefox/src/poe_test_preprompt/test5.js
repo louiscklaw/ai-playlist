@@ -42,7 +42,6 @@ const { TEST_LOUIS_STACK } = require('./prompt.js');
   await clearChatHistory(page);
   await clearModalBox(page);
 
-
   answer_idx++;
   var reply = await questionAndAnswer(page, TEST_LOUIS_STACK(''), answer_idx);
   assertKeyWord(reply, 'yes');
