@@ -63,9 +63,9 @@ const { getRandomInt } = require('../../utils/getRandomInt');
     // // var reply = await questionAndAnswer(page, helloworld_louis_paragraph(), answer_idx);
     // // assertKeyWord(reply, 'louis');
 
-    await page.waitForTimeout(9999 * 1000);
+    // await page.waitForTimeout(9999 * 1000);
 
-    // console.log(chalk.green('test pass'));
+    console.log(chalk.green('test pass'));
 
   } catch (error) {
     console.log(error);
