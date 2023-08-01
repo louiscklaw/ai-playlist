@@ -6,9 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docker_rebuild": "docker compose up -d",
-    "gitUpdate": "git add . && git commit -m\"update docker-openbox-firefox-puppeteer-tryout,\""
+    "gitUpdate": "git add . && git commit -m\"update docker-openbox-firefox-puppeteer-tryout,\"",
+    "update_readme": "github-markdown README.md > docs/index.html"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "markdown-to-html": "^0.0.13"
+  }
 }

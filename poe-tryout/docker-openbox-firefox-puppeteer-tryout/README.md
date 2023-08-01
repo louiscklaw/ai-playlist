@@ -1,3 +1,13 @@
+## Flow (planning)
+
+```mermaid
+  graph TD;
+      A[fetch jobs] -- jobs --> B[Query poe.com];
+      B[initialize louis background]-->D[draft email and CV];
+      C-->D;
+```
+
+
 ### preprompt
 
 #### test 1
