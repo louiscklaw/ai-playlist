@@ -10,7 +10,8 @@ var d_preset_role = {};
 preset_role.forEach((v) => {
   d_preset_role[v.act] = {
     prompt: v.prompt,
-    hello: 'world'
+    source: 'from preset_role.json',
+    hello: 'world',
   };
 })
 
