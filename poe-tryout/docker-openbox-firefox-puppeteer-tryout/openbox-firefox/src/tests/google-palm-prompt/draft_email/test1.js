@@ -1,18 +1,17 @@
 const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 // var assert = require('chai').assert
-const { UTILS_ROOT } = require('../../../config')
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
 
 const {
-  initGooglePaLMPage,
+  initChatGptPage,
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
   assertKeyWord
-} = require(`${UTILS_ROOT}/google-palm`);
+} = require('../../../utils/chatGPT');
 // const { TEST_LOUIS_STACK } = require('./prompt');
 const {
   TASK_DESCRIPTION,
@@ -43,7 +42,7 @@ const {
 
   await page.waitForTimeout(10 * 1000);
 
-  await initGooglePaLMPage(page);
+  await initChatGptPage(page);
   await clearChatHistory(page);
   await clearModalBox(page);
 
