@@ -29,9 +29,12 @@ npm i puppeteer-core \
 # node tests/tasks/summarize/test3.js
 # node tests/tasks/summarize/test4.js
 
-node tests/tasks/role_play/test2.js
+
+# node tests/tasks/role_play/test2.js
 # node tests/tasks/role_play/test1.js
 
 # node tests/markdown_content/test1.js
 
 # node tests/tasks/draft_email/test1.js
+
+node tests/google-palm-prompt/test1.js

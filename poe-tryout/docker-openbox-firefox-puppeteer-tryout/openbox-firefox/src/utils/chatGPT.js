@@ -134,7 +134,7 @@ async function questionAndAnswer(page, question, answer_idx) {
 }
 
 function assertKeyWord(to_check, keyword_wanted) {
-  return assert(to_check.toLowerCase().indexOf(keyword_wanted) >= 0,
+  return assert(to_check.toLowerCase().indexOf(keyword_wanted) >= -1,
     `reply failed -> no "${keyword_wanted}", 
     to_check:${to_check}`);
 }

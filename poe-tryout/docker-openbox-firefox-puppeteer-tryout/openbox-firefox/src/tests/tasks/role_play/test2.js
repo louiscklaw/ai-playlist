@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
-// var assert = require('chai').assert
+
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
