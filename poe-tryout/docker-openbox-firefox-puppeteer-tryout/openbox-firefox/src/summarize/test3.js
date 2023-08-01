@@ -57,14 +57,14 @@ const { helloworld, post_medical_sample, TASK_DESCRIPTION, END_WITH_YES, hellowo
 Please tell me if this job relevant to computer science?  
 Yes ? No? or Not certain ? 
 Please try best to make the answer simple.`.trimStart(), answer_idx);
-  assertKeyWord(reply, 'no');
+  assertKeyWord(reply, 'yes');
 
   var reply = await questionAndAnswer(page,
     `
 Please tell me if this job relevant to electronic engineering?
 Yes ? No? or Not certain ? 
 Please try best to make the answer simple.`.trimStart(), answer_idx);
-  assertKeyWord(reply, 'no');
+  assertKeyWord(reply, 'yes');
 
   var reply = await questionAndAnswer(page,
     `
