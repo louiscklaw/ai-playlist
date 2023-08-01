@@ -37,4 +37,8 @@ npm i puppeteer-core \
 
 # node tests/tasks/draft_email/test1.js
 
-node tests/google-palm-prompt/test1.js
+# node tests/google-palm-prompt/test1.js
+# node tests/google-palm-prompt/summarize/test1.js
+# node tests/google-palm-prompt/summarize/test2.js
+# node tests/google-palm-prompt/summarize/test3.js
+node tests/google-palm-prompt/summarize/test4.js

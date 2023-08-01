@@ -8,9 +8,9 @@
 ```
 
 
-### preprompt
+### preprompt tryout
 
-#### test 1
+### test 1 (testing on chatGPT)
 preprompt
 start a fresh talk
 remember you a person live in hong kong named louis
@@ -19,6 +19,9 @@ question
 what is this person name ?
 
 ![](./docs/test_preprompt.gif)
+
+### google-palm tryout
+![](./docs/google-palm.gif)
 
 ### start
 

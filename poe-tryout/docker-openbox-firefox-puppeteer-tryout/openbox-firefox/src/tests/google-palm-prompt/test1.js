@@ -2,6 +2,10 @@ const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 // var assert = require('chai').assert
 
+const { SRC_ROOT, UTILS_ROOT } = require('../../config.js');
+
+const { getRandomInt } = require(`${UTILS_ROOT}/getRandomInt`);
+
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
 
@@ -13,8 +17,7 @@ const {
   initGooglePaLMPage,
   questionAndAnswer,
   assertKeyWord
-} = require('../../utils/google-palm');
-const { getRandomInt } = require('../../utils/getRandomInt');
+} = require(`${UTILS_ROOT}/google-palm`);
 
 // const {
 //   test_markdown_content, TASK_DESCRIPTION
