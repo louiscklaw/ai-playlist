@@ -54,7 +54,7 @@ $ ./test.sh
 
 ### References:
   - https://github.com/f/awesome-chatgpt-prompts
-  - https://github.com/leob/express-mongo-rest-starter
+  - https://florianholzapfel.github.io/express-restify-mongoose
 
 ### logs
   - 2023-08-01: add expres database to store log
