@@ -11,7 +11,7 @@ const {
   clearModalBox,
   questionAndAnswer,
   assertKeyWord
-} = require('../../../utils/poe');
+} = require('../../../utils/chatGPT');
 // const { TEST_LOUIS_STACK } = require('./prompt');
 const { helloworld, post_medical_sample,
   TASK_DESCRIPTION, END_WITH_YES, helloworld_louis_paragraph, post_hardware_engineer_sample } = require('./prompt');

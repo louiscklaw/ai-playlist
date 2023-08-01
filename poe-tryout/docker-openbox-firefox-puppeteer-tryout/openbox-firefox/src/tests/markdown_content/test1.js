@@ -11,7 +11,7 @@ const {
   clearModalBox,
   questionAndAnswer,
   assertKeyWord
-} = require('../../utils/poe');
+} = require('../../utils/chatGPT');
 
 const {
   test_markdown_content, TASK_DESCRIPTION
