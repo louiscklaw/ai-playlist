@@ -41,4 +41,7 @@ npm i puppeteer-core \
 # node tests/google-palm-prompt/summarize/test1.js
 # node tests/google-palm-prompt/summarize/test2.js
 # node tests/google-palm-prompt/summarize/test3.js
-node tests/google-palm-prompt/summarize/test4.js
+# node tests/google-palm-prompt/summarize/test4.js
+
+# node tests/google-palm-prompt/role-play/test1.js
+node tests/google-palm-prompt/role-play/test2.js
