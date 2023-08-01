@@ -45,3 +45,4 @@ $ ./test.sh
 
 ### References:
 https://github.com/f/awesome-chatgpt-prompts
+https://github.com/leob/express-mongo-rest-starter
