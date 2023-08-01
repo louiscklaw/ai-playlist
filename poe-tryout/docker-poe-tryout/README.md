@@ -43,6 +43,14 @@ $ ./test.sh
 ```
 
 
+### high level design
+  1. fetch (HLD)
+  1. draft (HLD)
+  1. review (HLD)
+  1. send (HLD)
+
+
 ### References:
 https://github.com/f/awesome-chatgpt-prompts
 https://github.com/leob/express-mongo-rest-starter
+
