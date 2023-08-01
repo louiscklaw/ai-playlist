@@ -25,4 +25,12 @@ npm i puppeteer-core \
 # node poe_test_preprompt/test5.js
 # node summarize/test1.js
 # node summarize/test2.js
-node summarize/test3.js
+
+# node tests/tasks/summarize/test1.js
+# node tests/tasks/summarize/test2.js
+# node tests/tasks/summarize/test3.js
+# node tests/tasks/summarize/test4.js
+
+node tests/markdown_content/test1.js
+
+# node tests/tasks/draft_email/test1.js

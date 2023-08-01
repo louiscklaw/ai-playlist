@@ -139,7 +139,8 @@ function assertKeyWord(to_check, keyword_wanted) {
     to_check:${to_check}`);
 }
 
-function helloworld() {
+function helloworld(test_call = '') {
+  console.log(test_call);
   console.log('helloworld');
 }
 

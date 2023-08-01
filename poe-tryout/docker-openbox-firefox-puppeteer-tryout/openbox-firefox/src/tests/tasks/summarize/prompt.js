@@ -86,7 +86,7 @@ We offer attractive remuneration package including medical scheme, discretionary
 
 const TASK_DESCRIPTION = () => `
 Please,
-  you will understand and help me to summarize text I inputted.
+you will understand and help me to summarize text I inputted.
 `.trim()
 
 function helloworld() {
