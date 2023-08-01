@@ -51,6 +51,10 @@ $ ./test.sh
 
 
 ### References:
-https://github.com/f/awesome-chatgpt-prompts
-https://github.com/leob/express-mongo-rest-starter
+  - https://github.com/f/awesome-chatgpt-prompts
+  - https://github.com/leob/express-mongo-rest-starter
 
+### logs
+  - 2023-08-01: add expres database to store log
+    - draft google-palm support
+    - update pre-prompt
