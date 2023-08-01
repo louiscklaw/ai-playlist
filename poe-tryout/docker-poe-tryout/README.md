@@ -28,8 +28,10 @@ what is this person name ?
 ```bash
 # build openbox-ubuntu image
 $ ./build.sh
-
 $ docker compose up -d
+
+# mongo-express always cannot connect to mongo at start, manually restart
+$ docker compose restart mongo-express
 ```
 
 ### to run script inside src directory
