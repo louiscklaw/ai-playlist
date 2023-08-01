@@ -1,0 +1,25 @@
+{
+  "name": "awesome-chatgpt-prompts",
+  "version": "1.0.0",
+  "description": "<p align=\"center\"><h1>🧠 Awesome ChatGPT Prompts</h1></p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "csv_to_json": "node ./csv_to_json.js",
+    "gitUpdate": "git add . && git commit -m\"update preset prompt,\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louiscklaw/awesome-chatgpt-prompts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/louiscklaw/awesome-chatgpt-prompts/issues"
+  },
+  "homepage": "https://github.com/louiscklaw/awesome-chatgpt-prompts#readme",
+  "dependencies": {
+    "convert-csv-to-json": "^2.0.0"
+  }
+}

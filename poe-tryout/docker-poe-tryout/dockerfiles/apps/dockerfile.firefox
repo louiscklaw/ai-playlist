@@ -1,0 +1,17 @@
+FROM openbox-firefox-ubuntu
+
+
+RUN apt install -y software-properties-common
+
+RUN add-apt-repository -y ppa:mozillateam/ppa
+
+RUN  echo ' \n\
+Package: * \n\
+Pin: release o=LP-PPA-mozillateam \n\
+Pin-Priority: 1001 \n\
+' | tee /etc/apt/preferences.d/mozilla-firefox
+
+# # echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+RUN apt update
+RUN apt install -y firefox

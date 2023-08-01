@@ -1,0 +1,29 @@
+FROM openbox-firefox-ubuntu
+
+ENV NOVNC_VERSION="1.4.0" \
+    WEBSOCKIFY_VERSION="0.11.0" \
+    OPT_PATH="/opt"
+
+RUN apt install -qqy --no-install-recommends \
+  wget curl git zip unzip
+
+RUN wget -nv -O noVNC.zip "https://github.com/novnc/noVNC/archive/refs/tags/v${NOVNC_VERSION}.zip"
+RUN unzip -x noVNC.zip
+RUN rm noVNC.zip
+RUN mv noVNC-${NOVNC_VERSION} ${OPT_PATH}/noVNC
+
+RUN wget -nv -O websockify.zip "https://github.com/novnc/websockify/archive/refs/tags/v${WEBSOCKIFY_VERSION}.zip"
+RUN unzip -x websockify.zip
+RUN mv websockify-${WEBSOCKIFY_VERSION} ${OPT_PATH}/noVNC/utils/websockify
+RUN rm websockify.zip
+RUN ln ${OPT_PATH}/noVNC/vnc.html ${OPT_PATH}/noVNC/index.html
+
+ENV DISPLAY=:0 \
+    SCREEN_NUMBER=0 \
+    SCREEN_WIDTH=1024 \
+    SCREEN_HEIGHT=768 \
+    SCREEN_DEPTH=24+32 \
+    VNC_PORT=5900 \
+    WEB_VNC_PORT=6080
+
+EXPOSE 5900 6080
