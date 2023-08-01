@@ -38,3 +38,7 @@ $ docker compose up -d
 $ cd /app
 $ ./test.sh
 ```
+
+
+### References:
+https://github.com/f/awesome-chatgpt-prompts
