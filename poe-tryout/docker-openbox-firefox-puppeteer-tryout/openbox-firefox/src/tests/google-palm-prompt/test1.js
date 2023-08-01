@@ -57,12 +57,6 @@ const { getRandomInt } = require('../../utils/getRandomInt');
     var reply = await questionAndAnswer(page, `say 'hello 3' to me`, answer_idx);
     assertKeyWord(reply, `hello 3`);
 
-    // var reply = await questionAndAnswer(page, test_markdown_content, answer_idx);
-    // console.log({ reply });
-
-    // // var reply = await questionAndAnswer(page, helloworld_louis_paragraph(), answer_idx);
-    // // assertKeyWord(reply, 'louis');
-
     // await page.waitForTimeout(9999 * 1000);
 
     console.log(chalk.green('test pass'));
