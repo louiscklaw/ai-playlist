@@ -9,7 +9,7 @@ const { FIREFOX_DATA_DIR } = process.env;
 
 const { helloworld,
   initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
-} = require('./utils/poe.js');
+} = require('./utils/poe');
 
 // helloworld();
 

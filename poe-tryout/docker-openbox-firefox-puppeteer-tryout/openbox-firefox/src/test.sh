@@ -18,19 +18,17 @@ npm i puppeteer-core \
 # node express-helloworld.js
 
 # NOTE: preprompt
-# node poe_test_preprompt/test1.js
-# node poe_test_preprompt/test2.js
-# node poe_test_preprompt/test3.js
-# node poe_test_preprompt/test4.js
-# node poe_test_preprompt/test5.js
-# node summarize/test1.js
-# node summarize/test2.js
+# node tests/poe_test_preprompt/test1.js
+# node tests/poe_test_preprompt/test2.js
+# node tests/poe_test_preprompt/test3.js
+# node tests/poe_test_preprompt/test4.js
+# node tests/poe_test_preprompt/test5.js
 
 # node tests/tasks/summarize/test1.js
 # node tests/tasks/summarize/test2.js
 # node tests/tasks/summarize/test3.js
 # node tests/tasks/summarize/test4.js
 
-node tests/markdown_content/test1.js
+# node tests/markdown_content/test1.js
 
 # node tests/tasks/draft_email/test1.js

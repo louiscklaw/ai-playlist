@@ -12,11 +12,11 @@ const {
   questionAndAnswer,
   assertKeyWord
 } = require('../../../utils/poe');
-// const { TEST_LOUIS_STACK } = require('./prompt.js');
+// const { TEST_LOUIS_STACK } = require('./prompt');
 const {
   TASK_DESCRIPTION,
   helloworld_louis_paragraph
-} = require('./prompt.js');
+} = require('./prompt');
 
 // start
 (async () => {

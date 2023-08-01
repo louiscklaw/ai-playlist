@@ -9,8 +9,8 @@ const { FIREFOX_DATA_DIR } = process.env;
 
 const { helloworld,
   initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer, assertKeyWord
-} = require('../utils/poe.js');
-const { TEST_LOUIS_STACK } = require('./prompt.js');
+} = require('../../utils/poe');
+const { TEST_LOUIS_STACK } = require('./prompt');
 
 // helloworld();
 

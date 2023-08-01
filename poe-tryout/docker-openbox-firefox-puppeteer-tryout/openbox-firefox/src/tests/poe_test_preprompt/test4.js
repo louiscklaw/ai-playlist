@@ -9,8 +9,8 @@ const { FIREFOX_DATA_DIR } = process.env;
 
 const { helloworld,
   initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
-} = require('../utils/poe.js');
-const { TEST_SWIR_LOUIS } = require('./prompt.js');
+} = require('../../utils/poe');
+const { TEST_SWIR_LOUIS } = require('./prompt');
 
 // helloworld();
 
@@ -57,9 +57,9 @@ const { TEST_SWIR_LOUIS } = require('./prompt.js');
   assert(reply.toLowerCase().indexOf('hong kong') >= 0, `reply failed, reply:${reply}`);
   assert(reply.toLowerCase().indexOf('sierrawireless') >= 0, `reply failed, reply:${reply}`);
 
-  await page.waitForTimeout(9999 * 1000);
+  // await page.waitForTimeout(9999 * 1000);
 
-  console.log('test done');
+  console.log('test pass');
 
   await page.close();
   await browser.close();

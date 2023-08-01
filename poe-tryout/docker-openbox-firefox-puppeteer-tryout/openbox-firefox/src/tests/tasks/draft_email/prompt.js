@@ -18,7 +18,7 @@ you will understand and help me to draft a email to someone with the information
 `.trim()
 
 function helloworld() {
-  console.log('helloworld from prompt.js');
+  console.log('helloworld from prompt');
   return 'helloworld'
 }
 

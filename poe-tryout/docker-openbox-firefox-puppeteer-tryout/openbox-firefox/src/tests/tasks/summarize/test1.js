@@ -12,9 +12,9 @@ const {
   questionAndAnswer,
   assertKeyWord
 } = require('../../../utils/poe');
-// const { TEST_LOUIS_STACK } = require('./prompt.js');
+// const { TEST_LOUIS_STACK } = require('./prompt');
 const { helloworld, post_medical_sample,
-  TASK_DESCRIPTION, END_WITH_YES, helloworld_louis_paragraph } = require('./prompt.js');
+  TASK_DESCRIPTION, END_WITH_YES, helloworld_louis_paragraph } = require('./prompt');
 
 // start
 (async () => {
