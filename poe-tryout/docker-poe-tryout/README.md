@@ -60,4 +60,6 @@ $ ./test.sh
   - 2023-08-01: add expres database to store log
     - draft google-palm support
     - update pre-prompt
-    
+
+### TODO:
+  - docker-compse.production.yml
