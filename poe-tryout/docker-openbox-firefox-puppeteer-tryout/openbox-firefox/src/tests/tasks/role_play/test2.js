@@ -1,7 +1,6 @@
 const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 
-
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
 
@@ -10,14 +9,10 @@ const {
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  assertKeyWord
+  assertKeyWord,
 } = require('../../../utils/chatGPT');
 
-const {
-  TASK_DESCRIPTION,
-  helloworld_louis_paragraph,
-  d_preset_role,
-} = require('./prompt');
+const { TASK_DESCRIPTION, helloworld_louis_paragraph, d_preset_role } = require('./prompt');
 
 // start
 (async () => {
@@ -35,7 +30,7 @@ const {
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  session_retry = true;
 
   while (session_retry) {
     session_retry = false;
@@ -48,7 +43,6 @@ const {
   await clearModalBox(page);
 
   try {
-
     answer_idx++;
     var reply = await questionAndAnswer(page, d_preset_role['SQL terminal'].prompt, answer_idx);
     // NOTE: i am not sure what will gpt generate, currently just check Product is good enough
@@ -60,15 +54,10 @@ const {
     // await page.waitForTimeout(9999 * 1000);
 
     console.log(chalk.green('test pass'));
-
-
   } catch (error) {
     console.log(error);
-
   } finally {
-
     await page.close();
     await browser.close();
   }
-
 })();

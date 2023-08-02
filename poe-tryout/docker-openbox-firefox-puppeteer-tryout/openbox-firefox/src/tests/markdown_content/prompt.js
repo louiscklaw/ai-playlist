@@ -11,14 +11,15 @@ const test_markdown_content = `
     - Hong Kong
   - branch 2
     - Japan
-`
+`;
 
-const TASK_DESCRIPTION = () => `
+const TASK_DESCRIPTION = () =>
+  `
 Please,
 you will understand and summarize the text I inputted.
-`.trim()
+`.trim();
 
 module.exports = {
   test_markdown_content,
-  TASK_DESCRIPTION
-}
+  TASK_DESCRIPTION,
+};

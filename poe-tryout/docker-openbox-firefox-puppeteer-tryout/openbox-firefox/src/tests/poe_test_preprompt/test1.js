@@ -1,14 +1,18 @@
 const puppeteer = require('puppeteer-core');
 // const chalk = require('chalk');
 
-var assert = require('chai').assert
+var assert = require('chai').assert;
 
 require('dotenv').config();
 
 const { FIREFOX_DATA_DIR } = process.env;
 
-const { helloworld,
-  initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
+const {
+  helloworld,
+  initChatGptPage,
+  clearChatHistory,
+  clearModalBox,
+  questionAndAnswer,
 } = require('../../utils/chatGPT');
 const { TEST_IMAGINE_LOUIS } = require('./prompt');
 
@@ -30,7 +34,7 @@ const { TEST_IMAGINE_LOUIS } = require('./prompt');
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  session_retry = true;
 
   while (session_retry) {
     session_retry = false;
@@ -42,15 +46,11 @@ const { TEST_IMAGINE_LOUIS } = require('./prompt');
   await clearChatHistory(page);
   await clearModalBox(page);
 
-
   answer_idx++;
-  var reply = await questionAndAnswer(page,
-    TEST_IMAGINE_LOUIS(),
-    answer_idx);
+  var reply = await questionAndAnswer(page, TEST_IMAGINE_LOUIS(), answer_idx);
   assert(reply.toLowerCase().indexOf('yes') >= 0, `reply failed reply:${reply}`);
 
-
-  var reply = await questionAndAnswer(page, "What is this person name ?", answer_idx);
+  var reply = await questionAndAnswer(page, 'What is this person name ?', answer_idx);
   assert(reply.toLowerCase().indexOf('is louis') >= 0, `reply failed, reply:${reply}`);
 
   // await page.waitForTimeout(9999 * 1000);

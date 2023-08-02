@@ -1,4 +1,4 @@
-var assert = require('chai').assert
+var assert = require('chai').assert;
 
 async function initChatGptPage(page) {
   await page.goto('https://poe.com/ChatGPT');
@@ -9,18 +9,21 @@ async function clearChatHistory(page) {
   // NOTE: clear chat history
   // ChatBreakButton_button__
   await page.waitForSelector('textarea[placeholder="Talk to ChatGPT on Poe"]');
-  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', "Forget everything and start a fresh talk", { delay: 50 });
+  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', 'Forget everything and start a fresh talk', {
+    delay: 50,
+  });
   await page.waitForSelector('[class*="sendButton"]');
-  await page.evaluate(() => { document.querySelector('[class*="sendButton"]').click(); });
+  await page.evaluate(() => {
+    document.querySelector('[class*="sendButton"]').click();
+  });
 
-  await page.waitForSelector('[class*="ChatBreakButton_button__"]', { waitUntil: "networkidle0", });
-  await page.waitForSelector('[class*="Message_botMessageBubble__"]', { waitUntil: "networkidle0", });
+  await page.waitForSelector('[class*="ChatBreakButton_button__"]', { waitUntil: 'networkidle0' });
+  await page.waitForSelector('[class*="Message_botMessageBubble__"]', { waitUntil: 'networkidle0' });
   await page.waitForTimeout(3 * 1000);
   await page.evaluate(() => {
     document.querySelector('[class*="ChatBreakButton_button__"]').click();
-    document.querySelectorAll('[class*="Message_botMessageBubble__"]').forEach(item => item.remove())
+    document.querySelectorAll('[class*="Message_botMessageBubble__"]').forEach(item => item.remove());
   });
-
 }
 
 async function clearModalBox(page) {
@@ -30,52 +33,49 @@ async function clearModalBox(page) {
   await page.waitForTimeout(1 * 1000);
   await page.evaluate(() => {
     try {
-      document.querySelector('.ReactModal__Content').style.display = 'none'
-      document.querySelector('.ReactModal__Overlay').style.display = 'none'
+      document.querySelector('.ReactModal__Content').style.display = 'none';
+      document.querySelector('.ReactModal__Overlay').style.display = 'none';
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   });
   await page.waitForTimeout(1 * 1000);
-
 }
 
 async function questionAndAnswer(page, question, answer_idx) {
-  const countAnswerBubble = (page) => {
+  const countAnswerBubble = page => {
     return page.evaluate(() => {
-      return document.querySelectorAll('[class*="Message_botMessageBubble__"]').length
-    })
-  }
+      return document.querySelectorAll('[class*="Message_botMessageBubble__"]').length;
+    });
+  };
 
   var current_answer_bubble_length = await countAnswerBubble(page);
   var new_answer_bubble_length = 0;
 
   var list_lines = question.split('\n');
   for (var i = 0; i < list_lines.length; i++) {
-
     await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', list_lines[i], { delay: 1 });
     await page.keyboard.down('ShiftLeft');
     await page.keyboard.down('Enter');
     await page.keyboard.up('Enter');
     await page.keyboard.up('ShiftLeft');
-
   }
 
   console.log('wait for send button ready');
   await page.waitForSelector('button[class*="sendButton"]:not([disabled])');
   console.log('press send button');
   await page?.evaluate(() => {
-    document.querySelector('button[class*="sendButton"]:not([disabled])').click()
-  })
+    document.querySelector('button[class*="sendButton"]:not([disabled])').click();
+  });
 
   var reply = '...';
-  await page.waitForSelector(`[class*="Message_botMessageBubble__"]`, { waitUntil: "networkidle0", });
+  await page.waitForSelector(`[class*="Message_botMessageBubble__"]`, { waitUntil: 'networkidle0' });
   console.log({ current_answer_bubble_length, new_answer_bubble_length });
   for (var countdown = 10; countdown > 0; countdown--) {
     var new_answer_bubble_length = await countAnswerBubble(page);
     if (new_answer_bubble_length > current_answer_bubble_length) {
       // NOTE: new answer bubble appear
-      break
+      break;
     } else {
       // NOTE: no new answer bubble appear, keep waiting
       await page.waitForTimeout(1 * 1000);
@@ -87,7 +87,7 @@ async function questionAndAnswer(page, question, answer_idx) {
   // NOTE: wait for text type complete
   await page.waitForTimeout(3 * 1000);
   var old_reply = '';
-  const isTheBotStillTyping = (reply, old_reply) => reply != old_reply  // return true if the bot is typing
+  const isTheBotStillTyping = (reply, old_reply) => reply != old_reply; // return true if the bot is typing
 
   var first_check = true;
   const isFirstCheck = () => {
@@ -95,14 +95,12 @@ async function questionAndAnswer(page, question, answer_idx) {
       first_check = false;
       return true;
     }
-    return first_check
-  }
+    return first_check;
+  };
 
   for (var countdown = 60; countdown > 0; countdown--) {
-    reply = await page.evaluate((answer_idx) => {
-      return document.querySelectorAll('[class*="Message_botMessageBubble__"]')
-        .item(answer_idx)
-        .textContent;
+    reply = await page.evaluate(answer_idx => {
+      return document.querySelectorAll('[class*="Message_botMessageBubble__"]').item(answer_idx).textContent;
     }, new_answer_bubble_length - 1);
 
     if (countdown > 0 && reply.trim() == '...') {
@@ -118,13 +116,13 @@ async function questionAndAnswer(page, question, answer_idx) {
         // is the bot still typing ?
         if (isTheBotStillTyping(reply, old_reply)) {
           old_reply = reply;
-          console.log('bot still typing')
+          console.log('bot still typing');
           // console.log({ countdown, reply });
           await page.waitForTimeout(3 * 1000);
         } else {
           // bot not typing
-          console.log('bot typing done')
-          break
+          console.log('bot typing done');
+          break;
         }
       }
     }
@@ -134,9 +132,11 @@ async function questionAndAnswer(page, question, answer_idx) {
 }
 
 function assertKeyWord(to_check, keyword_wanted) {
-  return assert(to_check.toLowerCase().indexOf(keyword_wanted) >= -1,
+  return assert(
+    to_check.toLowerCase().indexOf(keyword_wanted) >= -1,
     `reply failed -> no "${keyword_wanted}", 
-    to_check:${to_check}`);
+    to_check:${to_check}`,
+  );
 }
 
 function helloworld(test_call = '') {
@@ -150,5 +150,5 @@ module.exports = {
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  assertKeyWord
-}
+  assertKeyWord,
+};

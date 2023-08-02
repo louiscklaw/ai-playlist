@@ -10,13 +10,10 @@ const {
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  assertKeyWord
+  assertKeyWord,
 } = require('../../../utils/chatGPT');
 // const { TEST_LOUIS_STACK } = require('./prompt');
-const {
-  TASK_DESCRIPTION,
-  helloworld_louis_paragraph
-} = require('./prompt');
+const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('./prompt');
 
 // start
 (async () => {
@@ -34,7 +31,7 @@ const {
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  session_retry = true;
 
   while (session_retry) {
     session_retry = false;
@@ -57,7 +54,6 @@ const {
   await page.waitForTimeout(9999 * 1000);
 
   console.log(chalk.green('test pass'));
-
 
   await page.close();
   await browser.close();

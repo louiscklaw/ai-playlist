@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 // var assert = require('chai').assert
 
-const { UTILS_ROOT } = require('../../../config')
+const { UTILS_ROOT } = require('../../../config');
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
@@ -12,11 +12,16 @@ const {
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  assertKeyWord
+  assertKeyWord,
 } = require(`${UTILS_ROOT}/google-palm`);
 // const { TEST_LOUIS_STACK } = require('./prompt');
-const { helloworld, post_medical_sample,
-  TASK_DESCRIPTION, END_WITH_YES, helloworld_louis_paragraph } = require('./prompt');
+const {
+  helloworld,
+  post_medical_sample,
+  TASK_DESCRIPTION,
+  END_WITH_YES,
+  helloworld_louis_paragraph,
+} = require('./prompt');
 
 // start
 (async () => {
@@ -34,7 +39,7 @@ const { helloworld, post_medical_sample,
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  session_retry = true;
 
   while (session_retry) {
     session_retry = false;
@@ -57,7 +62,6 @@ const { helloworld, post_medical_sample,
   // await page.waitForTimeout(9999 * 1000);
 
   console.log(chalk.green('test pass'));
-
 
   await page.close();
   await browser.close();
