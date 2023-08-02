@@ -1,11 +1,12 @@
 {
-  "name": "hello-rest",
+  "name": "logdb-helloworld",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "dev": "nodemon --exec \"npm run start\""
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,8 @@
     "express-restify-mongoose": "^7.0.2",
     "method-override": "^3.0.0",
     "node-fetch": "^2.6.12"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

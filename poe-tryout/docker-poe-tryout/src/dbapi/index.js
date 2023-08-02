@@ -9,16 +9,17 @@ const router = express.Router();
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-mongoose.connect('mongodb://localhost:27017/database');
+mongoose.connect('mongodb://mongo:27017/database');
 
 restify.serve(
   router,
   mongoose.model(
-    'Customer',
+    'Log',
     new mongoose.Schema({
-      name: { type: String, required: true },
+      level: { type: String, required: true },
       comment: { type: String },
-    }),
+
+    }, { timestamps: true }),
   ),
 );
 
