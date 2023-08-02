@@ -19,7 +19,8 @@ npm i puppeteer-core \
 
 # chat gpt
 # node tests/chatHistory/newChat.js
-node tests/chatgpt/poe_send_and_reply.js
+# node tests/chatgpt/poe_send_and_reply.js
+node tests/chatgpt/chatgpt_question_list.js
 # node tests/chatgpt/poe_helloworld.js
 
 # NOTE: preprompt

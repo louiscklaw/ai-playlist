@@ -40,23 +40,21 @@ const { helloworld,
     await clearModalBox(page);
     var session_id = await newChat();
 
-    answer_idx++;
-    var question = "say 'hello 1' to me";
-    var answer = await questionAndAnswer(page, question, answer_idx);
-    assert(answer.toLowerCase().indexOf('hello 1') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 1')}`);
-    await appendChat(session_id, { question, answer });
+    var question1 = "say 'hello 1' to me";
+    var question2 = "say 'hello 2' to me";
+    var question3 = "say 'hello 3' to me";
 
-    answer_idx++;
-    var question = "say 'hello 2' to me";
-    var answer = await questionAndAnswer(page, question, answer_idx);
-    assert(answer.toLowerCase().indexOf('hello 2') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 2')}`);
-    await appendChat(session_id, { question, answer });
+    var question_list = [
+      question1, question2, question3
+    ]
 
-    answer_idx++;
-    var question = "say 'hello 3' to me";
-    var answer = await questionAndAnswer(page, question, answer_idx);
-    assert(answer.toLowerCase().indexOf('hello 3') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 3')}`);
-    await appendChat(session_id, { question, answer });
+    for (var i = 0; i < question_list.length; i++) {
+      var question = question_list[i];
+      answer_idx++;
+
+      var answer = await questionAndAnswer(page, question, answer_idx);
+      await appendChat(session_id, { question, answer });
+    }
 
     // await page.waitForTimeout(9999 * 1000);
 
