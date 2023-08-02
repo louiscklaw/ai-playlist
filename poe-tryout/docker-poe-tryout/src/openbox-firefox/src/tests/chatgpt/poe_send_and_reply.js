@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer-core');
 // const chalk = require('chalk');
+const { SRC_ROOT, UTILS_ROOT } = require('../../config.js');
 
 var assert = require('chai').assert
 
@@ -9,7 +10,7 @@ const { FIREFOX_DATA_DIR } = process.env;
 
 const { helloworld,
   initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
-} = require('./utils/chatGPT');
+} = require(`${UTILS_ROOT}/chatGPT`);
 
 // helloworld();
 
@@ -48,7 +49,7 @@ const { helloworld,
 
   // await page.waitForTimeout(9999 * 1000);
 
-  console.log('test done'); 
+  console.log('test done');
 
   await page.close();
   await browser.close();

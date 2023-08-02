@@ -9,7 +9,7 @@ async function clearChatHistory(page) {
   // NOTE: clear chat history
   // ChatBreakButton_button__
   await page.waitForSelector('textarea[placeholder="Talk to ChatGPT on Poe"]');
-  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', "Forget everything and start a fresh talk", { delay: 50 });
+  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', "Please forget everything and start a fresh talk", { delay: 50 });
   await page.waitForSelector('[class*="sendButton"]');
   await page.evaluate(() => { document.querySelector('[class*="sendButton"]').click(); });
 

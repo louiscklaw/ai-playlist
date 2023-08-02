@@ -1,20 +1,18 @@
 const puppeteer = require('puppeteer-core');
 // const chalk = require('chalk');
+const { SRC_ROOT, UTILS_ROOT } = require('../../config.js');
+
+require('dotenv').config();
+const { FIREFOX_DATA_DIR } = process.env;
+
 
 // start
 (async () => {
   const browser = await puppeteer.launch({
     product: 'firefox',
     headless: false,
-
-    // TODO: confirm useless and remove me,
-    // userDataDirectory: '/share/firefox',
-    // args: ["--profile /share/firefox"],
-    // TODO: confirm useless and remove me,
-
     executablePath: '/usr/bin/firefox',
-    userDataDir: '/share/firefox',
-
+    userDataDir: FIREFOX_DATA_DIR,
     slowMo: true,
   });
   const page = await browser.newPage();
@@ -31,7 +29,7 @@ const puppeteer = require('puppeteer-core');
     document.querySelector('[class*="sendButton"]').click()
   })
 
-  await page.waitForTimeout(9999 * 1000);
+  // await page.waitForTimeout(9999 * 1000);
 
   await page.close();
   await browser.close();
