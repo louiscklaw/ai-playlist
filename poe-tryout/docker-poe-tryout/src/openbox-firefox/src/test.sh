@@ -18,8 +18,9 @@ npm i puppeteer-core \
 # node express-helloworld.js
 
 # chat gpt
+node tests/chatHistory/newChat.js
 # node tests/chatgpt/poe_send_and_reply.js
-node tests/chatgpt/poe_helloworld.js
+# node tests/chatgpt/poe_helloworld.js
 
 # NOTE: preprompt
 # node tests/poe_test_preprompt/test1.js
@@ -52,6 +53,6 @@ node tests/chatgpt/poe_helloworld.js
 
 # node tests/google-palm-prompt/draft_email/test1.js
 
-# logs
-# node tests/logs/newLog.js
-# node tests/logs/helloworld.js
+# chatHistory
+# node tests/chatHistory/newLog.js
+# node tests/chatHistory/helloworld.js

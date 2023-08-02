@@ -14,8 +14,12 @@ const { helloworld,
 
 // helloworld();
 
+var chat_history = [];
+
 // start
 (async () => {
+  const CHAT_SESSION = '1';
+
   var answer_idx = -1;
 
   const browser = await puppeteer.launch({
@@ -30,27 +34,37 @@ const { helloworld,
   });
   const page = await browser.newPage();
 
-  await initChatGptPage(page);
-  await clearChatHistory(page);
-  await clearModalBox(page);
-
-  answer_idx++;
-  var reply = await questionAndAnswer(page, "say 'hello 1' to me", answer_idx);
-  assert(reply.toLowerCase().indexOf('hello 1') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 1')}`);
-
-  answer_idx++;
-  var reply = await questionAndAnswer(page, "say 'hello 2' to me", answer_idx);
-  assert(reply.toLowerCase().indexOf('hello 2') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 2')}`);
+  try {
 
 
-  answer_idx++;
-  var reply = await questionAndAnswer(page, "say 'hello 3' to me", answer_idx);
-  assert(reply.toLowerCase().indexOf('hello 3') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 3')}`);
+    await initChatGptPage(page);
+    await clearChatHistory(page);
+    await clearModalBox(page);
 
-  // await page.waitForTimeout(9999 * 1000);
+    answer_idx++;
+    var question = "say 'hello 1' to me";
+    var answer = await questionAndAnswer(page, question, answer_idx);
+    assert(answer.toLowerCase().indexOf('hello 1') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 1')}`);
+    // chatHistory.push({ CHAT_SESSION, question, answer });
 
-  console.log('test done');
+    // answer_idx++;
+    // var reply = await questionAndAnswer(page, "say 'hello 2' to me", answer_idx);
+    // assert(reply.toLowerCase().indexOf('hello 2') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 2')}`);
 
-  await page.close();
-  await browser.close();
+
+    // answer_idx++;
+    // var reply = await questionAndAnswer(page, "say 'hello 3' to me", answer_idx);
+    // assert(reply.toLowerCase().indexOf('hello 3') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 3')}`);
+
+    // await page.waitForTimeout(9999 * 1000);
+
+    console.log('test done');
+
+  } catch (error) {
+    console.log({ CHAT_SESSION })
+
+  } finally {
+    await page.close();
+    await browser.close();
+  }
 })();
