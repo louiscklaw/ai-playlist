@@ -7,8 +7,8 @@ services:
     privileged: true
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-      - ./share/firefox-user-data:/share/firefox-user-data
-      - ./openbox-firefox/src:/app
+      - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
+      - ./src/openbox-firefox/src:/app
     environment:
       - TZ=Asia/Hong_Kong
 
