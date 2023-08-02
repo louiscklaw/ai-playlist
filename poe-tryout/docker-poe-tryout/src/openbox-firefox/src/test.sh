@@ -46,4 +46,8 @@ npm i puppeteer-core \
 # node tests/google-palm-prompt/role-play/test1.js
 # node tests/google-palm-prompt/role-play/test2.js
 
-node tests/google-palm-prompt/draft_email/test1.js
+# node tests/google-palm-prompt/draft_email/test1.js
+
+# logs
+node tests/logs/newLog.js
+# node tests/logs/helloworld.js
