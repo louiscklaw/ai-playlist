@@ -12,15 +12,6 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
 
-  bait:
-    build: bait
-    volumes:
-      - ./bait/src:/app
-    working_dir: /app
-    ports:
-      - 8080:8080
-    # command: sleep infinity
-
   mongo:
     image: mongo:latest
     container_name: mongo
@@ -42,9 +33,18 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: "27017"
     ports:
-      - "0.0.0.0:8081:8081"
+      - "0.0.0.0:8080:8080"
     depends_on:
       - mongo
+
+  bait:
+    build: ./src/bait
+    volumes:
+      - ./src/bait/src:/app
+    working_dir: /app
+    ports:
+      - 18089:8080
+    # command: sleep infinity
 
   dbapi:
     build: ./src/dbapi
@@ -54,4 +54,3 @@ services:
       - ./src/dbapi:/app
     depends_on:
       - mongo
-      
