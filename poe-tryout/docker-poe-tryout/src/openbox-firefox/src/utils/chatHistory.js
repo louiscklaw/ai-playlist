@@ -44,7 +44,13 @@ function newChat() {
       method: 'post',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' }
-    });
+    })
+    .then(res => res.json())
+    .then(res_json => {
+      console.log(res_json);
+      console.log('init chat done');
+      return res_json._id;
+    })
 }
 
 function helloworld() {

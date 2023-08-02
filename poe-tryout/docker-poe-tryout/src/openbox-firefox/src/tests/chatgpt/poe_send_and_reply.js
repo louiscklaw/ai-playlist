@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer-core');
 // const chalk = require('chalk');
 const { SRC_ROOT, UTILS_ROOT } = require('../../config.js');
+const { newChat, appendChat } = require('../../utils/chatHistory.js');
 
 var assert = require('chai').assert
 
@@ -9,12 +10,11 @@ require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
 
 const { helloworld,
-  initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer
+  initChatGptPage,
+  clearChatHistory,
+  clearModalBox,
+  questionAndAnswer
 } = require(`${UTILS_ROOT}/chatGPT`);
-
-// helloworld();
-
-var chat_history = [];
 
 // start
 (async () => {
@@ -35,26 +35,29 @@ var chat_history = [];
   const page = await browser.newPage();
 
   try {
-
-
     await initChatGptPage(page);
     await clearChatHistory(page);
     await clearModalBox(page);
+    var session_id = await newChat();
+
 
     answer_idx++;
     var question = "say 'hello 1' to me";
     var answer = await questionAndAnswer(page, question, answer_idx);
     assert(answer.toLowerCase().indexOf('hello 1') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 1')}`);
-    // chatHistory.push({ CHAT_SESSION, question, answer });
+    await appendChat(session_id, { question, answer });
 
-    // answer_idx++;
-    // var reply = await questionAndAnswer(page, "say 'hello 2' to me", answer_idx);
-    // assert(reply.toLowerCase().indexOf('hello 2') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 2')}`);
+    answer_idx++;
+    var question = "say 'hello 2' to me";
+    var answer = await questionAndAnswer(page, question, answer_idx);
+    assert(answer.toLowerCase().indexOf('hello 2') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 2')}`);
+    await appendChat(session_id, { question, answer });
 
-
-    // answer_idx++;
-    // var reply = await questionAndAnswer(page, "say 'hello 3' to me", answer_idx);
-    // assert(reply.toLowerCase().indexOf('hello 3') >= 0, `reply failed :${reply.toLowerCase().indexOf('hello 3')}`);
+    answer_idx++;
+    var question = "say 'hello 3' to me";
+    var answer = await questionAndAnswer(page, question, answer_idx);
+    assert(answer.toLowerCase().indexOf('hello 3') >= 0, `answer failed :${answer.toLowerCase().indexOf('hello 3')}`);
+    await appendChat(session_id, { question, answer });
 
     // await page.waitForTimeout(9999 * 1000);
 

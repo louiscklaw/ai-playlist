@@ -18,8 +18,8 @@ npm i puppeteer-core \
 # node express-helloworld.js
 
 # chat gpt
-node tests/chatHistory/newChat.js
-# node tests/chatgpt/poe_send_and_reply.js
+# node tests/chatHistory/newChat.js
+node tests/chatgpt/poe_send_and_reply.js
 # node tests/chatgpt/poe_helloworld.js
 
 # NOTE: preprompt
