@@ -1,14 +1,19 @@
 const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 
-var assert = require('chai').assert
+var assert = require('chai').assert;
 
 require('dotenv').config();
 
 const { FIREFOX_DATA_DIR } = process.env;
 
-const { helloworld,
-  initChatGptPage, clearChatHistory, clearModalBox, questionAndAnswer, assertKeyWord
+const {
+  helloworld,
+  initChatGptPage,
+  clearChatHistory,
+  clearModalBox,
+  questionAndAnswer,
+  assertKeyWord,
 } = require('../../utils/chatGPT');
 const { TEST_LOUIS_STACK } = require('./prompt');
 
@@ -30,7 +35,7 @@ const { TEST_LOUIS_STACK } = require('./prompt');
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  session_retry = true;
 
   while (session_retry) {
     session_retry = false;
@@ -46,17 +51,17 @@ const { TEST_LOUIS_STACK } = require('./prompt');
   var reply = await questionAndAnswer(page, TEST_LOUIS_STACK(''), answer_idx);
   assertKeyWord(reply, 'yes');
 
-  var reply = await questionAndAnswer(page, "What is this person name ?", answer_idx);
+  var reply = await questionAndAnswer(page, 'What is this person name ?', answer_idx);
   assertKeyWord(reply, 'is louis');
 
-  var reply = await questionAndAnswer(page, "Which subject is this person studied in ?", answer_idx);
+  var reply = await questionAndAnswer(page, 'Which subject is this person studied in ?', answer_idx);
   assertKeyWord(reply, 'electronic and communication engineering');
 
-  var reply = await questionAndAnswer(page, "What is the working experience of this person ?", answer_idx);
+  var reply = await questionAndAnswer(page, 'What is the working experience of this person ?', answer_idx);
   assertKeyWord(reply, 'china mobile hong kong');
   assertKeyWord(reply, 'sierrawireless');
 
-  var reply = await questionAndAnswer(page, "What louis love when louis free ?", answer_idx);
+  var reply = await questionAndAnswer(page, 'What louis love when louis free ?', answer_idx);
   assertKeyWord(reply, 'programming');
   assertKeyWord(reply, 'hardware');
   assertKeyWord(reply, 'software');
@@ -66,7 +71,6 @@ const { TEST_LOUIS_STACK } = require('./prompt');
   // await page.waitForTimeout(9999 * 1000);
 
   console.log(chalk.green('test pass'));
-
 
   await page.close();
   await browser.close();

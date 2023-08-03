@@ -3,17 +3,18 @@ const puppeteer = require('puppeteer-core');
 const { SRC_ROOT, UTILS_ROOT } = require('../../config.js');
 const { newChat, appendChat } = require('../../utils/chatHistory.js');
 
-var assert = require('chai').assert
+var assert = require('chai').assert;
 
 require('dotenv').config();
 
 const { FIREFOX_DATA_DIR } = process.env;
 
-const { helloworld,
+const {
+  helloworld,
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer
+  questionAndAnswer,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
 // start
@@ -61,10 +62,8 @@ const { helloworld,
     // await page.waitForTimeout(9999 * 1000);
 
     console.log('test done');
-
   } catch (error) {
-    console.log({ CHAT_SESSION })
-
+    console.log({ CHAT_SESSION });
   } finally {
     await page.close();
     await browser.close();

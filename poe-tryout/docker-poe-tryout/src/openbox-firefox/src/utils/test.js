@@ -1,4 +1,4 @@
-console.log('helloworld')
+console.log('helloworld');
 
 var test_db = `
 {

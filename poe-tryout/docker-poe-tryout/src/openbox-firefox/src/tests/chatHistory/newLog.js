@@ -1,4 +1,4 @@
-const { newLog } = require("../../utils/logs");
+const { newLog } = require('../../utils/logs');
 
 newLog('hello comment', 'info')
   .then(res => console.log('logging done'))

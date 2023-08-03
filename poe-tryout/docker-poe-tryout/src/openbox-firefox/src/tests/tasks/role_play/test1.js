@@ -10,14 +10,10 @@ const {
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  assertKeyWord
+  assertKeyWord,
 } = require('../../../utils/chatGPT');
 
-const {
-  TASK_DESCRIPTION,
-  helloworld_louis_paragraph,
-  d_preset_role,
-} = require('./prompt');
+const { TASK_DESCRIPTION, helloworld_louis_paragraph, d_preset_role } = require('./prompt');
 
 // start
 (async () => {
@@ -35,7 +31,7 @@ const {
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  session_retry = true;
 
   while (session_retry) {
     session_retry = false;
@@ -48,7 +44,6 @@ const {
   await clearModalBox(page);
 
   try {
-
     answer_idx++;
     var reply = await questionAndAnswer(page, d_preset_role['Linux Terminal'].prompt, answer_idx);
     assertKeyWord(reply, 'Copy/home/user\n');
@@ -59,15 +54,10 @@ const {
     // await page.waitForTimeout(9999 * 1000);
 
     console.log(chalk.green('test pass'));
-
-
   } catch (error) {
     console.log(error);
-
   } finally {
-
     await page.close();
     await browser.close();
   }
-
 })();

@@ -16,7 +16,7 @@ const {
   helloworld,
   initGooglePaLMPage,
   questionAndAnswer,
-  assertKeyWord
+  assertKeyWord,
 } = require(`${UTILS_ROOT}/google-palm`);
 
 // const {
@@ -42,7 +42,6 @@ const {
   await page.waitForTimeout(getRandomInt(10, 5) * 1000);
 
   try {
-
     await initGooglePaLMPage(page);
     await clearChatHistory(page);
     await clearModalBox(page);
@@ -63,13 +62,10 @@ const {
     // await page.waitForTimeout(9999 * 1000);
 
     console.log(chalk.green('test pass'));
-
   } catch (error) {
     console.log(error);
-
   } finally {
     await page.close();
     await browser.close();
-
   }
 })();

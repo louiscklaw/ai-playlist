@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 // var assert = require('chai').assert
-const { UTILS_ROOT } = require('../../../config')
+const { UTILS_ROOT } = require('../../../config');
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
@@ -11,12 +11,18 @@ const {
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  assertKeyWord
+  assertKeyWord,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
 // const { TEST_LOUIS_STACK } = require('./prompt');
-const { helloworld, post_medical_sample,
-  TASK_DESCRIPTION, END_WITH_YES, helloworld_louis_paragraph } = require('./prompt');
+const {
+  helloworld,
+  post_medical_sample,
+  TASK_DESCRIPTION,
+  END_WITH_YES,
+  helloworld_louis_paragraph,
+} = require('./prompt');
 const { newChat, appendChat } = require('../../../utils/chatHistory');
 
 // start
@@ -35,38 +41,35 @@ const { newChat, appendChat } = require('../../../utils/chatHistory');
   });
   const page = await browser.newPage();
 
-  session_retry = true
+  try {
+    await page.waitForTimeout(3 * 1000);
 
-  while (session_retry) {
-    session_retry = false;
+    await initChatGptPage(page);
+    await checkLoginState(page);
+
+    await clearChatHistory(page);
+    await clearModalBox(page);
+    var session_id = await newChat();
+
+    var question1 = TASK_DESCRIPTION();
+    var question2 = helloworld_louis_paragraph();
+    // var question3 = "say 'hello 3' to me";
+
+    var question_list = [question1, question2];
+
+    for (var i = 0; i < question_list.length; i++) {
+      var question = question_list[i];
+      answer_idx++;
+
+      var answer = await questionAndAnswer(page, question, answer_idx);
+      await appendChat(session_id, { question, answer });
+    }
+
+    console.log(chalk.green('test pass'));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await page.close();
+    await browser.close();
   }
-
-  await page.waitForTimeout(10 * 1000);
-
-  await initChatGptPage(page);
-  await clearChatHistory(page);
-  await clearModalBox(page);
-  var session_id = await newChat();
-
-
-  var question1 = TASK_DESCRIPTION();
-  var question2 = helloworld_louis_paragraph();
-  // var question3 = "say 'hello 3' to me";
-
-  var question_list = [
-    question1, question2
-  ]
-
-  for (var i = 0; i < question_list.length; i++) {
-    var question = question_list[i];
-    answer_idx++;
-
-    var answer = await questionAndAnswer(page, question, answer_idx);
-    await appendChat(session_id, { question, answer });
-  }
-
-  console.log(chalk.green('test pass'));
-
-  await page.close();
-  await browser.close();
 })();
