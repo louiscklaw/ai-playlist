@@ -20,7 +20,7 @@ npm i puppeteer-core \
 # chat gpt
 # node tests/chatHistory/newChat.js
 # node tests/chatgpt/poe_send_and_reply.js
-node tests/chatgpt/chatgpt_question_list.js
+# node tests/chatgpt/chatgpt_question_list.js
 # node tests/chatgpt/poe_helloworld.js
 
 # NOTE: preprompt
@@ -34,6 +34,7 @@ node tests/chatgpt/chatgpt_question_list.js
 # node tests/tasks/summarize/test2.js
 # node tests/tasks/summarize/test3.js
 # node tests/tasks/summarize/test4.js
+node tests/tasks/summarize/test5.js
 
 
 # node tests/tasks/role_play/test2.js
