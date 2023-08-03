@@ -17,7 +17,7 @@ set -x
 
 # sleep 1
 
-curl -X POST http://localhost:3000/chatgpt_summarize_helloworld \
+curl -X POST http://localhost:3000/chatgpt_role_play_helloworld \
    -H 'Content-Type: application/json' \
    -d @./input.json \
    -o result_input.json

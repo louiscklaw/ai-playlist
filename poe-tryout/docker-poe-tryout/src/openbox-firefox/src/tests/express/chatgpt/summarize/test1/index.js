@@ -52,15 +52,16 @@ app.get('/chatgpt_summarize_helloworld', async (req, res) => {
 
     var question_list = [question1, question2];
 
+    var q_and_a = [];
     for (var i = 0; i < question_list.length; i++) {
       var question = question_list[i];
       answer_idx++;
 
       var answer = await questionAndAnswer(page, question, answer_idx);
-      chat_history.history.push({ question, answer });
+      q_and_a.push({ question, answer });
     }
 
-    res.send({ state: 'helloworld done', chat_history });
+    res.send({ state: 'helloworld done', chat_history: { q_and_a } });
   } catch (error) {
     res.send({ state: 'helloworld error', error })
     throw error;

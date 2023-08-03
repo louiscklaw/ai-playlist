@@ -1,0 +1,32 @@
+{
+  "state": "helloworld done",
+  "json_input": {
+    "jobs_id": "blablabla",
+    "pre_prompt": [],
+    "question_list": [
+      "say 'hello 1' to me",
+      "say 'hello 2' to me",
+      "say 'hello 3' to me"
+    ]
+  },
+  "chat_history": [
+    {
+      "q_and_a": {
+        "history": [
+          {
+            "question": "say 'hello 1' to me",
+            "answer": "Hello 1!"
+          },
+          {
+            "question": "say 'hello 2' to me",
+            "answer": "Hello 2!"
+          },
+          {
+            "question": "say 'hello 3' to me",
+            "answer": "Hello 3!"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -18,14 +18,14 @@ const {
   clearModalBox,
   questionAndAnswer, checkLoginState
 } = require(`${UTILS_ROOT}/chatGPT`);
-const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
+// const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
 
 const port = 3000;
 
 const NO_QUESTION_FOUND = 'no question found';
 const QUESTION_LIST_NOT_FOUND = 'question list not found';
 
-async function solverHelloworld(question_list) {
+async function chatGPTSolver(question_list) {
   var chat_history = { session_id, history: [] };
 
   const CHAT_SESSION = '1';
@@ -52,7 +52,6 @@ async function solverHelloworld(question_list) {
 
     var session_id = await newChat();
 
-
     for (var i = 0; i < question_list.length; i++) {
       var question = question_list[i];
       answer_idx++;
@@ -73,18 +72,27 @@ async function solverHelloworld(question_list) {
   return chat_history
 }
 
-app.post('/chatgpt_summarize_helloworld', async (req, res) => {
+app.post('/chatgpt_role_play_helloworld', async (req, res) => {
   var json_input = req.body;
 
   try {
+    var chat_history = {};
     var { question_list } = json_input;
     if (!question_list) throw new Error(QUESTION_LIST_NOT_FOUND);
     if (question_list?.length < 1) throw new Error(NO_QUESTION_FOUND);
     // NOTE: question list valid after this line
 
-    var temp_history = await solverHelloworld(question_list)
+    var { pre_prompt } = json_input;
+    if (pre_prompt?.length > 0) {
+      console.log('pre-prompt found in input, processing...');
+      var result = await chatGPTSolver(pre_prompt)
+      chat_history['pre_prompt_result'] = result
+    }
 
-    res.send({ state: 'helloworld done', json_input, chat_history: { q_and_a: temp_history } });
+    var result = await chatGPTSolver(question_list);
+    chat_history['q_and_a'] = result;
+
+    res.send({ state: 'helloworld done', json_input, chat_history });
 
   } catch (error) {
     if (error.message == NO_QUESTION_FOUND) {
