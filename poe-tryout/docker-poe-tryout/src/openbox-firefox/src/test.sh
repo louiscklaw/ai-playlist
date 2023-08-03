@@ -15,7 +15,13 @@ npm i puppeteer-core \
 # node client_side_evaluate.js
 # node poe_send_and_reply_test1.js
 # node poe_send_and_reply.js
-# node express-helloworld.js
+
+# npx nodemon --exec "node tests/express/express-helloworld.js"
+# npx nodemon --exec "node tests/express/poe_send_and_reply.js"
+# npx nodemon --exec "node tests/express/chatgpt_summarize_helloworld.js"
+# npx nodemon --exec "node tests/express/chatgpt/summarize/test1.js"
+npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"
+# npx nodemon --exec "node tests/express/express-helloworld.js"
 
 # chat gpt
 # node tests/chatHistory/newChat.js
@@ -34,7 +40,7 @@ npm i puppeteer-core \
 # node tests/tasks/summarize/test2.js
 # node tests/tasks/summarize/test3.js
 # node tests/tasks/summarize/test4.js
-node tests/tasks/summarize/test5.js
+# node tests/tasks/summarize/test5.js
 
 
 # node tests/tasks/role_play/test2.js

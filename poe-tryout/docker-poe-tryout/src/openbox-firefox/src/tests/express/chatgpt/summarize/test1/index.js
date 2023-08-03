@@ -1,30 +1,27 @@
+const express = require('express');
+const app = express();
 const puppeteer = require('puppeteer-core');
-const chalk = require('chalk');
-const { UTILS_ROOT } = require('../../../config');
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR } = process.env;
 
-const {
-  initChatGptPage,
-  clearChatHistory,
-  clearModalBox,
-  questionAndAnswer,
-  assertKeyWord,
-  checkLoginState,
-} = require(`${UTILS_ROOT}/chatGPT`);
+const { SRC_ROOT, UTILS_ROOT } = require('../../../../../config');
+const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 
 const {
   helloworld,
-  post_medical_sample,
-  TASK_DESCRIPTION,
-  END_WITH_YES,
-  helloworld_louis_paragraph,
-} = require('./prompt');
-const { newChat, appendChat } = require('../../../utils/chatHistory');
+  initChatGptPage,
+  clearChatHistory,
+  clearModalBox,
+  questionAndAnswer, checkLoginState
+} = require(`${UTILS_ROOT}/chatGPT`);
+const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
 
-// start
-(async () => {
+const port = 3000;
+
+app.get('/chatgpt_summarize_helloworld', async (req, res) => {
+  const CHAT_SESSION = '1';
+
   var answer_idx = -1;
 
   const browser = await puppeteer.launch({
@@ -40,14 +37,14 @@ const { newChat, appendChat } = require('../../../utils/chatHistory');
   const page = await browser.newPage();
 
   try {
-    await page.waitForTimeout(3 * 1000);
-
     await initChatGptPage(page);
     await checkLoginState(page);
 
     await clearChatHistory(page);
     await clearModalBox(page);
+
     var session_id = await newChat();
+    var chat_history = { session_id, history: [] };
 
     var question1 = TASK_DESCRIPTION();
     var question2 = helloworld_louis_paragraph();
@@ -60,14 +57,24 @@ const { newChat, appendChat } = require('../../../utils/chatHistory');
       answer_idx++;
 
       var answer = await questionAndAnswer(page, question, answer_idx);
-      await appendChat(session_id, { question, answer });
+      chat_history.history.push({ question, answer });
     }
 
-    console.log(chalk.green('test pass'));
+    res.send({ state: 'helloworld done', chat_history });
   } catch (error) {
-    console.log(error);
+    res.send({ state: 'helloworld error', error })
+    throw error;
   } finally {
+
     await page.close();
     await browser.close();
   }
-})();
+});
+
+app.get('/helloworld', (req, res) => {
+  res.send('Hello World! from express-helloworld.js');
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
