@@ -14,10 +14,12 @@ mongoose.connect('mongodb://mongo:27017/database');
 restify.serve(
   router,
   mongoose.model(
-    'Log',
+    'JobPost',
     new mongoose.Schema({
-      level: { type: String, required: true },
-      comment: { type: String },
+      job_link: { type: String, required: true },
+      position: { type: String },
+      description: { type: String },
+      state: { type: String, required: true }
     }, { timestamps: true }),
   ),
 );

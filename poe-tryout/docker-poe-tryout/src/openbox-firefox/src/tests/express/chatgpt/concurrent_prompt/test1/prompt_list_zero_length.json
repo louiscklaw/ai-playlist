@@ -1,0 +1,9 @@
+{
+  "jobs_id": "blablabla",
+  "pre_prompt": [],
+  "question_list": [
+    "say 'hello 1' to me",
+    "say 'hello 2' to me",
+    "say 'hello 3' to me"
+  ]
+}
