@@ -22,7 +22,7 @@ var Queue = kue.createQueue({
 Queue.process('now', 1, async function (job, done) {
   console.log('\nProcessing job with id %s at %s', job.id, new Date())
   const { data } = job
-  const { new_job_post_id } = data
+  const { new_job_post_id, gpt_payload } = data
 
   // NOTE: do long running task by this request ?
   // http://dbapi:3001/api/v1/JobPost/${new_job_id}
@@ -47,12 +47,6 @@ Queue.process('now', 1, async function (job, done) {
   // http://openbox-firefox:3000/test1
 
   var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
-  var gpt_payload = {
-    "jobs_id": "blablabla",
-    "question_list": [
-      "say 'hello 1' to me"
-    ]
-  }
   var gpt_endpoint = 'http://openbox-firefox:3000'
   var chatgpt_summarize_res = await fetch(`${gpt_endpoint}/chatgpt_summarize_helloworld`, {
     method: 'post',
@@ -116,11 +110,11 @@ app.post('/process_new_job_post', async (req, res) => {
   console.log('/process_new_job_post');
 
   const req_body = req.body
-  const { new_job_post_id, job_post } = req_body
-
+  const { new_job_post_id, job_post, gpt_payload } = req_body
+  console.log(job_post)
   //prepare a job to perform
   //dont save it
-  var job = Queue.createJob('now', { new_job_post_id, job_post })
+  var job = Queue.createJob('now', { new_job_post_id, job_post, gpt_payload })
     .attempts(5)
     .backoff({ delay: 60000, type: 'fixed' })
     .priority('normal')

@@ -1,5 +1,12 @@
 const fetch = require('node-fetch');
 
+var gpt_payload = {
+  "jobs_id": "blablabla",
+  "question_list": [
+    "say 'hello 1' to me"
+  ]
+}
+
 Array(3)
   .fill(0)
   .forEach(async (v, i) => {
@@ -20,7 +27,7 @@ Array(3)
     const db_json = await add_db_response.json();
     const new_job_post_id = db_json._id;
 
-    var payload = { new_job_post_id, job_post }
+    var payload = { new_job_post_id, job_post, gpt_payload }
     const process_response = await fetch('http://localhost:3002/process_new_job_post', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -28,9 +35,9 @@ Array(3)
     });
 
     const process_res_json = await process_response.json();
-    console.log({
-      // db_json,
-      payload,
-      process_res_json
-    });
+    // console.log({
+    //   // db_json,
+    //   payload,
+    //   process_res_json
+    // });
   });
