@@ -1,0 +1,31 @@
+{
+  "job_link": "helloworld job_link",
+  "state": "helloworld_state",
+  "json_input": {
+    "jobs_id": "new_jobs_id",
+    "question_list": [
+      "say 'hello 1' to me"
+    ]
+  },
+  "chat_history": {
+    "q_and_a": {
+      "session_id": "blablabla"
+    },
+    "history": [
+      {
+        "question": "say 'hello 1' to me",
+        "answer": "Hello 1!",
+        "_id": "64cce9b8482d68827274389c"
+      },
+      {
+        "question": "say 'hello 2' to me",
+        "answer": "Hello 1!",
+        "_id": "64cce9b8482d68827274389d"
+      }
+    ]
+  },
+  "_id": "64cce9b8482d68827274389b",
+  "createdAt": "2023-08-04T12:06:16.510Z",
+  "updatedAt": "2023-08-04T12:06:16.510Z",
+  "__v": 0
+}

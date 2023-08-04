@@ -19,7 +19,20 @@ restify.serve(
       job_link: { type: String, required: true },
       position: { type: String },
       description: { type: String },
-      state: { type: String, required: true }
+      state: { type: String, required: true },
+      json_input: {
+        jobs_id: { type: String },
+        question_list: [String]
+      },
+      chat_history: {
+        q_and_a: {
+          session_id: { type: String },
+        },
+        history: [{
+          question: { type: String },
+          answer: { type: String }
+        }]
+      }
     }, { timestamps: true }),
   ),
 );
