@@ -2,25 +2,27 @@
   "state": "helloworld_state",
   "job_link": "helloworld job_link",
   "jobs_id": "blablabla",
-  "json_input": {
-    "jobs_id": "new_jobs_id",
-    "question_list": [
-      "say 'hello 1' to me"
-    ]
-  },
-  "chat_history": {
-    "q_and_a": {
-      "session_id": "blablabla"
+  "chatgpt_summarize_res_json": {
+    "json_input": {
+      "jobs_id": "new_jobs_id",
+      "question_list": [
+        "say 'hello 1' to me"
+      ]
     },
-    "history": [
-      {
-        "question": "say 'hello 1' to me",
-        "answer": "Hello 1!"
+    "chat_history": {
+      "q_and_a": {
+        "session_id": "blablabla"
       },
-      {
-        "question": "say 'hello 2' to me",
-        "answer": "Hello 1!"
-      }
-    ]
+      "history": [
+        {
+          "question": "say 'hello 1' to me",
+          "answer": "Hello 1!"
+        },
+        {
+          "question": "say 'hello 2' to me",
+          "answer": "Hello 1!"
+        }
+      ]
+    }
   }
 }

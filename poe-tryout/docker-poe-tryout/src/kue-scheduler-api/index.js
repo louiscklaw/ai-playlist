@@ -24,26 +24,6 @@ Queue.process('now', 1, async function (job, done) {
   const { data } = job
   const { new_job_post_id, gpt_payload } = data
 
-  // NOTE: do long running task by this request ?
-  // http://dbapi:3001/api/v1/JobPost/${new_job_id}
-  var res = await fetch(`${JOBPOST_ENDPOINT}/${new_job_post_id}`, {
-    method: 'patch',
-    body: JSON.stringify({ state: 'job_process_done' }),
-    headers: { 'Content-Type': 'application/json' },
-  })
-  var res_json = await res.json();
-  var json_input_filename = `/share/${new_job_post_id}/input.json`;
-  try {
-    await fs.mkdirSync(path.dirname(json_input_filename));
-  } catch (error) {
-    console.log(`${path.dirname(json_input_filename)} already exists`);
-  }
-
-  await fs.writeFileSync(
-    json_input_filename,
-    JSON.stringify(res_json, null, 2),
-    { encoding: 'utf8' });
-
   // http://openbox-firefox:3000/test1
 
   var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
@@ -64,6 +44,32 @@ Queue.process('now', 1, async function (job, done) {
     chatgpt_output_filename,
     JSON.stringify(chatgpt_summarize_res_json, null, 2),
     { encoding: 'utf8' });
+
+  var update_job_state_payload = {
+    state: 'job_process_done',
+    chatgpt_summarize_res_json
+  }
+
+  // NOTE: do long running task by this request ?
+  // http://dbapi:3001/api/v1/JobPost/${new_job_id}
+  var res = await fetch(`${JOBPOST_ENDPOINT}/${new_job_post_id}`, {
+    method: 'patch',
+    body: JSON.stringify(update_job_state_payload),
+    headers: { 'Content-Type': 'application/json' },
+  })
+  var res_json = await res.json();
+  var json_input_filename = `/share/${new_job_post_id}/input.json`;
+  try {
+    await fs.mkdirSync(path.dirname(json_input_filename));
+  } catch (error) {
+    console.log(`${path.dirname(json_input_filename)} already exists`);
+  }
+
+  await fs.writeFileSync(
+    json_input_filename,
+    JSON.stringify(res_json, null, 2),
+    { encoding: 'utf8' });
+
 
   done(null, { deliveredAt: new Date(), res_json, data })
 
@@ -111,7 +117,7 @@ app.post('/process_new_job_post', async (req, res) => {
 
   const req_body = req.body
   const { new_job_post_id, job_post, gpt_payload } = req_body
-  console.log(job_post)
+
   //prepare a job to perform
   //dont save it
   var job = Queue.createJob('now', { new_job_post_id, job_post, gpt_payload })
