@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-Array(2)
+Array(3)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`writing log ${i}...`);
@@ -28,5 +28,9 @@ Array(2)
     });
 
     const process_res_json = await process_response.json();
-    console.log({ db_json, payload, process_res_json });
+    console.log({
+      // db_json,
+      payload,
+      process_res_json
+    });
   });

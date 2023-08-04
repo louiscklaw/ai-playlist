@@ -50,10 +50,7 @@ Queue.process('now', 1, async function (job, done) {
   var gpt_payload = {
     "jobs_id": "blablabla",
     "question_list": [
-      "say 'hello 1' to me",
-      "say 'hello 2' to me",
-      "say 'hello 3' to me",
-
+      "say 'hello 1' to me"
     ]
   }
   var gpt_endpoint = 'http://openbox-firefox:3000'
@@ -89,9 +86,20 @@ Queue.on('schedule success', function (job) {
   //a highly recommended place to attach
   //job instance level events listeners
 
+  // console.log({ QueueInactiveCount: Queue.inactiveCount() });
+  Queue.inactiveCount((err, count) => {
+    console.log({
+      'state': "Queue schedule success",
+      QueueInactiveCount: count
+    })
+  })
+
   job
     .on('complete', function (result) {
-      console.log('Job completed with data ', result)
+      // console.log('Job completed with data ', result)
+      console.log('Dequeue job', job.id)
+      Queue.removeJob(job);
+
     })
     .on('failed attempt', function (errorMessage, doneAttempts) {
       console.log('Job failed')
@@ -105,9 +113,10 @@ Queue.on('schedule success', function (job) {
 })
 
 app.post('/process_new_job_post', async (req, res) => {
+  console.log('/process_new_job_post');
+
   const req_body = req.body
   const { new_job_post_id, job_post } = req_body
-  // console.log({ job_link })
 
   //prepare a job to perform
   //dont save it
@@ -118,7 +127,7 @@ app.post('/process_new_job_post', async (req, res) => {
 
   Queue.now(job)
 
-  res.send({ state: 'received' })
+  res.send({ state: 'schedued' })
 })
 
 try {
