@@ -9,6 +9,7 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
       - ./src/openbox-firefox/src:/app
+      - /volumes/static-share:/share
     environment:
       - TZ=Asia/Hong_Kong
 

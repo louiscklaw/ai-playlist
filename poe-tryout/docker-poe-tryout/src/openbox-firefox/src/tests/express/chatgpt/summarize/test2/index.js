@@ -25,8 +25,8 @@ const port = 3000;
 const NO_QUESTION_FOUND = 'no question found';
 const QUESTION_LIST_NOT_FOUND = 'question list not found';
 
-async function solverHelloworld(question_list) {
-  var chat_history = { session_id, history: [] };
+async function solverHelloworld(question_list, jobs_id) {
+  var chat_history = { session_id: jobs_id, history: [] };
 
   const CHAT_SESSION = '1';
   var answer_idx = -1;
@@ -50,8 +50,7 @@ async function solverHelloworld(question_list) {
     await clearChatHistory(page);
     await clearModalBox(page);
 
-    var session_id = await newChat();
-
+    // var session_id = await newChat();
 
     for (var i = 0; i < question_list.length; i++) {
       var question = question_list[i];
@@ -63,7 +62,7 @@ async function solverHelloworld(question_list) {
 
 
   } catch (error) {
-    res.send({ state: 'helloworld error', error })
+    // res.send({ state: 'helloworld error', error })
     throw error;
   } finally {
     await page.close();
@@ -77,16 +76,19 @@ app.post('/chatgpt_summarize_helloworld', async (req, res) => {
   var json_input = req.body;
 
   try {
-    var { question_list } = json_input;
+    var { jobs_id, question_list } = json_input;
+    // res.send(question_list)
     if (!question_list) throw new Error(QUESTION_LIST_NOT_FOUND);
     if (question_list?.length < 1) throw new Error(NO_QUESTION_FOUND);
     // NOTE: question list valid after this line
 
-    var temp_history = await solverHelloworld(question_list)
+    var temp_history = await solverHelloworld(question_list, jobs_id)
 
     res.send({ state: 'helloworld done', json_input, chat_history: { q_and_a: temp_history } });
 
   } catch (error) {
+    console.log(error);
+
     if (error.message == NO_QUESTION_FOUND) {
       res.send({ 'state': 'hello no question found' });
       return
@@ -99,7 +101,7 @@ app.post('/chatgpt_summarize_helloworld', async (req, res) => {
 })
 
 app.get('/helloworld', (req, res) => {
-  res.send('Hello World! from express-helloworld.js');
+  res.send('Hello World! from src/openbox-firefox/src/tests/express/chatgpt/summarize/test2/index.js');
 });
 
 // app.listen(port, () => {

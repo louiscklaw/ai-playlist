@@ -33,8 +33,46 @@ Queue.process('now', 1, async function (job, done) {
   })
   var res_json = await res.json();
   var json_input_filename = `/share/${new_job_post_id}/input.json`;
-  await fs.mkdirSync(path.dirname(json_input_filename));
-  await fs.writeFileSync(json_input_filename, JSON.stringify(res_json), { encoding: 'utf8' });
+  try {
+    await fs.mkdirSync(path.dirname(json_input_filename));
+  } catch (error) {
+    console.log(`${path.dirname(json_input_filename)} already exists`);
+  }
+
+  await fs.writeFileSync(
+    json_input_filename,
+    JSON.stringify(res_json, null, 2),
+    { encoding: 'utf8' });
+
+  // http://openbox-firefox:3000/test1
+
+  var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
+  var gpt_payload = {
+    "jobs_id": "blablabla",
+    "question_list": [
+      "say 'hello 1' to me",
+      "say 'hello 2' to me",
+      "say 'hello 3' to me",
+
+    ]
+  }
+  var gpt_endpoint = 'http://openbox-firefox:3000'
+  var chatgpt_summarize_res = await fetch(`${gpt_endpoint}/chatgpt_summarize_helloworld`, {
+    method: 'post',
+    body: JSON.stringify(gpt_payload),
+    headers: { 'Content-Type': 'application/json' },
+  })
+  var chatgpt_summarize_res_json = await chatgpt_summarize_res.json();
+  try {
+    await fs.mkdirSync(path.dirname(chatgpt_output_filename));
+  } catch (error) {
+    console.log(`${path.dirname(chatgpt_output_filename)} already exists`);
+  }
+
+  await fs.writeFileSync(
+    chatgpt_output_filename,
+    JSON.stringify(chatgpt_summarize_res_json, null, 2),
+    { encoding: 'utf8' });
 
   done(null, { deliveredAt: new Date(), res_json, data })
 

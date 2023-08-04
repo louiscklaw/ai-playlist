@@ -19,6 +19,7 @@ npm i puppeteer-core \
 # npx nodemon --exec "node tests/express/express-helloworld.js"
 # npx nodemon --exec "node tests/express/poe_send_and_reply.js"
 # npx nodemon --exec "node tests/express/chatgpt_summarize_helloworld.js"
+npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"
 
 # npx nodemon --exec "node tests/express/chatgpt/summarize/test1/index.js"
 # npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"
@@ -26,7 +27,7 @@ npm i puppeteer-core \
 # npx nodemon --exec "node tests/express/chatgpt/role-play/test1/index.js"
 # npx nodemon --exec "node tests/express/chatgpt/role-play/test2/index.js"
 
-node tests/express/chatgpt/concurrent_prompt/test1/index.js
+# node tests/express/chatgpt/concurrent_prompt/test1/index.js
 
 # npx nodemon --exec "node tests/express/express-helloworld.js"
 

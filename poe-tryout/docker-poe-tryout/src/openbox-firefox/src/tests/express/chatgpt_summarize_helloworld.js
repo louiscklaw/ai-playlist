@@ -77,7 +77,7 @@ app.get('/chatgpt_summarize_helloworld', async (req, res) => {
 });
 
 app.get('/helloworld', (req, res) => {
-  res.send('Hello World! from express-helloworld.js');
+  res.send('Hello World! from src/openbox-firefox/src/tests/express/chatgpt_summarize_helloworld.js');
 });
 
 app.listen(port, () => {

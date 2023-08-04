@@ -10,18 +10,19 @@
   },
   "chat_history": {
     "q_and_a": {
+      "session_id": "blablabla",
       "history": [
         {
           "question": "say 'hello 1' to me",
-          "answer": "Hello 1! How can I assist you today?"
+          "answer": "Hello 1!"
         },
         {
           "question": "say 'hello 2' to me",
-          "answer": "Hello 2! How can I assist you today?"
+          "answer": "Hello 2!"
         },
         {
           "question": "say 'hello 3' to me",
-          "answer": "Hello 3! How can I assist you today?"
+          "answer": "Hello 3!"
         }
       ]
     }
