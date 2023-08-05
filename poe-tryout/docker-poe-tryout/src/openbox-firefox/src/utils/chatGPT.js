@@ -5,13 +5,39 @@ async function initChatGptPage(page) {
   return 'init ChatGPT page';
 }
 
+// https://www.cointracker.io/
+// https://www.g2.com/products/asana/reviews
+async function tackleCloudflare(page) {
+  // await page.goto('https://www.cointracker.io', {
+  //   //wait for website to load 
+  //   waitUntil: 'load',
+  // });
+
+  // page.goto('https://www.g2.com/products/asana/reviews');
+
+  // // https://bot.sannysoft.com
+  page.goto('https://bot.sannysoft.com')
+  await page.waitForTimeout(5000)
+  await page.screenshot({ path: '/share/testresult.png', fullPage: true })
+
+  // // https://finviz.com/news.ashx
+  // await page.goto('https://finviz.com/news.ashx', {
+  //   //wait for website to load 
+  //   waitUntil: 'networkidle0'
+  // });
+
+  return 'init tackleCloudflare page';
+}
+
 async function clearChatHistory(page) {
   // NOTE: clear chat history
   // ChatBreakButton_button__
   await page.waitForSelector('textarea[placeholder="Talk to ChatGPT on Poe"]');
-  await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', 'Please forget everything and start a fresh talk', {
-    delay: 3,
-  });
+  await page.type(
+    'textarea[placeholder="Talk to ChatGPT on Poe"]',
+    'Please forget everything and start a fresh talk.',
+    { delay: 1, }
+  );
   await page.waitForSelector('[class*="sendButton"]');
   await page.evaluate(() => {
     document.querySelector('[class*="sendButton"]').click();
@@ -151,7 +177,6 @@ async function checkLoginState(page) {
     const selector = 'textarea[placeholder="Talk to ChatGPT on Poe"]';
 
     await page.waitForSelector(selector);
-    await page.type(selector, 'Please forget everything and start a fresh talk', { delay: 3 });
 
     await page.waitForTimeout(1 * 1000);
   } catch (error) {
@@ -162,6 +187,7 @@ async function checkLoginState(page) {
 
 module.exports = {
   helloworld,
+  tackleCloudflare,
   initChatGptPage,
   clearChatHistory,
   clearModalBox,

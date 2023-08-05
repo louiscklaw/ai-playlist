@@ -1,3 +1,21 @@
+## draft
+
+### tackle cloudflare bot preventation 
+  - so i change my path to using google-chrome
+![](./docs/tackle_cloudflare.png)
+
+```bash
+$ npm install puppeteer-extra puppeteer-extra-plugin-stealth
+```
+
+### build
+
+```bash
+$ build.sh
+
+```
+
+
 ### useful links
 
 []

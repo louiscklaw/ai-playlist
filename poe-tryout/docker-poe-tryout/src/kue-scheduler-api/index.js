@@ -116,11 +116,16 @@ app.post('/process_new_job_post', async (req, res) => {
   console.log('/process_new_job_post');
 
   const req_body = req.body
-  const { new_job_post_id, job_post, gpt_payload } = req_body
+  const {
+    new_job_post_id,
+    job_post,
+    gpt_payload } = req_body
 
   //prepare a job to perform
   //dont save it
-  var job = Queue.createJob('now', { new_job_post_id, job_post, gpt_payload })
+  var job = Queue.createJob('now', {
+    new_job_post_id, job_post, gpt_payload
+  })
     .attempts(5)
     .backoff({ delay: 60000, type: 'fixed' })
     .priority('normal')

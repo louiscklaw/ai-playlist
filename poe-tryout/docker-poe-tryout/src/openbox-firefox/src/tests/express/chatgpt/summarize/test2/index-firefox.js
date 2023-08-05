@@ -3,14 +3,14 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-// NOTE: original use puppeteer core only
 // const puppeteer = require('puppeteer-core');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const puppeteer = require('puppeteer-extra');
+
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 require('dotenv').config();
-const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
+const { FIREFOX_DATA_DIR } = process.env;
 
 const { SRC_ROOT, UTILS_ROOT } = require('../../../../../config');
 const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
@@ -36,15 +36,14 @@ async function solverHelloworld(question_list, jobs_id) {
   var answer_idx = -1;
 
   const browser = await puppeteer.launch({
-    product: 'chrome',
+    product: 'firefox',
     headless: false,
-    executablePath: '/usr/bin/google-chrome-stable',
-    userDataDir: CHROME_DATA_DIR,
+    executablePath: '/usr/bin/firefox',
+    userDataDir: FIREFOX_DATA_DIR,
     slowMo: 1,
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
-    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`]
   });
   const page = await browser.newPage();
 
@@ -77,7 +76,6 @@ async function solverHelloworld(question_list, jobs_id) {
   return chat_history
 }
 
-// NOTE: test using /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src/tests/express/chatgpt/summarize/test2/curl.sh
 app.post('/chatgpt_summarize_helloworld', async (req, res) => {
   var json_input = req.body;
 

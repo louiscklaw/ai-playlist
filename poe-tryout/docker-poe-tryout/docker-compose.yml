@@ -7,9 +7,19 @@ services:
     privileged: true
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-      - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
+      # - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
+
+      # NOTE: share firfox user profile
+      - ./volumes/openbox-firefox/firefox-user-data:/share/firefox-user-data
+
+      # NOTE: share chrome user profile
+      # - ./volumes/openbox-firefox/chrome-user-data:/share/chrome-user-data
+      
+      # NOTE: store output
+      - ./volumes/static-share:/share
+
+      # NOTE: source code
       - ./src/openbox-firefox/src:/app
-      - /volumes/static-share:/share
     environment:
       - TZ=Asia/Hong_Kong
 

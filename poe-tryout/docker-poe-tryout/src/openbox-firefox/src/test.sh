@@ -4,11 +4,15 @@ set -x
 
 # rm -rf node_modules
 
-export PUPPETEER_PRODUCT=firefox 
+export PUPPETEER_PRODUCT=chrome 
 
-npm i puppeteer-core \
-  express \
-  dotenv
+# npm i puppeteer-core \
+#   express \
+#   dotenv
+
+
+# npm install puppeteer-extra puppeteer-extra-plugin-stealth
+# npm install puppeteer-cloak
 
 # node index.js
 # node poe_send_and_reply.js
@@ -19,7 +23,10 @@ npm i puppeteer-core \
 # npx nodemon --exec "node tests/express/express-helloworld.js"
 # npx nodemon --exec "node tests/express/poe_send_and_reply.js"
 # npx nodemon --exec "node tests/express/chatgpt_summarize_helloworld.js"
+
 npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"
+# npx nodemon --exec "node poe/tests/chatgpt/landing.js"
+# npx nodemon --exec "node poe/tests/stealthing/index.js"
 
 # npx nodemon --exec "node tests/express/chatgpt/summarize/test1/index.js"
 # npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"

@@ -1,3 +1,4 @@
+// NOTE: expected running on host and not inside docker container
 const fetch = require('node-fetch');
 
 var gpt_payload = {
