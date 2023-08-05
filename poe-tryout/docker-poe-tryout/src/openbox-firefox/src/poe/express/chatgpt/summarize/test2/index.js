@@ -69,7 +69,6 @@ async function solverHelloworld(question_list, jobs_id) {
       chat_history.history.push({ question, answer });
     }
 
-
   } catch (error) {
     // res.send({ state: 'helloworld error', error })
     throw error;
