@@ -1,27 +1,46 @@
-const puppeteer = require('puppeteer-core');
-// const chalk = require('chalk');
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.json());
 
-// start
-(async () => {
-  const browser = await puppeteer.launch({
-    product: 'firefox',
-    headless: false,
+// NOTE: original use puppeteer core only
+// const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer-extra');
 
-    // TODO: confirm useless and remove me,
-    // userDataDirectory: '/share/firefox',
-    // args: ["--profile /share/firefox"],
-    // TODO: confirm useless and remove me,
+const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
-    executablePath: '/usr/bin/firefox',
-    userDataDir: '/share/firefox',
-  });
-  const page = await browser.newPage();
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
 
-  await page.goto('http://192.168.10.223:8080/read.html');
-  await page.screenshot({ path: '/share/gmail.png' });
+require('dotenv').config();
+const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
-  await page.waitForTimeout(999 * 1000);
+const { SRC_ROOT, UTILS_ROOT, PROMPT_ROOT, ERROR_ROOT, ROUTES_ROOT } = require('./config');
+const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
+const { helloworld_prompt, helloworld_summarize } = require(`${PROMPT_ROOT}`)
+const { helloworld_error } = require(`${ERROR_ROOT}`);
+const helloRoutes = require('./routes/hello');
+const summarizeRoutes = require('./routes/summarize');
 
-  await page.close();
-  await browser.close();
-})();
+const {
+  helloworld,
+  initChatGptPage,
+  clearChatHistory,
+  clearModalBox,
+  questionAndAnswer, checkLoginState
+} = require(`${UTILS_ROOT}/chatGPT`);
+
+console.log(helloworld_error);
+console.log(helloworld_prompt);
+console.log(helloworld_summarize);
+console.log('helloworld');
+
+// Register the routes
+app.use('/hello', helloRoutes);
+app.use('/summarize', summarizeRoutes);
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});

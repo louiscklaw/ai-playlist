@@ -6,12 +6,10 @@ set -x
 
 export PUPPETEER_PRODUCT=chrome 
 
-# npm i puppeteer-core \
-#   express \
-#   dotenv
-
-
-npm install puppeteer-extra \
+npm i puppeteer-core \
+  express \
+  dotenv\
+  puppeteer-extra \
   puppeteer-extra-plugin-stealth \
   puppeteer-extra-plugin-adblocker
 
@@ -25,7 +23,7 @@ npm install puppeteer-extra \
 # npx nodemon --exec "node tests/express/poe_send_and_reply.js"
 # npx nodemon --exec "node tests/express/chatgpt_summarize_helloworld.js"
 
-npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"
+# npx nodemon --exec "node poe/express/chatgpt/summarize/test2/index.js"
 # npx nodemon --exec "node poe/tests/chatgpt/landing.js"
 # npx nodemon --exec "node poe/tests/stealthing/index.js"
 
@@ -80,3 +78,5 @@ npx nodemon --exec "node tests/express/chatgpt/summarize/test2/index.js"
 # chatHistory
 # node tests/chatHistory/newLog.js
 # node tests/chatHistory/helloworld.js
+
+npx nodemon --exec "node ./index.js"
