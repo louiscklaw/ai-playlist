@@ -13,6 +13,7 @@ var kue = require('kue-scheduler')
 const PORT = 3002
 const DBAPI_HOST = 'http://dbapi:3001/api/v1'
 const JOBPOST_ENDPOINT = `${DBAPI_HOST}/JobPost`
+var gpt_endpoint = 'http://openbox-firefox:3000'
 
 var Queue = kue.createQueue({
   redis: { host: 'redis', port: 6379 },
@@ -27,7 +28,6 @@ Queue.process('now', 1, async function (job, done) {
   // http://openbox-firefox:3000/test1
 
   var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
-  var gpt_endpoint = 'http://openbox-firefox:3000'
   var chatgpt_summarize_res = await fetch(`${gpt_endpoint}/chatgpt_summarize_helloworld`, {
     method: 'post',
     body: JSON.stringify(gpt_payload),

@@ -3,7 +3,9 @@ const fetch = require('node-fetch');
 var gpt_payload = {
   "jobs_id": "blablabla",
   "question_list": [
-    "say 'hello 1' to me"
+    "say 'hello 1' to me",
+    "say 'hello 2' to me",
+    "say 'hello 3' to me"
   ]
 }
 
