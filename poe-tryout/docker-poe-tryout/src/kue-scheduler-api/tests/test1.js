@@ -10,7 +10,7 @@ var gpt_payload = {
   ]
 }
 
-Array(2)
+Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`writing log ${i}...`);

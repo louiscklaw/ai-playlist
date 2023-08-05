@@ -11,8 +11,9 @@ export PUPPETEER_PRODUCT=chrome
 #   dotenv
 
 
-# npm install puppeteer-extra puppeteer-extra-plugin-stealth
-# npm install puppeteer-cloak
+npm install puppeteer-extra \
+  puppeteer-extra-plugin-stealth \
+  puppeteer-extra-plugin-adblocker
 
 # node index.js
 # node poe_send_and_reply.js

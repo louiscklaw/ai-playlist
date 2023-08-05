@@ -5,8 +5,12 @@ app.use(bodyParser.json());
 
 // NOTE: original use puppeteer core only
 // const puppeteer = require('puppeteer-core');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 const puppeteer = require('puppeteer-extra');
+
+const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 require('dotenv').config();
