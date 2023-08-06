@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 const puppeteer = require('puppeteer-extra');
 
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
