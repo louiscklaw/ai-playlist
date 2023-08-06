@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
 var assert = require('chai').assert;
-const getRandomSecond = require('./getRandomSecond');
+const { getRandomSecond } = require('./getRandomSecond');
 
 async function clearModalBox(page) {
   // NOTE: clear modal box if any

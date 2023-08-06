@@ -12,9 +12,10 @@ npm i puppeteer-core express dotenv puppeteer-extra puppeteer-extra-plugin-steal
   puppeteer-proxy
 
 
+# firefox chrome, stealthing
 # npx nodemon --exec "node tests/firefox/proxy/index.js"
 # npx nodemon --exec "node tests/firefox/stealthing/index.js"
-npx nodemon --exec "node tests/firefox/chatgpt/landing.js"
+# npx nodemon --exec "node tests/firefox/chatgpt/landing.js"
 
 # node index.js
 # node poe_send_and_reply.js

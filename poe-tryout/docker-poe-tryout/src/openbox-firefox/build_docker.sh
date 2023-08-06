@@ -23,6 +23,10 @@ cd dockerfiles/apps
   docker build -f dockerfile.chrome . -t openbox-firefox-ubuntu
 cd -
 
+cd dockerfiles/apps/mitmproxy
+  docker build . -t openbox-firefox-ubuntu
+cd -
+
 # finialize docker
 cd dockerfiles/final
   docker build . \

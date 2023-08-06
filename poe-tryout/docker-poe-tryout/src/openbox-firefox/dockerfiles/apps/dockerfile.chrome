@@ -5,3 +5,8 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 RUN apt --fix-broken install -y ./google-chrome-stable_current_amd64.deb
 
 RUN rm -rf google-chrome-stable_current_amd64.deb
+
+RUN add-apt-repository -y ppa:savoury1/chromium
+
+RUN apt update
+RUN apt install -qy chromium-browser

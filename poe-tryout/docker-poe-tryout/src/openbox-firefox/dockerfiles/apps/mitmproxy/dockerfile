@@ -1,0 +1,5 @@
+FROM openbox-firefox-ubuntu
+
+ADD mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitmproxy.crt
+
+RUN update-ca-certificates

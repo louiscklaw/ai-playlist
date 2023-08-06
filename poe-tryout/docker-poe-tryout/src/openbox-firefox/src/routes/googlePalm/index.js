@@ -39,9 +39,11 @@ router.post('/helloworld', async (req, res) => {
     var temp_history = await googlePalmSolver(question_list, jobs_id)
 
     res.send({
-      state: 'helloworld done',
+      state: 'ask googlePalm done',
       json_input,
-      chat_history: { q_and_a: temp_history }
+      chat_history: {
+        q_and_a: temp_history
+      }
     });
 
   } catch (error) {

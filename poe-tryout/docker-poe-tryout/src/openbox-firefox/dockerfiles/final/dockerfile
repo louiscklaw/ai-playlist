@@ -19,30 +19,30 @@ RUN chmod +x /etc/run.sh
 # WORKDIR /home/logic
 # USER 1000:1000
 
-
-
-# RUN groupadd logic
-# RUN useradd -u 1000 -g logic -d /home/logic -s /bin/bash -p $(echo blablabla | openssl passwd -1 -stdin) logic
-# WORKDIR /home/logic
+RUN groupadd logic
+RUN useradd -u 1000 -g logic \
+  -d /home/logic \
+  -s /bin/bash -p $(echo blablabla | openssl passwd -1 -stdin) logic
+WORKDIR /home/logic
 
 # TODO: remove me
-# RUN cp /root/.bashrc /home/logic/.bashrc
+RUN cp /root/.bashrc /home/logic/.bashrc
 # RUN touch /home/logic/.bashrc
 
 
 # # NOTE: corelated to the supervisiord config file
-# ENV HOME /home/logic
+ENV HOME /home/logic
 
 # # NOTE: changing to user will fail vncserver
-# RUN mkdir -p /home/logic/.vnc
-# RUN echo 123456 | vncpasswd -f > /home/logic/.vnc/passwd
-# RUN chmod 600 /home/logic/.vnc/passwd
+RUN mkdir -p /home/logic/.vnc
+RUN echo 123456 | vncpasswd -f > /home/logic/.vnc/passwd
+RUN chmod 600 /home/logic/.vnc/passwd
 # # NOTE: vnc setup done
-# ADD etc/xdg/pcmanfm /home/logic/.config/pcmanfm
 
-# RUN chown 1000:1000 -R /home/logic
+ADD etc/xdg/pcmanfm /home/logic/.config/pcmanfm
 
-# USER 1000:1000
+RUN chown 1000:1000 -R /home/logic
 
+USER 1000
 
 CMD ["/etc/run.sh"]

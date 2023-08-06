@@ -36,35 +36,33 @@ async function googlePalmSolver(question_list, jobs_id) {
     headless: false,
     executablePath: '/usr/bin/google-chrome-stable',
     userDataDir: CHROME_DATA_DIR,
-    slowMo: 1,
+    // slowMo: 1,
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
     args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`]
   });
-  const page = await browser.newPage();
+  // const page = await browser.newPage();
+  const page = (await browser.pages())[0];
 
   try {
+    console.log(question_list);
     await initGooglePaLMPage(page);
     await clearChatHistory(page);
     await clearModalBox(page);
 
-    var i = 0;
-    answer_idx++, i++;
-    var reply = await questionAndAnswer(page, `say 'hello 1' to me`, answer_idx);
-    assertKeyWord(reply, `hello 1`);
+    for (var i = 0; i < question_list.length; i++) {
+      var question = question_list[i];
+      answer_idx++;
 
-    answer_idx++, i++;
-    var reply = await questionAndAnswer(page, `say 'hello 2' to me`, answer_idx);
-    assertKeyWord(reply, `hello 2`);
+      var answer = await questionAndAnswer(page, question, answer_idx);
+      chat_history.history.push({ question, answer });
+    }
 
-    answer_idx++, i++;
-    var reply = await questionAndAnswer(page, `say 'hello 3' to me`, answer_idx);
-    assertKeyWord(reply, `hello 3`);
 
-    // await page.waitForTimeout(9999 * 1000);
+    await page.waitForTimeout(10 * 1000);
+    await page.screenshot({ path: '/share/chrome_googlePalm_result.png', fullPage: true })
 
-    console.log(chalk.green('test pass'));
   } catch (error) {
     console.log(error);
   } finally {

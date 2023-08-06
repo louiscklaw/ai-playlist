@@ -44,7 +44,9 @@ router.post('/test', async (req, res) => {
     res.send({
       state: 'helloworld done',
       json_input,
-      chat_history: { q_and_a: temp_history }
+      chat_history: {
+        q_and_a: temp_history
+      }
     });
 
   } catch (error) {
