@@ -3,7 +3,9 @@
   "json_input": {
     "jobs_id": "blablabla",
     "question_list": [
-      "say 'louislabs.com' to me"
+      "say 'hello 1' to me",
+      "say 'hello 2' to me",
+      "say 'hello 3' to me"
     ]
   },
   "chat_history": {
@@ -11,8 +13,16 @@
       "session_id": "blablabla",
       "history": [
         {
-          "question": "say 'louislabs.com' to me",
-          "answer": "louislabs.com"
+          "question": "say 'hello 1' to me",
+          "answer": "Hello 1!"
+        },
+        {
+          "question": "say 'hello 2' to me",
+          "answer": "Hello 2!"
+        },
+        {
+          "question": "say 'hello 3' to me",
+          "answer": "Hello 3!"
         }
       ]
     }
