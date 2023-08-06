@@ -23,6 +23,7 @@ const { helloworld_error } = require(`${ERROR_ROOT}`);
 
 const helloRoutes = require('./routes/hello');
 const summarizeRoutes = require('./routes/summarize');
+const chatGPTRoutes = require('./routes/chatGPT');
 const googlePalmRoutes = require('./routes/googlePalm');
 
 const {
@@ -41,6 +42,7 @@ console.log('helloworld');
 // Register the routes
 app.use('/hello', helloRoutes);
 app.use('/summarize', summarizeRoutes);
+app.use('/chatGPT', chatGPTRoutes);
 app.use('/googlePalm', googlePalmRoutes);
 
 // Start the server
