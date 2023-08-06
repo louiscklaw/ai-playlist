@@ -1,0 +1,9 @@
+{
+  "jobs_id": "blablabla",
+  "preprompts": [
+    "Summarze the below text for me."
+  ],
+  "question_list": [
+    "Louis is a boy.\nLouis eat apple.\nLouis is a good guy."
+  ]
+}
