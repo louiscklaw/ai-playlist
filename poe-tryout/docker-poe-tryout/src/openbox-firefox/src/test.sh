@@ -17,6 +17,9 @@ npm i puppeteer-core express dotenv puppeteer-extra puppeteer-extra-plugin-steal
 # npx nodemon --exec "node tests/firefox/stealthing/index.js"
 # npx nodemon --exec "node tests/firefox/chatgpt/landing.js"
 
+npx nodemon --exec "node tests/chrome/stealthing/index.js"
+
+
 # node index.js
 # node poe_send_and_reply.js
 # node client_side_evaluate.js
@@ -83,4 +86,4 @@ npm i puppeteer-core express dotenv puppeteer-extra puppeteer-extra-plugin-steal
 # node tests/chatHistory/newLog.js
 # node tests/chatHistory/helloworld.js
 
-npx nodemon --exec "node ./index.js"
+# npx nodemon --exec "node ./index.js"
