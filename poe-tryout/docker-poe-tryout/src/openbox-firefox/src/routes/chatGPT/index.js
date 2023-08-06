@@ -12,19 +12,9 @@ puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
-require('dotenv').config();
-const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
+// require('dotenv').config();
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
-const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
-
-const {
-  helloworld,
-  initChatGptPage,
-  clearChatHistory,
-  clearModalBox,
-  questionAndAnswer, checkLoginState
-} = require(`${UTILS_ROOT}/chatGPT`);
 
 const { chatGPTSolver } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
@@ -33,13 +23,13 @@ router.post('/ask', async (req, res) => {
   var json_input = req.body;
 
   try {
-    var { jobs_id, question_list } = json_input;
+    var { jobs_id, question_list, preprompts } = json_input;
     // res.send(question_list)
     if (!question_list) throw new Error(QUESTION_LIST_NOT_FOUND);
     if (question_list?.length < 1) throw new Error(NO_QUESTION_FOUND);
     // NOTE: question list valid after this line
 
-    var temp_history = await chatGPTSolver(question_list, jobs_id)
+    var temp_history = await chatGPTSolver(question_list, jobs_id, preprompts)
 
     res.send({
       state: 'helloworld done',

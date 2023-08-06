@@ -28,8 +28,8 @@ const {
 
 
 
-async function chatGPTSolver(question_list, jobs_id) {
-  var chat_history = { session_id: jobs_id, history: [] };
+async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
+  var chat_history = { session_id: jobs_id, preprompts: [], history: [] };
   var answer_idx = -1;
 
   const browser = await puppeteer.launch({
@@ -51,6 +51,17 @@ async function chatGPTSolver(question_list, jobs_id) {
 
     await clearChatHistory(page);
     await clearModalBox(page);
+
+    if (preprompts.length > 0) {
+      for (var i = 0; i < preprompts.length; i++) {
+        var question = preprompts[i];
+        answer_idx++;
+
+        var answer = await questionAndAnswer(page, question, answer_idx);
+        chat_history.preprompts.push({ question, answer });
+      }
+
+    }
 
     for (var i = 0; i < question_list.length; i++) {
       var question = question_list[i];
