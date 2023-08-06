@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>サンプル</title>
+  </head>
+  <body>
+    <h1>サンプル</h1>
+
+    <p id="msg">show user agent</p>
+
+    <script>
+      let element = document.getElementById("msg");
+      element.insertAdjacentHTML("afterend", "<p>" + navigator.Webdriver + "</p>");
+    </script>
+  </body>
+</html>
