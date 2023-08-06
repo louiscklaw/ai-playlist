@@ -27,7 +27,9 @@ const helloRoutes = require('./routes/hello');
 const summarizeRoutes = require('./routes/summarize');
 const chatGPTRoutes = require('./routes/chatGPT');
 const googlePalmRoutes = require('./routes/googlePalm');
+const { helloworldBrowser } = require('./utils/initBrowser');
 
+helloworldBrowser();
 console.debug(helloworld_error);
 console.debug(helloworld_prompt);
 console.debug(helloworld_summarize);

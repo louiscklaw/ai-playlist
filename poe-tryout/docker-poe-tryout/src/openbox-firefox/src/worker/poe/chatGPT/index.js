@@ -1,8 +1,4 @@
-const express = require('express');
-const router = express.Router();
-
-const NO_QUESTION_FOUND = 'no question found';
-const QUESTION_LIST_NOT_FOUND = 'question list not found';
+// const express = require('express');
 
 const puppeteer = require('puppeteer-extra');
 
@@ -13,13 +9,11 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 require('dotenv').config();
-const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
-const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../../config');
-const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
+const { UTILS_ROOT } = require('../../../config');
+const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
 
 const {
-  helloworld,
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
@@ -31,18 +25,8 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
   var chat_history = { session_id: jobs_id, preprompts: [], history: [] };
   var answer_idx = -1;
 
-  const browser = await puppeteer.launch({
-    product: 'chrome',
-    headless: false,
-    executablePath: '/usr/bin/google-chrome-stable',
-    userDataDir: CHROME_DATA_DIR,
-    slowMo: 1,
-    // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
-    defaultViewport: { width: 1024, height: 768 },
-    ignoreHTTPSErrors: true,
-    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`],
-  });
-  const page = await browser.newPage();
+  const browser = await initBrowser();
+  const page = (await browser.pages())[0];
 
   try {
     await initChatGptPage(page);
@@ -71,7 +55,6 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
   } catch (error) {
     throw error;
   } finally {
-    await page.close();
     await browser.close();
   }
 
