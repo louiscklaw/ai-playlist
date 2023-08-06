@@ -1,0 +1,20 @@
+{
+  "state": "ask googlePalm done",
+  "json_input": {
+    "jobs_id": "blablabla",
+    "question_list": [
+      "say 'louislabs.com' to me"
+    ]
+  },
+  "chat_history": {
+    "q_and_a": {
+      "session_id": "blablabla",
+      "history": [
+        {
+          "question": "say 'louislabs.com' to me",
+          "answer": "louislabs.com"
+        }
+      ]
+    }
+  }
+}
