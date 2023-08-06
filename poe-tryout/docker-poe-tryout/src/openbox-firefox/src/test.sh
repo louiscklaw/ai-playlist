@@ -4,14 +4,17 @@ set -x
 
 # rm -rf node_modules
 
-export PUPPETEER_PRODUCT=chrome 
+export PUPPETEER_PRODUCT=firefox
+npm install
 
-npm i puppeteer-core \
-  express \
-  dotenv\
-  puppeteer-extra \
-  puppeteer-extra-plugin-stealth \
-  puppeteer-extra-plugin-adblocker
+npm i puppeteer-core express dotenv puppeteer-extra puppeteer-extra-plugin-stealth \
+  puppeteer-extra-plugin-adblocker \
+  puppeteer-proxy
+
+
+# npx nodemon --exec "node tests/firefox/proxy/index.js"
+# npx nodemon --exec "node tests/firefox/stealthing/index.js"
+npx nodemon --exec "node tests/firefox/chatgpt/landing.js"
 
 # node index.js
 # node poe_send_and_reply.js

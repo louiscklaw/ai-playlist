@@ -1,45 +1,48 @@
-const puppeteer = require('puppeteer-core');
-const chalk = require('chalk');
-// var assert = require('chai').assert
+const express = require('express');
+const router = express.Router();
 
-const { SRC_ROOT, UTILS_ROOT } = require('../../config.js');
+const NO_QUESTION_FOUND = 'no question found';
+const QUESTION_LIST_NOT_FOUND = 'question list not found';
 
-const { getRandomInt } = require(`${UTILS_ROOT}/getRandomInt`);
+const puppeteer = require('puppeteer-extra');
+
+const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
 
 require('dotenv').config();
-const { FIREFOX_DATA_DIR } = process.env;
+const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
+
+const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../../config');
+const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 
 const {
-  initChatGptPage,
-  clearChatHistory,
-  clearModalBox,
   helloworld,
   initGooglePaLMPage,
+  clearChatHistory,
+  clearModalBox,
   questionAndAnswer,
   assertKeyWord,
-} = require(`${UTILS_ROOT}/google-palm`);
+} = require(`${UTILS_ROOT}/googlePalm`);
 
-// const {
-//   test_markdown_content, TASK_DESCRIPTION
-// } = require('./prompt');
-
-// start
-(async () => {
+async function googlePalmSolver(question_list, jobs_id) {
+  var chat_history = { session_id: jobs_id, history: [] };
   var answer_idx = -1;
 
   const browser = await puppeteer.launch({
-    product: 'firefox',
+    product: 'chrome',
     headless: false,
-    executablePath: '/usr/bin/firefox',
-    userDataDir: FIREFOX_DATA_DIR,
+    executablePath: '/usr/bin/google-chrome-stable',
+    userDataDir: CHROME_DATA_DIR,
     slowMo: 1,
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
+    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`]
   });
-
   const page = await browser.newPage();
-  await page.waitForTimeout(getRandomInt(10, 5) * 1000);
 
   try {
     await initGooglePaLMPage(page);
@@ -68,4 +71,10 @@ const {
     await page.close();
     await browser.close();
   }
-})();
+
+  return chat_history
+}
+
+module.exports = {
+  googlePalmSolver
+}

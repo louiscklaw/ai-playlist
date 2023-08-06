@@ -20,8 +20,10 @@ const { SRC_ROOT, UTILS_ROOT, PROMPT_ROOT, ERROR_ROOT, ROUTES_ROOT } = require('
 const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 const { helloworld_prompt, helloworld_summarize } = require(`${PROMPT_ROOT}`)
 const { helloworld_error } = require(`${ERROR_ROOT}`);
+
 const helloRoutes = require('./routes/hello');
 const summarizeRoutes = require('./routes/summarize');
+const googlePalmRoutes = require('./routes/googlePalm');
 
 const {
   helloworld,
@@ -39,6 +41,7 @@ console.log('helloworld');
 // Register the routes
 app.use('/hello', helloRoutes);
 app.use('/summarize', summarizeRoutes);
+app.use('/googlePalm', googlePalmRoutes);
 
 // Start the server
 app.listen(3000, () => {
