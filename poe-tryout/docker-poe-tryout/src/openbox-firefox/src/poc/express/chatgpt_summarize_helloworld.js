@@ -19,7 +19,8 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, checkLoginState
+  questionAndAnswer,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
 const port = 3000;
@@ -67,10 +68,9 @@ app.get('/chatgpt_summarize_helloworld', async (req, res) => {
 
     res.send({ state: 'helloworld done', chat_history });
   } catch (error) {
-    res.send({ state: 'helloworld error', error })
+    res.send({ state: 'helloworld error', error });
     throw error;
   } finally {
-
     await page.close();
     await browser.close();
   }

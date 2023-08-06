@@ -9,20 +9,20 @@ async function initChatGptPage(page) {
 // https://www.g2.com/products/asana/reviews
 async function tackleCloudflare(page) {
   // await page.goto('https://www.cointracker.io', {
-  //   //wait for website to load 
+  //   //wait for website to load
   //   waitUntil: 'load',
   // });
 
   // page.goto('https://www.g2.com/products/asana/reviews');
 
   // // https://bot.sannysoft.com
-  page.goto('https://bot.sannysoft.com')
-  await page.waitForTimeout(5000)
-  await page.screenshot({ path: '/share/testresult.png', fullPage: true })
+  page.goto('https://bot.sannysoft.com');
+  await page.waitForTimeout(5000);
+  await page.screenshot({ path: '/share/testresult.png', fullPage: true });
 
   // // https://finviz.com/news.ashx
   // await page.goto('https://finviz.com/news.ashx', {
-  //   //wait for website to load 
+  //   //wait for website to load
   //   waitUntil: 'networkidle0'
   // });
 
@@ -36,7 +36,7 @@ async function clearChatHistory(page) {
   await page.type(
     'textarea[placeholder="Talk to ChatGPT on Poe"]',
     'Please forget everything and start a fresh talk.',
-    { delay: 1, }
+    { delay: 1 },
   );
   await page.waitForSelector('[class*="sendButton"]');
   await page.evaluate(() => {

@@ -3,5 +3,5 @@ const helloworld_prompt = 'hello prompt';
 
 module.exports = {
   helloworld_prompt,
-  helloworld_summarize
-}
+  helloworld_summarize,
+};

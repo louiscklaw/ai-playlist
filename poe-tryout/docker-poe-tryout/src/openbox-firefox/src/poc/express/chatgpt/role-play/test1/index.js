@@ -13,7 +13,8 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, checkLoginState
+  questionAndAnswer,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
 
@@ -23,13 +24,11 @@ app.post('/chatgpt_role_play_helloworld', async (req, res) => {
   var chat_history = 'hello chat history';
 
   try {
-
     res.send({ state: 'helloworld done', chat_history });
   } catch (error) {
-    res.send({ state: 'helloworld error', error })
+    res.send({ state: 'helloworld error', error });
     throw error;
   } finally {
-
     // await page.close();
     // await browser.close();
   }

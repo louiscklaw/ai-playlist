@@ -13,7 +13,8 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, checkLoginState
+  questionAndAnswer,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
 
@@ -63,10 +64,9 @@ app.get('/chatgpt_summarize_helloworld', async (req, res) => {
 
     res.send({ state: 'helloworld done', chat_history: { q_and_a } });
   } catch (error) {
-    res.send({ state: 'helloworld error', error })
+    res.send({ state: 'helloworld error', error });
     throw error;
   } finally {
-
     await page.close();
     await browser.close();
   }

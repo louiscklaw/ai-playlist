@@ -1,9 +1,9 @@
 // const puppeteer = require('puppeteer-core');
 const puppeteer = require('puppeteer-extra');
 
-// add stealth plugin and use defaults (all evasion techniques) 
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
+// add stealth plugin and use defaults (all evasion techniques)
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
 
 // const { executablePath } = require('puppeteer')
 
@@ -22,7 +22,8 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, tackleCloudflare
+  questionAndAnswer,
+  tackleCloudflare,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
 // start
@@ -31,19 +32,20 @@ const {
 
   var answer_idx = -1;
 
-  puppeteer.launch({
-    product: 'chrome',
-    headless: false,
-    executablePath: '/usr/bin/google-chrome-stable',
-    userDataDir: FIREFOX_DATA_DIR,
-    slowMo: 1,
-    // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
-    defaultViewport: { width: 1024, height: 768 * 2 },
-    ignoreHTTPSErrors: true,
-    args: ['--no-sandbox']
-  })
+  puppeteer
+    .launch({
+      product: 'chrome',
+      headless: false,
+      executablePath: '/usr/bin/google-chrome-stable',
+      userDataDir: FIREFOX_DATA_DIR,
+      slowMo: 1,
+      // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
+      defaultViewport: { width: 1024, height: 768 * 2 },
+      ignoreHTTPSErrors: true,
+      args: ['--no-sandbox'],
+    })
     .then(async browser => {
-      console.log('Running tests..')
+      console.log('Running tests..');
       // const page = await browser.newPage()
       const page = (await browser.pages())[0];
 
@@ -51,7 +53,9 @@ const {
 
       // // await page.goto('https://bot.sannysoft.com')
       // // https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html
-      await page.goto('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html', { waitUntil: 'load' })
+      await page.goto('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html', {
+        waitUntil: 'load',
+      });
 
       // await page.evaluate(async () => {
       //   delete navigator.__proto__.webdriver;
@@ -67,11 +71,9 @@ const {
       //   }
       // });
 
-      await page.waitForTimeout(1 * 1000)
-      await page.screenshot({ path: '/share/stealth_result.png', fullPage: true })
+      await page.waitForTimeout(1 * 1000);
+      await page.screenshot({ path: '/share/stealth_result.png', fullPage: true });
       // await browser.close()
       // console.log(`All done, check the screenshot. ✨`)
-    })
-
-
+    });
 })();

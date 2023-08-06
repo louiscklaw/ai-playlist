@@ -7,11 +7,11 @@ app.use(bodyParser.json());
 // const puppeteer = require('puppeteer-core');
 const puppeteer = require('puppeteer-extra');
 
-const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
@@ -24,7 +24,8 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, checkLoginState
+  questionAndAnswer,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
 
@@ -48,7 +49,7 @@ async function solverHelloworld(question_list, jobs_id) {
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
-    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`]
+    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`],
   });
   const page = await browser.newPage();
 
@@ -68,7 +69,6 @@ async function solverHelloworld(question_list, jobs_id) {
       var answer = await questionAndAnswer(page, question, answer_idx);
       chat_history.history.push({ question, answer });
     }
-
   } catch (error) {
     // res.send({ state: 'helloworld error', error })
     throw error;
@@ -77,7 +77,7 @@ async function solverHelloworld(question_list, jobs_id) {
     await browser.close();
   }
 
-  return chat_history
+  return chat_history;
 }
 
 // NOTE: test using /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src/tests/express/chatgpt/summarize/test2/curl.sh
@@ -91,23 +91,21 @@ app.post('/chatgpt_summarize_helloworld', async (req, res) => {
     if (question_list?.length < 1) throw new Error(NO_QUESTION_FOUND);
     // NOTE: question list valid after this line
 
-    var temp_history = await solverHelloworld(question_list, jobs_id)
+    var temp_history = await solverHelloworld(question_list, jobs_id);
 
     res.send({ state: 'helloworld done', json_input, chat_history: { q_and_a: temp_history } });
-
   } catch (error) {
     console.log(error);
 
     if (error.message == NO_QUESTION_FOUND) {
-      res.send({ 'state': 'hello no question found' });
-      return
+      res.send({ state: 'hello no question found' });
+      return;
     }
-    res.send({ 'state': "unknown error", error_messge: error.message });
+    res.send({ state: 'unknown error', error_messge: error.message });
   } finally {
     // close something
   }
-
-})
+});
 
 app.get('/helloworld', (req, res) => {
   res.send('Hello World! from src/openbox-firefox/src/tests/express/chatgpt/summarize/test2/index.js');

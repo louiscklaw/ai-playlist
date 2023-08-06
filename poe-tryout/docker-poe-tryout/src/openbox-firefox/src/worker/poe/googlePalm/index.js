@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const NO_QUESTION_FOUND = 'no question found';
-const QUESTION_LIST_NOT_FOUND = 'question list not found';
 
 const puppeteer = require('puppeteer-extra');
 
-const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
@@ -19,7 +17,6 @@ const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../../config');
 const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 
 const {
-  helloworld,
   initGooglePaLMPage,
   clearChatHistory,
   clearModalBox,
@@ -40,7 +37,7 @@ async function googlePalmSolver(question_list, jobs_id) {
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
-    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`]
+    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`],
   });
   // const page = await browser.newPage();
   const page = (await browser.pages())[0];
@@ -59,10 +56,8 @@ async function googlePalmSolver(question_list, jobs_id) {
       chat_history.history.push({ question, answer });
     }
 
-
     await page.waitForTimeout(10 * 1000);
-    await page.screenshot({ path: '/share/chrome_googlePalm_result.png', fullPage: true })
-
+    await page.screenshot({ path: '/share/chrome_googlePalm_result.png', fullPage: true });
   } catch (error) {
     console.log(error);
   } finally {
@@ -70,9 +65,9 @@ async function googlePalmSolver(question_list, jobs_id) {
     await browser.close();
   }
 
-  return chat_history
+  return chat_history;
 }
 
 module.exports = {
-  googlePalmSolver
-}
+  googlePalmSolver,
+};

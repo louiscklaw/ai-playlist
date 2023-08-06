@@ -7,8 +7,7 @@ async function clearModalBox(page) {
   // NOTE: clear modal box if any
   console.log('clear modal box');
 
-  await page.waitForTimeout(
-    getRandomSecond(1, 5) * 1000);
+  await page.waitForTimeout(getRandomSecond(1, 5) * 1000);
   await page.evaluate(() => {
     try {
       document.querySelector('.ReactModal__Content').style.display = 'none';
@@ -17,8 +16,7 @@ async function clearModalBox(page) {
       console.log(error);
     }
   });
-  await page.waitForTimeout(
-    getRandomSecond(1, 5) * 1000);
+  await page.waitForTimeout(getRandomSecond(1, 5) * 1000);
 }
 
 async function clearChatHistory(page) {
@@ -37,8 +35,7 @@ async function clearChatHistory(page) {
 
   await page.waitForSelector('[class*="ChatBreakButton_button__"]', { waitUntil: 'networkidle0' });
   await page.waitForSelector('[class*="Message_botMessageBubble__"]', { waitUntil: 'networkidle0' });
-  await page.waitForTimeout(
-    getRandomSecond(3, 5) * 1000);
+  await page.waitForTimeout(getRandomSecond(3, 5) * 1000);
   await page.evaluate(() => {
     document.querySelector('[class*="ChatBreakButton_button__"]').click();
     document.querySelectorAll('[class*="Message_botMessageBubble__"]').forEach(item => item.remove());
@@ -81,16 +78,14 @@ async function questionAndAnswer(page, question, answer_idx) {
       break;
     } else {
       // NOTE: no new answer bubble appear, keep waiting
-      await page.waitForTimeout(
-        getRandomSecond(1, 3) * 1000);
+      await page.waitForTimeout(getRandomSecond(1, 3) * 1000);
     }
   }
 
   console.log({ current_answer_bubble_length, new_answer_bubble_length });
 
   // NOTE: wait for text type complete
-  await page.waitForTimeout(
-    getRandomSecond(3, 5) * 1000);
+  await page.waitForTimeout(getRandomSecond(3, 5) * 1000);
   var old_reply = '';
   const isTheBotStillTyping = (reply, old_reply) => reply != old_reply; // return true if the bot is typing
 
@@ -116,16 +111,14 @@ async function questionAndAnswer(page, question, answer_idx) {
       if (isFirstCheck()) {
         console.log('first check found');
         old_reply = reply;
-        await page.waitForTimeout(
-          getRandomSecond(1, 3) * 1000);
+        await page.waitForTimeout(getRandomSecond(1, 3) * 1000);
       } else {
         // is the bot still typing ?
         if (isTheBotStillTyping(reply, old_reply)) {
           old_reply = reply;
           console.log('bot still typing');
           // console.log({ countdown, reply });
-          await page.waitForTimeout(
-            getRandomSecond(3, 5) * 1000);
+          await page.waitForTimeout(getRandomSecond(3, 5) * 1000);
         } else {
           // bot not typing
           console.log('bot typing done');

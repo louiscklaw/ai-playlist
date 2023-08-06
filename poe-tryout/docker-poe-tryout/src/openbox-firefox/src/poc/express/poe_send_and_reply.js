@@ -68,9 +68,8 @@ app.get('/test1', async (req, res) => {
 
     res.send({ state: 'helloworld done', chat_history });
   } catch (error) {
-    res.send({ state: 'helloworld error', error })
+    res.send({ state: 'helloworld error', error });
   } finally {
-
     await page.close();
     await browser.close();
   }

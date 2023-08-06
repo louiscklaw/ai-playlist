@@ -16,7 +16,8 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, checkLoginState
+  questionAndAnswer,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 // const { TASK_DESCRIPTION, helloworld_louis_paragraph } = require('../prompt');
 
@@ -59,17 +60,15 @@ async function chatGPTSolver(question_list) {
       var answer = await questionAndAnswer(page, question, answer_idx);
       chat_history.history.push({ question, answer });
     }
-
-
   } catch (error) {
-    res.send({ state: 'helloworld error', error })
+    res.send({ state: 'helloworld error', error });
     throw error;
   } finally {
     await page.close();
     await browser.close();
   }
 
-  return chat_history
+  return chat_history;
 }
 
 app.post('/chatgpt_role_play_helloworld', async (req, res) => {
@@ -85,26 +84,24 @@ app.post('/chatgpt_role_play_helloworld', async (req, res) => {
     var { pre_prompt } = json_input;
     if (pre_prompt?.length > 0) {
       console.log('pre-prompt found in input, processing...');
-      var result = await chatGPTSolver(pre_prompt)
-      chat_history['pre_prompt_result'] = result
+      var result = await chatGPTSolver(pre_prompt);
+      chat_history['pre_prompt_result'] = result;
     }
 
     var result = await chatGPTSolver(question_list);
     chat_history['q_and_a'] = result;
 
     res.send({ state: 'helloworld done', json_input, chat_history });
-
   } catch (error) {
     if (error.message == NO_QUESTION_FOUND) {
-      res.send({ 'state': 'hello no question found' });
-      return
+      res.send({ state: 'hello no question found' });
+      return;
     }
-    res.send({ 'state': "unknown error", error_messge: error.message });
+    res.send({ state: 'unknown error', error_messge: error.message });
   } finally {
     // close something
   }
-
-})
+});
 
 app.get('/helloworld', (req, res) => {
   res.send('Hello World! from express-helloworld.js');

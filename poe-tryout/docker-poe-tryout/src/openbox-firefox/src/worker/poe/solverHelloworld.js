@@ -6,11 +6,11 @@ const QUESTION_LIST_NOT_FOUND = 'question list not found';
 
 const puppeteer = require('puppeteer-extra');
 
-const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
 
 require('dotenv').config();
 const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
@@ -23,10 +23,9 @@ const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
-  questionAndAnswer, checkLoginState
+  questionAndAnswer,
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
-
-
 
 async function solverHelloworld(question_list, jobs_id) {
   var chat_history = { session_id: jobs_id, history: [] };
@@ -41,7 +40,7 @@ async function solverHelloworld(question_list, jobs_id) {
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
-    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`]
+    args: ['--no-sandbox', `--user-data-dir=${CHROME_DATA_DIR}`],
   });
   const page = await browser.newPage();
 
@@ -59,19 +58,16 @@ async function solverHelloworld(question_list, jobs_id) {
       var answer = await questionAndAnswer(page, question, answer_idx);
       chat_history.history.push({ question, answer });
     }
-
   } catch (error) {
-
     throw error;
-
   } finally {
     await page.close();
     await browser.close();
   }
 
-  return chat_history
+  return chat_history;
 }
 
 module.exports = {
-  solverHelloworld
-}
+  solverHelloworld,
+};

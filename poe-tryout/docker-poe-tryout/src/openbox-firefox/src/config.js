@@ -13,5 +13,5 @@ module.exports = {
   PROMPT_ROOT,
   ERROR_ROOT,
   ROUTES_ROOT,
-  WORKER_ROOT
+  WORKER_ROOT,
 };
