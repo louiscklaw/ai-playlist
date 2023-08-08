@@ -5,9 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./index.js"
+    "dev": "nodemon --exec \"node ./index.js\"",
+    "gitUpdate": "git add . && git commit -m\"update jobsdb-link-extractor,\""
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "*"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
