@@ -11,6 +11,7 @@ puppeteer.use(StealthPlugin());
 require('dotenv').config();
 
 const { UTILS_ROOT } = require('../../../config');
+const { getRandomSecond } = require('../../../utils/getRandomSecond');
 const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
 
 const {
@@ -42,6 +43,7 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
 
         var answer = await questionAndAnswer(page, question, answer_idx);
         chat_history.preprompts.push({ question, answer });
+        await page.waitForTimeout(getRandomSecond(5, 15) * 1000);
       }
     }
 
@@ -51,7 +53,13 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
 
       var answer = await questionAndAnswer(page, question, answer_idx);
       chat_history.history.push({ question, answer });
+      await page.waitForTimeout(getRandomSecond(5, 10) * 1000);
     }
+
+    // NOTE: successful ask, cool down bot for slething
+    console.log('successful ask, cooldown bot');
+    await page.waitForTimeout(1 * 60 * 1000);
+    console.log('cooldown bot done');
   } catch (error) {
     throw error;
   } finally {
