@@ -6,7 +6,6 @@ const puppeteer = require('puppeteer-core');
 const BROWSERLESS_HOST = 'link-extractor-chrome';
 const SCREENSHOT_ROOT = '/share/screenshot';
 
-const SRC_ROOT = __dirname;
 
 (async () => {
   const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;

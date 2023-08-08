@@ -1,10 +1,7 @@
 const fetch = require('node-fetch');
 
 const body = {
-  jobs_id: 'blablabla',
-  job_post: 'we are employing a teacher',
-  preprompts: ['we are employing a teacher, understand ?'],
-  question_list: ['what is the post employing?'],
+  url: 'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
 };
 
 Array(1)
@@ -12,10 +9,15 @@ Array(1)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
 
-    const response = await fetch('http://localhost:3003/jobsdbPostExtract');
+    const response = await fetch('http://localhost:3003/jobsdbPostExtract', {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-    const res_text = await response.text();
-    console.log({ res_text });
+    const res_json = await response.json();
+    const { extracted } = res_json;
+    console.log({ res_json });
   });
 
 console.log('helloworld');
