@@ -12,7 +12,7 @@ Array(3)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
 
-    const response = await fetch('http://localhost:3002/process_new_job_post', {
+    const response = await fetch('http://localhost:3002/ask_jobsdb_post', {
       method: 'post',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' },
