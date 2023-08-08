@@ -12,6 +12,7 @@ require('dotenv').config();
 
 const { UTILS_ROOT } = require('../../../config');
 const { getRandomSecond } = require('../../../utils/getRandomSecond');
+const { getRandomInt } = require('../../../utils/getRandomInt');
 const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
 
 const {
@@ -57,8 +58,9 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
     }
 
     // NOTE: successful ask, cool down bot for slething
-    console.log('successful ask, cooldown bot');
-    await page.waitForTimeout(1 * 60 * 1000);
+    const cooldownMinute = getRandomInt(2, 5);
+    console.log(`successful ask, cooldown bot, ${cooldownMinute} minute ...`);
+    await page.waitForTimeout(cooldownMinute * 60 * 1000);
     console.log('cooldown bot done');
   } catch (error) {
     throw error;
