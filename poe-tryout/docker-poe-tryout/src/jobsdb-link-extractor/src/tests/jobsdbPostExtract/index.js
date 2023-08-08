@@ -17,7 +17,7 @@ Array(1)
 
     const res_json = await response.json();
     const { extracted } = res_json;
-    console.log({ res_json });
+    console.log({ extracted });
   });
 
 console.log('helloworld');
