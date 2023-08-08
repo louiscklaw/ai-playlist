@@ -10,4 +10,4 @@ docker compose \
   -f ./static-share/docker-compose.yml \
   -f ./openbox-firefox/docker-compose.yml \
   -f ./jobsdb-link-extractor/docker-compose.yml \
-  logs -f jobsdb-link-extractor
+  exec -it jobsdb-link-extractor bash

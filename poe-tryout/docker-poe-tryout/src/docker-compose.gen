@@ -20,14 +20,14 @@ services:
     working_dir: /app
   changedetection:
     depends_on:
-      playwright-chrome:
+      changedetection-chrome:
         condition: service_started
         required: true
     environment:
       HIDE_REFERER: "true"
       NO_PROXY: '"localhost,192.168.10.0/24"'
       PGID: "1000"
-      PLAYWRIGHT_DRIVER_URL: ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
+      PLAYWRIGHT_DRIVER_URL: ws://changedetection-chrome:3000/?stealth=1&--disable-web-security=true
       PORT: "5000"
       PUID: "1000"
     image: ghcr.io/dgtlmoon/changedetection.io
@@ -44,6 +44,23 @@ services:
       source: changedetection-data
       target: /datastore
       volume: {}
+  changedetection-chrome:
+    environment:
+      CHROME_REFRESH_TIME: "600000"
+      CONNECTION_TIMEOUT: "300000"
+      DEFAULT_BLOCK_ADS: "true"
+      DEFAULT_IGNORE_HTTPS_ERRORS: "true"
+      DEFAULT_STEALTH: "true"
+      ENABLE_DEBUGGER: "false"
+      MAX_CONCURRENT_SESSIONS: "10"
+      PREBOOT_CHROME: "true"
+      SCREEN_DEPTH: "16"
+      SCREEN_HEIGHT: "1024"
+      SCREEN_WIDTH: "1920"
+    image: browserless/chrome
+    networks:
+      default: null
+    restart: unless-stopped
   dbapi:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
@@ -73,13 +90,23 @@ services:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor
       dockerfile: Dockerfile
     command:
-    - ./entry.sh
+    - sleep
+    - infinity
+    depends_on:
+      link-extractor-chrome:
+        condition: service_started
+        required: true
     networks:
       default: null
     volumes:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor/src
       target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor/screenshot
+      target: /share/screenshot
       bind:
         create_host_path: true
     working_dir: /app
@@ -112,6 +139,28 @@ services:
       target: /share
       bind:
         create_host_path: true
+  link-extractor-chrome:
+    environment:
+      CHROME_REFRESH_TIME: "600000"
+      CONNECTION_TIMEOUT: "300000"
+      DEFAULT_BLOCK_ADS: "true"
+      DEFAULT_IGNORE_HTTPS_ERRORS: "true"
+      DEFAULT_STEALTH: "true"
+      ENABLE_DEBUGGER: "false"
+      MAX_CONCURRENT_SESSIONS: "10"
+      PREBOOT_CHROME: "true"
+      SCREEN_DEPTH: "16"
+      SCREEN_HEIGHT: "1024"
+      SCREEN_WIDTH: "1920"
+    image: browserless/chrome
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "13000"
+      protocol: tcp
+    restart: unless-stopped
   mongo:
     image: mongo:latest
     networks:
@@ -191,23 +240,6 @@ services:
       target: /app
       bind:
         create_host_path: true
-  playwright-chrome:
-    environment:
-      CHROME_REFRESH_TIME: "600000"
-      CONNECTION_TIMEOUT: "300000"
-      DEFAULT_BLOCK_ADS: "true"
-      DEFAULT_IGNORE_HTTPS_ERRORS: "true"
-      DEFAULT_STEALTH: "true"
-      ENABLE_DEBUGGER: "false"
-      MAX_CONCURRENT_SESSIONS: "10"
-      PREBOOT_CHROME: "true"
-      SCREEN_DEPTH: "16"
-      SCREEN_HEIGHT: "1024"
-      SCREEN_WIDTH: "1920"
-    image: browserless/chrome
-    networks:
-      default: null
-    restart: unless-stopped
   redis:
     command:
     - redis-server
