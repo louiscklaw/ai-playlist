@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec \"node ./index.js\"",
-    "gitUpdate": "git add . && git commit -m\"update jobsdb-link-extractor,\""
+    "dev": "nodemon --exec \"node ./index.js\""
   },
   "keywords": [],
   "author": "",
