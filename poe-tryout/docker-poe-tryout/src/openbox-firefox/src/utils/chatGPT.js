@@ -142,7 +142,7 @@ async function questionAndAnswer(page, question, answer_idx) {
         // is the bot still typing ?
         if (isTheBotStillTyping(reply, old_reply)) {
           old_reply = reply;
-          console.log('bot still typing');
+          console.log(`bot still typing, countdown:${countdown}`);
           // console.log({ countdown, reply });
           await page.waitForTimeout(3 * 1000);
         } else {
