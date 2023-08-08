@@ -2,16 +2,16 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>サンプル</title>
+    <title>navigator.Webdriver test</title>
   </head>
   <body>
-    <h1>サンプル</h1>
+    <h1>navigator.Webdriver test</h1>
 
-    <p id="msg">show user agent</p>
+    <p id="msg">show user agent, should show undefined</p>
 
     <script>
       let element = document.getElementById("msg");
-      element.insertAdjacentHTML("afterend", "<p>" + navigator.Webdriver + "</p>");
+      element.insertAdjacentHTML("afterend", '<p id="webdriver-result">' + navigator.Webdriver + "</p>");
     </script>
   </body>
 </html>

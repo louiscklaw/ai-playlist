@@ -1,0 +1,7 @@
+services:
+  debug:
+    image: ubuntu:latest
+    command: sleep infinity
+  #   build: ./docker-ubuntu2
+  # ubuntu3:
+  #   build: ./docker-ubuntu3

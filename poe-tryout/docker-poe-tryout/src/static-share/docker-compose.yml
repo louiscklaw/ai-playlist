@@ -1,0 +1,12 @@
+services:
+  static-share:
+    build: ./static-share
+    volumes:
+      - ./static-share:/app
+      - ./volumes/static-share:/share
+    working_dir: /app
+    command: ./entry.sh
+    # command: sleep infinity
+    ports:
+      - 8080:8080
+    user: 1000:1000

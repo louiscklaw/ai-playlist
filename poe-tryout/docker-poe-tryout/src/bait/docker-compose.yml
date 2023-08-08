@@ -1,0 +1,9 @@
+services:
+  bait:
+    build: ./bait
+    volumes:
+      - "./bait/src:/app"
+    working_dir: /app
+    ports:
+      - 18089:8080
+    # command: sleep infinity

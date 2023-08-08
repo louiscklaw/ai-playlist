@@ -1,5 +1,26 @@
 ## draft
 
+### tags
+  - ui testing
+  - api testing
+  - ai training
+  - browser stealthing
+
+### endpoints
+  - kue-scheduler
+    - /chatGPT/helloworld
+    - /chatGPT/ask
+    - /googlePalm/helloworld
+    - /googlePalm/ask
+
+### steps to develop
+  - start firefox, import mitm certificate
+  - mitm is not used at the moment
+  - test poe login state by start_firefox.sh
+  - start ./test.sh at openbox-firefox container
+  - to ensuore you are good to go
+    - run `/workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src/tests/ChatGPT/ask_helloworld/test.sh` -> the simpleest helloworld question to poe chatgpt
+
 ### tackle cloudflare bot preventation 
   - so i change my path to using google-chrome
 ![](./docs/tackle_cloudflare.png)

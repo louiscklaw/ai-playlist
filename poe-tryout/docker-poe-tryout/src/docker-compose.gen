@@ -1,0 +1,223 @@
+name: src
+services:
+  bait:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait
+      dockerfile: Dockerfile
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8080
+      published: "18089"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait/src
+      target: /app
+      bind:
+        create_host_path: true
+    working_dir: /app
+  dbapi:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
+      dockerfile: Dockerfile
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3001
+      published: "3001"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
+      target: /app
+      bind:
+        create_host_path: true
+  debug:
+    command:
+    - sleep
+    - infinity
+    image: ubuntu:latest
+    networks:
+      default: null
+  kue-scheduler-api:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/kue-scheduler-api
+      dockerfile: Dockerfile
+    depends_on:
+      mongo:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3002
+      published: "3002"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/kue-scheduler-api
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
+      target: /share
+      bind:
+        create_host_path: true
+  mongo:
+    image: mongo:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 27017
+      published: "27017"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/mongo/data/db
+      target: /data/db
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/mongo/data/configdb
+      target: /data/configdb
+      bind:
+        create_host_path: true
+  mongo-express:
+    environment:
+      ME_CONFIG_MONGODB_PORT: "27017"
+      ME_CONFIG_MONGODB_SERVER: mongo
+    image: mongo-express:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8081
+      published: "8081"
+      protocol: tcp
+  openbox-firefox:
+    environment:
+      TZ: Asia/Hong_Kong
+    image: openbox-firefox-ubuntu
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 6080
+      published: "6080"
+      protocol: tcp
+    - mode: ingress
+      target: 3000
+      published: "3000"
+      protocol: tcp
+    - mode: ingress
+      target: 5900
+      published: "5900"
+      protocol: tcp
+    privileged: true
+    volumes:
+    - type: bind
+      source: /usr/share/zoneinfo/Asia/Hong_Kong
+      target: /etc/localtime
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-firefox/firefox-user-data
+      target: /share/firefox-user-data
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-firefox/chrome-user-data
+      target: /share/chrome-user-data
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
+      target: /share
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src
+      target: /app
+      bind:
+        create_host_path: true
+  redis:
+    command:
+    - redis-server
+    - /etc/redis/redis.conf
+    image: redis:6.0.7
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 6379
+      published: "6379"
+      protocol: tcp
+    restart: always
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/etc_redis
+      target: /etc/redis
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/data
+      target: /data
+      bind:
+        create_host_path: true
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8001
+      published: "8001"
+      protocol: tcp
+    restart: always
+    volumes:
+    - type: volume
+      source: redisinsight_store
+      target: /db
+      volume: {}
+  static-share:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/static-share
+      dockerfile: Dockerfile
+    command:
+    - ./entry.sh
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8080
+      published: "8080"
+      protocol: tcp
+    user: 1000:1000
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/static-share
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
+      target: /share
+      bind:
+        create_host_path: true
+    working_dir: /app
+networks:
+  default:
+    name: src_default
+volumes:
+  redisinsight_store:
+    name: src_redisinsight_store
