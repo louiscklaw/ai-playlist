@@ -13,7 +13,7 @@ services:
       - PORT=5000
       - PUID=1000
       - PGID=1000
-      - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
+      - PLAYWRIGHT_DRIVER_URL=ws://changedetection-chrome:3000/?stealth=1&--disable-web-security=true
       # An exclude list (useful for notification URLs above) can be specified by with
       - NO_PROXY="localhost,192.168.10.0/24"
       # Hides the `Referer` header so that monitored websites can't see the changedetection.io hostname.
@@ -25,13 +25,13 @@ services:
     restart: unless-stopped
     
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
-    # and must wait before starting (substitute "browser-chrome" with "playwright-chrome" if last one is used)
+    # and must wait before starting (substitute "browser-chrome" with "changedetection-chrome" if last one is used)
     depends_on:
-        playwright-chrome:
+        changedetection-chrome:
             condition: service_started
 
-  playwright-chrome:
-    #  hostname: playwright-chrome
+  changedetection-chrome:
+    #  hostname: changedetection-chrome
     image: browserless/chrome
     restart: unless-stopped
     environment:
