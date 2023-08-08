@@ -4,26 +4,35 @@ const router = express.Router();
 const { Queue } = require('../queue');
 
 router.post('/', async (req, res) => {
-  console.log('/process_new_job_post');
+  var state = 'init';
+  var err_msg = {};
 
-  const req_body = req.body;
-  const { jobs_id, job_post, preprompts, question_list } = req_body;
+  try {
+    console.log('/process_new_job_post');
 
-  // //prepare a job to perform
-  // //dont save it
-  var job = Queue.createJob('now', {
-    jobs_id,
-    job_post,
-    preprompts,
-    question_list,
-  })
-    .attempts(5)
-    .backoff({ delay: 60000, type: 'fixed' })
-    .priority('normal');
+    const req_body = req.body;
+    const { jobs_id, job_post, preprompts, question_list } = req_body;
 
-  Queue.now(job);
+    // //prepare a job to perform
+    // //dont save it
+    var job = Queue.createJob('now', {
+      jobs_id,
+      job_post,
+      preprompts,
+      question_list,
+    })
+      .attempts(5)
+      .backoff({ delay: 15 * 1000, type: 'fixed' })
+      .priority('normal');
 
-  res.send({ state: 'schedued' });
+    Queue.now(job);
+    state = 'scheduled';
+  } catch (error) {
+    state = 'error during adding to queue';
+    err_msg = error;
+  } finally {
+    res.send({ state, err_msg });
+  }
 });
 
 module.exports = router;
