@@ -10,6 +10,8 @@ services:
     depends_on:
       link-extractor-chrome:
         condition: service_started
+    ports:
+      - 3003:3000
 
   link-extractor-chrome:
     image: browserless/chrome
