@@ -1,12 +1,12 @@
 {
-  "name": "kue-scheduler-api",
+  "name": "poe-scheduler-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./index.js",
-    "gitUpdate": "git add . && git commit -m\"update kue-scheduler-api,\"",
+    "gitUpdate": "git add . && git commit -m\"update poe-scheduler-api,\"",
     "dev": "nodemon --exec \"npm run start\""
   },
   "keywords": [],

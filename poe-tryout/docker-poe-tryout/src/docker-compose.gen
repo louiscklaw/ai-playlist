@@ -110,35 +110,6 @@ services:
       bind:
         create_host_path: true
     working_dir: /app
-  kue-scheduler-api:
-    build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/kue-scheduler-api
-      dockerfile: Dockerfile
-    depends_on:
-      mongo:
-        condition: service_started
-        required: true
-      redis:
-        condition: service_started
-        required: true
-    networks:
-      default: null
-    ports:
-    - mode: ingress
-      target: 3002
-      published: "3002"
-      protocol: tcp
-    volumes:
-    - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/kue-scheduler-api
-      target: /app
-      bind:
-        create_host_path: true
-    - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
-      target: /share
-      bind:
-        create_host_path: true
   link-extractor-chrome:
     environment:
       CHROME_REFRESH_TIME: "600000"
@@ -238,6 +209,35 @@ services:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src
       target: /app
+      bind:
+        create_host_path: true
+  poe-scheduler-api:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
+      dockerfile: Dockerfile
+    depends_on:
+      mongo:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3002
+      published: "3002"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
+      target: /share
       bind:
         create_host_path: true
   redis:
