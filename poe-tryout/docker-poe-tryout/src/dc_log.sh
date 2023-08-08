@@ -9,4 +9,7 @@ docker compose \
   -f ./kue-scheduler-api/docker-compose.yml \
   -f ./static-share/docker-compose.yml \
   -f ./openbox-firefox/docker-compose.yml \
-  logs -f
+  -f ./jobsdb-link-extractor/docker-compose.yml \
+  logs -f 
+  
+# jobsdb-link-extractor

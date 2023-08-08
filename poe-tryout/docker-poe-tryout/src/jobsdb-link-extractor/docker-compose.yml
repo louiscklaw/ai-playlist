@@ -1,0 +1,8 @@
+services:
+  jobsdb-link-extractor:
+    build: ./jobsdb-link-extractor
+    volumes:
+      - ./jobsdb-link-extractor/src:/app
+    working_dir: /app
+    command: ./entry.sh
+    # command: sleep infinity

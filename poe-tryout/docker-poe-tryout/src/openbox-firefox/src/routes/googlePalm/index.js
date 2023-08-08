@@ -12,7 +12,8 @@ require('dotenv').config();
 // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
-const { googlePalmSolver } = require(`${WORKER_ROOT}/poe/googlePalm`);
+const { googlePalmSolver, testLanding } = require(`${WORKER_ROOT}/poe/googlePalm`);
+
 // const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 const { ASK_DONE } = require(`${SRC_ROOT}/constants`);
 

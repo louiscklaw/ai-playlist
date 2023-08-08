@@ -33,34 +33,34 @@ Queue.process('now', 1, async function (job, done) {
     console.log(`${path.dirname(chatgpt_output_filename)} already exists`);
   }
 
-  // await fs.writeFileSync(chatgpt_output_filename, JSON.stringify(chatgpt_summarize_result_json, null, 2), {
-  //   encoding: 'utf8',
-  // });
+  await fs.writeFileSync(chatgpt_output_filename, JSON.stringify(chatgpt_summarize_result_json, null, 2), {
+    encoding: 'utf8',
+  });
 
-  // var update_job_state_payload = {
-  //   state: 'job_process_done',
-  //   chatgpt_summarize_res_json: chatgpt_summarize_result_json,
-  // };
+  var update_job_state_payload = {
+    state: 'job_process_done',
+    chatgpt_summarize_res_json: chatgpt_summarize_result_json,
+  };
 
-  // // NOTE: do long running task by this request ?
-  // // http://dbapi:3001/api/v1/JobPost/${new_job_id}
-  // var res = await fetch(`${JOBPOST_ENDPOINT}/${new_job_post_id}`, {
-  //   method: 'patch',
-  //   body: JSON.stringify(update_job_state_payload),
-  //   headers: { 'Content-Type': 'application/json' },
-  // });
-  // var res_json = await res.json();
-  // var json_input_filename = `/share/${new_job_post_id}/input.json`;
-  // try {
-  //   await fs.mkdirSync(path.dirname(json_input_filename));
-  // } catch (error) {
-  //   console.log(`${path.dirname(json_input_filename)} already exists`);
-  // }
+  // NOTE: do long running task by this request ?
+  // http://dbapi:3001/api/v1/JobPost/${new_job_id}
+  var res = await fetch(`${JOBPOST_ENDPOINT}/${new_job_post_id}`, {
+    method: 'patch',
+    body: JSON.stringify(update_job_state_payload),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  var res_json = await res.json();
+  var json_input_filename = `/share/${new_job_post_id}/input.json`;
+  try {
+    await fs.mkdirSync(path.dirname(json_input_filename));
+  } catch (error) {
+    console.log(`${path.dirname(json_input_filename)} already exists`);
+  }
 
-  // await fs.writeFileSync(json_input_filename, JSON.stringify(res_json, null, 2), { encoding: 'utf8' });
+  await fs.writeFileSync(json_input_filename, JSON.stringify(res_json, null, 2), { encoding: 'utf8' });
 
-  // done(null, { deliveredAt: new Date(), res_json, data });
-  done(null, 'helloworld');
+  done(null, { deliveredAt: new Date(), res_json, data });
+  // done(null, 'helloworld');
 });
 
 //listen on scheduler errors

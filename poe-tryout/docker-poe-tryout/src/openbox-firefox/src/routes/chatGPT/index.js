@@ -18,7 +18,7 @@ const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
 
 const { ASK_DONE } = require(`${SRC_ROOT}/constants`);
 
-const { chatGPTSolver } = require(`${WORKER_ROOT}/poe/chatGPT`);
+const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
 router.post('/ask', async (req, res) => {
   var json_input = req.body;
@@ -49,6 +49,13 @@ router.post('/ask', async (req, res) => {
 
     res.send({ state: 'unknown error', error_messge: error.message });
   }
+});
+
+// NOTE: test with src/openbox-firefox/src/tests/chatGPT/helloworld
+router.get('/testLanding', async (req, res) => {
+  var result = await testLanding();
+  res.send(result);
+  // res.send('helloworld')
 });
 
 // NOTE: test with src/openbox-firefox/src/tests/chatGPT/helloworld
