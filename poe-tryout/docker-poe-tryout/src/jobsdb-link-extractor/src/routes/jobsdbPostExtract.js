@@ -62,10 +62,11 @@ router.post('/', async (req, res) => {
       ).textContent;
       return title;
     });
-    const jobDescription = await jobPage.evaluate(() => {
-      const title = document.querySelector('div[data-automation="jobDescription"]').textContent;
-      return title;
+    var jobDescription = await jobPage.evaluate(() => {
+      const description = document.querySelector('div[data-automation="jobDescription"]').textContent;
+      return description;
     });
+    jobDescription = jobDescription.replace(/ /g, '\n');
 
     await jobPage.screenshot({ path: `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`, fullPage: true });
 
@@ -91,6 +92,7 @@ router.post('/', async (req, res) => {
 
     res.send({
       state,
+      url,
       extracted,
       debug_info,
     });

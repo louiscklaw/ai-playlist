@@ -2,7 +2,7 @@
 
 set -ex
 
-curl -X POST http://localhost:3000/chatgpt_summarize_helloworld \
+curl -X POST http://localhost:3003/jobsdbPostExtract \
    -H 'Content-Type: application/json' \
    -d @./input.json \
    -o result.json
