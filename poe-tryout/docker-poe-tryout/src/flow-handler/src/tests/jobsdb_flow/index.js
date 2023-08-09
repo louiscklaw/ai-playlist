@@ -7,7 +7,7 @@ const body = {
   question_list: ['what is the post employing?'],
 };
 
-Array(5)
+Array(10)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
