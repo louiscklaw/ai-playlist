@@ -11,4 +11,4 @@ docker compose \
   -f ./openbox-firefox/docker-compose.yml \
   -f ./jobsdb-link-extractor/docker-compose.yml \
   -f ./flow-handler/docker-compose.yml \
-  exec -it jobsdb-link-extractor bash
+  restart openbox-seat1
