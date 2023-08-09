@@ -11,6 +11,8 @@ router.post('/', async (req, res) => {
   var err_msg = {};
 
   try {
+    console.log('/ask_jobsdb_post');
+
     const req_body = req.body;
     const { jobs_id, job_post, preprompts, question_list } = req_body;
 
