@@ -44,10 +44,11 @@ module.exports = Queue => {
       var done_result_json = await done_result.json();
       console.log({ done_result_json });
 
-      //
+      console.log(chatgpt_summarize_result_json);
       var update_job_state_payload = await writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_json);
 
       // NOTE: do long running task by this request ?
+      console.log(update_job_state_payload);
       var res_json = await writeOutputToDB(new_job_post_id, update_job_state_payload);
 
       // NOTE: successful ask, cool down bot for slething
