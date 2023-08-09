@@ -27,19 +27,23 @@ $ tree -L 3 -d -a
 ```
 
 ### tags
-  - ui testing
-  - api testing
   - ai training
+  - api testing
   - browser stealthing
+  - ui testing
 
 ### endpoints
   - poe-scheduler
-    - /chatGPT/helloworld
-    - /chatGPT/ask
-    - /googlePalm/helloworld
-    - /googlePalm/ask
+    - /chatGPT/helloworld      ( poe chatGPT helloworld self-test )
+    - /chatGPT/ask             ( ask poe/chatGPT )
+    - /googlePalm/helloworld   ( poe/googlePalm helloworld self-test )
+    - /googlePalm/ask          ( ask poe/googlePalm )
 
 ### steps to develop
+```bash
+$ cd src
+$ ./dc_build.sh
+```
   - start firefox, import mitm certificate
   - mitm is not used at the moment
   - test poe login state by start_firefox.sh
