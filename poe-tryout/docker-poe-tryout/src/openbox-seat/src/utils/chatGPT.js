@@ -175,9 +175,7 @@ async function checkLoginState(page) {
 
   try {
     const selector = 'textarea[placeholder="Talk to ChatGPT on Poe"]';
-
     await page.waitForSelector(selector);
-
     await page.waitForTimeout(1 * 1000);
   } catch (error) {
     // console.log('gpt input box not found, check if logged out')

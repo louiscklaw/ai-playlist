@@ -243,7 +243,7 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-seat/src
       target: /app
       bind:
         create_host_path: true
@@ -290,7 +290,7 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-seat/src
       target: /app
       bind:
         create_host_path: true

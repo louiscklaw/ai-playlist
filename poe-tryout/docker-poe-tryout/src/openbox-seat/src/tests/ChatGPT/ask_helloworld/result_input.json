@@ -1,0 +1,4 @@
+{
+  "state": "unknown error",
+  "error_messge": "net::ERR_NAME_NOT_RESOLVED at http://bait:8080/navigator_webdriver_test.html"
+}

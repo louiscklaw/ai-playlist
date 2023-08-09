@@ -20,7 +20,7 @@ services:
   #     - ./volumes/static-share/_output:/share
 
   #     # NOTE: source code
-  #     - "./openbox-firefox/src:/app"
+  #     - "./openbox-seat/src:/app"
   #   environment:
   #     - TZ=Asia/Hong_Kong
   #   # command: sleep infinity
@@ -46,7 +46,7 @@ services:
       - ./volumes/static-share/_output:/share
 
       # NOTE: source code
-      - "./openbox-firefox/src:/app"
+      - "./openbox-seat/src:/app"
     environment:
       - TZ=Asia/Hong_Kong
     # command: sleep infinity
@@ -72,7 +72,7 @@ services:
       - ./volumes/static-share/_output:/share
 
       # NOTE: source code
-      - "./openbox-firefox/src:/app"
+      - "./openbox-seat/src:/app"
     environment:
       - TZ=Asia/Hong_Kong
     # command: sleep infinity
@@ -98,7 +98,7 @@ services:
   #     - ./volumes/static-share/_output:/share
 
   #     # NOTE: source code
-  #     - "./openbox-firefox/src:/app"
+  #     - "./openbox-seat/src:/app"
   #   environment:
   #     - TZ=Asia/Hong_Kong
   #   # command: sleep infinity

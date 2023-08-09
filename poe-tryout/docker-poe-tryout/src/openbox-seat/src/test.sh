@@ -7,7 +7,11 @@ set -x
 export PUPPETEER_PRODUCT=firefox
 npm install
 
-npm i puppeteer-core express dotenv puppeteer-extra puppeteer-extra-plugin-stealth \
+npm i puppeteer-core \
+  express \
+  dotenv \
+  puppeteer-extra \
+  puppeteer-extra-plugin-stealth \
   puppeteer-extra-plugin-adblocker \
   puppeteer-proxy
 

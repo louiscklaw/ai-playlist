@@ -19,12 +19,12 @@ module.exports = Queue => {
       const { jobs_id, job_post, preprompts, question_list, url_after_done } = data;
       const new_job_post_id = jobs_id;
       const gpt_payload = { jobs_id, preprompts, question_list };
-      var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
+      // var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
 
-      // // http://openbox-firefox:3000/test1
+      // // // http://openbox-firefox:3000/test1
       var random_openbox_host = getRandomOpenboxHost();
       const gpt_endpoint = `http://${random_openbox_host}:3000`;
-      // console.log({ random_openbox_host, gpt_endpoint });
+      console.log({ random_openbox_host, gpt_endpoint });
 
       // NOTE: ask poe start
       var chatgpt_summarize_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
@@ -33,27 +33,29 @@ module.exports = Queue => {
         headers: { 'Content-Type': 'application/json' },
       });
       var chatgpt_summarize_result_json = await chatgpt_summarize_result.json();
+      console.log({ chatgpt_summarize_result_json });
+      console.log({ chatgpt_summarize_result_json });
 
-      // NOTE: asking should be completed before this line
-      console.log('calling done url', url_after_done);
-      var done_result = await fetch(url_after_done, {
-        method: 'post',
-        body: JSON.stringify(chatgpt_summarize_result_json),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      var done_result_json = await done_result.json();
-      console.log({ done_result_json });
+      // // NOTE: asking should be completed before this line
+      // console.log('calling done url', url_after_done);
+      // var done_result = await fetch(url_after_done, {
+      //   method: 'post',
+      //   body: JSON.stringify(chatgpt_summarize_result_json),
+      //   headers: { 'Content-Type': 'application/json' },
+      // });
+      // var done_result_json = await done_result.json();
+      // console.log({ done_result_json });
 
-      console.log(chatgpt_summarize_result_json);
-      var update_job_state_payload = await writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_json);
+      // console.log(chatgpt_summarize_result_json);
+      // var update_job_state_payload = await writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_json);
 
-      // NOTE: do long running task by this request ?
-      console.log(update_job_state_payload);
-      var res_json = await writeOutputToDB(new_job_post_id, update_job_state_payload);
+      // // NOTE: do long running task by this request ?
+      // console.log(update_job_state_payload);
+      // var res_json = await writeOutputToDB(new_job_post_id, update_job_state_payload);
 
-      // NOTE: successful ask, cool down bot for slething
-      await mySleep(1 * 60 * 1000);
-      console.log('cooldown bot done');
+      // // NOTE: successful ask, cool down bot for slething
+      // await mySleep(1 * 60 * 1000);
+      // console.log('cooldown bot done');
 
       done(null, { deliveredAt: new Date(), res_json, data });
     } catch (error) {
@@ -62,7 +64,7 @@ module.exports = Queue => {
       } else {
         console.log(error.code);
         console.log(error.message);
-        done(new Error('not handled error found, schedule retry'));
+        done(new Error(error.message));
       }
     } finally {
     }
@@ -71,8 +73,8 @@ module.exports = Queue => {
   //listen on scheduler errors
   Queue.on('schedule error', function (error) {
     //handle all scheduling errors here
+    console.log('schedule error');
     console.log(error);
-    console.log('blablabla');
   });
 
   //listen on success scheduling
@@ -95,9 +97,11 @@ module.exports = Queue => {
         Queue.removeJob(job);
       })
       .on('failed attempt', function (errorMessage, doneAttempts) {
+        console.log(errorMessage);
         console.log('Job failed');
       })
       .on('failed', function (errorMessage) {
+        console.log(errorMessage);
         console.log('Job failed');
       })
       .on('progress', function (progress, data) {

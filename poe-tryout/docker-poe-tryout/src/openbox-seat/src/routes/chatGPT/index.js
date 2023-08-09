@@ -15,13 +15,20 @@ puppeteer.use(StealthPlugin());
 // require('dotenv').config();
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
-
-const { ASK_DONE } = require(`${SRC_ROOT}/constants`);
-
-const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
+const {
+  ASK_INIT,
+  ASK_DONE,
+  //
+} = require(`${SRC_ROOT}/constants`);
+const {
+  chatGPTSolver,
+  testLanding,
+  //
+} = require(`${WORKER_ROOT}/poe/chatGPT`);
 
 router.post('/ask', async (req, res) => {
   var json_input = req.body;
+  var output = { state: ASK_INIT, error: '' };
 
   try {
     var { jobs_id, question_list, preprompts } = json_input;
@@ -32,22 +39,21 @@ router.post('/ask', async (req, res) => {
 
     var temp_history = await chatGPTSolver(question_list, jobs_id, preprompts);
 
-    res.send({
+    output = {
       state: ASK_DONE,
       json_input,
-      chat_history: {
-        q_and_a: temp_history,
-      },
-    });
+      chat_history: { q_and_a: temp_history },
+    };
   } catch (error) {
     console.log(error);
 
     if (error.message == NO_QUESTION_FOUND) {
-      res.send({ state: 'hello no question found' });
-      return;
+      output = { state: 'hello no question found' };
+    } else {
+      output = { state: 'unknown error', error_messge: error.message };
     }
-
-    res.send({ state: 'unknown error', error_messge: error.message });
+  } finally {
+    res.send(output);
   }
 });
 

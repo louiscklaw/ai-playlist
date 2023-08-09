@@ -52,7 +52,6 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
   try {
     await initChatGptPage(page);
     await checkLoginState(page);
-
     await clearChatHistory(page);
     await clearModalBox(page);
 
@@ -85,7 +84,6 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
 
   return chat_history;
 }
-
 
 async function testLanding() {
   var result = { status: 'done' };
