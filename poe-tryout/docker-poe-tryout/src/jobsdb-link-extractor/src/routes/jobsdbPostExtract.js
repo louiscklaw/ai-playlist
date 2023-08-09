@@ -66,7 +66,9 @@ router.post('/', async (req, res) => {
       const description = document.querySelector('div[data-automation="jobDescription"]').textContent;
       return description;
     });
-    jobDescription = jobDescription.replace(/ /g, '\n');
+    // NOTE: string_cleaning_test.js
+    jobDescription = jobDescription.replace(/\n +/g, '\n');
+    jobDescription = jobDescription.replace(/\n+/g, '\n');
 
     await jobPage.screenshot({ path: `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`, fullPage: true });
 

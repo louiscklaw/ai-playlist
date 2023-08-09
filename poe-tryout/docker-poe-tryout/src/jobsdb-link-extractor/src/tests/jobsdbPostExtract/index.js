@@ -1,13 +1,6 @@
 const fetch = require('node-fetch');
 
-const urls = [
-  'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
-  'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
-  'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
-  'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
-  'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
-  'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868',
-];
+const urls = ['https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868'];
 
 urls.map(async (v, i) => {
   console.log(`posting ask ${i}...`);
@@ -22,5 +15,3 @@ urls.map(async (v, i) => {
   const { extracted } = res_json;
   console.log({ extracted });
 });
-
-console.log('helloworld');
