@@ -11,7 +11,7 @@
 $ tree -L 3 -d -a
 .
 ├── docs                          ( documentation )
-├── _seeds                        ( seed for oenbox-firefox )
+├── _seeds                        ( seed for openbox-firefox )
 │   └── chrome-user-data-seed                        
 └── src                               
     ├── bait                      ( hosting self bait page )
