@@ -15,7 +15,7 @@ docker compose \
   -f ./flow-handler/docker-compose.yml \
   pull
 
-
+# NOTE: making of logickee/openbox-seat-ubuntu
 cd ./openbox-seat
   ./build_docker.sh
 cd -
