@@ -1,5 +1,31 @@
 ## draft
 
+### system design
+![](./docs/hand_draft.jpg)
+
+### component introduction
+
+### directory introduction
+
+```bash
+$ tree -L 3 -d -a
+.
+├── docs                          ( documentation )
+├── _seeds                        ( seed for oenbox-firefox )
+│   └── chrome-user-data-seed                        
+└── src                               
+    ├── bait                      ( hosting self bait page )
+    ├── changedetect              ( changedetect container home )
+    ├── dbapi                     ( dbapi container home )
+    ├── fetcher                   
+    ├── flow-handler              ( main entry point )
+    ├── jobsdb-link-extractor     ( jobsdb-link-extractor home )
+    ├── openbox-firefox           ( openbox-seat home )
+    ├── poe-scheduler-api         ( poe-scheduler-api source/container home )
+    ├── static-share              ( output hosting/container home )
+    └── volumes                   ( docker persistance strage )
+```
+
 ### tags
   - ui testing
   - api testing
