@@ -87,4 +87,8 @@ npm i puppeteer-core express dotenv puppeteer-extra puppeteer-extra-plugin-steal
 # node tests/chatHistory/newLog.js
 # node tests/chatHistory/helloworld.js
 
-npx nodemon --exec "node ./index.js"
+# NOTE: move to package.json
+# npx nodemon --exec "node ./index.js"
+# npm run dev
+
+npm run dev

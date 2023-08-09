@@ -23,6 +23,25 @@ const {
   checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
+function getNMinutesLater(n_minute = 0) {
+  // Get the current date and time
+  var currentTime = new Date();
+
+  // Add 2 minutes to the current time
+  var futureTime = new Date(currentTime.getTime() + n_minute * 60000);
+
+  // Extract hours and minutes from the future time
+  var hours = futureTime.getHours();
+  var minutes = futureTime.getMinutes();
+
+  // Format hours and minutes with leading zeros if necessary
+  hours = ('0' + hours).slice(-2);
+  minutes = ('0' + minutes).slice(-2);
+
+  // Display the future time in HH:MM format
+  console.log(hours + ':' + minutes);
+}
+
 async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
   var chat_history = { session_id: jobs_id, preprompts: [], history: [] };
   var answer_idx = -1;
@@ -57,15 +76,17 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
       await page.waitForTimeout(getRandomSecond(5, 10) * 1000);
     }
 
+    await browser.close();
+
     // NOTE: successful ask, cool down bot for slething
-    const cooldownMinute = getRandomInt(2, 5);
-    console.log(`successful ask, cooldown bot, ${cooldownMinute} minute ...`);
+    const cooldownMinute = 1;
+    console.log(`successful ask, cooldown bot, ${cooldownMinute} minute ... return again`);
     await page.waitForTimeout(cooldownMinute * 60 * 1000);
     console.log('cooldown bot done');
   } catch (error) {
     throw error;
   } finally {
-    await browser.close();
+    if (browser?.close) await browser.close();
   }
 
   return chat_history;
