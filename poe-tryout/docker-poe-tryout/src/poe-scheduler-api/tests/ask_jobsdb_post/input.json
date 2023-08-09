@@ -1,5 +1,5 @@
 {
   "jobs_id": "blablabla",
-
-  "question_list": ["say 'hello 1' to me", "say 'hello 2' to me", "say 'hello 3' to me"]
+  "preprompts": ["Hi How are you ?"],
+  "question_list": ["this is a good weather in hong kong today"]
 }
