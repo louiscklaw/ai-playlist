@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "markdown-to-html": "^0.0.13"
+  },
+  "dependencies": {
+    "finity": "^0.5.4"
   }
 }

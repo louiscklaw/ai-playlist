@@ -1,3 +1,7 @@
+networks:
+  default:
+    name: poe-tryout
+
 services:
   debug:
     image: ubuntu:latest
