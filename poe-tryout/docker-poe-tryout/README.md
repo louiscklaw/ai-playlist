@@ -33,7 +33,7 @@ $ tree -L 3 -d -a
   - browser stealthing
 
 ### endpoints
-  - kue-scheduler
+  - poe-scheduler
     - /chatGPT/helloworld
     - /chatGPT/ask
     - /googlePalm/helloworld
