@@ -27,11 +27,12 @@ $ tree -L 3 -d -a
 ```
 
 ### tags
-  - ai training
-  - api testing
+  - ai training ( poe / chatGPT / googlePalm)
+  - api testing ( expressjs )
   - browser stealthing
   - ui testing (google chrome / chromium / firefox )
   - stealthing
+  - queueing / state machine
 
 ### endpoints
   - poe-scheduler
