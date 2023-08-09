@@ -65,6 +65,10 @@ services:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
       dockerfile: Dockerfile
+    depends_on:
+      mongo:
+        condition: service_started
+        required: true
     networks:
       default: null
     ports:
@@ -85,19 +89,47 @@ services:
     image: ubuntu:latest
     networks:
       default: null
-  jobsdb-link-extractor:
+  flow-handler:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler
       dockerfile: Dockerfile
     command:
-    - sleep
-    - infinity
+    - ./entry.sh
     depends_on:
       link-extractor-chrome:
         condition: service_started
         required: true
     networks:
       default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3005"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler/src
+      target: /app
+      bind:
+        create_host_path: true
+    working_dir: /app
+  jobsdb-link-extractor:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor
+      dockerfile: Dockerfile
+    command:
+    - ./entry.sh
+    depends_on:
+      link-extractor-chrome:
+        condition: service_started
+        required: true
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3003"
+      protocol: tcp
     volumes:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor/src
@@ -153,6 +185,10 @@ services:
       bind:
         create_host_path: true
   mongo-express:
+    depends_on:
+      mongo:
+        condition: service_started
+        required: true
     environment:
       ME_CONFIG_MONGODB_PORT: "27017"
       ME_CONFIG_MONGODB_SERVER: mongo
@@ -164,7 +200,7 @@ services:
       target: 8081
       published: "8081"
       protocol: tcp
-  openbox-firefox:
+  openbox-seat1:
     environment:
       TZ: Asia/Hong_Kong
     image: openbox-firefox-ubuntu
@@ -173,15 +209,15 @@ services:
     ports:
     - mode: ingress
       target: 6080
-      published: "6080"
+      published: "6081"
       protocol: tcp
     - mode: ingress
       target: 3000
-      published: "3000"
+      published: "3021"
       protocol: tcp
     - mode: ingress
       target: 5900
-      published: "5900"
+      published: "5901"
       protocol: tcp
     privileged: true
     volumes:
@@ -192,12 +228,59 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-firefox/firefox-user-data
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat1/firefox-user-data
       target: /share/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-firefox/chrome-user-data
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat1/chrome-user-data
+      target: /share/chrome-user-data
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
+      target: /share
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src
+      target: /app
+      bind:
+        create_host_path: true
+  openbox-seat2:
+    environment:
+      TZ: Asia/Hong_Kong
+    image: openbox-firefox-ubuntu
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 6080
+      published: "6082"
+      protocol: tcp
+    - mode: ingress
+      target: 3000
+      published: "3022"
+      protocol: tcp
+    - mode: ingress
+      target: 5900
+      published: "5902"
+      protocol: tcp
+    privileged: true
+    volumes:
+    - type: bind
+      source: /usr/share/zoneinfo/Asia/Hong_Kong
+      target: /etc/localtime
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat2/firefox-user-data
+      target: /share/firefox-user-data
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat2/chrome-user-data
       target: /share/chrome-user-data
       bind:
         create_host_path: true

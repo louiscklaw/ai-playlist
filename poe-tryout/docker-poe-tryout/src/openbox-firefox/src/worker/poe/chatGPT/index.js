@@ -77,12 +77,6 @@ async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
     }
 
     await browser.close();
-
-    // NOTE: successful ask, cool down bot for slething
-    const cooldownMinute = 1;
-    console.log(`successful ask, cooldown bot, ${cooldownMinute} minute ... return again`);
-    await page.waitForTimeout(cooldownMinute * 60 * 1000);
-    console.log('cooldown bot done');
   } catch (error) {
     throw error;
   } finally {

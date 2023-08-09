@@ -29,7 +29,7 @@ services:
     image: openbox-firefox-ubuntu
     ports:
       - 6081:6080
-      - 3000:3000
+      - 3021:3000
       - 5901:5900
     privileged: true
     volumes:
@@ -50,3 +50,55 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
     # command: sleep infinity
+
+  openbox-seat2:
+    image: openbox-firefox-ubuntu
+    ports:
+      - 6082:6080
+      - 3022:3000
+      - 5902:5900
+    privileged: true
+    volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      # - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
+
+      # NOTE: share firfox user profile
+      - ./volumes/openbox-seat2/firefox-user-data:/share/firefox-user-data
+
+      # NOTE: share chrome user profile
+      - ./volumes/openbox-seat2/chrome-user-data:/share/chrome-user-data
+      
+      # NOTE: store output
+      - ./volumes/static-share/_output:/share
+
+      # NOTE: source code
+      - "./openbox-firefox/src:/app"
+    environment:
+      - TZ=Asia/Hong_Kong
+    # command: sleep infinity
+    
+  # openbox-seat3:
+  #   image: openbox-firefox-ubuntu
+  #   ports:
+  #     - 6083:6080
+  #     - 3023:3000
+  #     - 5903:5900
+  #   privileged: true
+  #   volumes:
+  #     - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+  #     # - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
+
+  #     # NOTE: share firfox user profile
+  #     - ./volumes/openbox-seat3/firefox-user-data:/share/firefox-user-data
+
+  #     # NOTE: share chrome user profile
+  #     - ./volumes/openbox-seat3/chrome-user-data:/share/chrome-user-data
+      
+  #     # NOTE: store output
+  #     - ./volumes/static-share/_output:/share
+
+  #     # NOTE: source code
+  #     - "./openbox-firefox/src:/app"
+  #   environment:
+  #     - TZ=Asia/Hong_Kong
+  #   # command: sleep infinity

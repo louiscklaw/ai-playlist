@@ -21,8 +21,8 @@ services:
       ME_CONFIG_MONGODB_PORT: "27017"
     ports:
       - 8081:8081
-    # depends_on:
-    #   - mongo
+    depends_on:
+      - mongo
 
   dbapi:
     build: ./dbapi
@@ -30,6 +30,5 @@ services:
       - 3001:3001
     volumes:
       - ./dbapi:/app
-    # TODO: resume me
-    # depends_on:
-    #   - mongo
+    depends_on:
+      - mongo
