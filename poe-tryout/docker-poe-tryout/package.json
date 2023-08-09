@@ -15,5 +15,7 @@
   "devDependencies": {
     "markdown-to-html": "^0.0.13"
   },
-  "dependencies": {}
+  "dependencies": {
+    "finity": "^0.5.4"
+  }
 }

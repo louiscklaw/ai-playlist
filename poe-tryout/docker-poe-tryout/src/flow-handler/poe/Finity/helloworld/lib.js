@@ -3,21 +3,29 @@ const Finity = require('finity');
 function processTaskAsync(taskParams) {
   console.log('Processing task:', taskParams);
   // Simulate an async operation
-  return new Promise(resolve => setTimeout(resolve, 3000));
+  return new Promise(resolve => setTimeout(resolve(taskParams + 1), 100));
 }
+
 
 const worker = Finity
   .configure()
     .initialState('ready')
       .on('task_submitted').transitionTo('running')
     .state('running')
-      .do((state, context) => processTaskAsync(context.eventPayload))
-        .onSuccess().transitionTo('succeeded')
+      .do((state, context) => processTaskAsync(1))
+        .onSuccess().transitionTo('succeeded1', {hello:'world'})
         .onFailure().transitionTo('failed')
-      .onTimeout(1000)
-        .transitionTo('timed_out')
+        .onTimeout(1000).transitionTo('timed_out')
+    .state('succeeded1')
+      .do((state, context) => processTaskAsync(context.result))
+        .onSuccess().transitionTo('succeeded2')
+        .onFailure().transitionTo('succeeded1')
+        .onTimeout(1000).transitionTo('timed_out')
+
     .global()
-      .onStateEnter(state => console.log(`Entering state '${state}'`))
+      .onStateEnter((state, context) => {
+        console.log(`Entering state '${state}'`)
+      })
   .start();
 
 // const taskParams = {

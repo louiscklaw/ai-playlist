@@ -18,8 +18,8 @@ Array(10)
       headers: { 'Content-Type': 'application/json' },
     });
 
-    const res_text = await response.text();
-    console.log({ res_text });
+    const res_json = await response.json();
+    console.log({ res_json });
   });
 
 console.log('helloworld');
