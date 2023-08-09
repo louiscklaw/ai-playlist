@@ -30,7 +30,8 @@ $ tree -L 3 -d -a
   - ai training
   - api testing
   - browser stealthing
-  - ui testing
+  - ui testing (google chrome / chromium / firefox )
+  - stealthing
 
 ### endpoints
   - poe-scheduler
@@ -44,6 +45,7 @@ $ tree -L 3 -d -a
 $ cd src
 $ ./dc_build.sh
 ```
+
   - start firefox, import mitm certificate
   - mitm is not used at the moment
   - test poe login state by start_firefox.sh
