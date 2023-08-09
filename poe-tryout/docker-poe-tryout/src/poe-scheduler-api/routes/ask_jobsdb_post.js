@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
+const { ERROR_ADDING_QUEUE } = require('../constants/error');
+const { STATE_INIT, STATE_SCHEDULED } = require('../constants/states');
+
 const { Queue } = require('../queue');
 
 router.post('/', async (req, res) => {
-  var state = 'init';
+  var state = STATE_INIT;
   var err_msg = {};
 
   try {
-    console.log('/process_new_job_post');
-
     const req_body = req.body;
     const { jobs_id, job_post, preprompts, question_list } = req_body;
 
     // //prepare a job to perform
     // //dont save it
-    var job = Queue.createJob('now', {
+    var job = Queue.createJob('poe', {
       jobs_id,
       job_post,
       preprompts,
@@ -26,9 +27,9 @@ router.post('/', async (req, res) => {
       .priority('normal');
 
     Queue.now(job);
-    state = 'scheduled';
+    state = STATE_SCHEDULED;
   } catch (error) {
-    state = 'error during adding to queue';
+    state = ERROR_ADDING_QUEUE;
     err_msg = error;
   } finally {
     res.send({ state, err_msg });
