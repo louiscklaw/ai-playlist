@@ -1,4 +1,4 @@
-FROM openbox-firefox-ubuntu
+FROM openbox-seat-ubuntu
 
 EXPOSE 5900
 

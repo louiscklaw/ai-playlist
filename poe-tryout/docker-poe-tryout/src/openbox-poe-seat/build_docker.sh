@@ -2,47 +2,47 @@
 
 set -x
 
-docker rmi openbox-firefox-ubuntu
+docker rmi openbox-seat-ubuntu
 
 set -ex
 
 # build openbox as base
 cd dockerfiles/ubuntu
-  docker build . -t openbox-firefox-ubuntu
+  docker build . -t openbox-seat-ubuntu
 cd -
 
 # build openbox as base
 cd dockerfiles/openbox
-  docker build . -t openbox-firefox-ubuntu
+  docker build . -t openbox-seat-ubuntu
 cd -
 
 cd dockerfiles/apps
-  docker build -f dockerfile.puppeteer . -t openbox-firefox-ubuntu
-  docker build -f dockerfile.vnc . -t openbox-firefox-ubuntu
-  docker build -f dockerfile.firefox . -t openbox-firefox-ubuntu
-  docker build -f dockerfile.chrome . -t openbox-firefox-ubuntu
+  docker build -f dockerfile.puppeteer . -t openbox-seat-ubuntu
+  docker build -f dockerfile.vnc . -t openbox-seat-ubuntu
+  docker build -f dockerfile.firefox . -t openbox-seat-ubuntu
+  docker build -f dockerfile.chrome . -t openbox-seat-ubuntu
 cd -
 
 cd dockerfiles/apps/mitmproxy
-  docker build . -t openbox-firefox-ubuntu
+  docker build . -t openbox-seat-ubuntu
 cd -
 
 # finialize docker
 cd dockerfiles/final
   docker build . \
     --build-arg="ANDROID_API_LEVEL=$ANDROID_API_LEVEL" \
-    -t openbox-firefox-ubuntu
+    -t openbox-seat-ubuntu
 cd -
 
-# docker image tag openbox-firefox-ubuntu logickee/openbox-firefox-ubuntu
-# docker push logickee/openbox-firefox-ubuntu
+# docker image tag openbox-seat-ubuntu logickee/openbox-seat-ubuntu
+# docker push logickee/openbox-seat-ubuntu
 
 # docker run --rm -it \
 #   --privileged \
 #   --device /dev/kvm \
 #   -p 6080:6080 \
 #   -p 4723:4723 \
-#   openbox-firefox-ubuntu \
+#   openbox-seat-ubuntu \
 #   bash
 
   # -v ./share:/share \

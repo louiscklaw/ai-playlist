@@ -203,7 +203,7 @@ services:
   openbox-seat1:
     environment:
       TZ: Asia/Hong_Kong
-    image: openbox-firefox-ubuntu
+    image: openbox-seat-ubuntu
     networks:
       default: null
     ports:
@@ -250,7 +250,7 @@ services:
   openbox-seat2:
     environment:
       TZ: Asia/Hong_Kong
-    image: openbox-firefox-ubuntu
+    image: openbox-seat-ubuntu
     networks:
       default: null
     ports:

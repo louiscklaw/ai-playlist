@@ -1,4 +1,4 @@
-FROM openbox-firefox-ubuntu
+FROM openbox-seat-ubuntu
 
 ADD mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitmproxy.crt
 

@@ -1,6 +1,6 @@
 services:
   # openbox-firefox:
-  #   image: openbox-firefox-ubuntu
+  #   image: openbox-seat-ubuntu
   #   ports:
   #     - 6080:6080
   #     - 3000:3000
@@ -26,7 +26,7 @@ services:
   #   # command: sleep infinity
 
   openbox-seat1:
-    image: openbox-firefox-ubuntu
+    image: openbox-seat-ubuntu
     ports:
       - 6081:6080
       - 3021:3000
@@ -52,7 +52,7 @@ services:
     # command: sleep infinity
 
   openbox-seat2:
-    image: openbox-firefox-ubuntu
+    image: openbox-seat-ubuntu
     ports:
       - 6082:6080
       - 3022:3000
@@ -78,7 +78,7 @@ services:
     # command: sleep infinity
     
   # openbox-seat3:
-  #   image: openbox-firefox-ubuntu
+  #   image: openbox-seat-ubuntu
   #   ports:
   #     - 6083:6080
   #     - 3023:3000

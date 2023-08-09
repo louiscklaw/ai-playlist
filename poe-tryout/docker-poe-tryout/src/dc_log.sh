@@ -8,9 +8,10 @@ docker compose \
   -f ./dbapi/docker-compose.yml \
   -f ./poe-scheduler-api/docker-compose.yml \
   -f ./static-share/docker-compose.yml \
-  -f ./openbox-firefox/docker-compose.yml \
+  -f ./openbox-poe-seat/docker-compose.yml \
   -f ./jobsdb-link-extractor/docker-compose.yml \
   -f ./flow-handler/docker-compose.yml \
-  logs -f flow-handler
+  logs -f 
   
+  # flow-handler
   # poe-scheduler-api

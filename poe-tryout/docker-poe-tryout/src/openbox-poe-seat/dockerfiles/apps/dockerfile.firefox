@@ -1,4 +1,4 @@
-FROM openbox-firefox-ubuntu
+FROM openbox-seat-ubuntu
 
 
 RUN apt install -y software-properties-common
