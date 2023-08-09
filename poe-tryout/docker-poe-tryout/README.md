@@ -112,14 +112,6 @@ $ docker compose restart mongo-express
 
 ### to run script inside src directory
 
-### mapping:
-  - ./openbox-firefox/src:/app
-
-```bash
-$ cd /app
-$ ./test.sh
-```
-
 
 ### high level design
   1. fetch (HLD)
@@ -132,10 +124,12 @@ $ ./test.sh
   - https://github.com/f/awesome-chatgpt-prompts
   - https://florianholzapfel.github.io/express-restify-mongoose
 
+
 ### logs
   - 2023-08-01: add expres database to store log
     - draft google-palm support
     - update pre-prompt
+
 
 ### TODO:
   - docker-compse.production.yml
