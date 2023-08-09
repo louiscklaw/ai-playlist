@@ -8,4 +8,3 @@ curl -X POST http://localhost:3002/ask_jobsdb_post \
    
    # \
    # -o result_input.json
-
