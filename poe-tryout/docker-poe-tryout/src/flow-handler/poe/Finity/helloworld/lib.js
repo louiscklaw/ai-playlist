@@ -3,7 +3,7 @@ const Finity = require('finity');
 function processTaskAsync(taskParams) {
   console.log('Processing task:', taskParams);
   // Simulate an async operation
-  return new Promise(resolve => setTimeout(resolve, 100));
+  return new Promise(resolve => setTimeout(resolve, 3000));
 }
 
 const worker = Finity
@@ -20,8 +20,11 @@ const worker = Finity
       .onStateEnter(state => console.log(`Entering state '${state}'`))
   .start();
 
-const taskParams = {
-  foo: 'bar',
-};
+// const taskParams = {
+//   foo: 'bar',
+// };
+// worker.handle('task_submitted', taskParams);
 
-worker.handle('task_submitted', taskParams);
+module.exports = {
+  worker
+}
