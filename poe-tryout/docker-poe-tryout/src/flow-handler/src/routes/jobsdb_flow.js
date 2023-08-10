@@ -18,14 +18,6 @@ router.post('/', async (req, res) => {
   const firstInstance = Finity.start(worker_config);
   firstInstance.handle('task_submitted', taskParams);
 
-  // jobsdbFlowMachine.handle('e_extract_job_detail');
-
-  // jobsdbFlowMachine.handle('e_extract_job_detail');
-  //  jobsdbFlowMachine.handle('e_extraction_done');
-  // await jobsdbFlowMachine.handle('e_summarize_job_detail');
-  // await jobsdbFlowMachine.handle('e_summarize_done');
-  // await jobsdbFlowMachine.handle('e_draft_email');
-  // await jobsdbFlowMachine.handle('e_draft_email_done');
 });
 
 module.exports = router;
