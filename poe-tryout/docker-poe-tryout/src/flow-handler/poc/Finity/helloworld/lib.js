@@ -1,5 +1,6 @@
 const Finity = require('finity');
 
+
 function processTaskAsync(taskParams) {
   console.log('Processing task:', taskParams);
   // Simulate an async operation
@@ -13,7 +14,7 @@ const worker = Finity
       .on('task_submitted').transitionTo('running')
     .state('running')
       .do((state, context) => processTaskAsync(1))
-        .onSuccess().transitionTo('succeeded1', {hello:'world'})
+        .onSuccess().transitionTo('succeeded1')
         .onFailure().transitionTo('failed')
         .onTimeout(1000).transitionTo('timed_out')
     .state('succeeded1')
