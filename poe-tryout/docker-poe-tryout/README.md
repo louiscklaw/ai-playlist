@@ -18,7 +18,7 @@ $ tree -L 3 -d -a
     ├── changedetect              ( changedetect container home )
     ├── dbapi                     ( dbapi container home )
     ├── fetcher                   
-    ├── flow-handler              ( main entry point )
+    ├── flow-handler              ( main entry point, workflow control )
     ├── jobsdb-link-extractor     ( jobsdb-link-extractor home )
     ├── openbox-firefox           ( openbox-seat home )
     ├── poe-scheduler-api         ( poe-scheduler-api source/container home )
