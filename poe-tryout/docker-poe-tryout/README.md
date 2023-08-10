@@ -17,7 +17,6 @@ $ tree -L 3 -d -a
     ├── bait                      ( hosting self bait page )
     ├── changedetect              ( changedetect container home )
     ├── dbapi                     ( dbapi container home )
-    ├── fetcher                   
     ├── flow-handler              ( main entry point, workflow control )
     ├── jobsdb-link-extractor     ( jobsdb-link-extractor home )
     ├── openbox-firefox           ( openbox-seat home )
