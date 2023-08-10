@@ -1,7 +1,7 @@
 const express = require('express');
 
 // const { mySleep } = require('../utils/mySleep');
-const { jobsdbMachine } = require('../state_machine/jobsdbMachine');
+const { jobsdbMachine } = require('../state_machine/jobsdb/jobsdbMachine');
 
 const router = express.Router();
 
@@ -14,13 +14,14 @@ router.post('/', async (req, res) => {
     jobsdb_job_url,
     post_id,
   });
+  
   console.log(jobsdb_machine.state, jobsdb_machine.context.instance);
 
   try {
     // await jobsdb_machine.extractJobDetail();
     // await jobsdb_machine.extractDone();
     await jobsdb_machine.askPoe();
-    await jobsdb_machine.askPoeDone();
+    // await jobsdb_machine.askPoeDone();
   } catch (error) {
     console.log({ error, flow_state: jobsdb_machine.state });
   }

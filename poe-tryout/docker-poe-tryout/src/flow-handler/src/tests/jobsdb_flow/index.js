@@ -14,7 +14,7 @@ Array(1)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
 
-    const response = await fetch('http://localhost:3005/jobsdb_flow', {
+    const response = await fetch('http://flow-handler:3000/jobsdb_flow', {
       method: 'post',
       body: JSON.stringify({ 
         num: i, instance: i,

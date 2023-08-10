@@ -16,7 +16,7 @@ module.exports = Queue => {
 
       const { data } = job;
       var res_json = {};
-      const { jobs_id, job_post, preprompts, question_list, url_after_done } = data;
+      const { jobs_id, job_post, preprompts, question_list, callback_url } = data;
       const new_job_post_id = jobs_id;
       const gpt_payload = { jobs_id, preprompts, question_list };
       // var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
@@ -33,8 +33,14 @@ module.exports = Queue => {
         headers: { 'Content-Type': 'application/json' },
       });
       var chatgpt_summarize_result_json = await chatgpt_summarize_result.json();
-      console.log({ chatgpt_summarize_result_json });
-      console.log({ chatgpt_summarize_result_json });
+
+      var result_cb_url = await fetch(callback_url, {
+        method: 'post',
+        body: JSON.stringify(chatgpt_summarize_result_json),
+        headers: { 'Content-Type': 'application/json' },
+      })
+      var result_json = await result_cb_url.json();
+
 
       // // NOTE: asking should be completed before this line
       // console.log('calling done url', url_after_done);
@@ -56,6 +62,8 @@ module.exports = Queue => {
       // // NOTE: successful ask, cool down bot for slething
       // await mySleep(1 * 60 * 1000);
       // console.log('cooldown bot done');
+
+      
 
       done(null, { deliveredAt: new Date(), res_json, data });
     } catch (error) {

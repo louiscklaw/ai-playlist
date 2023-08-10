@@ -86,9 +86,16 @@ services:
     command:
     - sleep
     - infinity
-    image: ubuntu:latest
+    image: node:latest
     networks:
       default: null
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src
+      target: /src
+      bind:
+        create_host_path: true
+    working_dir: /src
   flow-handler:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler

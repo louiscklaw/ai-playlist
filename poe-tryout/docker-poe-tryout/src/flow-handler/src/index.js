@@ -14,8 +14,14 @@ const PORT = 3000;
 const jobsdbFlowRoutes = require('./routes/jobsdb_flow');
 app.use('/jobsdb_flow', jobsdbFlowRoutes);
 
+const jobsdbFlowPoeCallbackRoutes = require('./routes/jobsdb_flow_poe_callback');
+app.use('/jobsdb_flow_poe_callback', jobsdbFlowPoeCallbackRoutes);
+
+
 const helloworldRoutes = require('./routes/helloworld');
 app.use('/helloworld', helloworldRoutes);
+
+
 
 // Start the server
 app.listen(PORT, () => {

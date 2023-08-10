@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     console.log('/process_new_job_post');
 
     const req_body = req.body;
-    const { jobs_id, job_post, preprompts, question_list } = req_body;
+    const { jobs_id, job_post, preprompts, question_list, callback_url } = req_body;
 
     // //prepare a job to perform
     // //dont save it
@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
       job_post,
       preprompts,
       question_list,
+      callback_url
     })
       .attempts(5)
       .backoff({ delay: 15 * 1000, type: 'fixed' })

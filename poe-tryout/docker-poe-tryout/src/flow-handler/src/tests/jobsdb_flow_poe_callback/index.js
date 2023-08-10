@@ -17,8 +17,24 @@ Array(1)
 
     const response = await fetch('http://flow-handler:3000/jobsdb_flow_poe_callback', {
       method: 'post',
-      body: JSON.stringify({ 
-        hello:'world'
+      body: JSON.stringify({
+        state: 'ask_done',
+        json_input: {
+          jobs_id: 'blablabla',
+          preprompts: ['Summarze the below text for me.'],
+          question_list: ['Louis is a boy.\nLouis eat apple.\nLouis is a good guy.'],
+        },
+        chat_history: {
+          q_and_a: {
+            session_id: 'blablabla',
+            history: [
+              {
+                question: 'Louis is a boy.\nLouis eat apple.\nLouis is a good guy.',
+                answer: 'Louis is a good boy who eats apples.',
+              },
+            ],
+          },
+        },
       }),
       headers: { 'Content-Type': 'application/json' },
     });

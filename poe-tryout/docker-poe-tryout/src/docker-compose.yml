@@ -4,8 +4,11 @@ networks:
 
 services:
   debug:
-    image: ubuntu:latest
+    image: node:latest
     command: sleep infinity
+    working_dir: /src
+    volumes:
+      - ./:/src
   #   build: ./docker-ubuntu2
   # ubuntu3:
   #   build: ./docker-ubuntu3
