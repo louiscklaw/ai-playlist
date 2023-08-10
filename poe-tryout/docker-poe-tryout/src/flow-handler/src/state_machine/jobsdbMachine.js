@@ -11,11 +11,6 @@ const S_SUMMARIZE_DONE = 's_summarize_done';
 const S_DRAFTING_EMAIL = 's_drafting_email';
 const S_DRAFT_EMAIL_DONE = 's_draft_email_done';
 
-const extractJobsDBPostIdFromUrl = (url_in) => {
-  const last_ele = url_in.length-1
-  return url_in.split('-')[last_ele]
-};
-
 var jobsdbMachine = new StateMachine.factory({
   init: S_NEW_JOB_FOUND,
   transitions: [
@@ -32,7 +27,8 @@ var jobsdbMachine = new StateMachine.factory({
         retry_count = 3;
         for (var i = 0; i < retry_count; i++) {
           try {
-            var { jobsdb_job_url}= this.context;
+            var { post_id, jobsdb_job_url}= this.context;
+            console.log('processing post_id:'+post_id);
             var result = await fetch(`http://jobsdb-link-extractor:3000/jobsdbPostExtract`,{
               method:'POST',
               body: JSON.stringify({
@@ -41,7 +37,7 @@ var jobsdbMachine = new StateMachine.factory({
               headers: { 'Content-Type': 'application/json' }
             });
             var result_json = await result.json();
-            this.context.job_id = extractJobsDBPostIdFromUrl(jobsdb_job_url); 
+            this.context.post_id = post_id; 
             res(result_json);
           } catch (error) {
             console.log(error);
@@ -54,7 +50,7 @@ var jobsdbMachine = new StateMachine.factory({
 
     onExtractDone: function () {
       return new Promise(async (res, rej) => {
-        console.log('extraction done, job_id:'+ this.context.job_id)
+        console.log('extraction done, post_id:'+ this.context.post_id)
         res()
       });
     },

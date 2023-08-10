@@ -6,13 +6,13 @@ const { jobsdbMachine } = require('../state_machine/jobsdbMachine');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { num, instance, jobsdb_job_url } = req.body;
+  const { num, instance, jobsdb_job_url, post_id } = req.body;
   res.send({ state: 'scheduled', url: jobsdb_job_url });
 
   var jobsdb_machine = new jobsdbMachine({ 
     instance,
-    job_id:'', 
-    jobsdb_job_url 
+    jobsdb_job_url,
+    post_id
   });
   console.log(jobsdb_machine.state, jobsdb_machine.context.instance);
 
