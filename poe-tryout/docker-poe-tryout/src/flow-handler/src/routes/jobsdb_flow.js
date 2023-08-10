@@ -1,23 +1,29 @@
-const Finity = require('finity');
-
 const express = require('express');
 
 // const { mySleep } = require('../utils/mySleep');
-// const { jobsdbFlowMachine } = require('../state_machine/jobsdbFlowMachine');
-const { worker_config } = require('../state_machine/worker_config');
+const { jobsdbMachine } = require('../state_machine/jobsdbMachine');
+
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { num } = req.body;
-  res.send({ num });
+  const { num, instance, jobsdb_job_url } = req.body;
+  res.send({ state: 'scheduled', url: jobsdb_job_url });
 
-  const taskParams = {
-    foo: num,
-  };
+  var jobsdb_machine = new jobsdbMachine({ 
+    instance,
+    job_id:'', 
+    jobsdb_job_url 
+  });
+  console.log(jobsdb_machine.state, jobsdb_machine.context.instance);
 
-  const firstInstance = Finity.start(worker_config);
-  firstInstance.handle('task_submitted', taskParams);
-
+  try {
+    var extraction_result = await jobsdb_machine.extractJobDetail();
+    console.log(extraction_result)
+    await jobsdb_machine.extractDone();
+  } catch (error) {
+    console.log(error)
+  }
+    
 });
 
 module.exports = router;

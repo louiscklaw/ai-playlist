@@ -11,10 +11,12 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   const req_body = req.body;
-  const { url } = req_body;
+  const { post_id, url } = req_body;
   // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
+  
+  // NOTE: considerate the test, split the calculation to call input
+  // const post_id = url.split('-').pop();
 
-  const post_id = url.split('-').pop();
   console.log(`extracting job with post_id ${post_id}`);
 
   const browser = await puppeteer.connect({

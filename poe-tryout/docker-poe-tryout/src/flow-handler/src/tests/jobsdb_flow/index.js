@@ -7,14 +7,20 @@ const body = {
   question_list: ['what is the post employing?'],
 };
 
-Array(10)
+'https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868'
+
+Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
 
     const response = await fetch('http://localhost:3005/jobsdb_flow', {
       method: 'post',
-      body: JSON.stringify({ num: i }),
+      body: JSON.stringify({ 
+        num: i, instance: i,
+        post_id: 'sample_jobsdb_post',
+        jobsdb_job_url: 'http://bait:8080/sample_jobsdb_post.html',
+      }),
       headers: { 'Content-Type': 'application/json' },
     });
 

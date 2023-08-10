@@ -11,7 +11,7 @@ Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
-    const response = await fetch('http://localhost:3005/helloworld');
+    const response = await fetch('http://localhost:18089/sample_jobsdb_post.html');
     const res_text = await response.text();
     console.log({ res_text });
   });
