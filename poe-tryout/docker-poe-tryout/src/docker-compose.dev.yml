@@ -1,0 +1,3 @@
+services:
+  flow-handler:
+    command: ./dev.sh

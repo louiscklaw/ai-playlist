@@ -94,7 +94,7 @@ services:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler
       dockerfile: Dockerfile
     command:
-    - ./entry.sh
+    - ./dev.sh
     depends_on:
       link-extractor-chrome:
         condition: service_started
