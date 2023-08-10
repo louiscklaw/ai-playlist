@@ -42,7 +42,6 @@ var jobsdbMachine = new StateMachine.factory({
               post_id,
               url: jobsdb_job_url })
             var result_json = await result.json();
-            console.log({result_json})
 
             this.context['extraction_result'] = result_json;
 

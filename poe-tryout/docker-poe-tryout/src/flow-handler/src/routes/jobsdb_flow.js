@@ -18,9 +18,9 @@ router.post('/', async (req, res) => {
 
   try {
     var extraction_result = await jobsdb_machine.extractJobDetail();
-    console.log(extraction_result);
     await jobsdb_machine.extractDone();
     await jobsdb_machine.askPoe();
+    await jobsdb_machine.askPoeDone();
   } catch (error) {
     console.log({ error, flow_state: jobsdb_machine.state });
   }
