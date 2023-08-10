@@ -11,17 +11,11 @@ app.use(bodyParser.json());
 
 const PORT = 3000;
 
-const jobsdbFlowRoutes = require('./routes/jobsdb_flow');
-app.use('/jobsdb_flow', jobsdbFlowRoutes);
+app.use('/jobsdb_flow_summarize_cb', require('./routes/jobsdb_flow_summarize_cb'));
+app.use('/jobsdb_flow_poe_cb', require('./routes/jobsdb_flow_poe_cb'));
+app.use('/jobsdb_flow', require('./routes/jobsdb_flow'));
 
-const jobsdbFlowPoeCallbackRoutes = require('./routes/jobsdb_flow_poe_callback');
-app.use('/jobsdb_flow_poe_callback', jobsdbFlowPoeCallbackRoutes);
-
-
-const helloworldRoutes = require('./routes/helloworld');
-app.use('/helloworld', helloworldRoutes);
-
-
+app.use('/helloworld', require('./routes/helloworld'));
 
 // Start the server
 app.listen(PORT, () => {

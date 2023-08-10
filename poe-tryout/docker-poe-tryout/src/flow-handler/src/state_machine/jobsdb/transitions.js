@@ -1,6 +1,7 @@
-const fetch = require('node-fetch');
 
 const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../utils/fetchOpenboxSeat');
+const { getHelloworld } = require('../../fetch/getHelloworld');
+const { postHelloworld } = require('../../fetch/postHelloworld');
 
 const S_HELLOWORLD = 'helloworld';
 
@@ -23,8 +24,8 @@ const transitions = [
   { name: 'askPoeDone', from: S_ASKING_POE, to: S_ASKING_POE_DONE },
   { name: 'summarize', from: S_ASKING_POE_DONE, to: S_SUMMARIZING_JOB_DETAIL },
   { name: 'summarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_SUMMARIZE_DONE },
-  { name: 'draftEmail', from: S_SUMMARIZE_DONE, to: S_DRAFTING_EMAIL },
-  { name: 'draftEmailDone', from: S_DRAFTING_EMAIL, to: S_DRAFT_EMAIL_DONE },
+  { name: 'poeDraftEmail', from: S_SUMMARIZE_DONE, to: S_DRAFTING_EMAIL },
+  { name: 'poeDraftEmailDone', from: S_DRAFTING_EMAIL, to: S_DRAFT_EMAIL_DONE },
 ];
 
 const methods = {
@@ -87,16 +88,34 @@ const methods = {
     });
   },
   onSummarize: function () {
-    console.log('I Summarize');
+    return new Promise(async (res, rej) => {
+      console.log('I Summarize');
+      res();
+    });
   },
   onSummarizeDone: function () {
-    console.log('I SummarizeDone');
+    return new Promise(async (res, rej) => {
+      console.log('I SummarizeDone');
+      res();
+    });
   },
-  onDraftEmail: function () {
-    console.log('I DraftEmail');
+  onPoeDraftEmail: function () {
+    return new Promise(async (res, rej) => {
+      console.log('I DraftEmail');
+      var result= await postHelloworld({job_info:"helloworld"})
+      var res_json = result.json();
+      
+      res();
+    });
   },
-  onDraftEmailDone: function () {
-    console.log('I DraftEmailDone');
+  onPoeDraftEmailDone: function () {
+    return new Promise(async (res, rej) => {
+      console.log('I DraftEmailDone');
+      // var result = await getHelloworld();
+      // var res_text = await result.text();
+      // console.log(res_text);
+      res();
+    });
   },
 };
 

@@ -15,6 +15,9 @@ const doneRoutes = require('./routes/done');
 app.use('/helloworld', helloworldRoutes);
 app.use('/process_new_job_post', processNewJobPostRoutes);
 app.use('/ask_jobsdb_post', askJobsdbPostRoutes);
+
+app.use('/postHelloworld', require('./routes/postHelloworld'));
+
 app.use('/done', doneRoutes);
 
 
