@@ -12,6 +12,7 @@ YML_S='
 -f ./changedetect/docker-compose.yml
 -f ./jobsdb-link-extractor/docker-compose.yml
 -f ./flow-handler/docker-compose.yml
+-f ./apprise-api/docker-compose.yml
 '
 
 if [[ -v DOCKER_DEV ]]; then

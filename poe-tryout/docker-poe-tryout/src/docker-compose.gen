@@ -1,5 +1,25 @@
 name: src
 services:
+  apprise-api:
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    image: lscr.io/linuxserver/apprise-api:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8000
+      published: "8000"
+      protocol: tcp
+    restart: unless-stopped
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/apprise-api/config
+      target: /config
+      bind:
+        create_host_path: true
   bait:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait

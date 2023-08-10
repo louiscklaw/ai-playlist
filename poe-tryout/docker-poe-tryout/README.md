@@ -42,8 +42,8 @@ $ tree -L 3 -d -a
 
 ### steps to develop
 ```bash
-$ cd src
-$ ./dc_build.sh
+# in project root
+$ npm run docker_dev 
 ```
 
   - start firefox, import mitm certificate
