@@ -6,18 +6,20 @@ function processTaskAsync(taskParams) {
   return new Promise(resolve => setTimeout(resolve, 100));
 }
 
-const worker = Finity
-  .configure()
-    .initialState('ready')
-      .on('task_submitted').transitionTo('running')
-    .state('running')
-      .do((state, context) => processTaskAsync(context.eventPayload))
-        .onSuccess().transitionTo('succeeded')
-        .onFailure().transitionTo('failed')
-      .onTimeout(1000)
-        .transitionTo('timed_out')
-    .global()
-      .onStateEnter(state => console.log(`Entering state '${state}'`))
+const worker = Finity.configure()
+  .initialState('ready')
+  .on('task_submitted')
+  .transitionTo('running')
+  .state('running')
+  .do((state, context) => processTaskAsync(context.eventPayload))
+  .onSuccess()
+  .transitionTo('succeeded')
+  .onFailure()
+  .transitionTo('failed')
+  .onTimeout(1000)
+  .transitionTo('timed_out')
+  .global()
+  .onStateEnter(state => console.log(`Entering state '${state}'`))
   .start();
 
 const taskParams = {
