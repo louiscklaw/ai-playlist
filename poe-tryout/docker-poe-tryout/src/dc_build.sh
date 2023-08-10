@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 YML_S='
 -f ./docker-compose.yml
@@ -14,21 +14,33 @@ YML_S='
 -f ./flow-handler/docker-compose.yml
 '
 
-YML_DEV_S="
-$YML_S
--f ./docker-compose.dev.yml
-"
+if [[ -v DOCKER_DEV ]]; then
+  echo 
+  echo 
+  echo -e "\033[31m USING DEV DOCKER COMPOSE CONFIG !!! \033[0m"
+  echo 
+  echo 
+  read -p "Press Enter to continue..."
 
-docker compose $YML_DEV_S pull
+  YML_S="
+  $YML_S
+  -f ./docker-compose.dev.yml
+  "
+fi
+
+set -ex
+
+docker compose $YML_S pull
 
 # NOTE: making of logickee/openbox-seat-ubuntu
-cd ./openbox-seat
-  ./build_docker.sh
-cd -
+if [[ -v DOCKER_DEV ]]; then
+  cd ./openbox-seat
+    ./build_docker.sh
+  cd -
+fi
 
 docker compose $YML_S config > docker-compose.gen
-docker compose $YML_DEV_S config > docker-compose.dev.gen
-docker compose $YML_DEV_S up -d --build
+docker compose $YML_S up -d --build
 
 exit 0
 

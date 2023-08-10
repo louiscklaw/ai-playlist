@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker_rebuild": "docker compose up -d",
+    "docker_rebuild": "cd src && ./dc_build.sh",
+    "docker_dev": "cd src && DOCKER_DEV=true ./dc_build.sh",
     "gitUpdate": "git add . && git commit -m\"update docker-poe-tryout,\"",
     "update_readme": "github-markdown README.md > docs/index.html"
   },
