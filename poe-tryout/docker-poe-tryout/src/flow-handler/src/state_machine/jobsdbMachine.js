@@ -37,10 +37,16 @@ var jobsdbMachine = new StateMachine.factory({
             var { post_id, jobsdb_job_url}= this.context;
             this.context.post_id = post_id; 
             
-            var result = await postJobsdbPostExtract({ url: jobsdb_job_url })
+            // post_id,
+            var result = await postJobsdbPostExtract({ 
+              post_id,
+              url: jobsdb_job_url })
             var result_json = await result.json();
+            console.log({result_json})
 
-            res(result_json);
+            this.context['extraction_result'] = result_json;
+
+            res();
           } catch (error) {
             console.log(error);
             console.log('error found, retry');
@@ -58,7 +64,10 @@ var jobsdbMachine = new StateMachine.factory({
     },
     onAskPoe: function () {
       return new Promise(async (res, rej) => {
-        console.log('asking poe, post_id:'+ this.context.post_id)
+        const {context} = this;
+        
+        console.log('asking poe, ')
+        console.log({context})
         res()
       });
     },

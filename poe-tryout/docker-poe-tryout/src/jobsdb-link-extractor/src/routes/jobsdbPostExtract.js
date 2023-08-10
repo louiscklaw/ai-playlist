@@ -10,30 +10,34 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const req_body = req.body;
-  const { post_id, url } = req_body;
-  // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
+  var output = {state: 'init', extracted: {},debug:{}, error:''}
+  var browser = {}, page = {};
   
-  // NOTE: considerate the test, split the calculation to call input
-  // const post_id = url.split('-').pop();
-
-  console.log(`extracting job with post_id ${post_id}`);
-
-  const browser = await puppeteer.connect({
-    browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
-    slowMo: 1,
-    defaultViewport: { width: 1920, height: 1080 * 3 },
-  });
-  const page = await browser.newPage();
-  await page.goto(url, {
-    waitUntil: 'networkidle2',
-  });
-
-  var state = 'starting';
-  var extracted = {};
-  var debug_info = {};
-
   try {
+    // NOTE: input validation, may be set a schema here ?
+    const req_body = req.body;
+    const { post_id, url } = req_body;
+    if (!post_id) throw new Error('post_id is required')    
+
+    // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
+    
+    // NOTE: considerate the test, split the calculation to call input
+    // const post_id = url.split('-').pop();
+
+    // slowMo: 1,
+     browser = await puppeteer.connect({
+      browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
+      defaultViewport: { width: 1920, height: 1080 * 3 },
+    });
+     page = await browser.newPage();
+    await page.goto(url, {
+      waitUntil: 'networkidle2',
+    });
+
+    var state = 'starting';
+    var extracted = {};
+    var debug_info = {};
+
     const jobPage = page;
 
     const jobTitle = await jobPage.evaluate(() => {
@@ -45,6 +49,7 @@ router.post('/', async (req, res) => {
       const title = document.querySelector('div[data-automation="jobDetailsHeader"]').outerHTML;
       return title;
     });
+
     const { companyName, jobAddress, postDate, _debugList } = await jobPage.evaluate(() => {
       var output = {};
       var debugList = [];
@@ -76,8 +81,8 @@ router.post('/', async (req, res) => {
 
     // console.log('halt at timeout');
     // await page.waitForTimeout(999 * 1000);
-    state = 'extract success';
-    extracted = {
+    output.state = 'extract success';
+    output.extracted = {
       jobTitle,
       companyName,
       _jobDetailsHeaderRawHTML,
@@ -87,20 +92,18 @@ router.post('/', async (req, res) => {
       jobHighlight,
       jobDescription,
     };
-  } catch (error) {
-    state = 'error during extraction';
-    debug_info = error;
-  } finally {
-    await page.close();
-    await browser.close();
 
-    res.send({
-      state,
-      url,
-      extracted,
-      debug_info,
-    });
+  } catch (error) {
+    output.state = 'error'
+    output.error = error.message;
+  } finally {
+    // if (page != {}) await page.close();
+    // if (browser != {}) await browser.close();
+
+    // console.log({output})
+    res.send(output)
   }
+
 });
 
 module.exports = router;
