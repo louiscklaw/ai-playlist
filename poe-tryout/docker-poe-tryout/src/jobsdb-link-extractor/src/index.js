@@ -10,10 +10,8 @@ const PORT = 3000;
 const helloworldRoutes = require('./routes/helloworld');
 app.use('/helloworld', helloworldRoutes);
 
-
 const jobsdbPostExtractRoutes = require('./routes/jobsdbPostExtract');
 app.use('/jobsdbPostExtract', jobsdbPostExtractRoutes);
-
 
 // Start the server
 app.listen(PORT, () => {

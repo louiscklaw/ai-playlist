@@ -11,6 +11,7 @@ docker compose \
   -f ./openbox-seat/docker-compose.yml \
   -f ./jobsdb-link-extractor/docker-compose.yml \
   -f ./flow-handler/docker-compose.yml \
-  logs -f jobsdb-link-extractor
-  # -f flow-handler 
+  logs -f 
+  # flow-handler 
+  # -f jobsdb-link-extractor
   # poe-scheduler-api
