@@ -15,29 +15,21 @@ puppeteer.use(StealthPlugin());
 // require('dotenv').config();
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
-const {
-  ASK_INIT,
-  ASK_DONE,
-  //
-} = require(`${SRC_ROOT}/constants`);
-const {
-  chatGPTSolver,
-  testLanding,
-  //
-} = require(`${WORKER_ROOT}/poe/chatGPT`);
+const { ASK_INIT, ASK_DONE } = require(`${SRC_ROOT}/constants`);
+const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
 router.post('/ask', async (req, res) => {
   var json_input = req.body;
-  var output = { state: ASK_INIT, error: '' };
+  var output = { state: ASK_INIT, input: json_input, error: '' };
 
   try {
-    var { jobs_id, question_list, preprompts } = json_input;
+    var { question_list, preprompts } = json_input;
     // res.send(question_list)
     if (!question_list) throw new Error(QUESTION_LIST_NOT_FOUND);
     if (question_list?.length < 1) throw new Error(NO_QUESTION_FOUND);
     // NOTE: question list valid after this line
 
-    var temp_history = await chatGPTSolver(question_list, jobs_id, preprompts);
+    var temp_history = await chatGPTSolver(question_list, preprompts);
 
     output = {
       state: ASK_DONE,

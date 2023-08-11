@@ -42,8 +42,8 @@ function getNMinutesLater(n_minute = 0) {
   console.log(hours + ':' + minutes);
 }
 
-async function chatGPTSolver(question_list, jobs_id, preprompts = []) {
-  var chat_history = { session_id: jobs_id, preprompts: [], history: [] };
+async function chatGPTSolver(question_list, preprompts = []) {
+  var chat_history = { preprompts: [], history: [] };
   var answer_idx = -1;
 
   const browser = await initBrowser();
