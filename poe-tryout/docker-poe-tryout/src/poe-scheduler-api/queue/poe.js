@@ -14,12 +14,13 @@ module.exports = Queue => {
     try {
       console.log('\nProcessing job with id %s at %s', job.id, new Date());
 
+      // const new_job_post_id = jobs_id;
+      // var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
+
       const { data } = job;
       var res_json = {};
-      const { jobs_id, job_post, preprompts, question_list, callback_url } = data;
-      const new_job_post_id = jobs_id;
-      const gpt_payload = { jobs_id, preprompts, question_list };
-      // var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
+      const { preprompts, question_list, callback_url } = data;
+      const gpt_payload = { preprompts, question_list };
 
       // // // http://openbox-firefox:3000/test1
       var random_openbox_host = getRandomOpenboxHost();
@@ -38,10 +39,8 @@ module.exports = Queue => {
         method: 'post',
         body: JSON.stringify(chatgpt_summarize_result_json),
         headers: { 'Content-Type': 'application/json' },
-      })
-      var result_json = await result_cb_url.json();
-
-
+      });
+      var result_cb_json = await result_cb_url.json();
       // // NOTE: asking should be completed before this line
       // console.log('calling done url', url_after_done);
       // var done_result = await fetch(url_after_done, {
@@ -62,8 +61,6 @@ module.exports = Queue => {
       // // NOTE: successful ask, cool down bot for slething
       // await mySleep(1 * 60 * 1000);
       // console.log('cooldown bot done');
-
-      
 
       done(null, { deliveredAt: new Date(), res_json, data });
     } catch (error) {
