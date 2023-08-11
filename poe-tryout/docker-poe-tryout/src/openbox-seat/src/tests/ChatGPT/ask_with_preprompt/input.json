@@ -1,5 +1,4 @@
 {
-  "jobs_id": "blablabla",
   "preprompts": [
     "say 'preprompt 1' to me"
   ],
