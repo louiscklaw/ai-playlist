@@ -417,7 +417,7 @@ services:
     working_dir: /app
 networks:
   default:
-    name: poe-tryout
+    name: dev-poe-tryout
 volumes:
   changedetection-data:
     name: src_changedetection-data
