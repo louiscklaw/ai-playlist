@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        background: white;
+      }
+
+      .actor {
+        stroke: #ccccff;
+        fill: #ececff;
+      }
+      text.actor {
+        fill: black;
+        stroke: none;
+        font-family: Helvetica;
+      }
+
+      .actor-line {
+        stroke: grey;
+      }
+
+      .messageLine0 {
+        stroke-width: 1.5;
+        stroke-dasharray: '2 2';
+        marker-end: 'url(#arrowhead)';
+        stroke: black;
+      }
+
+      .messageLine1 {
+        stroke-width: 1.5;
+        stroke-dasharray: '2 2';
+        stroke: black;
+      }
+
+      #arrowhead {
+        fill: black;
+      }
+
+      .messageText {
+        fill: black;
+        stroke: none;
+        font-family: 'trebuchet ms', verdana, arial;
+        font-size: 14px;
+      }
+
+      .labelBox {
+        stroke: #ccccff;
+        fill: #ececff;
+      }
+
+      .labelText {
+        fill: black;
+        stroke: none;
+        font-family: 'trebuchet ms', verdana, arial;
+      }
+
+      .loopText {
+        fill: black;
+        stroke: none;
+        font-family: 'trebuchet ms', verdana, arial;
+      }
+
+      .loopLine {
+        stroke-width: 2;
+        stroke-dasharray: '2 2';
+        marker-end: 'url(#arrowhead)';
+        stroke: #ccccff;
+      }
+
+      .note {
+        stroke: #decc93;
+        fill: #fff5ad;
+      }
+
+      .noteText {
+        fill: black;
+        stroke: none;
+        font-family: 'trebuchet ms', verdana, arial;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.sequenceConfig = {
+        diagramMarginX: 50,
+        diagramMarginY: 10,
+        boxTextMargin: 5,
+        noteMargin: 10,
+        messageMargin: 35,
+        mirrorActors: true,
+      };
+      mermaid.initialize({ startOnLoad: true, showSequenceNumbers: true });
+    </script>
+
+    <div>
+      <div class="mermaid">
+      sequenceDiagram
+        participant jobsdb
+        participant extractor
+        participant flow_handler
+        participant poe_scheduler
+        participant openbox_poe
+    
+    
+        jobsdb-->>extractor: hello!
+        extractor-->>+flow_handler: hello!
+    
+            flow_handler-->>+poe_scheduler: hello!
+            poe_scheduler-->>+openbox_poe: hello!
+            openbox_poe-->>-flow_handler: call-back!
+    
+            flow_handler-->>+poe_scheduler: hello!
+            poe_scheduler-->>+openbox_poe: hello!
+            openbox_poe-->>-flow_handler: call-back!
+
+            flow_handler-->>-extractor: call-back!
+      </div>
+      <div style="width: 100%; text-align: center; margin-top: 1rem; text-decoration: underline; font-weight: bold;;">
+        flow graph of project
+      </div>
+    </div>
+  </body>
+</html>

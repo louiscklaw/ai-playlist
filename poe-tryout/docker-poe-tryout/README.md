@@ -1,5 +1,7 @@
 ## draft
 
+![](./docs/graphs/1/graph.png)
+
 ### system design
 ![](./docs/hand_draft.jpg)
 
