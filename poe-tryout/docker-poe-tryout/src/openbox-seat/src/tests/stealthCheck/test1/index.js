@@ -7,7 +7,7 @@ Array(1)
     const url = 'http://openbox-seat1:3000/stealthCheck';
     const response = await fetch(url, {
       method: 'post',
-      body: JSON.stringify({hello:'world'}),
+      body: JSON.stringify({ hello: 'world' }),
       headers: { 'Content-Type': 'application/json' },
     });
 
