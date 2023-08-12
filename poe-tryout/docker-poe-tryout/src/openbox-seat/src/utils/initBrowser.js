@@ -56,6 +56,7 @@ async function initBrowser() {
     await initStealthing(page);
     await testStealthing(page);
 
+
     return browser;
   } catch (error) {
     console.log('error during initBrowser');
