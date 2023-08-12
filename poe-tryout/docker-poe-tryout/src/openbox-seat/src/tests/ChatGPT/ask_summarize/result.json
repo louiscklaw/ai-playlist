@@ -1,0 +1,23 @@
+{
+  "state": "ask_done",
+  "json_input": {
+    "preprompts": ["Summarze the below text for me."],
+    "question_list": ["Louis is a boy.\nLouis eat apple.\nLouis is a good guy."]
+  },
+  "chat_history": {
+    "q_and_a": {
+      "preprompts": [
+        {
+          "question": "Summarze the below text for me.",
+          "answer": "I apologize, but I cannot see the text you are referring to. Please provide the text you would like me to summarize, and I'll be happy to assist you."
+        }
+      ],
+      "history": [
+        {
+          "question": "Louis is a boy.\nLouis eat apple.\nLouis is a good guy.",
+          "answer": "The text provided states that Louis is a boy who eats apples and is described as a good person."
+        }
+      ]
+    }
+  }
+}
