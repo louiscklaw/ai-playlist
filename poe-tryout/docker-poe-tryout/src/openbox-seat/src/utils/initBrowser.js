@@ -13,29 +13,43 @@ const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../config');
 
 async function initStealthing(page) {
-  await page.evaluate(() => {
-    Object.defineProperty(navigator, 'webdriver', {
-      get: () => undefined,
+  try {
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, 'webdriver', {
+        get: () => undefined,
+      });
+      
     });
-  });
+  } catch (error) {
+    console.log('error during initStealthing');
+    console.log(error);
+    throw error;
+  }
 }
+
 async function testStealthing(page) {
-  await page.goto('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html');
-  var webdriver_result = await page.evaluate(() => {
-    return document.querySelector('#webdriver-result').textContent;
-  });
-  var chrome_result = await page.evaluate(() => {
-    return document.querySelector('#chrome-result').textContent;
-  });
+  try {
+    await page.goto('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html');
+    var webdriver_result = await page.evaluate(() => {
+      return document.querySelector('#webdriver-result').textContent;
+    });
+    var chrome_result = await page.evaluate(() => {
+      return document.querySelector('#chrome-result').textContent;
+    });
 
-  assert(webdriver_result == 'missing (passed)', 'webdriver should be missing !');
-  assert(chrome_result == 'present (passed)', 'should present !');
+    assert(webdriver_result == 'missing (passed)', 'webdriver should be missing !');
+    assert(chrome_result == 'present (passed)', 'should present !');
 
-  await page.goto('http://bait:8080/navigator_webdriver_test.html', { waitUntil: 'load' });
-  webdriver_result = await page.evaluate(() => {
-    return document.querySelector('#webdriver-result').textContent;
-  });
-  assert(webdriver_result == 'undefined', 'navigator.Webdriver not equal to undefined');
+    await page.goto('http://bait:8080/navigator_webdriver_test.html', { waitUntil: 'load' });
+    webdriver_result = await page.evaluate(() => {
+      return document.querySelector('#webdriver-result').textContent;
+    });
+    assert(webdriver_result == 'undefined', 'navigator.Webdriver not equal to undefined');
+  } catch (error) {
+    console.log('error during testStealthing');
+    console.log(error);
+    throw error;
+  }
 }
 
 async function initBrowser() {
@@ -56,11 +70,11 @@ async function initBrowser() {
     await initStealthing(page);
     await testStealthing(page);
 
-
     return browser;
   } catch (error) {
     console.log('error during initBrowser');
     console.log(error);
+    throw error;
   }
 }
 

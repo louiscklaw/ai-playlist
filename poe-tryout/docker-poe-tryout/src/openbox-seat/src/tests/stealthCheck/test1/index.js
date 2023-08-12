@@ -14,5 +14,3 @@ Array(1)
     const res_json = await response.json();
     console.log({ res_json });
   });
-
-console.log('helloworld')
