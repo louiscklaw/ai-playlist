@@ -43,6 +43,7 @@ module.exports = Queue => {
         });
         var result_cb_json = await result_cb_url.json();
       }else{
+        console.log({chatgpt_summarize_result_json})
         console.log('no callback url provided, quitting');
       }
 
