@@ -1,6 +1,4 @@
-const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../utils/fetchOpenboxSeat');
-const { getHelloworld } = require('../../fetch/getHelloworld');
-const { postHelloworld } = require('../../fetch/postHelloworld');
+
 
 const S_HELLOWORLD = 'helloworld';
 
@@ -15,7 +13,6 @@ const S_ASKING_POE = 's_asking_poe';
 const S_ASKING_POE_DONE = 's_asking_poe_done';
 const S_STORE_JSON_DONE = 'S_STORE_JSON_DONE';
 
-const EXTRACTION_SUCCESS = 'extract success';
 
 const transitions = [
   { name: 'extractJobDetail', from: S_NEW_JOB_FOUND, to: S_EXTRACTING_JOB_DETAIL },
