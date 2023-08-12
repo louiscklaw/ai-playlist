@@ -73,8 +73,7 @@ module.exports = Queue => {
       if (error.code == 'ECONNREFUSED' && error.message.indexOf('openbox-firefox') > -1) {
         done(new Error('the openbox-firefox server is not already, schedule retry'));
       } else {
-        console.log(error.code);
-        console.log(error.message);
+        console.log({error});
         done(new Error(error.message));
       }
     } finally {

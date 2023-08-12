@@ -24,6 +24,10 @@ services:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait
       dockerfile: Dockerfile
+    command:
+    - npm
+    - run
+    - start
     networks:
       default: null
     ports:

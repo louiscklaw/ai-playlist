@@ -13,7 +13,6 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 require('dotenv').config();
-const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../config');
 const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);

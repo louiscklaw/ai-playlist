@@ -39,23 +39,28 @@ async function testStealthing(page) {
 }
 
 async function initBrowser() {
-  var browser = await puppeteer.launch({
-    product: 'chrome',
-    headless: false,
-    executablePath: '/usr/bin/google-chrome-stable',
-    userDataDir: CHROME_DATA_DIR,
-    slowMo: 1,
-    // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
-    defaultViewport: { width: 1024, height: 768 },
-    ignoreHTTPSErrors: true,
-    args: [`--user-data-dir=${CHROME_DATA_DIR}`],
-  });
+  try {
+    var browser = await puppeteer.launch({
+      product: 'chrome',
+      headless: false,
+      executablePath: '/usr/bin/google-chrome-stable',
+      userDataDir: CHROME_DATA_DIR,
+      slowMo: 1,
+      // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
+      defaultViewport: { width: 1024, height: 768 },
+      ignoreHTTPSErrors: true,
+      args: [`--user-data-dir=${CHROME_DATA_DIR}`],
+    });
 
-  const page = (await browser.pages())[0];
-  await initStealthing(page);
-  await testStealthing(page);
+    const page = (await browser.pages())[0];
+    await initStealthing(page);
+    await testStealthing(page);
 
-  return browser;
+    return browser;
+  } catch (error) {
+    console.log('error during initBrowser');
+    console.log(error);
+  }
 }
 
 function helloworldBrowser() {

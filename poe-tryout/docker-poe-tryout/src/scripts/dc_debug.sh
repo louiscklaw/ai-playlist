@@ -11,4 +11,4 @@ docker compose \
   -f ./openbox-seat/docker-compose.yml \
   -f ./jobsdb-link-extractor/docker-compose.yml \
   -f ./flow-handler/docker-compose.yml \
-  exec -it test bash
+  exec -it bait bash

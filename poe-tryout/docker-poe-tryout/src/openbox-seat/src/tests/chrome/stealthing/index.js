@@ -39,7 +39,6 @@ var assert = require('chai').assert;
   var webdriver_result = await page.evaluate(() => {
     return document.querySelector('#webdriver-result').textContent;
   });
-
   assert(webdriver_result == 'missing (passed)', 'webdriver selthing test failed !');
 
   await page.goto('http://bait:8080/navigator_webdriver_test.html', { waitUntil: 'load' });

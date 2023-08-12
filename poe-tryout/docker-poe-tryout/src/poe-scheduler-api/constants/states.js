@@ -2,10 +2,10 @@
 
 const HELLOWORLD_STATE = 'HELLOWORLD_STATE';
 
-const STATE_INIT = 'state_init';
-const STATE_START = 'state_start';
-const STATE_SCHEDULED = 'state_scheduled';
-const STATE_DONE = 'state_done';
+const STATE_INIT = 'STATE_INIT';
+const STATE_START = 'STATE_START';
+const STATE_SCHEDULED = 'STATE_SCHEDULED';
+const STATE_DONE = 'STATE_DONE';
 
 module.exports = {
   //
