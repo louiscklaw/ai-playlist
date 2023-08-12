@@ -16,7 +16,8 @@ module.exports = {
 
         res();
       } catch (error) {
-        myLogger.error('error', { message: 'error during saving result' });
+        myLogger.error( 'error during saving result' );
+        
         rej();
       }
     });

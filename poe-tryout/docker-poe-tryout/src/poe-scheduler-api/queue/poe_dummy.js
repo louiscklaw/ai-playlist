@@ -39,16 +39,13 @@ module.exports = Queue => {
       //   headers: { 'Content-Type': 'application/json' },
       // });
       var chatgpt_summarize_result_json = {
-        state: 'ask_done',
-        json_input: { question_list: ["say 'hello 1' to me", "say 'hello 2' to me"] },
+        state: 'ASK_DONE',
         chat_history: {
-          q_and_a: {
-            preprompts: [],
-            history: [
-              { question: "say 'hello 1' to me", answer: 'Hello 1! How can I assist you today?' },
-              { question: "say 'hello 2' to me", answer: 'Hello 2! How can I assist you today?' },
-            ],
-          },
+          preprompts: [],
+          history: [
+            { question: "say 'hello 1' to me", answer: 'Hello 1! How can I assist you today?' },
+            { question: "say 'hello 2' to me", answer: 'Hello 2! How can I assist you today?' },
+          ],
         },
       };
 
