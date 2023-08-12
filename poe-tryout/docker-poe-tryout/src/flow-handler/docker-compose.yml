@@ -6,6 +6,10 @@ services:
     # command: sleep infinity
     volumes:
       - ./flow-handler/src:/app
+      
+      # NOTE: store output
+      - ./volumes/static-share/_output:/share
+
       # - ./volumes/flow-handler/screenshot:/share/screenshot
     working_dir: /app
     depends_on:

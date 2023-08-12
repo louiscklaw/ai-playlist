@@ -1,17 +1,17 @@
 const fetch = require('node-fetch');
 
-// NOTE: simulate the response from poe-scheduler
+// NOTE: expecting calling from poe-scheduler to flow-handler
 
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
 
-    const response = await fetch('http://flow-handler:3000/jobsdb_flow_summarize_cb', {
+    const response = await fetch('http://flow-handler:3000/jobsdb_draft_email_cb', {
       method: 'post',
       body: JSON.stringify({
-        state: 'sumarize_done',
-        summarize_result: { hello: 'world' },
+        state: 'draft_email_done',
+        result: { hello: 'world', content:"helloworld email content" },
       }),
       headers: { 'Content-Type': 'application/json' },
     });

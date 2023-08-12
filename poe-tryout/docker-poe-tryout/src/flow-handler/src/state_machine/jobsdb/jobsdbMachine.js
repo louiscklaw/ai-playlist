@@ -1,10 +1,10 @@
 // const { mySleep } = require('../../utils/mySleep');
-const { fetchPost, postJobsdbPostExtract } = require('../../utils/fetchPost');
+// const { fetchPost, postJobsdbPostExtract } = require('../../utils/fetchPost');
 
 // const fetch = require('node-fetch');
+// const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../utils/fetchOpenboxSeat');
 
 var StateMachine = require('javascript-state-machine');
-const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../utils/fetchOpenboxSeat');
 
 const {
   //
@@ -13,11 +13,11 @@ const {
   S_EXTRACTION_DONE,
   S_ASKING_POE_DONE,
   S_SUMMARIZE_DONE,
+  S_DRAFT_EMAIL_DONE,
 } = require('./transitions');
 
 var jobsdbMachine = new StateMachine.factory({
   init: S_EXTRACTION_DONE,
-  // S_NEW_JOB_FOUND,
   transitions,
   methods,
   data: context => ({ context: context }),
@@ -25,7 +25,6 @@ var jobsdbMachine = new StateMachine.factory({
 
 var jobsdbPoeCallack = new StateMachine.factory({
   init: S_ASKING_POE_DONE,
-  // S_NEW_JOB_FOUND,
   transitions,
   methods,
   data: context => ({ context: context }),
@@ -33,7 +32,13 @@ var jobsdbPoeCallack = new StateMachine.factory({
 
 var jobsdbPoeSummarizeCbMachine = new StateMachine.factory({
   init: S_SUMMARIZE_DONE,
-  // S_NEW_JOB_FOUND,
+  transitions,
+  methods,
+  data: context => ({ context: context }),
+});
+
+var jobsdbPoeDraftEmailCbMachine = new StateMachine.factory({
+  init: S_DRAFT_EMAIL_DONE,
   transitions,
   methods,
   data: context => ({ context: context }),
@@ -48,5 +53,6 @@ module.exports = {
   jobsdbMachine,
   jobsdbPoeCallack,
   jobsdbPoeSummarizeCbMachine,
+  jobsdbPoeDraftEmailCbMachine,
   helloworld,
 };

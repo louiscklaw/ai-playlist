@@ -1,32 +1,32 @@
+const {myLogger} = require('../utils/myLogger');
+const { jobsdbPoeDraftEmailCbMachine } = require('../state_machine/jobsdb/jobsdbMachine');
+
 const express = require('express');
-
-// const { mySleep } = require('../utils/mySleep');
-const { jobsdbPoeSummarizeCbMachine } = require('../state_machine/jobsdb/jobsdbMachine');
-
 const router = express.Router();
 
+// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
 router.post('/', async (req, res) => {
   var output = { state: 'init', debug: { input: {} }, error: {} };
   var req_body = req.body;
   output.debug = { input: req_body };
 
   try {
-    console.log('receive callback from poe summarize ');
+    myLogger.log('info',{message: 'receive callback from draft email '});
     output.state = 'start';
 
-    // NOTE: containue from summiarie done state
-    var jobsdb_poe_cb = new jobsdbPoeSummarizeCbMachine({});
+    var machine = new jobsdbPoeDraftEmailCbMachine({});
 
-    await jobsdb_poe_cb.poeDraftEmail();
+    myLogger.info(JSON.stringify(req_body))
+    machine.context.draft_email_result = req_body;
 
-    // // NOTE: for debug
-    // await jobsdb_poe_cb.poeDraftEmailDone();
-    // await jobsdb_poe_cb.onStoreResult();
-    // NOTE: draft email done handled using callback_url
+    // NOTE: current store result is the end,
+    // so no further processing is required
+    await machine.onStoreResult();
 
+    myLogger.log('info',{message: {output}})
     output.state = 'success';
   } catch (error) {
-    console.log({ error });
+    myLogger.log('info',{message: { error }});
     output.state = 'error';
     output.error = error;
   } finally {

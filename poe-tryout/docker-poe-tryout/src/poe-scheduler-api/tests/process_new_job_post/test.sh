@@ -2,7 +2,7 @@
 
 set -ex
 
-curl -X POST http://localhost:3002/process_new_job_post \
+curl -X POST http://poe-scheduler-api:3002/process_new_job_post \
    -H 'Content-Type: application/json' \
    -d @./input.json 
   #  \

@@ -25,7 +25,7 @@ module.exports = Queue => {
       // // // http://openbox-firefox:3000/test1
       var random_openbox_host = getRandomOpenboxHost();
       const gpt_endpoint = `http://${random_openbox_host}:3000`;
-      console.log({ random_openbox_host, gpt_endpoint });
+      console.log({ random_openbox_host, gpt_endpoint, callback_url });
 
       // NOTE: ask poe start
       var chatgpt_summarize_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
@@ -35,12 +35,17 @@ module.exports = Queue => {
       });
       var chatgpt_summarize_result_json = await chatgpt_summarize_result.json();
 
-      var result_cb_url = await fetch(callback_url, {
-        method: 'post',
-        body: JSON.stringify(chatgpt_summarize_result_json),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      var result_cb_json = await result_cb_url.json();
+      if (callback_url) {
+        var result_cb_url = await fetch(callback_url, {
+          method: 'post',
+          body: JSON.stringify(chatgpt_summarize_result_json),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        var result_cb_json = await result_cb_url.json();
+      }else{
+        console.log('no callback url provided, quitting');
+      }
+
       // // NOTE: asking should be completed before this line
       // console.log('calling done url', url_after_done);
       // var done_result = await fetch(url_after_done, {

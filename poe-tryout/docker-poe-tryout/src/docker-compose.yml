@@ -3,7 +3,7 @@ networks:
     name: poe-tryout
 
 services:
-  debug:
+  test:
     image: node:latest
     command: sleep infinity
     working_dir: /src

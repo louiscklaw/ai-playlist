@@ -75,7 +75,7 @@ module.exports = Queue => {
     // console.log({ QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
       console.log({
-        state: 'Queue schedule success',
+        state: 'QUEUE_SCHEDULE_SUCCESS',
         QueueInactiveCount: count,
       });
     });

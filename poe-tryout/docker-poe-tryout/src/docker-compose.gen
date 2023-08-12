@@ -102,20 +102,6 @@ services:
       target: /app
       bind:
         create_host_path: true
-  debug:
-    command:
-    - sleep
-    - infinity
-    image: node:latest
-    networks:
-      default: null
-    volumes:
-    - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src
-      target: /src
-      bind:
-        create_host_path: true
-    working_dir: /src
   flow-handler:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler
@@ -137,6 +123,11 @@ services:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler/src
       target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
+      target: /share
       bind:
         create_host_path: true
     working_dir: /app
@@ -415,6 +406,20 @@ services:
       bind:
         create_host_path: true
     working_dir: /app
+  test:
+    command:
+    - sleep
+    - infinity
+    image: node:latest
+    networks:
+      default: null
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src
+      target: /src
+      bind:
+        create_host_path: true
+    working_dir: /src
 networks:
   default:
     name: dev-poe-tryout
