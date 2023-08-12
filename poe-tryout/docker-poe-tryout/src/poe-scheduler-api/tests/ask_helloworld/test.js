@@ -8,16 +8,11 @@ jobDescription = jobDescription.replace(/\n\n+/g, '\n');
 
 const body = {
   preprompts: [
-    'Hi, please help to understand the text below',
-`title: Validation Assistant,
-company name: SYNCO (H.K.) Ltd,
-company address: Tai Po Area,
-post date: 4-Aug-2023,
-job highlight: DSE / F.5 or above, GMP, Tai Po,
-description: ${jobDescription}
-`.trim(),
+    "What is orange? please make your answer in below 20 words.",
   ],
-  question_list: ['What is the title of the job ?'],
+  question_list: [
+    "What is banana? please make your answer in below 20 words."
+  ],
   callback_url: 'http://poe-scheduler-api:3002/done',
 };
 
@@ -25,9 +20,7 @@ Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
-
     const url = 'http://poe-scheduler-api:3002/ask_jobsdb_post';
-    // const url = 'http://poe-scheduler-api:3002/helloworld';
     const response = await fetch(url, {
       method: 'post',
       body: JSON.stringify(body),
