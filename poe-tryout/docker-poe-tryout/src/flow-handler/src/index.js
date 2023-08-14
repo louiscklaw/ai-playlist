@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use('/jobsdb_draft_email_cb', require('./routes/jobsdb_draft_email_cb'));
 app.use('/jobsdb_draft_email', require('./routes/jobsdb_draft_email'));
 
+// TODO: rename to _poe_summarize
 app.use('/jobsdb_flow_summarize_cb', require('./routes/jobsdb_flow_summarize_cb'));
 app.use('/jobsdb_flow_summarize', require('./routes/jobsdb_flow_summarize'));
 

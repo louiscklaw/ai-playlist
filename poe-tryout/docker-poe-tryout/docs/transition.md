@@ -11,7 +11,7 @@
   P: 
 ```
 I will input some text, 
-please summarize it in 50 words
+please summarize it in around 50 words
 ```
 
   Q:

@@ -12,9 +12,10 @@ const {
   methods,
   S_EXTRACTION_DONE,
   S_ASKING_POE_DONE,
-  S_SUMMARIZE_DONE,
   S_DRAFTING_EMAIL,
-  S_READY_DRAFT_EMAIL,S_READY_SUMMARIZE
+  S_READY_DRAFT_EMAIL,
+  S_READY_SUMMARIZE,
+  S_SUMMARIZING_JOB_DETAIL,
 } = require('./transitions');
 
 var jobsdbMachine = new StateMachine.factory({
@@ -39,7 +40,7 @@ var jobsdbPoeSummarizeMachine = new StateMachine.factory({
 });
 
 var jobsdbPoeSummarizeCbMachine = new StateMachine.factory({
-  init: S_READY_DRAFT_EMAIL,
+  init: S_SUMMARIZING_JOB_DETAIL,
   transitions,
   methods,
   data: context => ({ context: context }),

@@ -1,8 +1,8 @@
-const express = require('express');
-
-// const { mySleep } = require('../utils/mySleep');
 const { jobsdbPoeSummarizeCbMachine } = require('../state_machine/jobsdb/jobsdbMachine');
 
+// const { mySleep } = require('../utils/mySleep');
+const express = require('express');
+const { storeJson } = require('../utils/storeJson');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -14,15 +14,17 @@ router.post('/', async (req, res) => {
     console.log('receive callback from poe summarize ');
     output.state = 'start';
 
+    console.log({ req_body });
+
     // NOTE: containue from summiarie done state
-    var jobsdb_poe_cb = new jobsdbPoeSummarizeCbMachine({});
+    var machine = new jobsdbPoeSummarizeCbMachine();
+    machine.context = req_body;
 
-    await jobsdb_poe_cb.poeDraftEmail();
+    if (req_body.state == 'ask_done'){
 
-    // // NOTE: for debug
-    // await jobsdb_poe_cb.poeDraftEmailDone();
-    // await jobsdb_poe_cb.onStoreResult();
-    // NOTE: draft email done handled using callback_url
+      await machine.poeSummarizeDone();
+      await storeJson('/share/helloworld/summarize_result.json', req_body);
+    }
 
     output.state = 'success';
   } catch (error) {
@@ -33,19 +35,6 @@ router.post('/', async (req, res) => {
     res.send(output);
   }
 
-  // const { num, instance, jobsdb_job_url, post_id } = req.body;
-  // res.send({ state: 'scheduled', url: jobsdb_job_url });
-
-  // console.log(jobsdb_machine.state, jobsdb_machine.context.instance);
-
-  // try {
-  //   // await jobsdb_machine.extractJobDetail();
-  //   // await jobsdb_machine.extractDone();
-  //   await jobsdb_machine.askPoe();
-  //   await jobsdb_machine.askPoeDone();
-  // } catch (error) {
-  //   console.log({ error, flow_state: jobsdb_machine.state });
-  // }
 });
 
 module.exports = router;

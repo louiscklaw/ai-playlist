@@ -20,8 +20,8 @@ const transitions = [
   { name: 'askPoe', from: S_EXTRACTION_DONE, to: S_ASKING_POE },
   { name: 'askPoeDone', from: S_ASKING_POE, to: S_ASKING_POE_DONE },
 
-  { name: 'summarize', from: S_READY_SUMMARIZE, to: S_SUMMARIZING_JOB_DETAIL },
-  { name: 'summarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_SUMMARIZE_DONE },
+  { name: 'poeSummarize', from: S_READY_SUMMARIZE, to: S_SUMMARIZING_JOB_DETAIL },
+  { name: 'poeSummarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_SUMMARIZE_DONE },
 
   { name: 'poeDraftEmail', from: S_READY_DRAFT_EMAIL, to: S_DRAFTING_EMAIL },
   { name: 'poeDraftEmailDone', from: S_DRAFTING_EMAIL, to: S_DRAFT_EMAIL_DONE },
@@ -30,7 +30,7 @@ const transitions = [
 ];
 
 const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
-const { onSummarize, onSummarizeDone } = require('./onSummarize');
+const { onPoeSummarize, onPoeSummarizeDone } = require('./onPoeSummarize');
 const { onAskPoe, onAskPoeDone } = require('./onAskPoe');
 const { onExtractDone } = require('./onExtractDone');
 const { onExtractJobDetail } = require('./onExtractJobDetail');
@@ -41,8 +41,8 @@ const methods = {
   onExtractDone,
   onAskPoe,
   onAskPoeDone,
-  onSummarize,
-  onSummarizeDone,
+  onPoeSummarize,
+  onPoeSummarizeDone,
   onPoeDraftEmail,
   onPoeDraftEmailDone,
   onStoreResult,
@@ -51,15 +51,16 @@ const methods = {
 module.exports = {
   transitions,
   methods,
-  S_HELLOWORLD,
-  S_NEW_JOB_FOUND,
+  S_ASKING_POE_DONE,
+  S_ASKING_POE,
+  S_DRAFT_EMAIL_DONE,
+  S_DRAFTING_EMAIL,
   S_EXTRACTING_JOB_DETAIL,
   S_EXTRACTION_DONE,
-  S_SUMMARIZING_JOB_DETAIL,
-  S_SUMMARIZE_DONE,
-  S_DRAFTING_EMAIL,
-  S_DRAFT_EMAIL_DONE,
-  S_ASKING_POE,
-  S_ASKING_POE_DONE,
+  S_HELLOWORLD,
+  S_NEW_JOB_FOUND,
   S_READY_DRAFT_EMAIL,
+  S_READY_SUMMARIZE,
+  S_SUMMARIZE_DONE,
+  S_SUMMARIZING_JOB_DETAIL,
 };

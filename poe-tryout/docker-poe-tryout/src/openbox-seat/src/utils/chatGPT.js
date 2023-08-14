@@ -171,9 +171,10 @@ function helloworld(test_call = '') {
 }
 
 async function checkLoginState(page) {
-  console.log('chatGPT.js: checkLoginState');
-
+  
   try {
+    console.log('chatGPT.js: checkLoginState');
+  
     const selector = 'textarea[placeholder="Talk to ChatGPT on Poe"]';
     await page.waitForSelector(selector);
     await page.waitForTimeout(1 * 1000);
