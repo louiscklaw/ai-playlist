@@ -1,5 +1,6 @@
 'use strict';
 const path = require('path');
+const fetch  = require('node-fetch')
 
 const { gpt_endpoint, getRandomOpenboxHost, JOBPOST_ENDPOINT } = require('../constants');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
@@ -7,7 +8,7 @@ const { writeOutputToDB } = require('../utils/writeOutputToDB');
 const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
 const { mySleep } = require('../utils/mySleep');
 
-module.exports = Queue => {
+module.exports = Queue => { 
   console.log('poe Queue init');
 
   Queue.process('poe', 1, async function (job, done) {

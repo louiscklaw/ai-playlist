@@ -1,5 +1,3 @@
-
-
 const S_HELLOWORLD = 'helloworld';
 
 const S_NEW_JOB_FOUND = 'S_NEW_JOB_FOUND';
@@ -12,20 +10,24 @@ const S_DRAFT_EMAIL_DONE = 'S_DRAFT_EMAIL_DONE';
 const S_ASKING_POE = 'S_ASKING_POE';
 const S_ASKING_POE_DONE = 'S_ASKING_POE_DONE';
 const S_STORE_JSON_DONE = 'S_STORE_JSON_DONE';
-
+const S_READY_DRAFT_EMAIL = 'S_READY_DRAFT_EMAIL';
+const S_READY_SUMMARIZE = 'S_READY_SUMMARIZE';
 
 const transitions = [
   { name: 'extractJobDetail', from: S_NEW_JOB_FOUND, to: S_EXTRACTING_JOB_DETAIL },
   { name: 'extractDone', from: S_EXTRACTING_JOB_DETAIL, to: S_EXTRACTION_DONE },
+
   { name: 'askPoe', from: S_EXTRACTION_DONE, to: S_ASKING_POE },
   { name: 'askPoeDone', from: S_ASKING_POE, to: S_ASKING_POE_DONE },
-  { name: 'summarize', from: S_ASKING_POE_DONE, to: S_SUMMARIZING_JOB_DETAIL },
+
+  { name: 'summarize', from: S_READY_SUMMARIZE, to: S_SUMMARIZING_JOB_DETAIL },
   { name: 'summarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_SUMMARIZE_DONE },
-  { name: 'poeDraftEmail', from: S_SUMMARIZE_DONE, to: S_DRAFTING_EMAIL },
+
+  { name: 'poeDraftEmail', from: S_READY_DRAFT_EMAIL, to: S_DRAFTING_EMAIL },
   { name: 'poeDraftEmailDone', from: S_DRAFTING_EMAIL, to: S_DRAFT_EMAIL_DONE },
+
   { name: 'storeResult', from: S_DRAFT_EMAIL_DONE, to: S_STORE_JSON_DONE },
 ];
-
 
 const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
 const { onSummarize, onSummarizeDone } = require('./onSummarize');
@@ -46,7 +48,6 @@ const methods = {
   onStoreResult,
 };
 
-
 module.exports = {
   transitions,
   methods,
@@ -60,4 +61,5 @@ module.exports = {
   S_DRAFT_EMAIL_DONE,
   S_ASKING_POE,
   S_ASKING_POE_DONE,
+  S_READY_DRAFT_EMAIL,
 };

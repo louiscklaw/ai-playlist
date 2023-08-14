@@ -14,8 +14,7 @@ var Queue = kue.createQueue({
 Queue.clear();
 
 // require('./now')(Queue);
-// require('./poe')(Queue);
-
-require('./poe_dummy')(Queue);
+require('./poe')(Queue);
+// require('./poe_dummy')(Queue);
 
 module.exports = { Queue };

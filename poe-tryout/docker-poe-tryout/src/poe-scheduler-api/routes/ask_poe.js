@@ -19,8 +19,6 @@ router.post('/', async (req, res) => {
     // //prepare a job to perform
     // //dont save it
     var job = Queue.createJob('poe', {
-      jobs_id,
-      job_post,
       preprompts,
       question_list,
       callback_url

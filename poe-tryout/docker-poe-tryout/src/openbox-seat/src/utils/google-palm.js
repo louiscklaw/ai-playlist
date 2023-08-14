@@ -108,19 +108,19 @@ async function questionAndAnswer(page, question, answer_idx) {
       await page.waitForTimeout(1 * 1000);
     } else {
       if (isFirstCheck()) {
-        console.log('first check found');
+        console.log('google-palm.js: first check found');
         old_reply = reply;
         await page.waitForTimeout(1 * 1000);
       } else {
         // is the bot still typing ?
         if (isTheBotStillTyping(reply, old_reply)) {
           old_reply = reply;
-          console.log('bot still typing');
+          console.log('google-palm.js: bot still typing');
           // console.log({ countdown, reply });
           await page.waitForTimeout(3 * 1000);
         } else {
           // bot not typing
-          console.log('bot typing done');
+          console.log('google-palm.js: bot typing done');
           break;
         }
       }

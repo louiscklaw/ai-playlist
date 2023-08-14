@@ -2,9 +2,11 @@
 
 
 
-
 ### extract
-### summarize
+
+
+
+### summarize (S_READY_SUMMARIZE)
   P: `forget everything and start a new talk`
   P: 
 ```
@@ -33,7 +35,7 @@ Louislabs company is hiring a validation engineer. The key responsibilities incl
 ```
 
 
-### draft email
+### draft email (S_READY_DRAFT_EMAIL)
   P: `Forget everything and start a new talk`
   P: 
 ```

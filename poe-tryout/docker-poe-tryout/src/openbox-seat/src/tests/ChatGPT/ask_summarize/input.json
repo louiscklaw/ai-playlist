@@ -1,4 +1,5 @@
 {
+  "working_path":"helloworld",
   "preprompts": [
     "Summarze the below text for me."
   ],

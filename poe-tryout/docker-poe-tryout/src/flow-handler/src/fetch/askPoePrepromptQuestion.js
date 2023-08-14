@@ -10,8 +10,8 @@ function askPoePrepromptQuestion(payload) {
 
   return fetch('http://poe-scheduler-api:3002/ask_poe', {
     method: 'post',
-    body: JSON.stringify(payload),
     headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
   });
 }
 

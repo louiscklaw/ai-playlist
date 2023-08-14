@@ -15,12 +15,16 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use('/jobsdb_draft_email_cb', require('./routes/jobsdb_draft_email_cb'));
+app.use('/jobsdb_draft_email', require('./routes/jobsdb_draft_email'));
+
 app.use('/jobsdb_flow_summarize_cb', require('./routes/jobsdb_flow_summarize_cb'));
+app.use('/jobsdb_flow_summarize', require('./routes/jobsdb_flow_summarize'));
+
 app.use('/jobsdb_flow_poe_cb', require('./routes/jobsdb_flow_poe_cb'));
 app.use('/jobsdb_flow', require('./routes/jobsdb_flow'));
 app.use('/helloworld', require('./routes/helloworld'));
 
 // Start the server
 app.listen(PORT, () => {
-  myLogger.log('info', { message: `Server is running on port ${PORT}` });
+  myLogger.info(`Server is running on port ${PORT}`);
 });

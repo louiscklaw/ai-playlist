@@ -1,20 +1,6 @@
-const fs = require('fs');
-
 const { myLogger } = require('../../utils/myLogger');
+const storeJson = require('../../utils/storeJson');
 const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
-// const { askPoePrepromptQuestion } = require('../../fetch/askPoePrepromptQuestion');
-// const { DRAFT_EMAIL_PREPROMPT } = require('./constants');
-
-async function storeJson(filepath, json) {
-  try {
-    await fs.writeFileSync(filepath, JSON.stringify(json, null, 2), {
-      encoding: 'utf-8',
-    });
-  } catch (error) {
-    myLogger.error('error during storeJson');
-    myLogger.error(error);
-  }
-}
 
 module.exports = {
   onStoreResult: function () {
@@ -31,7 +17,7 @@ module.exports = {
         res();
       } catch (error) {
         myLogger.error('error during saving result...');
-        myLogger.error(error);
+        console.log(error)
 
         rej();
       }
