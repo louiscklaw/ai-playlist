@@ -14,11 +14,12 @@ router.post('/', async (req, res) => {
   try {
     console.log(`/${__filename}`);
     const req_body = req.body;
-    const { jobs_id, job_post, preprompts, question_list, callback_url } = req_body;
+    const { working_dir, preprompts, question_list, callback_url } = req_body;
 
     // //prepare a job to perform
     // //dont save it
     var job = Queue.createJob('poe', {
+      working_dir,
       preprompts,
       question_list,
       callback_url

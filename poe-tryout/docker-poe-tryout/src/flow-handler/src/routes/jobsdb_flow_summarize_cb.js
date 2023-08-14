@@ -6,22 +6,21 @@ const { storeJson } = require('../utils/storeJson');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  var output = { state: 'init', debug: { input: {} }, error: {} };
+  var output = { state: 'INIT', debug: {  }, error: {} };
   var req_body = req.body;
-  output.debug = { input: req_body };
+  output = {...output, debug:{input: {...req_body}}}
+  var {working_dir} = req.body;
 
   try {
     console.log('receive callback from poe summarize ');
     output.state = 'start';
-
-    console.log({ req_body });
 
     // NOTE: containue from summiarie done state
     var machine = new jobsdbPoeSummarizeCbMachine();
     machine.context = req_body;
 
     await machine.poeSummarizeDone();
-    await storeJson('/share/helloworld/summarize_result.json', req_body);
+    await storeJson(`${working_dir}/summarize_result.json`, req_body);
 
     output.state = 'success';
   } catch (error) {
