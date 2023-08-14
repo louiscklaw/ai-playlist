@@ -26,6 +26,7 @@ const transitions = [
   { name: 'storeResult', from: S_DRAFT_EMAIL_DONE, to: S_STORE_JSON_DONE },
 ];
 
+
 const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
 const { onSummarize, onSummarizeDone } = require('./onSummarize');
 const { onAskPoe, onAskPoeDone } = require('./onAskPoe');
@@ -44,6 +45,7 @@ const methods = {
   onPoeDraftEmailDone,
   onStoreResult,
 };
+
 
 module.exports = {
   transitions,
