@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
     machine.context = req_body;
 
     await machine.poeSummarizeDone();
+    
     await storeJson(`${working_dir}/summarize_result.json`, req_body);
 
     output.state = 'success';
