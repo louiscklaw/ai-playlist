@@ -20,11 +20,8 @@ router.post('/', async (req, res) => {
     var machine = new jobsdbPoeSummarizeCbMachine();
     machine.context = req_body;
 
-    if (req_body.state == 'ask_done'){
-
-      await machine.poeSummarizeDone();
-      await storeJson('/share/helloworld/summarize_result.json', req_body);
-    }
+    await machine.poeSummarizeDone();
+    await storeJson('/share/helloworld/summarize_result.json', req_body);
 
     output.state = 'success';
   } catch (error) {
@@ -34,7 +31,6 @@ router.post('/', async (req, res) => {
   } finally {
     res.send(output);
   }
-
 });
 
 module.exports = router;
