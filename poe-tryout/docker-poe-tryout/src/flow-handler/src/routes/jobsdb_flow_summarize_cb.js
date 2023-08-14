@@ -28,9 +28,9 @@ router.post('/', async (req, res) => {
     console.log({ error });
     output.state = 'error';
     output.error = error;
-  } finally {
-    res.send(output);
-  }
+  } 
+
+  res.send(output);
 });
 
 module.exports = router;

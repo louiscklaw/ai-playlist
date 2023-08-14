@@ -15,13 +15,20 @@ const {
   S_DRAFTING_EMAIL,
   S_READY_DRAFT_EMAIL,
   S_READY_SUMMARIZE,
-  S_SUMMARIZING_JOB_DETAIL,S_NEW_JOB_FOUND,
+  S_SUMMARIZING_JOB_DETAIL,S_NEW_JOB_FOUND,S_EXTRACTING_JOB_DETAIL,
 } = require('./transitions');
 
 
 
 var jobsFoundMachine = new StateMachine.factory({
   init: S_NEW_JOB_FOUND,
+  transitions,
+  methods,
+  data: context => ({ context: context }),
+});
+
+var jobsFoundCbMachine = new StateMachine.factory({
+  init: S_EXTRACTING_JOB_DETAIL,
   transitions,
   methods,
   data: context => ({ context: context }),
@@ -81,6 +88,6 @@ module.exports = {
   jobsdbPoeSummarizeCbMachine,
   jobsdbPoeDraftEmailMachine,
   jobsdbPoeDraftEmailCbMachine,
-  jobsFoundMachine,
+  jobsFoundMachine,jobsFoundCbMachine,
   helloworld,
 };
