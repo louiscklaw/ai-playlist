@@ -10,13 +10,12 @@ module.exports = {
         var { req_body } = this.context;
         var { jobsdb_job_url, callback_url } = req_body;
 
-
         var result = await postJobsdbPostExtract({
           url: jobsdb_job_url,
-          callback_url
+          callback_url,
         });
         var result_json = await result.json();
-        console.log(result_json )
+        console.log(result_json);
 
         res();
       } catch (error) {

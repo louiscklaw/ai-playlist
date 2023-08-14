@@ -31,7 +31,9 @@ router.post('/', async (req, res) => {
       const { url } = req_body;
       console.log({ url });
 
-      const post_id = url.split('-').pop();
+
+
+      const post_id = url.replace('.html','').split('-').pop();
       if (!post_id) throw new Error('post_id is required');
 
       // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
@@ -76,7 +78,7 @@ router.post('/', async (req, res) => {
 
       const jobHighlight = await jobPage.evaluate(() => {
         const title = document.querySelector(
-          'div[data-automation="job-details-job-highlights"] > div:nth-child(1)  > div:nth-child(2)',
+          'div[data-automation="job-details-job-highlights"] > div:nth-child(1) > div:nth-child(2)',
         ).textContent;
         return title;
       });
@@ -92,6 +94,7 @@ router.post('/', async (req, res) => {
       await jobPage.screenshot({ path: screenshot_path, fullPage: true });
 
       var extracted = {
+        post_id,
         jobTitle,
         companyName,
         _jobDetailsHeaderRawHTML,
