@@ -1,0 +1,64 @@
+# this file record transition o
+
+
+
+
+### extract
+### summarize
+  P: `forget everything and start a new talk`
+  P: 
+```
+I will input some text, 
+please summarize it in 50 words
+```
+
+  Q:
+``` 
+We are louislabs company, we are hiring a validation engineer
+
+The Key Roles and Responsibilities of this position:
+
+  Assist in planning and executing qualification and validation activities
+  Prepare qualification protocols and reports for production equipment, facilities and utilities
+
+The Qualification and Experience needed:
+
+  Bachelor’s degree in Engineering, Pharmaceutical or other related science discipline
+  Fresh graduates are welcome
+```
+
+  A: 
+```
+Louislabs company is hiring a validation engineer. The key responsibilities include assisting in planning and executing qualification and validation activities, as well as preparing qualification protocols and reports for production equipment, facilities, and utilities. The desired qualification is a bachelor's degree in Engineering, Pharmaceutical, or a related science discipline, and fresh graduates are welcome to apply.
+```
+
+
+### draft email
+  P: `Forget everything and start a new talk`
+  P: 
+```
+I will input the summary of the position, 
+can you draft me a cover letter ? 
+Please try to make it in less than 100 words.
+```
+
+  P: 
+```
+Louislabs company is hiring a validation engineer. The key responsibilities include assisting in planning and executing qualification and validation activities, as well as preparing qualification protocols and reports for production equipment, facilities, and utilities. The desired qualification is a bachelor's degree in Engineering, Pharmaceutical, or a related science discipline, and fresh graduates are welcome to apply.
+```
+
+A:
+```
+Dear Hiring Manager,
+
+I am writing to apply for the Validation Engineer position at Louislabs Company. With expertise in planning and executing qualification and validation activities, along with a strong background in Engineering, I am confident in my ability to contribute to the success of your team. I am well-versed in preparing qualification protocols and reports for production equipment, facilities, and utilities. Holding a bachelor's degree in Engineering, I am excited to bring my knowledge and passion to ensure compliance and quality. Fresh out of college, I am enthusiastic about joining Louislabs and making a valuable contribution.
+
+Thank you for considering my application.
+
+Sincerely,
+[Your Name]
+```
+
+### store
+
+
