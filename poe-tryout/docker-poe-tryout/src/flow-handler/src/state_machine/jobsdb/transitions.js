@@ -31,12 +31,13 @@ const transitions = [
   { name: 'storeResult', from: S_DRAFT_EMAIL_DONE, to: S_STORE_JSON_DONE },
 ];
 
-const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
-const { onPoeSummarize, onPoeSummarizeDone } = require('./onPoeSummarize');
-const { onAskPoe, onAskPoeDone } = require('./onAskPoe');
-const { onExtractDone } = require('./onExtractDone');
 const { onExtractJobDetail } = require('./onExtractJobDetail');
+const { onExtractDone } = require('./onExtractDone');
+const { onPoeSummarize, onPoeSummarizeDone } = require('./onPoeSummarize');
+const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
 const { onStoreResult } = require('./onStoreResult');
+
+const { onAskPoe, onAskPoeDone } = require('./onAskPoe');
 
 const methods = {
   onExtractJobDetail,

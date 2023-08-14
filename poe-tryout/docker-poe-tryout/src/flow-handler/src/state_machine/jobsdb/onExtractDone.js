@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { storeJson } = require('../../utils/storeJson');
 
 const url = 'http://flow-handler:3000/jobsdb_flow_summarize';
 
@@ -10,35 +11,42 @@ module.exports = {
 
     return new Promise(async (res, rej) => {
       try {
-        const {working_dir} = this.context;
+        const {working_dir, jobTitle,
+          companyName,
+          jobAddress,
+          postDate,
+          jobHighlight,
+          jobDescription,
+        } = this.context;
+
+        var input_to_summarize = {
+          working_dir,
+          preprompts: SAMPLE_PREPROMPTS,
+          question_list: [
+`
+I will input a job advertisement, 
+please try to summarize it in around 100 words
+`.trim(),
+`
+company name: ${companyName}
+job title: ${jobTitle}
+job addess: ${jobAddress}
+post date: ${postDate}
+job highlight: ${jobHighlight}
+
+job description: 
+${jobDescription}
+`.trim(),
+          ],
+          callback_url: 'http://flow-handler:3000/jobsdb_flow_summarize_cb',
+        };
+
+        await storeJson(`${working_dir}/input_to_summarize.json`, input_to_summarize);
 
         // proceed to summarize
         await fetch(url, {
           method: 'post',
-          body: JSON.stringify({
-            working_dir,
-            preprompts: SAMPLE_PREPROMPTS,
-            question_list: [
-`
-I will input some text, 
-please try to summarize it in around 50 words
-`.trim(),
-`
-We are louislabs company, we are hiring a validation engineer
-
-The Key Roles and Responsibilities of this position:
-
-Assist in planning and executing qualification and validation activities
-Prepare qualification protocols and SAMPLE_QUESTIONSreports for production equipment, facilities and utilities
-
-The Qualification and Experience needed:
-
-Bachelor’s degree in Engineering, Pharmaceutical or other related science discipline
-Fresh graduates are welcome
-`.trim(),
-            ],
-            callback_url: 'http://flow-handler:3000/jobsdb_flow_summarize_cb',
-          }),
+          body: JSON.stringify(input_to_summarize),
           headers: { 'Content-Type': 'application/json' },
         });
 
