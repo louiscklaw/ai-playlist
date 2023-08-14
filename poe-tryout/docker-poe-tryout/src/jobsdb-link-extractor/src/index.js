@@ -7,11 +7,8 @@ app.use(bodyParser.json());
 
 const PORT = 3000;
 
-const helloworldRoutes = require('./routes/helloworld');
-app.use('/helloworld', helloworldRoutes);
-
-const jobsdbPostExtractRoutes = require('./routes/jobsdbPostExtract');
-app.use('/jobsdbPostExtract', jobsdbPostExtractRoutes);
+app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
+app.use('/helloworld', require('./routes/helloworld'));
 
 // Start the server
 app.listen(PORT, () => {

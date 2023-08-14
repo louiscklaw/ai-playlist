@@ -1,28 +1,28 @@
+const { postJobsdbPostExtract } = require('../../utils/fetchPost');
+
 module.exports = {
   onExtractJobDetail: function () {
     return new Promise(async (res, rej) => {
-      retry_count = 3;
-      for (var i = 0; i < retry_count; i++) {
-        try {
-          var { post_id, jobsdb_job_url } = this.context;
-          this.context.post_id = post_id;
+      try {
+        retry_count = 5;
 
-          // post_id,
-          var result = await postJobsdbPostExtract({
-            post_id,
-            url: jobsdb_job_url,
-          });
-          var result_json = await result.json();
+        console.log(this.context);
+        var { req_body } = this.context;
+        var { jobsdb_job_url, callback_url } = req_body;
 
-          this.context['extraction_result'] = result_json;
 
-          res();
-        } catch (error) {
-          console.log(error);
-          console.log('error found, retry');
-        }
+        var result = await postJobsdbPostExtract({
+          url: jobsdb_job_url,
+          callback_url
+        });
+        var result_json = await result.json();
+        console.log(result_json )
+
+        res();
+      } catch (error) {
+        console.log(error);
+        rej('extract job detail failed, url:' + jobsdb_job_url);
       }
-      rej('extract job detail failed, url:' + this.context.jobsdb_job_url);
     });
   },
 };

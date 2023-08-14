@@ -15,8 +15,17 @@ const {
   S_DRAFTING_EMAIL,
   S_READY_DRAFT_EMAIL,
   S_READY_SUMMARIZE,
-  S_SUMMARIZING_JOB_DETAIL,
+  S_SUMMARIZING_JOB_DETAIL,S_NEW_JOB_FOUND,
 } = require('./transitions');
+
+
+
+var jobsFoundMachine = new StateMachine.factory({
+  init: S_NEW_JOB_FOUND,
+  transitions,
+  methods,
+  data: context => ({ context: context }),
+});
 
 var jobsdbMachine = new StateMachine.factory({
   init: S_EXTRACTION_DONE,
@@ -72,5 +81,6 @@ module.exports = {
   jobsdbPoeSummarizeCbMachine,
   jobsdbPoeDraftEmailMachine,
   jobsdbPoeDraftEmailCbMachine,
+  jobsFoundMachine,
   helloworld,
 };

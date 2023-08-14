@@ -7,103 +7,118 @@ const fs = require('fs'),
 const puppeteer = require('puppeteer-core');
 
 const express = require('express');
+const { postResult } = require('../util/postResult');
 const router = express.Router();
 
+
+
 router.post('/', async (req, res) => {
-  var output = {state: 'init', extracted: {},debug:{}, error:''}
-  var browser = {}, page = {};
-  
-  try {
-    // NOTE: input validation, may be set a schema here ?
-    const req_body = req.body;
-    const { post_id, url } = req_body;
-    if (!post_id) throw new Error('post_id is required')    
+  console.log('/jobsdbPostExtract called');
+  const {callback_url} = req.body;
 
-    // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
-    
-    // NOTE: considerate the test, split the calculation to call input
-    // const post_id = url.split('-').pop();
+  res.send({state: 'scheduled'})
 
-    // slowMo: 1,
-     browser = await puppeteer.connect({
-      browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
-      defaultViewport: { width: 1920, height: 1080 * 3 },
-    });
-     page = await browser.newPage();
-    await page.goto(url, {
-      waitUntil: 'networkidle2',
-    });
+  var output = { state: 'INIT', extracted: {}, debug: {}, error: {} };
+  var browser = {},
+    page = {};
 
-    var state = 'starting';
-    var extracted = {};
-    var debug_info = {};
+  var retry = 3;
+  var done = false;
+  for (var i = 0; i < retry; i++) {
+    try {
+      // NOTE: input validation, may be set a schema here ?
+      const req_body = req.body;
+      const { url } = req_body;
+      console.log({ url });
 
-    const jobPage = page;
+      const post_id = url.split('-').pop();
+      if (!post_id) throw new Error('post_id is required');
 
-    const jobTitle = await jobPage.evaluate(() => {
-      const title = document.querySelector('div[data-automation="detailsTitle"] h1').textContent;
-      return title;
-    });
+      // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
 
-    const _jobDetailsHeaderRawHTML = await jobPage.evaluate(() => {
-      const title = document.querySelector('div[data-automation="jobDetailsHeader"]').outerHTML;
-      return title;
-    });
+      // NOTE: considerate the test, split the calculation to call input
+      // const post_id = url.split('-').pop();
 
-    const { companyName, jobAddress, postDate, _debugList } = await jobPage.evaluate(() => {
-      var output = {};
-      var debugList = [];
-      document.querySelectorAll('div[data-automation="jobDetailsHeader"] span').forEach((ele, idx) => {
-        if (idx == 1) output['companyName'] = ele.textContent || '';
-        if (idx == 2) output['jobAddress'] = ele.textContent || '';
-        if (idx == 3) output['postDate'] = ele.textContent || '';
-        debugList.push(ele.innerHTML);
+      // slowMo: 1,
+      browser = await puppeteer.connect({
+        browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
+        defaultViewport: { width: 1920, height: 1080 * 3 },
       });
-      output['_debugList'] = debugList;
-      return output;
-    });
+      page = await browser.newPage();
+      await page.goto(url, { waitUntil: 'networkidle2' });
 
-    const jobHighlight = await jobPage.evaluate(() => {
-      const title = document.querySelector(
-        'div[data-automation="job-details-job-highlights"] > div:nth-child(1)  > div:nth-child(2)',
-      ).textContent;
-      return title;
-    });
-    var jobDescription = await jobPage.evaluate(() => {
-      const description = document.querySelector('div[data-automation="jobDescription"]').textContent;
-      return description;
-    });
-    // NOTE: string_cleaning_test.js
-    jobDescription = jobDescription.replace(/\n +/g, '\n');
-    jobDescription = jobDescription.replace(/\n+/g, '\n');
+      console.log('browser started');
 
-    await jobPage.screenshot({ path: `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`, fullPage: true });
+      const jobPage = page;
 
-    // console.log('halt at timeout');
-    // await page.waitForTimeout(999 * 1000);
-    output.state = 'extract success';
-    output.extracted = {
-      jobTitle,
-      companyName,
-      _jobDetailsHeaderRawHTML,
-      _debugList,
-      jobAddress,
-      postDate,
-      jobHighlight,
-      jobDescription,
-    };
+      const jobTitle = await jobPage.evaluate(() => {
+        const title = document.querySelector('div[data-automation="detailsTitle"] h1').textContent;
+        return title;
+      });
 
-  } catch (error) {
-    output.state = 'error'
-    output.error = error.message;
-  } finally {
-    // if (page != {}) await page.close();
-    // if (browser != {}) await browser.close();
+      const _jobDetailsHeaderRawHTML = await jobPage.evaluate(() => {
+        const title = document.querySelector('div[data-automation="jobDetailsHeader"]').outerHTML;
+        return title;
+      });
 
-    // console.log({output})
-    res.send(output)
+      const { companyName, jobAddress, postDate, _debugList } = await jobPage.evaluate(() => {
+        var output = {};
+        var debugList = [];
+        document.querySelectorAll('div[data-automation="jobDetailsHeader"] span').forEach((ele, idx) => {
+          if (idx == 1) output['companyName'] = ele.textContent || '';
+          if (idx == 2) output['jobAddress'] = ele.textContent || '';
+          if (idx == 3) output['postDate'] = ele.textContent || '';
+          debugList.push(ele.innerHTML);
+        });
+        output['_debugList'] = debugList;
+        return output;
+      });
+
+      const jobHighlight = await jobPage.evaluate(() => {
+        const title = document.querySelector(
+          'div[data-automation="job-details-job-highlights"] > div:nth-child(1)  > div:nth-child(2)',
+        ).textContent;
+        return title;
+      });
+      var jobDescription = await jobPage.evaluate(() => {
+        const description = document.querySelector('div[data-automation="jobDescription"]').textContent;
+        return description;
+      });
+      // NOTE: string_cleaning_test.js
+      jobDescription = jobDescription.replace(/\n +/g, '\n');
+      jobDescription = jobDescription.replace(/\n+/g, '\n');
+
+      var screenshot_path = `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`;
+      await jobPage.screenshot({ path: screenshot_path, fullPage: true });
+
+      var extracted = {
+        jobTitle,
+        companyName,
+        _jobDetailsHeaderRawHTML,
+        _debugList,
+        jobAddress,
+        postDate,
+        jobHighlight,
+        jobDescription,
+      };
+
+      output = { ...output, state: 'extract_done', extracted };
+
+      done = true;
+    } catch (error) {
+      console.log(error);
+      output = { ...output, state: 'extraction_error', error };
+    }
+
+    if (done) {
+      console.log('done exitting...');
+      break;
+    }
   }
 
+  // console.log({output})
+  await postResult(callback_url, output.extracted)
+  
 });
 
 module.exports = router;

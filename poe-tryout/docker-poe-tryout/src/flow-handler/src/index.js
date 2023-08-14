@@ -14,6 +14,9 @@ myLogger.log('info', { message: 'flow-handler start' });
 const app = express();
 app.use(bodyParser.json());
 
+app.use('/jobsdb_link_extract_cb', require('./routes/jobsdb_link_extract_cb'));
+app.use('/jobsdb_link_extract', require('./routes/jobsdb_link_extract'));
+
 app.use('/jobsdb_draft_email_cb', require('./routes/jobsdb_draft_email_cb'));
 app.use('/jobsdb_draft_email', require('./routes/jobsdb_draft_email'));
 

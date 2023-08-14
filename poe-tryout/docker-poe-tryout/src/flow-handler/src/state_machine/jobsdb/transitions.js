@@ -17,12 +17,14 @@ const transitions = [
   { name: 'extractJobDetail', from: S_NEW_JOB_FOUND, to: S_EXTRACTING_JOB_DETAIL },
   { name: 'extractDone', from: S_EXTRACTING_JOB_DETAIL, to: S_EXTRACTION_DONE },
 
+  // ?? why ?
   { name: 'askPoe', from: S_EXTRACTION_DONE, to: S_ASKING_POE },
   { name: 'askPoeDone', from: S_ASKING_POE, to: S_ASKING_POE_DONE },
 
   { name: 'poeSummarize', from: S_READY_SUMMARIZE, to: S_SUMMARIZING_JOB_DETAIL },
   { name: 'poeSummarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_SUMMARIZE_DONE },
 
+  // draft CV
   { name: 'poeDraftEmail', from: S_READY_DRAFT_EMAIL, to: S_DRAFTING_EMAIL },
   { name: 'poeDraftEmailDone', from: S_DRAFTING_EMAIL, to: S_DRAFT_EMAIL_DONE },
 
