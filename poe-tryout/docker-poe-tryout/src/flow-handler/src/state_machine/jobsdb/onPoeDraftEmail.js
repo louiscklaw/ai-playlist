@@ -1,8 +1,18 @@
+const fs = require('fs');
+
 const { askPoePrepromptQuestion } = require('../../fetch/askPoePrepromptQuestion');
 
 const { DRAFT_EMAIL_PREPROMPT } = require('./constants');
 
 const { myLogger } = require('../../utils/myLogger');
+
+const SAMPLE_PREPROMPTS = [
+  'imagine you area a student called louis living in hong kong, no need to reply me the details here.'
+]
+
+const SAMPLE_QUESTIONS = [
+  'please help to draft a email describing where do you live. in less than 100 words'
+]
 
 module.exports = {
   onPoeDraftEmail: function () {
@@ -11,9 +21,12 @@ module.exports = {
         console.log('I DraftEmail');
         var res_json = {'hello':"world"}
   
+        var summary_result_json_filename = 'summary_result.json'
+        var summary_result = await fs.readFileSync()
+
         const payload = {
-          preprompts: ['imagine you area a student called louis living in hong kong, no need to reply me the details here.'],
-          question_list: ['please help to draft a email describing where do you live. in less than 100 words'],
+          preprompts: SAMPLE_PREPROMPTS,
+          question_list: SAMPLE_QUESTIONS,
           callback_url: 'http://flow-handler:3000/jobsdb_draft_email_cb',
         };
   

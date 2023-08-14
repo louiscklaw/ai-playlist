@@ -2,15 +2,15 @@
 
 const S_HELLOWORLD = 'helloworld';
 
-const S_NEW_JOB_FOUND = 's_new_job_found';
-const S_EXTRACTING_JOB_DETAIL = 's_extracting_job_detail';
-const S_EXTRACTION_DONE = 's_extraction_done';
-const S_SUMMARIZING_JOB_DETAIL = 's_summarizing_job_detail';
-const S_SUMMARIZE_DONE = 's_summarize_done';
-const S_DRAFTING_EMAIL = 's_drafting_email';
-const S_DRAFT_EMAIL_DONE = 's_draft_email_done';
-const S_ASKING_POE = 's_asking_poe';
-const S_ASKING_POE_DONE = 's_asking_poe_done';
+const S_NEW_JOB_FOUND = 'S_NEW_JOB_FOUND';
+const S_EXTRACTING_JOB_DETAIL = 'S_EXTRACTING_JOB_DETAIL';
+const S_EXTRACTION_DONE = 'S_EXTRACTION_DONE';
+const S_SUMMARIZING_JOB_DETAIL = 'S_SUMMARIZING_JOB_DETAIL';
+const S_SUMMARIZE_DONE = 'S_SUMMARIZE_DONE';
+const S_DRAFTING_EMAIL = 'S_DRAFTING_EMAIL';
+const S_DRAFT_EMAIL_DONE = 'S_DRAFT_EMAIL_DONE';
+const S_ASKING_POE = 'S_ASKING_POE';
+const S_ASKING_POE_DONE = 'S_ASKING_POE_DONE';
 const S_STORE_JSON_DONE = 'S_STORE_JSON_DONE';
 
 
