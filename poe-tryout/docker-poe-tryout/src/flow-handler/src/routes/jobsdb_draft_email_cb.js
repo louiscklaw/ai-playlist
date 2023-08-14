@@ -14,10 +14,9 @@ router.post('/', async (req, res) => {
 
   try {
     // assemble the new context
-    console.log({ req_body });
-    // var { output: draft_email_output } = req_body;
+    var {working_dir} = req_body;
 
-    await storeJson('/share/helloworld/draft_email.json', req_body);
+    await storeJson(`${working_dir}/draft_email.json`, req_body);
 
     myLogger.info('receive callback from draft email ');
     output.state = 'start';
@@ -25,9 +24,10 @@ router.post('/', async (req, res) => {
     var machine = new jobsdbPoeDraftEmailCbMachine();
     machine.context = req_body;
 
+    await machine.onPoeDraftEmailDone();
+
     // NOTE: current store result is the end,
     // so no further processing is required
-    await machine.onPoeDraftEmailDone();
     await machine.onStoreResult();
 
     output.state = 'success';

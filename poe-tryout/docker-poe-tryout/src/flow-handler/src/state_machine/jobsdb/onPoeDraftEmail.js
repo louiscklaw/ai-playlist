@@ -32,9 +32,7 @@ module.exports = {
     return new Promise(async (res, rej) => {
       // http://flow-handler:3000/jobsdb_draft_email_cb
       myLogger.log('info', { message: 'I DraftEmailDone' });
-      // var result = await getHelloworld();
-      // var res_text = await result.text();
-      // console.log(res_text);
+
       res();
     });
   },

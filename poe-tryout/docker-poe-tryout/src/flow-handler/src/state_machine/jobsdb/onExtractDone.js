@@ -11,7 +11,6 @@ module.exports = {
     return new Promise(async (res, rej) => {
       try {
         const {working_dir} = this.context;
-        console.log(this.context);
 
         // proceed to summarize
         await fetch(url, {
