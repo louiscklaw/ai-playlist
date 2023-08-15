@@ -4,7 +4,7 @@ Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
-    const url = 'http://openbox-seat1:3000/stealthCheck';
+    const url = 'http://openbox-poe-seat1:3000/stealthCheck';
     const response = await fetch(url, {
       method: 'post',
       body: JSON.stringify({ hello: 'world' }),

@@ -2,11 +2,11 @@
 
 const { getRandomInt } = require('./utils/getRandomInt');
 
-// const gpt_endpoint = 'http://openbox-seat1:3000';
+// const gpt_endpoint = 'http://openbox-poe-seat1:3000';
 
 const openbox_hosts = [
-  'openbox-seat1',
-  // 'openbox-seat2'
+  'openbox-poe-seat1',
+  // 'openbox-poe-seat2'
 ];
 
 const DBAPI_HOST = 'http://dbapi:3001/api/v1';
@@ -16,7 +16,7 @@ const SHARE_DIR = '/share';
 function getRandomOpenboxHost() {
   var randomIdx = getRandomInt(openbox_hosts.length, 1) - 1;
   console.log({ randomIdx });
-  // return 'openbox-seat1';
+  // return 'openbox-poe-seat1';
   return openbox_hosts[randomIdx];
 }
 

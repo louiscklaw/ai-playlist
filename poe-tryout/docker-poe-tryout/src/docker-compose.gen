@@ -222,7 +222,7 @@ services:
       target: 8081
       published: "8081"
       protocol: tcp
-  openbox-seat1:
+  openbox-poe-seat1:
     environment:
       TZ: Asia/Hong_Kong
     image: logickee/openbox-seat-ubuntu
@@ -250,12 +250,12 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat1/firefox-user-data
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/firefox-user-data
       target: /share/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat1/chrome-user-data
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/chrome-user-data
       target: /share/chrome-user-data
       bind:
         create_host_path: true
@@ -269,7 +269,7 @@ services:
       target: /app
       bind:
         create_host_path: true
-  openbox-seat2:
+  openbox-poe-seat2:
     environment:
       TZ: Asia/Hong_Kong
     image: logickee/openbox-seat-ubuntu
@@ -297,12 +297,12 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat2/firefox-user-data
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/firefox-user-data
       target: /share/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-seat2/chrome-user-data
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/chrome-user-data
       target: /share/chrome-user-data
       bind:
         create_host_path: true

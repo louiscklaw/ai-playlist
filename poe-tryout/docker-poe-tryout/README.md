@@ -1,5 +1,7 @@
 ## draft
 
+
+
 ![](./docs/graphs/1/graph.png)
 
 ### system design
@@ -45,6 +47,14 @@ $ tree -L 3 -d -a
 ### steps to develop
 ```bash
 # in project root
+$ cp .env.example .env
+
+# if not build openbox-poe-seat image
+$ cd src/openbox-poe-seat
+$ ./build_image.sh
+$ ./push.sh
+# openbox-poe-seat build done
+
 $ npm run docker_dev 
 ```
 
