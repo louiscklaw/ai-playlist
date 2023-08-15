@@ -1,4 +1,5 @@
 'use strict';
+
 const { gpt_endpoint, JOBPOST_ENDPOINT } = require('../constants');
 
 const fs = require('fs');

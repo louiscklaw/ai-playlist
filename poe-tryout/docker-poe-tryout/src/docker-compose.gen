@@ -362,7 +362,7 @@ services:
     restart: always
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/etc_redis
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/etc/redis
       target: /etc/redis
       bind:
         create_host_path: true

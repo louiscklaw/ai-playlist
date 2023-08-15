@@ -9,8 +9,8 @@ module.exports = {
         console.log('I Summarize');
         const { req_body } = this.context;
         var payload = req_body;
-        console.log({ req_body });
-
+        
+        // console.log({ payload });
         var result = await askPoePrepromptQuestion(payload);
 
         res();
