@@ -22,7 +22,7 @@ const transitions = [
   { name: 'askPoeDone', from: S_ASKING_POE, to: S_ASKING_POE_DONE },
 
   { name: 'poeSummarize', from: S_READY_SUMMARIZE, to: S_SUMMARIZING_JOB_DETAIL },
-  { name: 'poeSummarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_SUMMARIZE_DONE },
+  { name: 'poeSummarizeDone', from: S_SUMMARIZING_JOB_DETAIL, to: S_READY_DRAFT_EMAIL },
 
   // draft CV
   { name: 'poeDraftEmail', from: S_READY_DRAFT_EMAIL, to: S_DRAFTING_EMAIL },

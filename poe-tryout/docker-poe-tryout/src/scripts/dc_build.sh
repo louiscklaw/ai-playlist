@@ -8,7 +8,7 @@ YML_S='
 -f ./dbapi/docker-compose.yml
 -f ./poe-scheduler-api/docker-compose.yml
 -f ./static-share/docker-compose.yml
--f ./openbox-seat/docker-compose.yml
+-f ./openbox-poe-seat/docker-compose.yml
 -f ./changedetect/docker-compose.yml
 -f ./jobsdb-link-extractor/docker-compose.yml
 -f ./flow-handler/docker-compose.yml
@@ -33,9 +33,9 @@ set -ex
 
 docker compose $YML_S pull
 
-# NOTE: making of logickee/openbox-seat-ubuntu
+# NOTE: making of logickee/openbox-poe-seat
 if [[ -v DOCKER_DEV ]]; then
-  cd ./openbox-seat
+  cd ./openbox-poe-seat
     ./build_docker.sh
   cd -
 fi

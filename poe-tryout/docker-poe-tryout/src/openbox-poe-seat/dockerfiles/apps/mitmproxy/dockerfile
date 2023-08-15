@@ -1,4 +1,4 @@
-FROM openbox-seat-ubuntu
+FROM openbox-poe-seat
 
 ADD mitmproxy-ca-cert.pem /usr/local/share/ca-certificates/mitmproxy.crt
 

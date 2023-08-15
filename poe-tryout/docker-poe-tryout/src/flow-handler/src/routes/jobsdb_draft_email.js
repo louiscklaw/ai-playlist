@@ -15,21 +15,20 @@ router.post('/', async (req, res) => {
 
     var machine = new jobsdbPoeDraftEmailMachine();
 
-    //   // NOTE: current store result is the end,
-    //   // so no further processing is required
-    machine.context = {req_body}
+    // NOTE: current store result is the end,
+    // so no further processing is required
+    machine.context = { req_body };
     await machine.poeDraftEmail();
 
     output.state = 'success';
   } catch (error) {
     output.state = 'error';
     output.error = error;
-    console.log(error)
+    console.log(error);
     // myLogger.error(output);
   }
 
   res.send(output);
-
 });
 
 module.exports = router;

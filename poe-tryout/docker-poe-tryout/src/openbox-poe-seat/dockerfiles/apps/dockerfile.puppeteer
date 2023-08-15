@@ -1,4 +1,4 @@
-FROM openbox-seat-ubuntu
+FROM openbox-poe-seat
 
 
 RUN apt install -y curl

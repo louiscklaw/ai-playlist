@@ -1,4 +1,4 @@
-FROM openbox-seat-ubuntu
+FROM openbox-poe-seat
 
 ENV NOVNC_VERSION="1.4.0" \
     WEBSOCKIFY_VERSION="0.11.0" \

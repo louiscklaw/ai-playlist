@@ -1,4 +1,4 @@
-FROM openbox-seat-ubuntu
+FROM openbox-poe-seat
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 

@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
     machine.context = {...req_body, working_dir};
     await machine.poeSummarizeDone();
 
+
     output.state = 'success';
   } catch (error) {
     console.log({ error });

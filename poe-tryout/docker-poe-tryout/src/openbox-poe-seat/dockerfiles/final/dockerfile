@@ -1,4 +1,4 @@
-FROM openbox-seat-ubuntu
+FROM openbox-poe-seat
 
 ARG ANDROID_API_LEVEL=25
 ENV ANDROID_API_LEVEL ${ANDROID_API_LEVEL}

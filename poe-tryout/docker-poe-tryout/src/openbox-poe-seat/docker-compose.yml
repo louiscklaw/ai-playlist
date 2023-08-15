@@ -1,6 +1,6 @@
 services:
   # openbox-firefox:
-  #   image: openbox-seat-ubuntu
+  #   image: openbox-poe-seat
   #   ports:
   #     - 6080:6080
   #     - 3000:3000
@@ -20,13 +20,13 @@ services:
   #     - ./volumes/static-share/_output:/share
 
   #     # NOTE: source code
-  #     - "./openbox-seat/src:/app"
+  #     - "./openbox-poe-seat/src:/app"
   #   environment:
   #     - TZ=Asia/Hong_Kong
   #   # command: sleep infinity
 
-  openbox-seat1:
-    image: logickee/openbox-seat-ubuntu
+  openbox-poe-seat1:
+    image: logickee/openbox-poe-seat
     ports:
       - 6081:6080
       - 3021:3000
@@ -37,22 +37,22 @@ services:
       # - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
 
       # NOTE: share firfox user profile
-      - ./volumes/openbox-seat1/firefox-user-data:/share/firefox-user-data
+      - ./volumes/openbox-poe-seat1/firefox-user-data:/share/firefox-user-data
 
       # NOTE: share chrome user profile
-      - ./volumes/openbox-seat1/chrome-user-data:/share/chrome-user-data
+      - ./volumes/openbox-poe-seat1/chrome-user-data:/share/chrome-user-data
       
       # NOTE: store output
       - ./volumes/static-share/_output:/share
 
       # NOTE: source code
-      - "./openbox-seat/src:/app"
+      - "./openbox-poe-seat/src:/app"
     environment:
       - TZ=Asia/Hong_Kong
     # command: sleep infinity
 
-  openbox-seat2:
-    image: logickee/openbox-seat-ubuntu
+  openbox-poe-seat2:
+    image: logickee/openbox-poe-seat
     ports:
       - 6082:6080
       - 3022:3000
@@ -63,22 +63,22 @@ services:
       # - ./src/openbox-firefox/share/firefox-user-data:/share/firefox-user-data
 
       # NOTE: share firfox user profile
-      - ./volumes/openbox-seat2/firefox-user-data:/share/firefox-user-data
+      - ./volumes/openbox-poe-seat2/firefox-user-data:/share/firefox-user-data
 
       # NOTE: share chrome user profile
-      - ./volumes/openbox-seat2/chrome-user-data:/share/chrome-user-data
+      - ./volumes/openbox-poe-seat2/chrome-user-data:/share/chrome-user-data
       
       # NOTE: store output
       - ./volumes/static-share/_output:/share
 
       # NOTE: source code
-      - "./openbox-seat/src:/app"
+      - "./openbox-poe-seat/src:/app"
     environment:
       - TZ=Asia/Hong_Kong
     # command: sleep infinity
     
   # openbox-seat3:
-  #   image: logickee/openbox-seat-ubuntu
+  #   image: logickee/openbox-poe-seat
   #   ports:
   #     - 6083:6080
   #     - 3023:3000
@@ -98,7 +98,7 @@ services:
   #     - ./volumes/static-share/_output:/share
 
   #     # NOTE: source code
-  #     - "./openbox-seat/src:/app"
+  #     - "./openbox-poe-seat/src:/app"
   #   environment:
   #     - TZ=Asia/Hong_Kong
   #   # command: sleep infinity
