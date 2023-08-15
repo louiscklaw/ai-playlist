@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const useProxy = require('puppeteer-page-proxy');
 
-const {initBrowser} = require('../utils/initBrowser')
+const { initBrowser } = require('../utils/initBrowser');
 
 async function mySleep(time_ms) {
   return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ async function getIpWithProxy() {
       await useProxy(request, 'http://v2raya:20172');
     });
 
-    await page.goto('http://ifconfig.me', {waitUntil:'load'});
+    await page.goto('http://ifconfig.me', { waitUntil: 'load' });
     var proxied_ip_address = await page.evaluate(() => {
       return document.querySelector('#ip_address').textContent;
     });
@@ -59,8 +59,7 @@ async function getMyIp() {
   }
 }
 
-
-async function checkIpLeaking(){
+async function checkIpLeaking() {
   try {
     const my_ip_addess = await getMyIp();
     await mySleep(5000);
@@ -70,10 +69,8 @@ async function checkIpLeaking(){
   } catch (error) {
     console.log('error during checking my ip leakage');
     console.log(error);
-    throw new Error('error during checking my ip leakage')
+    throw new Error('error during checking my ip leakage');
   }
 }
 
-
-module.exports = {checkIpLeaking}
-
+module.exports = { checkIpLeaking };

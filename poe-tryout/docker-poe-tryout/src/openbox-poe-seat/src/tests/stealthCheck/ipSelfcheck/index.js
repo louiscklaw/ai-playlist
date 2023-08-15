@@ -1,4 +1,3 @@
-const {checkIpLeaking} = require('../../../checking/ipSelfcheck');
-
+const { checkIpLeaking } = require('../../../checking/ipSelfcheck');
 
 checkIpLeaking();

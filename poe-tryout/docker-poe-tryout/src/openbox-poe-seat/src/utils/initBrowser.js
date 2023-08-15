@@ -1,3 +1,7 @@
+require('dotenv').config();
+var { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
+const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../config');
+
 const assert = require('chai').assert;
 
 const puppeteer = require('puppeteer-extra');
@@ -8,9 +12,10 @@ puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
-require('dotenv').config();
-const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
-const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../config');
+if (!CHROME_DATA_DIR) {
+  console.log('chrome data dir not set, default to /tmp');
+  CHROME_DATA_DIR = '/tmp/chrome-data-dir';
+}
 
 async function initStealthing(page) {
   try {
