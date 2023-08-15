@@ -1,5 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+require('dotenv').config();
+  // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
+const { PROMPT_ROOT, ERROR_ROOT } = require('./config');
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -14,11 +19,6 @@ try {
   const StealthPlugin = require('puppeteer-extra-plugin-stealth');
   puppeteer.use(StealthPlugin());
 
-  require('dotenv').config();
-  // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
-
-  const { PROMPT_ROOT, ERROR_ROOT } = require('./config');
-
   // const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 
   require(`${PROMPT_ROOT}`);
@@ -27,8 +27,9 @@ try {
   const summarizeRoutes = require('./routes/summarize');
   const chatGPTRoutes = require('./routes/chatGPT');
   const googlePalmRoutes = require('./routes/googlePalm');
-  const { helloworldBrowser } = require('./utils/initBrowser');
 
+  // TODO: remove me ?
+  const { helloworldBrowser } = require('./utils/initBrowser');
   helloworldBrowser();
 
   // Register the routes
