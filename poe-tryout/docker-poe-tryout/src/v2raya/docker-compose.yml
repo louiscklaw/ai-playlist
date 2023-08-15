@@ -13,3 +13,4 @@ services:
       - ./volumes/v2raya/etc/v2raya:/etc/v2raya 
     environment:
       - V2RAYA_LOG_FILE=/tmp/v2raya.log
+      - V2RAYA_ADDRESS=0.0.0.0:2017
