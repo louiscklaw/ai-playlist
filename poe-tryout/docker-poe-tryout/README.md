@@ -1,5 +1,10 @@
 ## draft
 
+### v2raya in the middle, i add the proxy function to puppeteer already. 
+  - the remaining part should be integrate it into the main openbox-poe-seat program.
+
+
+
 ### reseed user profile for google chrome
 
 ```bash
