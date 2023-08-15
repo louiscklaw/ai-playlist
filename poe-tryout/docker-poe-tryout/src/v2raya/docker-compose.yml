@@ -5,12 +5,16 @@ services:
     privileged: true
     ports:
       - 2017:2017
-      - 20173:20173 # socks
+
+      # Because by default v2rayA will open 20170 (socks5), 20171 (http), 20172 (http with shunt rules) ports through the core. To modify the port, please refer to the [Backend Address and Inbound Port Settings] () section.
+      - 20171:20171 # http
       - 20172:20172 # http
+      - 20173:20173 # socks
     volumes:
       - ./volumes/v2raya/lib/modules:/lib/modules:ro 
       - ./volumes/v2raya/etc/resolv.conf:/etc/resolv.conf 
       - ./volumes/v2raya/etc/v2raya:/etc/v2raya 
+      - ./volumes/v2raya/tmp/v2raya.log:/tmp/v2raya.log
     environment:
       - V2RAYA_LOG_FILE=/tmp/v2raya.log
       - V2RAYA_ADDRESS=0.0.0.0:2017

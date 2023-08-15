@@ -432,6 +432,7 @@ services:
     working_dir: /src
   v2raya:
     environment:
+      V2RAYA_ADDRESS: 0.0.0.0:2017
       V2RAYA_LOG_FILE: /tmp/v2raya.log
     image: mzz2017/v2raya
     networks:
@@ -442,12 +443,16 @@ services:
       published: "2017"
       protocol: tcp
     - mode: ingress
-      target: 20173
-      published: "20173"
+      target: 20171
+      published: "20171"
       protocol: tcp
     - mode: ingress
       target: 20172
       published: "20172"
+      protocol: tcp
+    - mode: ingress
+      target: 20173
+      published: "20173"
       protocol: tcp
     privileged: true
     restart: unless-stopped
@@ -466,6 +471,11 @@ services:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/v2raya
       target: /etc/v2raya
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/tmp/v2raya.log
+      target: /tmp/v2raya.log
       bind:
         create_host_path: true
 networks:
