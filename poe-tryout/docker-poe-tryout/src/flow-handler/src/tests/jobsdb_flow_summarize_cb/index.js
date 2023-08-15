@@ -16,11 +16,11 @@ Array(1)
       headers: { 'Content-Type': 'application/json' },
     });
 
-    console.log(await response.text())
+    console.log(await response.text());
 
     // const res_json = await response.json();
     // console.log({ res_json });
-    console.log('helloworld')
+    console.log('helloworld');
   });
 
 console.log('done');

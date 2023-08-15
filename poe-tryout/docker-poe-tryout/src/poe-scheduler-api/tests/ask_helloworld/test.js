@@ -1,12 +1,8 @@
 const fetch = require('node-fetch');
 
 const body = {
-  preprompts: [
-    "What is orange? please make your answer in below 20 words.",
-  ],
-  question_list: [
-    "What is banana? please make your answer in below 20 words."
-  ],
+  preprompts: ['What is orange? please make your answer in below 20 words.'],
+  question_list: ['What is banana? please make your answer in below 20 words.'],
   callback_url: 'http://poe-scheduler-api:3002/done',
 };
 

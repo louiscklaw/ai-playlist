@@ -48,5 +48,4 @@ var assert = require('chai').assert;
   assert(webdriver_result == 'undefined', 'navigator.Webdriver not equal to undefined');
 
   await browser.close();
-  
 })();

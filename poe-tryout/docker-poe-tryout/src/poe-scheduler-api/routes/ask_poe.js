@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
       working_dir,
       preprompts,
       question_list,
-      callback_url
+      callback_url,
     })
       .attempts(5)
       .backoff({ delay: 15 * 1000, type: 'fixed' })

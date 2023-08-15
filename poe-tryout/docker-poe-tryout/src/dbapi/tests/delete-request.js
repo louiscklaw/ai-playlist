@@ -1,18 +1,15 @@
 const fetch = require('node-fetch');
 
 (async () => {
-
   const response = await fetch('http://localhost:3001/api/v1/Customer/64c9beba5dc9292b6471f638', {
     method: 'delete',
   });
 
   // NOTE: if response.status == 204 means success
   console.log(response.status);
-
 })();
 
 // request = require('request')
-
 
 // function increaseCount(currentCount, resourceId, next) {
 //   var options, patch;

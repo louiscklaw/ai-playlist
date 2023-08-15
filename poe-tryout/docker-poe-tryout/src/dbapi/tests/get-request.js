@@ -9,7 +9,6 @@ const fetch = require('node-fetch');
 
 // request = require('request')
 
-
 // function increaseCount(currentCount, resourceId, next) {
 //   var options, patch;
 //   patch = [

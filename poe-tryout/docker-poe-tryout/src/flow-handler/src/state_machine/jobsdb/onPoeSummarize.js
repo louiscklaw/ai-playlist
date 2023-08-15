@@ -28,16 +28,16 @@ module.exports = {
         console.log('I SummarizeDone');
 
         const { working_dir } = this.context;
-        const job_summary = this.context.chat_history.q_and_a.history[1].answer
+        const job_summary = this.context.chat_history.q_and_a.history[1].answer;
 
         const url = 'http://flow-handler:3000/jobsdb_draft_email';
         const SAMPLE_PREPROMPTS = [
-'Forget everything and start a new talk.',
-`
+          'Forget everything and start a new talk.',
+          `
 I will input the summary of the position, please try to analyze it.
 Please try to make it in less than 100 words.
 `.trim(),
-job_summary,
+          job_summary,
         ];
 
         const SAMPLE_QUESTIONS = ['can you draft me a cover letter ? Thanks.'];

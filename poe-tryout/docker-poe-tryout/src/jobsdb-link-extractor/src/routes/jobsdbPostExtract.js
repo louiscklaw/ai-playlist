@@ -10,13 +10,11 @@ const express = require('express');
 const { postResult } = require('../util/postResult');
 const router = express.Router();
 
-
-
 router.post('/', async (req, res) => {
   console.log('/jobsdbPostExtract called');
-  const {callback_url} = req.body;
+  const { callback_url } = req.body;
 
-  res.send({state: 'scheduled'})
+  res.send({ state: 'scheduled' });
 
   var output = { state: 'INIT', extracted: {}, debug: {}, error: {} };
   var browser = {},
@@ -31,9 +29,7 @@ router.post('/', async (req, res) => {
       const { url } = req_body;
       console.log({ url });
 
-
-
-      const post_id = url.replace('.html','').split('-').pop();
+      const post_id = url.replace('.html', '').split('-').pop();
       if (!post_id) throw new Error('post_id is required');
 
       // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
@@ -120,8 +116,7 @@ router.post('/', async (req, res) => {
   }
 
   // console.log({output})
-  await postResult(callback_url, output.extracted)
-  
+  await postResult(callback_url, output.extracted);
 });
 
 module.exports = router;

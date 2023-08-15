@@ -1,7 +1,6 @@
 const { postHelloworld } = require('../../fetch/postHelloworld');
 const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../utils/fetchOpenboxSeat');
 
-
 module.exports = {
   onAskPoe: function () {
     return new Promise(async (res, rej) => {
@@ -26,4 +25,3 @@ module.exports = {
     });
   },
 };
-

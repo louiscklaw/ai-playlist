@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 require('dotenv').config();
-  // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
+// const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 const { PROMPT_ROOT, ERROR_ROOT } = require('./config');
 
 const app = express();

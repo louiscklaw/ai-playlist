@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-const fetch  = require('node-fetch')
+const fetch = require('node-fetch');
 
 const { gpt_endpoint, getRandomOpenboxHost, JOBPOST_ENDPOINT } = require('../constants');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
@@ -8,7 +8,7 @@ const { writeOutputToDB } = require('../utils/writeOutputToDB');
 const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
 const { mySleep } = require('../utils/mySleep');
 
-module.exports = Queue => { 
+module.exports = Queue => {
   console.log('poe Queue init');
 
   Queue.process('poe', 1, async function (job, done) {
@@ -20,7 +20,7 @@ module.exports = Queue => {
 
       const { data } = job;
       var res_json = {};
-      const {working_dir, preprompts, question_list, callback_url } = data;
+      const { working_dir, preprompts, question_list, callback_url } = data;
       const gpt_payload = { preprompts, question_list };
 
       // // // http://openbox-firefox:3000/test1
@@ -35,7 +35,7 @@ module.exports = Queue => {
         headers: { 'Content-Type': 'application/json' },
       });
       var chatgpt_summarize_result_json = await chatgpt_summarize_result.json();
-      chatgpt_summarize_result_json = {...chatgpt_summarize_result_json, working_dir}
+      chatgpt_summarize_result_json = { ...chatgpt_summarize_result_json, working_dir };
 
       if (callback_url) {
         var result_cb_url = await fetch(callback_url, {
@@ -44,8 +44,8 @@ module.exports = Queue => {
           headers: { 'Content-Type': 'application/json' },
         });
         var result_cb_json = await result_cb_url.json();
-      }else{
-        console.log({chatgpt_summarize_result_json})
+      } else {
+        console.log({ chatgpt_summarize_result_json });
         console.log('no callback url provided, quitting');
       }
 
@@ -75,7 +75,7 @@ module.exports = Queue => {
       if (error.code == 'ECONNREFUSED' && error.message.indexOf('openbox-firefox') > -1) {
         done(new Error('the openbox-firefox server is not already, schedule retry'));
       } else {
-        console.log({error});
+        console.log({ error });
         done(new Error(error.message));
       }
     } finally {

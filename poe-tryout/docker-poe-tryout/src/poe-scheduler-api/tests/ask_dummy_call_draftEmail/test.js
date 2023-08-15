@@ -11,7 +11,7 @@ const body = {
     'using less than 10 words, describe orange',
     'using less than 10 words, describe banana',
   ],
-  callback_url: `${FLOW_HANDLER_ENDPOINT}/jobsdb_draft_email_cb`
+  callback_url: `${FLOW_HANDLER_ENDPOINT}/jobsdb_draft_email_cb`,
 };
 
 Array(1)
@@ -28,5 +28,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({res_json });
+    console.log({ res_json });
   });

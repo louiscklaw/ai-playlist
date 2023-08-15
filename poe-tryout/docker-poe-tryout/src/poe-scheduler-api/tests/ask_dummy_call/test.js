@@ -9,10 +9,10 @@ const body = {
   ],
   callback_url: 'http://poe-scheduler-api:3002/done',
   context: {
-    name:'helloworld',
-    process:'in between',
-    value:'dummy value'
-  }
+    name: 'helloworld',
+    process: 'in between',
+    value: 'dummy value',
+  },
 };
 
 Array(1)

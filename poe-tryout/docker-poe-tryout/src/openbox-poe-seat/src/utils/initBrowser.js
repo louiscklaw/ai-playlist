@@ -18,7 +18,6 @@ async function initStealthing(page) {
       Object.defineProperty(navigator, 'webdriver', {
         get: () => undefined,
       });
-      
     });
   } catch (error) {
     console.log('error during initStealthing');

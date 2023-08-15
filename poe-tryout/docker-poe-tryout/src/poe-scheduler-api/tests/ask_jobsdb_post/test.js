@@ -9,7 +9,7 @@ jobDescription = jobDescription.replace(/\n\n+/g, '\n');
 const body = {
   preprompts: [
     'Hi, please help to understand the text below',
-`title: Validation Assistant,
+    `title: Validation Assistant,
 company name: SYNCO (H.K.) Ltd,
 company address: Tai Po Area,
 post date: 4-Aug-2023,

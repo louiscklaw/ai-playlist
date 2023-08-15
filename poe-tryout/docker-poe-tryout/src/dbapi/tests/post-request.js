@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
   const response = await fetch('http://localhost:3001/api/v1/Customer', {
     method: 'post',
     body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   });
   const data = await response.json();
 
@@ -14,7 +14,6 @@ const fetch = require('node-fetch');
 })();
 
 // request = require('request')
-
 
 // function increaseCount(currentCount, resourceId, next) {
 //   var options, patch;

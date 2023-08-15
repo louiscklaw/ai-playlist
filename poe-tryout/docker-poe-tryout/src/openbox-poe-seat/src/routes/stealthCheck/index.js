@@ -10,7 +10,6 @@ router.post('/', async (req, res) => {
     await stealthCheck();
 
     res.send({ state: STEALTHCHECK_CHECK_OK });
-
   } catch (error) {
     console.log(error);
     res.send({ state: STEALTHCHECK_CHECK_FAILED, error });

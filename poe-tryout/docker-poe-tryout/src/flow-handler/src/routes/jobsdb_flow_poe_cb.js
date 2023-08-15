@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
   var output = { state: 'init', debug: { input: {} }, error: {} };
   var req_body = req.body;
   output.debug = { input: req_body };
-  console.log({req_body})
+  console.log({ req_body });
 
   // req_body contains the answer from poe w.r.t. question.
 
@@ -17,9 +17,7 @@ router.post('/', async (req, res) => {
     console.log('receive callback from poe ');
     output.state = 'start';
 
-    var jobsdb_poe_cb = new jobsdbPoeCallack({
-      
-    });
+    var jobsdb_poe_cb = new jobsdbPoeCallack({});
 
     await jobsdb_poe_cb.summarize();
     await jobsdb_poe_cb.summarizeDone();
@@ -28,13 +26,12 @@ router.post('/', async (req, res) => {
 
     output.state = 'success';
   } catch (error) {
-    console.log({error})
+    console.log({ error });
     output.state = 'error';
     output.error = error;
   } finally {
     res.send(output);
   }
-
 });
 
 module.exports = router;

@@ -11,16 +11,16 @@ Array(1)
       method: 'post',
       body: JSON.stringify({
         state: 'draft_email_done',
-        result: { hello: 'world', content:"helloworld email content" },
+        result: { hello: 'world', content: 'helloworld email content' },
       }),
       headers: { 'Content-Type': 'application/json' },
     });
 
-    console.log(await response.text())
+    console.log(await response.text());
 
     // const res_json = await response.json();
     // console.log({ res_json });
-    console.log('helloworld')
+    console.log('helloworld');
   });
 
 console.log('done');

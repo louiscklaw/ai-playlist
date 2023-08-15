@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 
   try {
     // assemble the new context
-    var {working_dir} = req_body;
+    var { working_dir } = req_body;
 
     await storeJson(`${working_dir}/draft_email.json`, req_body);
 

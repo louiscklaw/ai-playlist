@@ -1,7 +1,5 @@
-const { storeJson } = require("../../../utils/storeJson");
+const { storeJson } = require('../../../utils/storeJson');
 
-
-(async () =>{
-  await storeJson('./hello.json',{hello:'world'})
-}
-)();
+(async () => {
+  await storeJson('./hello.json', { hello: 'world' });
+})();

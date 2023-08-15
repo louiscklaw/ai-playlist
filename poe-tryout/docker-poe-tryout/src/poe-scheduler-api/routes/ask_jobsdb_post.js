@@ -31,7 +31,6 @@ router.post('/', async (req, res) => {
 
     Queue.now(job);
     state = STATE_SCHEDULED;
-    
   } catch (error) {
     state = ERROR_ADDING_QUEUE;
     err_msg = error;

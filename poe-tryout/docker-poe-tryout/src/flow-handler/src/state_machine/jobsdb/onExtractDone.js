@@ -11,23 +11,17 @@ module.exports = {
 
     return new Promise(async (res, rej) => {
       try {
-        const {working_dir, jobTitle,
-          companyName,
-          jobAddress,
-          postDate,
-          jobHighlight,
-          jobDescription,
-        } = this.context;
+        const { working_dir, jobTitle, companyName, jobAddress, postDate, jobHighlight, jobDescription } = this.context;
 
         var input_to_summarize = {
           working_dir,
           preprompts: SAMPLE_PREPROMPTS,
           question_list: [
-`
+            `
 I will input a job advertisement, 
 please try to summarize it in around 100 words
 `.trim(),
-`
+            `
 company name: ${companyName}
 job title: ${jobTitle}
 job addess: ${jobAddress}
