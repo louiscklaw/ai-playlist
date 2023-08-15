@@ -29,8 +29,8 @@ try {
   const googlePalmRoutes = require('./routes/googlePalm');
 
   // TODO: remove me ?
-  const { helloworldBrowser } = require('./utils/initBrowser');
-  helloworldBrowser();
+  // const { helloworldBrowser } = require('./utils/initBrowser');
+  // helloworldBrowser();
 
   // Register the routes
   app.use('/summarize', summarizeRoutes);

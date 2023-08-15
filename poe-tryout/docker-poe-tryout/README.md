@@ -1,5 +1,24 @@
 ## draft
 
+### reseed user profile for google chrome
+
+```bash
+# 1. at projectroot
+$ cd _seeds
+$ ./reseed.sh
+# will open a chrome browser, go through tutorial
+
+# stop openbox-poe-seat if running
+$ docker compose kill openbox-poe-seat1
+
+
+# /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1
+$ ./renew_user_data_.sh
+
+$ docker compose restart openbox-poe-seat1
+
+```
+
 
 
 ![](./docs/graphs/1/graph.png)

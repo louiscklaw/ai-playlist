@@ -13,6 +13,7 @@ YML_S='
 -f ./jobsdb-link-extractor/docker-compose.yml
 -f ./flow-handler/docker-compose.yml
 -f ./apprise-api/docker-compose.yml
+-f ./v2raya/docker-compose.yml
 '
 
 if [[ -v DOCKER_DEV ]]; then

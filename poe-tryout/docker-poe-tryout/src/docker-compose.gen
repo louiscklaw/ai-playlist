@@ -223,6 +223,7 @@ services:
       published: "8081"
       protocol: tcp
   openbox-poe-seat1:
+    container_name: openbox-poe-seat1
     environment:
       TZ: Asia/Hong_Kong
     image: logickee/openbox-poe-seat
@@ -270,6 +271,7 @@ services:
       bind:
         create_host_path: true
   openbox-poe-seat2:
+    container_name: openbox-poe-seat2
     environment:
       TZ: Asia/Hong_Kong
     image: logickee/openbox-poe-seat
@@ -428,6 +430,44 @@ services:
       bind:
         create_host_path: true
     working_dir: /src
+  v2raya:
+    environment:
+      V2RAYA_LOG_FILE: /tmp/v2raya.log
+    image: mzz2017/v2raya
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 2017
+      published: "2017"
+      protocol: tcp
+    - mode: ingress
+      target: 20173
+      published: "20173"
+      protocol: tcp
+    - mode: ingress
+      target: 20172
+      published: "20172"
+      protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/lib/modules
+      target: /lib/modules
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/resolv.conf
+      target: /etc/resolv.conf
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/v2raya
+      target: /etc/v2raya
+      bind:
+        create_host_path: true
 networks:
   default:
     name: dev-poe-tryout

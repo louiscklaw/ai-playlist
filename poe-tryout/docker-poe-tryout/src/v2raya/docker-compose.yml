@@ -1,0 +1,15 @@
+services:
+  v2raya:
+    image: mzz2017/v2raya
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - 2017:2017
+      - 20173:20173 # socks
+      - 20172:20172 # http
+    volumes:
+      - ./volumes/v2raya/lib/modules:/lib/modules:ro 
+      - ./volumes/v2raya/etc/resolv.conf:/etc/resolv.conf 
+      - ./volumes/v2raya/etc/v2raya:/etc/v2raya 
+    environment:
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
