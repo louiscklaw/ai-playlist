@@ -5,7 +5,7 @@ const urls = ['https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509
 urls.map(async (v, i) => {
   console.log(`posting ask ${i}...`);
 
-  const response = await fetch('http://localhost:3003/jobsdbPostExtract', {
+  const response = await fetch('http://jobsdb-link-extractor:3000/jobsdbPostExtract', {
     method: 'post',
     body: JSON.stringify({ url: urls[i] }),
     headers: { 'Content-Type': 'application/json' },
