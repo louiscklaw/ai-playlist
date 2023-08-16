@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     await storeJson(`${working_dir}/extract_result.json`, req_body);
 
     machine.context = { ...req_body, working_dir };
-    // await machine.extractDone();
+    await machine.extractDone();
 
     output = { ...output, state: 'success' };
   } catch (error) {
