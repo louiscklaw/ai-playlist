@@ -17,7 +17,7 @@ const transitions = [
   { name: 'extractJobDetail', from: S_NEW_JOB_FOUND, to: S_EXTRACTING_JOB_DETAIL },
   { name: 'extractDone', from: S_EXTRACTING_JOB_DETAIL, to: S_EXTRACTION_DONE },
 
-  // ?? why ?
+  // NOTE: why i do this ??
   { name: 'askPoe', from: S_EXTRACTION_DONE, to: S_ASKING_POE },
   { name: 'askPoeDone', from: S_ASKING_POE, to: S_ASKING_POE_DONE },
 
