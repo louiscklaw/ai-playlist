@@ -1,25 +1,30 @@
 name: src
 services:
-  apprise-api:
-    environment:
-      PGID: "1000"
-      PUID: "1000"
-      TZ: Etc/UTC
-    image: lscr.io/linuxserver/apprise-api:latest
+  api-debug:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/api-debug
+      dockerfile: Dockerfile
+    command:
+    - ./entry.sh
     networks:
       default: null
     ports:
     - mode: ingress
-      target: 8000
-      published: "8000"
+      target: 3000
+      published: "3051"
       protocol: tcp
-    restart: unless-stopped
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/apprise-api/config
-      target: /config
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/api-debug/src
+      target: /app
       bind:
         create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/api-debug
+      target: /share
+      bind:
+        create_host_path: true
+    working_dir: /app
   bait:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait
@@ -84,6 +89,11 @@ services:
     image: browserless/chrome
     networks:
       default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3053"
+      protocol: tcp
     restart: unless-stopped
   dbapi:
     build:
@@ -106,6 +116,31 @@ services:
       target: /app
       bind:
         create_host_path: true
+  diff-handler:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/changedetect/diff-handler
+      dockerfile: Dockerfile
+    command:
+    - ./entry.sh
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3052"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/changedetect/diff-handler/src
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/changedetect/diff-handler
+      target: /share
+      bind:
+        create_host_path: true
+    working_dir: /app
   flow-handler:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler

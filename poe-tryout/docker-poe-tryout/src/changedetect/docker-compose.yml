@@ -1,4 +1,31 @@
+volumes:
+  changedetection-data:
+
 services:
+  diff-handler:
+    build: ./changedetect/diff-handler
+    volumes:
+      - ./changedetect/diff-handler/src:/app
+      - ./volumes/changedetect/diff-handler:/share
+    working_dir: /app
+    ports:
+      - 3052:3000
+    command: ./entry.sh
+    # command: sleep infinity
+
+  # apprise-api:
+  #   # container_name: apprise-api
+  #   image: lscr.io/linuxserver/apprise-api:latest
+  #   # environment:
+  #   #   - PUID=1000
+  #   #   - PGID=1000
+  #   #   - TZ=Etc/UTC
+  #   volumes:
+  #     - ./volumes/apprise-api/config:/config
+  #   ports:
+  #     - 8000:8000
+  #   restart: unless-stopped
+
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
     # container_name: changedetection
@@ -34,6 +61,8 @@ services:
     #  hostname: changedetection-chrome
     image: browserless/chrome
     restart: unless-stopped
+    ports:
+      - 3053:3000
     environment:
       - SCREEN_WIDTH=1920
       - SCREEN_HEIGHT=1024
@@ -47,6 +76,3 @@ services:
       - DEFAULT_STEALTH=true
       # Ignore HTTPS errors, like for self-signed certs
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
-
-volumes:
-  changedetection-data:

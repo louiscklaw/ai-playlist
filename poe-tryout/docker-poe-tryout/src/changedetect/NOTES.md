@@ -18,3 +18,7 @@ var body = document.querySelector("body");
 body.appendChild(div);
 
 ```
+
+
+# apprise configuration
+http://localhost:8000/cfg/helloworld

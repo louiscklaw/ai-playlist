@@ -1,0 +1,12 @@
+services:
+  api-debug:
+    build: ./api-debug
+    # image: ubuntu:latest
+    command: ./entry.sh
+    # command: sleep infinity
+    volumes:
+      - ./api-debug/src:/app
+      - ./volumes/api-debug:/share
+    working_dir: /app
+    ports:
+      - 3051:3000
