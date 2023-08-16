@@ -1,8 +1,10 @@
+const {parse} = require('node-html-parser')
 
 function htmlToMarkdown(html_string){
   try {
     var output = html_string
-    .replace(/\\"/g,'"')
+      .replace(/\\"/g,'"')
+      .replace(/[\w|-]+=".+?"/g,'')
       .replace(/class=".+?"/g,'')
       .replace(/ >/g,'>')
       .replace(/style=".+?"/g,'')

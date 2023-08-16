@@ -7,6 +7,7 @@ services:
     volumes:
       - ./jobsdb-link-extractor/src:/app
       - ./volumes/jobsdb-link-extractor/screenshot:/share/screenshot
+      - ./volumes/jobsdb-link-extractor:/share
     working_dir: /app
     depends_on:
       link-extractor-chrome:

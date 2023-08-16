@@ -17,11 +17,12 @@ router.post('/', async (req, res) => {
     const { post_id } = req_body;
 
     var working_dir = `/share/${post_id}`;
+    console.log(`writing to ${working_dir}...`)
     await createDirIfNotExists(working_dir);
     await storeJson(`${working_dir}/extract_result.json`, req_body);
 
     machine.context = { ...req_body, working_dir };
-    await machine.extractDone();
+    // await machine.extractDone();
 
     output = { ...output, state: 'success' };
   } catch (error) {

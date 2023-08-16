@@ -8,6 +8,7 @@ const puppeteer = require('puppeteer-core');
 
 const express = require('express');
 const { postResult } = require('../util/postResult');
+const { htmlToMarkdown } = require('./htmlToMarkdown');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -95,21 +96,26 @@ router.post('/', async (req, res) => {
       jobDescription = jobDescription.replace(/\n+/g, '\n');
       jobDescription = jobDescription.replace(/ /g, ' ');
 
+      var _jobDescriptionMd = htmlToMarkdown(_jobDescriptionRaw)
+      fs.writeFileSync('/share/screenshot/hello-html.html',_jobDescriptionRaw, {encoding:'utf8'})
+      fs.writeFileSync('/share/screenshot/hello-md.md',_jobDescriptionMd, {encoding:'utf8'})
+
       var screenshot_path = `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`;
       await jobPage.screenshot({ path: screenshot_path, fullPage: true });
 
       var extracted = {
         post_id,
-        jobTitle,
-        companyName,
-        _jobDetailsHeaderRawHTML,
-        _jobDescriptionRaw,
         __jobDescriptionRawProcessed,
         _debugList,
+        _jobDescriptionMd,
+        _jobDescriptionRaw,
+        _jobDetailsHeaderRawHTML,
+        companyName,
         jobAddress,
-        postDate,
-        jobHighlight,
         jobDescription,
+        jobHighlight,
+        jobTitle,
+        postDate,
       };
 
       output = { ...output, state: 'extract_done', extracted };
