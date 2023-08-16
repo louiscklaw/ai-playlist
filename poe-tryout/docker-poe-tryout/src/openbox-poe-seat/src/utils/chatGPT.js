@@ -1,5 +1,9 @@
 var assert = require('chai').assert;
 
+async function botCooldown(time_s, page) {
+  await page.waitForTimeout(time_s * 1000);
+}
+
 async function initChatGptPage(page) {
   await page.goto('https://poe.com/ChatGPT');
   return 'init ChatGPT page';

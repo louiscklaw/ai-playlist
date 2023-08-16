@@ -5,7 +5,7 @@ const SAMPLE_PREPROMPTS = [
   `
 I will input the summary of the position, 
 can you draft me a cover letter ? 
-Please try to make it in less than 100 words.
+Please try to make your summary in less than 100 words.
 `.trim(),
   `
 Louislabs company is hiring a validation engineer. 

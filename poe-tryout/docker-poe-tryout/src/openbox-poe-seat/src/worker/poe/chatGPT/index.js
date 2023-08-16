@@ -42,6 +42,15 @@ function getNMinutesLater(n_minute = 0) {
   console.log(hours + ':' + minutes);
 }
 
+async function gptBotCooldown(time_s, page) {
+  try {
+    await page.waitForTimeout(time_s * 1000);
+  } catch (error) {
+    console.log('error during gptBotCooldown')
+    throw error
+  }
+}
+
 async function chatGPTSolver(question_list, preprompts = []) {
   var chat_history = { preprompts: [], history: [] };
   var answer_idx = -1;
@@ -62,7 +71,10 @@ async function chatGPTSolver(question_list, preprompts = []) {
 
         var answer = await questionAndAnswer(page, question, answer_idx);
         chat_history.preprompts.push({ question, answer });
-        await page.waitForTimeout(getRandomSecond(5, 15) * 1000);
+        
+        // TODO: remove this
+        // await page.waitForTimeout(getRandomSecond(5, 15) * 1000);
+        await gptBotCooldown(getRandomSecond(5, 15),page)
       }
     }
 
@@ -72,7 +84,10 @@ async function chatGPTSolver(question_list, preprompts = []) {
 
       var answer = await questionAndAnswer(page, question, answer_idx);
       chat_history.history.push({ question, answer });
-      await page.waitForTimeout(getRandomSecond(5, 10) * 1000);
+
+      // TODO: remove this
+      // await page.waitForTimeout(getRandomSecond(5, 15) * 1000);
+      await gptBotCooldown(getRandomSecond(5, 15),page)
     }
 
     await browser.close();

@@ -7,9 +7,26 @@ const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 const { writeOutputToDB } = require('../utils/writeOutputToDB');
 const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
 const { mySleep } = require('../utils/mySleep');
+const { mySleepM } = require('../utils/mySleepM');
+
+console.log('poe Queue init');
+
+function getRandomPoeEndpoint() {
+  try {
+    // http://openbox-poe-seat1:3000
+    var random_openbox_host = getRandomOpenboxHost();
+    const gpt_endpoint = `http://${random_openbox_host}:3000`;
+    
+    return {random_openbox_host, gpt_endpoint};
+  } catch (error) {
+    console.log('error geting random poe endpoint, return default poe-seat')
+    console.log(error)
+    return 'http://openbox-poe-seat1:3000'
+  }
+}
+
 
 module.exports = Queue => {
-  console.log('poe Queue init');
 
   Queue.process('poe', 1, async function (job, done) {
     try {
@@ -18,23 +35,24 @@ module.exports = Queue => {
       // const new_job_post_id = jobs_id;
       // var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
 
+      // NOTE: collect input
       const { data } = job;
-      var res_json = {};
       const { working_dir, preprompts, question_list, callback_url } = data;
-      const gpt_payload = { preprompts, question_list };
 
-      // // // http://openbox-firefox:3000/test1
-      var random_openbox_host = getRandomOpenboxHost();
-      const gpt_endpoint = `http://${random_openbox_host}:3000`;
-      console.log({ random_openbox_host, gpt_endpoint, callback_url });
+      const gpt_payload = { preprompts, question_list };
+      const {random_openbox_host, gpt_endpoint} = getRandomPoeEndpoint();
+
+      // NOTE: log input
+      console.log({ random_openbox_host, gpt_endpoint, data, gpt_payload });
+
 
       // NOTE: ask poe start
-      var chatgpt_summarize_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
+      var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
         method: 'post',
         body: JSON.stringify(gpt_payload),
         headers: { 'Content-Type': 'application/json' },
       });
-      var chatgpt_summarize_result_json = await chatgpt_summarize_result.json();
+      var chatgpt_summarize_result_json = await poe_result.json();
       chatgpt_summarize_result_json = { ...chatgpt_summarize_result_json, working_dir };
 
       if (callback_url) {
@@ -49,6 +67,7 @@ module.exports = Queue => {
         console.log('no callback url provided, quitting');
       }
 
+      // TODO: remove me ??
       // // NOTE: asking should be completed before this line
       // console.log('calling done url', url_after_done);
       // var done_result = await fetch(url_after_done, {
@@ -67,10 +86,11 @@ module.exports = Queue => {
       // var res_json = await writeOutputToDB(new_job_post_id, update_job_state_payload);
 
       // // NOTE: successful ask, cool down bot for slething
-      // await mySleep(1 * 60 * 1000);
-      // console.log('cooldown bot done');
 
-      done(null, { deliveredAt: new Date(), res_json, data });
+      await mySleepM(3);
+      console.log('cooldown bot done');
+
+      done(null, { deliveredAt: new Date(),  data });
     } catch (error) {
       if (error.code == 'ECONNREFUSED' && error.message.indexOf('openbox-firefox') > -1) {
         done(new Error('the openbox-firefox server is not already, schedule retry'));
@@ -78,28 +98,27 @@ module.exports = Queue => {
         console.log({ error });
         done(new Error(error.message));
       }
-    } finally {
     }
   });
 
   //listen on scheduler errors
   Queue.on('schedule error', function (error) {
-    //handle all scheduling errors here
+    try {
+          //handle all scheduling errors here
     console.log('schedule error');
     console.log(error);
+    } catch (err) {
+      
+    }
   });
 
   //listen on success scheduling
   Queue.on('schedule success', function (job) {
-    //a highly recommended place to attach
-    //job instance level events listeners
-
+    // NOTE: a highly recommended place to attach job instance level events listeners
+      
     // console.log({ QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
-      console.log({
-        state: 'Queue schedule success',
-        QueueInactiveCount: count,
-      });
+      console.log({ state: 'Queue schedule success', QueueInactiveCount: count, });
     });
 
     job
@@ -119,5 +138,6 @@ module.exports = Queue => {
       .on('progress', function (progress, data) {
         console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
       });
+
   });
 };

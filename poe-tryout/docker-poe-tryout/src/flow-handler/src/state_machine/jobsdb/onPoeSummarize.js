@@ -32,15 +32,20 @@ module.exports = {
 
         const url = 'http://flow-handler:3000/jobsdb_draft_email';
         const SAMPLE_PREPROMPTS = [
-          'Forget everything and start a new talk.',
-          `
+'Forget everything and start a new talk.',
+`
 I will input the summary of the position, please try to analyze it.
-Please try to make it in less than 100 words.
+Please try to make your summary in less than 100 words.
 `.trim(),
           job_summary,
         ];
 
-        const SAMPLE_QUESTIONS = ['can you draft me a cover letter ? Thanks.'];
+        const SAMPLE_QUESTIONS = [
+`
+can you draft me a cover letter ? Thanks. 
+please try to make it in less than 100 words
+`.trim()
+];
 
         var input_to_draft_email = {
           working_dir,
