@@ -17,6 +17,7 @@
     "javascript-state-machine": "^3.1.0",
     "method-override": "^3.0.0",
     "node-fetch": "^2.6.12",
+    "valid-url": "^1.0.9",
     "winston": "^3.10.0"
   },
   "devDependencies": {

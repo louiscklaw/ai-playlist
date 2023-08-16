@@ -4,9 +4,10 @@ set -ex
 
 docker compose \
   -f ./docker-compose.gen \
-  logs -f  
+  logs -f diff-handler  flow-handler jobsdb-link-extractor poe-scheduler-api
+
+  # 
   # diff-handler jobsdb-link-extractor
-  
   #  bait jobsdb-link-extractor openbox-poe-seat1  flow-handler
   # bait jobsdb-link-extractor openbox-poe-seat1 poe-scheduler-api flow-handler
   # flow-handler 

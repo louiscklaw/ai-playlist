@@ -4,4 +4,4 @@ set -ex
 
 docker compose \
   -f ./docker-compose.gen \
-  restart
+  restart redis

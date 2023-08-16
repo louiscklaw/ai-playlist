@@ -11,7 +11,9 @@ function fetchPost(url, json_body) {
 }
 
 function postJobsdbLinkExtract(json_body) {
-  console.log(json_body);
+  console.log('postJobsdbLinkExtract')
+  console.log({json_body});
+  // return ;
   return fetchPost(`http://flow-handler:3000/jobsdb_link_extract`, json_body);
 }
 

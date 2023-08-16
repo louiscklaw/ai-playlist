@@ -151,6 +151,9 @@ services:
       link-extractor-chrome:
         condition: service_started
         required: true
+      poe-scheduler-api:
+        condition: service_started
+        required: true
     networks:
       default: null
     ports:
@@ -196,6 +199,11 @@ services:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor/screenshot
       target: /share/screenshot
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor
+      target: /share
       bind:
         create_host_path: true
     working_dir: /app
@@ -287,12 +295,12 @@ services:
         create_host_path: true
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/firefox-user-data
-      target: /share/firefox-user-data
+      target: /workspace/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/chrome-user-data
-      target: /share/chrome-user-data
+      target: /workspace/chrome-user-data
       bind:
         create_host_path: true
     - type: bind
@@ -335,12 +343,12 @@ services:
         create_host_path: true
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/firefox-user-data
-      target: /share/firefox-user-data
+      target: /workspace/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/chrome-user-data
-      target: /share/chrome-user-data
+      target: /workspace/chrome-user-data
       bind:
         create_host_path: true
     - type: bind
@@ -358,9 +366,6 @@ services:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
       dockerfile: Dockerfile
     depends_on:
-      mongo:
-        condition: service_started
-        required: true
       redis:
         condition: service_started
         required: true
@@ -371,6 +376,7 @@ services:
       target: 3002
       published: "3002"
       protocol: tcp
+    restart: unless-stopped
     volumes:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
@@ -394,7 +400,7 @@ services:
       target: 6379
       published: "6379"
       protocol: tcp
-    restart: always
+    restart: unless-stopped
     volumes:
     - type: bind
       source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/etc/redis
@@ -415,7 +421,7 @@ services:
       target: 8001
       published: "8001"
       protocol: tcp
-    restart: always
+    restart: unless-stopped
     volumes:
     - type: volume
       source: redisinsight_store

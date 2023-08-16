@@ -1,4 +1,5 @@
 'use strict';
+var validUrl = require('valid-url');
 
 const { SRC_ROOT, BROWSERLESS_HOST, SCREENSHOT_ROOT } = require('../config');
 
@@ -29,6 +30,8 @@ router.post('/', async (req, res) => {
       const req_body = req.body;
       const { url } = req_body;
       console.log({ url });
+
+      if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`)
 
       const post_id = url.replace('.html', '').split('-').pop();
       if (!post_id) throw new Error('post_id is required');

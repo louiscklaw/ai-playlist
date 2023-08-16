@@ -16,7 +16,8 @@
     "express": "^4.18.2",
     "node-fetch": "^2.6.12",
     "node-html-parser": "^6.1.5",
-    "puppeteer-core": "*"
+    "puppeteer-core": "*",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

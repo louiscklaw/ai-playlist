@@ -1,3 +1,5 @@
+var validUrl = require('valid-url');
+
 const { postJobsdbPostExtract } = require('../../utils/fetchPost');
 
 module.exports = {
@@ -9,6 +11,13 @@ module.exports = {
         console.log(this.context);
         var { req_body } = this.context;
         var { jobsdb_job_url, callback_url } = req_body;
+
+        if (validUrl.isUri(jobsdb_job_url)){
+          // NOTE: url checking pass
+        } else {
+            throw new Error(`invalid url ${jobsdb_job_url}`);
+        }
+      
 
         var result = await postJobsdbPostExtract({
           url: jobsdb_job_url,
