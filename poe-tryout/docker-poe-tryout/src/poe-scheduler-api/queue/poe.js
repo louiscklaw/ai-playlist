@@ -65,7 +65,7 @@ module.exports = Queue => {
       } else {
         console.log({ chatgpt_summarize_result_json });
         const {chat_history }= chatgpt_summarize_result_json
-        console.log({ chat_history });
+        console.log(chat_history.q_and_a.history);
         console.log('no callback url provided, showing here');
       }
 
