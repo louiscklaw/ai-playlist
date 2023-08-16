@@ -11,7 +11,8 @@ module.exports = {
 
     return new Promise(async (res, rej) => {
       try {
-        const { working_dir, jobTitle, companyName, jobAddress, postDate, jobHighlight, jobDescription } = this.context;
+        const { working_dir, jobTitle, companyName, jobAddress, postDate, jobHighlight, jobDescription, 
+          _jobDescriptionMd } = this.context;
 
         var input_to_summarize = {
           working_dir,
@@ -28,8 +29,10 @@ job addess: ${jobAddress}
 post date: ${postDate}
 job highlight: ${jobHighlight}
 
-job description: 
-${jobDescription}
+job description (markdown):
+\`\`\`
+${_jobDescriptionMd}
+\`\`\`
 `.trim(),
           ],
           callback_url: 'http://flow-handler:3000/jobsdb_flow_summarize_cb',
