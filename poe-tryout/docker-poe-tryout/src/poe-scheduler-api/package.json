@@ -19,7 +19,8 @@
     "express-restify-mongoose": "^7.0.2",
     "kue-scheduler": "^0.10.15",
     "method-override": "^3.0.0",
-    "node-fetch": "^2.6.12"
+    "node-fetch": "^2.6.12",
+    "node-html-parser": "^6.1.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

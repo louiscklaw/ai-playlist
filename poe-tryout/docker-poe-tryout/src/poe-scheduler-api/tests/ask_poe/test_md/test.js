@@ -1,23 +1,20 @@
 const fetch = require('node-fetch');
+const fs = require('fs');
+const { htmlToMarkdown } = require('../../../utils/htmlToMarkdown');
 
-const markdown_content = 
-`
-# Hi, i am louis
-## This is the food i love:
 
-- apple
-- orange
-- banana
+const doc  = fs.readFileSync(
+  'example.html', 
+  {encoding: 'utf8'}
+  )
 
-## This is the food i hate:
+  const markdown_content = htmlToMarkdown(doc)
 
-- pear
-- grape
-`.trim()
+
 
 const body = {
   preprompts: [
-    "I will send you a mark down, please try to understand it. please try to make your answer in less than 10 words."
+    "I will send you a mark down, please try to summarize it. please try to make your answer in less than 10 words."
   ],
   question_list: [
 `
