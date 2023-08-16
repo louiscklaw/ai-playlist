@@ -20,7 +20,7 @@ module.exports = {
           question_list: [
             `
 I will pass you a job advertisement, 
-please try to summarize it in around 100 words
+please try to summarize it in around 200 words.
 `.trim(),
             `
 company name: ${companyName}
