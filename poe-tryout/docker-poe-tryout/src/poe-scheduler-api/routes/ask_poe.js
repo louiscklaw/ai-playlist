@@ -7,17 +7,16 @@ const { STATE_INIT, STATE_SCHEDULED } = require('../constants/states');
 const { Queue } = require('../queue');
 
 router.post('/', async (req, res) => {
-  var output = {};
   var state = STATE_INIT;
-  var err_msg = {};
+  var output = {state, error:{}};
 
   try {
     console.log(`/${__filename}`);
     const req_body = req.body;
     const { working_dir, preprompts, question_list, callback_url } = req_body;
 
-    // //prepare a job to perform
-    // //dont save it
+    //prepare a job to perform
+    //dont save it
     var job = Queue.createJob('poe', {
       working_dir,
       preprompts,
@@ -29,13 +28,13 @@ router.post('/', async (req, res) => {
       .priority('normal');
 
     Queue.now(job);
-    state = STATE_SCHEDULED;
+    output = {...output, state:STATE_SCHEDULED}
+
   } catch (error) {
-    state = ERROR_ADDING_QUEUE;
-    err_msg = error;
-  } finally {
-    res.send({ state, err_msg });
-  }
+    output = {...output, state: ERROR_ADDING_QUEUE, error}
+  } 
+  
+  res.send(output);
 });
 
 module.exports = router;
