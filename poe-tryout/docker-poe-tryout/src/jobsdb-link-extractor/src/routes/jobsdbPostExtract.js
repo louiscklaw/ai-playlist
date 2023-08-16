@@ -78,13 +78,22 @@ router.post('/', async (req, res) => {
         ).textContent;
         return title;
       });
-      var jobDescription = await jobPage.evaluate(() => {
-        const description = document.querySelector('div[data-automation="jobDescription"]').textContent;
-        return description;
+      var {description, _jobDescriptionRaw, __jobDescriptionRawProcessed} = await jobPage.evaluate(() => {
+        const _jobDescriptionRaw = document.querySelector('div[data-automation="jobDescription"]').outerHTML;
+
+        var __jobDescriptionRawProcessed = _jobDescriptionRaw.replace(/<\/[p|h1|h2|b]>/g,'{{this_should_be_a_newline}}</p>');
+        var html = document.createElement('html');
+        html.innerHTML = __jobDescriptionRawProcessed;
+        const description = html.textContent;
+
+        return {description, _jobDescriptionRaw, __jobDescriptionRawProcessed};
       });
       // NOTE: string_cleaning_test.js
+      var jobDescription = description;
+      jobDescription = jobDescription.replace(/{{this_should_be_a_newline}}/g, '\n');
       jobDescription = jobDescription.replace(/\n +/g, '\n');
       jobDescription = jobDescription.replace(/\n+/g, '\n');
+      jobDescription = jobDescription.replace(/ /g, ' ');
 
       var screenshot_path = `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`;
       await jobPage.screenshot({ path: screenshot_path, fullPage: true });
@@ -94,6 +103,8 @@ router.post('/', async (req, res) => {
         jobTitle,
         companyName,
         _jobDetailsHeaderRawHTML,
+        _jobDescriptionRaw,
+        __jobDescriptionRawProcessed,
         _debugList,
         jobAddress,
         postDate,
