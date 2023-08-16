@@ -19,7 +19,7 @@ module.exports = {
           preprompts: SAMPLE_PREPROMPTS,
           question_list: [
             `
-I will input a job advertisement, 
+I will pass you a job advertisement, 
 please try to summarize it in around 100 words
 `.trim(),
             `
