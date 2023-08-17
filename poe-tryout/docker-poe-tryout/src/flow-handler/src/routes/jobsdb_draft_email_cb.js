@@ -29,11 +29,12 @@ router.post('/', async (req, res) => {
     var machine = new jobsdbPoeDraftEmailCbMachine();
     machine.context = req_body;
 
-    await machine.onPoeDraftEmailDone();
+    await machine.poeDraftEmailDone();
 
     // NOTE: current store result is the end,
     // so no further processing is required
-    await machine.onStoreResult();
+    await machine.storeResult();
+    await machine.reportJobComplete();
 
     output = {...output, state:'done'}
   } catch (error) {

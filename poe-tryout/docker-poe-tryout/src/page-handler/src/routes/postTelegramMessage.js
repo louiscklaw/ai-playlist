@@ -1,3 +1,4 @@
+const axios = require('axios');
 const TG = require('telegram-bot-api')
 
 const express = require('express');
@@ -23,8 +24,9 @@ router.post('/',async (req, res) => {
     await api.sendMessage({
         chat_id: TELEGRAM_CHAT_ID,
         text,
+        parse_mode: 'MarkdownV2'
     })
-  
+
     output = {...output, state:SEND_MESSAGE_DONE, debug: req.body}
     res.send(output);
   } catch (error) {
