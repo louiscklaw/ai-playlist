@@ -13,7 +13,7 @@
     "docker_test":"cd src && ./scripts/dc_test.sh",
     "gU": "git add . && git commit -m\"update docker-poe-tryout,\"",
     "update_readme": "github-markdown README.md > docs/index.html",
-    "tidy":"npx prettier --write **/*.js"
+    "tidy":"sleep 1 && npx prettier --write **/*.js"
   },
   "keywords": [],
   "author": "",
