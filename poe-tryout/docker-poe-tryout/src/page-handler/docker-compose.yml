@@ -10,3 +10,5 @@ services:
     working_dir: /app
     ports:
       - 3061:3000
+    env_file: ./.env
+    
