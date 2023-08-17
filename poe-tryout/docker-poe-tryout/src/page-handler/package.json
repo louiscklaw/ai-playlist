@@ -1,0 +1,13 @@
+{
+  "name": "page-handler",
+  "version": "1.0.0",
+  "description": "https://hk.jobsdb.com/hk/en/job/quality-engineer-100003010347214 https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gitUpdate":"git add . && git commit -m\"update page-handler,\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
