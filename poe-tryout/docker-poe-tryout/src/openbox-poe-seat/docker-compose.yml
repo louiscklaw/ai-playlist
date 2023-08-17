@@ -28,6 +28,7 @@ services:
   openbox-poe-seat1:
     image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat1
+    shm_size: "1gb"
     ports:
       - 6081:6080
       - 3021:3000
@@ -58,6 +59,7 @@ services:
   openbox-poe-seat2:
     image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat2
+    shm_size: "1gb"
     ports:
       - 6082:6080
       - 3022:3000
