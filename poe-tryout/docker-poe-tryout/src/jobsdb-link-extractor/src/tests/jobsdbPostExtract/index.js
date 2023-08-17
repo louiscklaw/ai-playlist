@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const urls = ['https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868'];
+const urls = ['https://hk.jobsdb.com/hk/en/job/validation-engineer-qa-100003010527848'];
 
 urls.map(async (v, i) => {
   console.log(`posting ask ${i}...`);
