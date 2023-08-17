@@ -6,17 +6,18 @@ const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
 function onReportJobComplete() {
     return new Promise(async (res, rej) => {
       try {
-        myLogger.info('store json result...');
+        myLogger.info('report job complete...');
         const { working_dir } = this.context;
+        myLogger.info(this.context);
         myLogger.info(working_dir);
 
-        await createDirIfNotExists(working_dir);
-        await storeJson(`${working_dir}/store_result.json`, this.context);
+        var message = `job email prepared in dir: ${working_dir}`;
+        await postTelegramMessage(message)
 
         res();
       } catch (error) {
-        myLogger.error('error during saving result...');
-        console.log(error);
+        myLogger.error('error during report job complete...');
+        myLogger.error(error.message);
 
         rej();
       }

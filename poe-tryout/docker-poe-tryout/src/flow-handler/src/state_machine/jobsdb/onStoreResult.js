@@ -7,8 +7,12 @@ module.exports = {
     return new Promise(async (res, rej) => {
       try {
         myLogger.info('store json result...');
-        const { working_dir } = this.context;
-        myLogger.info(working_dir);
+
+        var { working_dir } = this.context;
+        if (!working_dir) {
+          myLogger.info('working_dir is not defined, default to /share/testing')
+          working_dir = '/share/testing'
+        };
 
         await createDirIfNotExists(working_dir);
         await storeJson(`${working_dir}/store_result.json`, this.context);
