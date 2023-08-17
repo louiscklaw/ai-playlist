@@ -11,7 +11,7 @@
     "docker_debug":"cd src && ./scripts/dc_debug.sh",
     "docker_restart":"cd src && ./scripts/dc_restart.sh",
     "docker_test":"cd src && ./scripts/dc_test.sh",
-    "gitUpdate": "git add . && git commit -m\"update docker-poe-tryout,\"",
+    "gU": "git add . && git commit -m\"update docker-poe-tryout,\"",
     "update_readme": "github-markdown README.md > docs/index.html",
     "tidy":"npx prettier --write **/*.js"
   },
