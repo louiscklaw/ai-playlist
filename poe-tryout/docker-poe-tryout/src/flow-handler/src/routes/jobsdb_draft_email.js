@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
 
   try {
     output.state = 'start';
-    myLogger.info('receive callback from draft email ');
+    myLogger.info('init draft email ');
 
     var machine = new jobsdbPoeDraftEmailMachine();
 
