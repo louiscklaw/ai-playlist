@@ -1,3 +1,6 @@
+# ignore docker-compose.gen
+**/*.gen
+
 **/*.key
 **/.config
 **/.pki
