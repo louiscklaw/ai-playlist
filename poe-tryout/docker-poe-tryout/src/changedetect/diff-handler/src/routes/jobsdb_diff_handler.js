@@ -19,9 +19,12 @@ function getPayloadToFlowHandlerJson(diff_link) {
 }
 
 router.post('/', (req, res) => {
+  var output = { state: 'init', debug: {}, error: {} };
+
   try {
     var req_body = req.body;
-    console.log({ req_body });
+    // console.log({ req_body });
+    output = { ...output, state: 'start', debug: req_body };
 
     const json_message = req_body.message;
     const messages = json_message.split(/\n/);
@@ -34,24 +37,18 @@ router.post('/', (req, res) => {
         await postJobsdbLinkExtract(j);
       } catch (error) {
         console.log(error);
-        console.log(`error during posting to flow-handler ${j}`);
+        throw new Error(`error during posting to flow-handler ${j}`);
       }
     });
 
-    fs.writeFileSync(
-      '/share/jobsdb_diff_handler_diff.json',
-      JSON.stringify({
-        flow_handler_payloads,
-        req_body,
-      }),
-      { encoding: 'utf8' },
-    );
+    output = { ...output, state: 'done' };
   } catch (error) {
-    console.log('error during reply');
+    console.log('error occur in diff-handler');
     console.log(error);
+    output = { ...output, state: 'error', error: error.message };
   }
 
-  res.send('jobsdb_diff_handler Hello, World!');
+  res.send(output);
 });
 
 module.exports = router;
