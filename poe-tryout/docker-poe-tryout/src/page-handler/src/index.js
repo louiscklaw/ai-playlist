@@ -5,13 +5,12 @@ const bodyParser = require('body-parser');
 
 const PORT = 3000;
 
-
 try {
   const app = express();
   app.use(bodyParser.json());
 
     // app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
-  app.use('/post_helloworld', require('./routes/post_helloworld'));
+  // app.use('/post_helloworld', require('./routes/post_helloworld'));
   app.use('/helloworld', require('./routes/helloworld'));
 
   // // Start the server
