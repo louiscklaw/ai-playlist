@@ -9,22 +9,26 @@ const api = new TG({
     token: TELEGRAM_TOKEN
 })
 
+const SEND_MESSAGE_FAILED = 'SEND_MESSAGE_FAILED'
+const SEND_MESSAGE_DONE = 'SEND_MESSAGE_DONE'
+
 // https://core.telegram.org/bots/api#available-methods
 
 router.get('/',async (req, res) => {
-
-  res.send('telegramSendMessage Hello, World!');
-
+  var output = {state: 'init', debug:req.body, error:{}}
   try {
-    var result = await api.getMe()
+    // var result = await api.getMe()
     await api.sendMessage({
         chat_id: TELEGRAM_CHAT_ID,
         text: 'telegramSendMessage Hello, World!',
     })
   
-    console.log(result)
+    output = {...output, state:SEND_MESSAGE_DONE, debug: req.body}
+    res.send(output);
   } catch (error) {
     console.log(error)
+    output = {...output, state:SEND_MESSAGE_FAILED, error: error.message}
+    res.send(output)
   }
 
 });
