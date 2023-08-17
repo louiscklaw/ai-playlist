@@ -30,6 +30,6 @@ try {
 
   // app.use('/postCbHelloworld', require('./routes/postCbHelloworld'));
 } catch (error) {
-  console.log('error during init');
+  console.log('error during init poe-scheduler');
   console.log(error);
 }
