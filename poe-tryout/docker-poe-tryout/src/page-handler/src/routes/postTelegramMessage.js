@@ -1,4 +1,3 @@
-const axios = require('axios');
 const TG = require('telegram-bot-api');
 
 const express = require('express');
