@@ -33,3 +33,5 @@ services:
       - ./dbapi:/app
     depends_on:
       - mongo
+    environment:
+      - PORT=3001

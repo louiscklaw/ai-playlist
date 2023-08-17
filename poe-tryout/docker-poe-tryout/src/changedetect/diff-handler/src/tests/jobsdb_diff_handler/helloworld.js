@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const string_links = require('./string_links')
+const string_links = require('./string_links');
 
 const body = {
   version: '1.0',
@@ -31,5 +31,3 @@ Array(1)
     const res_json = await response.json();
     console.log({ res_json });
   });
-
-

@@ -29,5 +29,5 @@ var string_links = [
   '(added)    /hk/en/job/technical-officer-100003010512160?token=0~73fcbfb3-7e85-4990-b645-a0b462df2ae7§ionRank=22&jobId=jobsdb-hk-job-100003010512160',
   '(added)    /hk/en/job/validation-assistant-100003010526705?token=0~73fcbfb3-7e85-4990-b645-a0b462df2ae7§ionRank=3&jobId=jobsdb-hk-job-100003010526705',
   '(added)    /hk/en/job/validation-engineer-qa-100003010527848?token=0~73fcbfb3-7e85-4990-b645-a0b462df2ae7§ionRank=1&jobId=jobsdb-hk-job-100003010527848',
-  ].join('\n')
-module.exports = string_links
+].join('\n');
+module.exports = string_links;
