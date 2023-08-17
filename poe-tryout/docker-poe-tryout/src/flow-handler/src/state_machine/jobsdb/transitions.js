@@ -13,6 +13,8 @@ const S_STORE_JSON_DONE = 'S_STORE_JSON_DONE';
 const S_READY_DRAFT_EMAIL = 'S_READY_DRAFT_EMAIL';
 const S_READY_SUMMARIZE = 'S_READY_SUMMARIZE';
 
+const S_JOB_COMPLETE = 'S_JOB_COMPLETE';
+
 const transitions = [
   { name: 'extractJobDetail', from: S_NEW_JOB_FOUND, to: S_EXTRACTING_JOB_DETAIL },
   { name: 'extractDone', from: S_EXTRACTING_JOB_DETAIL, to: S_EXTRACTION_DONE },
@@ -29,6 +31,7 @@ const transitions = [
   { name: 'poeDraftEmailDone', from: S_DRAFTING_EMAIL, to: S_DRAFT_EMAIL_DONE },
 
   { name: 'storeResult', from: S_DRAFT_EMAIL_DONE, to: S_STORE_JSON_DONE },
+  { name: 'reportJobComplete', from: S_STORE_JSON_DONE, to: S_JOB_COMPLETE },
 ];
 
 const { onExtractJobDetail } = require('./onExtractJobDetail');
@@ -36,6 +39,7 @@ const { onExtractDone } = require('./onExtractDone');
 const { onPoeSummarize, onPoeSummarizeDone } = require('./onPoeSummarize');
 const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
 const { onStoreResult } = require('./onStoreResult');
+const { onReportJobComplete } = require('./onReportJobComplete');
 
 const { onAskPoe, onAskPoeDone } = require('./onAskPoe');
 
@@ -49,6 +53,7 @@ const methods = {
   onPoeDraftEmail,
   onPoeDraftEmailDone,
   onStoreResult,
+  onReportJobComplete,
 };
 
 module.exports = {
