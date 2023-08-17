@@ -2,7 +2,7 @@ name: src
 services:
   api-debug:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/api-debug
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/api-debug
       dockerfile: Dockerfile
     command:
     - ./entry.sh
@@ -15,24 +15,22 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/api-debug/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/api-debug/src
       target: /app
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/api-debug
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/api-debug
       target: /share
       bind:
         create_host_path: true
     working_dir: /app
   bait:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait
       dockerfile: Dockerfile
     command:
-    - npm
-    - run
-    - start
+    - ./dev.sh
     networks:
       default: null
     ports:
@@ -42,7 +40,7 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/bait/src
       target: /app
       bind:
         create_host_path: true
@@ -97,7 +95,7 @@ services:
     restart: unless-stopped
   dbapi:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
       dockerfile: Dockerfile
     depends_on:
       mongo:
@@ -112,13 +110,13 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/dbapi
       target: /app
       bind:
         create_host_path: true
   diff-handler:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/changedetect/diff-handler
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/changedetect/diff-handler
       dockerfile: Dockerfile
     command:
     - ./entry.sh
@@ -131,19 +129,19 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/changedetect/diff-handler/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/changedetect/diff-handler/src
       target: /app
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/changedetect/diff-handler
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/changedetect/diff-handler
       target: /share
       bind:
         create_host_path: true
     working_dir: /app
   flow-handler:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler
       dockerfile: Dockerfile
     command:
     - ./dev.sh
@@ -163,19 +161,19 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/flow-handler/src
       target: /app
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
       target: /share
       bind:
         create_host_path: true
     working_dir: /app
   jobsdb-link-extractor:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor
       dockerfile: Dockerfile
     command:
     - ./entry.sh
@@ -192,17 +190,17 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/jobsdb-link-extractor/src
       target: /app
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor/screenshot
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor/screenshot
       target: /share/screenshot
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/jobsdb-link-extractor
       target: /share
       bind:
         create_host_path: true
@@ -240,12 +238,12 @@ services:
       protocol: tcp
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/mongo/data/db
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/mongo/data/db
       target: /data/db
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/mongo/data/configdb
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/mongo/data/configdb
       target: /data/configdb
       bind:
         create_host_path: true
@@ -268,6 +266,8 @@ services:
   openbox-poe-seat1:
     container_name: openbox-poe-seat1
     environment:
+      CHROME_DATA_DIR: /workspace/chrome-user-data
+      FIREFOX_DATA_DIR: /workspace/firefox-user-data
       TZ: Asia/Hong_Kong
     image: logickee/openbox-poe-seat
     networks:
@@ -294,28 +294,30 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/firefox-user-data
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/firefox-user-data
       target: /workspace/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/chrome-user-data
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat1/chrome-user-data
       target: /workspace/chrome-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
       target: /share
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-poe-seat/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-poe-seat/src
       target: /app
       bind:
         create_host_path: true
   openbox-poe-seat2:
     container_name: openbox-poe-seat2
     environment:
+      CHROME_DATA_DIR: /workspace/chrome-user-data
+      FIREFOX_DATA_DIR: /workspace/firefox-user-data
       TZ: Asia/Hong_Kong
     image: logickee/openbox-poe-seat
     networks:
@@ -342,28 +344,28 @@ services:
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/firefox-user-data
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/firefox-user-data
       target: /workspace/firefox-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/chrome-user-data
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/openbox-poe-seat2/chrome-user-data
       target: /workspace/chrome-user-data
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share/_output
       target: /share
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-poe-seat/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-poe-seat/src
       target: /app
       bind:
         create_host_path: true
   poe-scheduler-api:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
       dockerfile: Dockerfile
     depends_on:
       redis:
@@ -379,12 +381,12 @@ services:
     restart: unless-stopped
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api
       target: /app
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
       target: /share
       bind:
         create_host_path: true
@@ -403,12 +405,12 @@ services:
     restart: unless-stopped
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/etc/redis
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/etc/redis
       target: /etc/redis
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/data
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/redis/data
       target: /data
       bind:
         create_host_path: true
@@ -429,7 +431,7 @@ services:
       volume: {}
   static-share:
     build:
-      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/static-share
+      context: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/static-share
       dockerfile: Dockerfile
     command:
     - ./entry.sh
@@ -443,12 +445,12 @@ services:
     user: 1000:1000
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/static-share
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/static-share
       target: /app
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/static-share
       target: /share
       bind:
         create_host_path: true
@@ -466,7 +468,7 @@ services:
       default: null
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src
       target: /src
       bind:
         create_host_path: true
@@ -499,23 +501,23 @@ services:
     restart: unless-stopped
     volumes:
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/lib/modules
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/lib/modules
       target: /lib/modules
       read_only: true
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/resolv.conf
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/resolv.conf
       target: /etc/resolv.conf
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/v2raya
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/etc/v2raya
       target: /etc/v2raya
       bind:
         create_host_path: true
     - type: bind
-      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/tmp/v2raya.log
+      source: /home/logic/_workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/v2raya/tmp/v2raya.log
       target: /tmp/v2raya.log
       bind:
         create_host_path: true

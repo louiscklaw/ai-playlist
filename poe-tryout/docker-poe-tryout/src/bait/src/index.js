@@ -5,7 +5,8 @@ const PORT = 8080;
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-
+try {
+  
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -19,3 +20,8 @@ app.listen(PORT, () => {
 });
 
 // app.use('/postCbHelloworld', require('./routes/postCbHelloworld'));
+
+} catch (error) {
+  console.log('error during init')
+  console.log(error)  
+}

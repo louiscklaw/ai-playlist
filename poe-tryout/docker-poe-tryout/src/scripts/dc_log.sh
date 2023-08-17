@@ -4,7 +4,11 @@ set -ex
 
 docker compose \
   -f ./docker-compose.gen \
-  logs -f diff-handler  flow-handler jobsdb-link-extractor poe-scheduler-api
+  logs -f 
+  # jobsdb-link-extractor
+  # redis
+  # diff-handler
+  # bait
 
   # 
   # diff-handler jobsdb-link-extractor

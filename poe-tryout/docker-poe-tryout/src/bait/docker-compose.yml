@@ -6,4 +6,4 @@ services:
     working_dir: /app
     ports:
       - 18089:8080
-    command: npm run start
+    command: ./dev.sh

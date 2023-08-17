@@ -50,6 +50,9 @@ services:
       - "./openbox-poe-seat/src:/app"
     environment:
       - TZ=Asia/Hong_Kong
+      - FIREFOX_DATA_DIR=/workspace/firefox-user-data
+      - CHROME_DATA_DIR=/workspace/chrome-user-data
+
     # command: sleep infinity
 
   openbox-poe-seat2:
@@ -77,5 +80,5 @@ services:
       - "./openbox-poe-seat/src:/app"
     environment:
       - TZ=Asia/Hong_Kong
-    # command: sleep infinity
-    
+      - FIREFOX_DATA_DIR=/workspace/firefox-user-data
+      - CHROME_DATA_DIR=/workspace/chrome-user-data
