@@ -4,7 +4,7 @@ const { postJobsdbLinkExtract } = require('../util/postJobsdbLinkExtract');
 const express = require('express');
 const router = express.Router();
 
-const { getAddedLink } = require('./getAddedLink');
+const { getAddedLink } = require('../util/getAddedLink');
 
 function getPayloadToFlowHandlerJson(diff_link) {
   try {
