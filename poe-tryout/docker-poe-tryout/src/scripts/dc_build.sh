@@ -38,7 +38,8 @@ docker compose $YML_S pull
 # NOTE: making of logickee/openbox-poe-seat
 if [[ -v DOCKER_DEV ]]; then
   cd ./openbox-poe-seat
-    ./build_docker.sh
+    echo 'skip building save time... '
+    # ./build_docker.sh
   cd -
 fi
 
