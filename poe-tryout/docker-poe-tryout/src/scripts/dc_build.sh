@@ -29,6 +29,13 @@ if [[ -v DOCKER_DEV ]]; then
   $YML_S
   -f ./docker-compose.dev.yml
   "
+else
+  echo 
+  echo 
+  echo -e "\033[31m USING PROD DOCKER COMPOSE CONFIG !!! \033[0m"
+  echo 
+  echo 
+  read -p "Press Enter to continue..."
 fi
 
 set -ex

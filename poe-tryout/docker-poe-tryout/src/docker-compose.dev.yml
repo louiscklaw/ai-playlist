@@ -5,3 +5,15 @@
 services:
   flow-handler:
     command: ./dev.sh
+  bait:
+    command: ./dev.sh
+  diff-handler:
+    command: ./dev.sh
+  flow-handler:
+    command: ./dev.sh
+  jobsdb-link-extractor:
+    command: ./dev.sh
+  page-handler:
+    command: ./dev.sh
+  static-share:
+    command: ./dev.sh

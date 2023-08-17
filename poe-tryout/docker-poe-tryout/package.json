@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docker_rebuild": "cd src && ./dc_build.sh",
+    "docker_prod": "cd src && ./scripts/dc_build.sh",
     "docker_dev": "cd src && DOCKER_DEV=true ./scripts/dc_build.sh",
     "docker_log":"cd src && ./scripts/dc_log.sh",
     "docker_debug":"cd src && ./scripts/dc_debug.sh",
