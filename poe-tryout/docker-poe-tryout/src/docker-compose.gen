@@ -363,6 +363,31 @@ services:
       target: /app
       bind:
         create_host_path: true
+  page-handler:
+    build:
+      context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/page-handler
+      dockerfile: Dockerfile
+    command:
+    - ./entry.sh
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3061"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/page-handler/src
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/volumes/page-handler
+      target: /share
+      bind:
+        create_host_path: true
+    working_dir: /app
   poe-scheduler-api:
     build:
       context: /workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/poe-scheduler-api

@@ -1,0 +1,12 @@
+services:
+  page-handler:
+    build: ./page-handler
+    # image: ubuntu:latest
+    command: ./entry.sh
+    # command: sleep infinity
+    volumes:
+      - ./page-handler/src:/app
+      - ./volumes/page-handler:/share
+    working_dir: /app
+    ports:
+      - 3061:3000

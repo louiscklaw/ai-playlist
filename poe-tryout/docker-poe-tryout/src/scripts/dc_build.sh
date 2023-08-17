@@ -13,6 +13,7 @@ YML_S='
 -f ./openbox-poe-seat/docker-compose.yml
 -f ./poe-scheduler-api/docker-compose.yml
 -f ./static-share/docker-compose.yml
+-f ./page-handler/docker-compose.yml
 -f ./v2raya/docker-compose.yml
 '
 
