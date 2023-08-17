@@ -1,4 +1,4 @@
-# ignore docker-compose.gen
+# ignore docker-compose.gen, avoid leak by environment variable
 **/*.gen
 
 **/*.key
