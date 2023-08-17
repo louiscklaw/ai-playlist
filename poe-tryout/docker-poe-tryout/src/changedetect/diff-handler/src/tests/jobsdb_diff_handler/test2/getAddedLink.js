@@ -1,10 +1,11 @@
-function getAddedLink(in_string){
-  const temp = in_string.split('\n')
+function getAddedLink(in_string) {
+  const temp = in_string
+    .split('\n')
     .filter(m => m != '')
     .filter(s => s.search(/(into|added)/g) > -1)
-    .map(m => m.replace(/\((into|added)\) /g,'').trim())
+    .map(m => m.replace(/\((into|added)\) /g, '').trim());
 
-  return temp
+  return temp;
 }
 
-module.exports = {getAddedLink}
+module.exports = { getAddedLink };

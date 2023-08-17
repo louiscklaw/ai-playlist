@@ -12,12 +12,11 @@ module.exports = {
         var { req_body } = this.context;
         var { jobsdb_job_url, callback_url } = req_body;
 
-        if (validUrl.isUri(jobsdb_job_url)){
+        if (validUrl.isUri(jobsdb_job_url)) {
           // NOTE: url checking pass
         } else {
-            throw new Error(`invalid url ${jobsdb_job_url}`);
+          throw new Error(`invalid url ${jobsdb_job_url}`);
         }
-      
 
         var result = await postJobsdbPostExtract({
           url: jobsdb_job_url,

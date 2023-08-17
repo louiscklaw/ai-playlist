@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
       const { url } = req_body;
       console.log({ url });
 
-      if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`)
+      if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`);
 
       const post_id = url.replace('.html', '').split('-').pop();
       if (!post_id) throw new Error('post_id is required');
@@ -82,15 +82,18 @@ router.post('/', async (req, res) => {
         ).textContent;
         return title;
       });
-      var {description, _jobDescriptionRaw, __jobDescriptionRawProcessed} = await jobPage.evaluate(() => {
+      var { description, _jobDescriptionRaw, __jobDescriptionRawProcessed } = await jobPage.evaluate(() => {
         const _jobDescriptionRaw = document.querySelector('div[data-automation="jobDescription"]').outerHTML;
 
-        var __jobDescriptionRawProcessed = _jobDescriptionRaw.replace(/<\/[p|h1|h2|b]>/g,'{{this_should_be_a_newline}}</p>');
+        var __jobDescriptionRawProcessed = _jobDescriptionRaw.replace(
+          /<\/[p|h1|h2|b]>/g,
+          '{{this_should_be_a_newline}}</p>',
+        );
         var html = document.createElement('html');
         html.innerHTML = __jobDescriptionRawProcessed;
         const description = html.textContent;
 
-        return {description, _jobDescriptionRaw, __jobDescriptionRawProcessed};
+        return { description, _jobDescriptionRaw, __jobDescriptionRawProcessed };
       });
       // NOTE: string_cleaning_test.js
       var jobDescription = description;
@@ -99,9 +102,9 @@ router.post('/', async (req, res) => {
       jobDescription = jobDescription.replace(/\n+/g, '\n');
       jobDescription = jobDescription.replace(/ /g, ' ');
 
-      var _jobDescriptionMd = htmlToMarkdown(_jobDescriptionRaw)
-      fs.writeFileSync('/share/screenshot/hello-html.html',_jobDescriptionRaw, {encoding:'utf8'})
-      fs.writeFileSync('/share/screenshot/hello-md.md',_jobDescriptionMd, {encoding:'utf8'})
+      var _jobDescriptionMd = htmlToMarkdown(_jobDescriptionRaw);
+      fs.writeFileSync('/share/screenshot/hello-html.html', _jobDescriptionRaw, { encoding: 'utf8' });
+      fs.writeFileSync('/share/screenshot/hello-md.md', _jobDescriptionMd, { encoding: 'utf8' });
 
       var screenshot_path = `${SCREENSHOT_ROOT}/jobsdb_${post_id}.png`;
       await jobPage.screenshot({ path: screenshot_path, fullPage: true });

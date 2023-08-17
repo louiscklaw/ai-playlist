@@ -8,7 +8,7 @@ const { Queue } = require('../queue');
 
 router.post('/', async (req, res) => {
   var state = STATE_INIT;
-  var output = {state, error:{}};
+  var output = { state, error: {} };
 
   try {
     console.log(`/${__filename}`);
@@ -28,12 +28,11 @@ router.post('/', async (req, res) => {
       .priority('normal');
 
     Queue.now(job);
-    output = {...output, state:STATE_SCHEDULED}
-
+    output = { ...output, state: STATE_SCHEDULED };
   } catch (error) {
-    output = {...output, state: ERROR_ADDING_QUEUE, error}
-  } 
-  
+    output = { ...output, state: ERROR_ADDING_QUEUE, error };
+  }
+
   res.send(output);
 });
 

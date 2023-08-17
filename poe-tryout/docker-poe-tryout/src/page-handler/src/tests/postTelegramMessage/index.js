@@ -9,10 +9,10 @@ Array(1)
   .forEach(async (v, i) => {
     console.log(`post-telegram-message page-handler ${i}...`);
 
-    const response = await fetch('http://page-handler:3000/post-telegram-message',{
-      method:'post',
+    const response = await fetch('http://page-handler:3000/post-telegram-message', {
+      method: 'post',
       body: JSON.stringify(payload),
-      headers: {'content-type': 'application/json'}
+      headers: { 'content-type': 'application/json' },
     });
 
     const res_json = await response.json();

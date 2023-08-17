@@ -16,18 +16,16 @@ function getRandomPoeEndpoint() {
     // http://openbox-poe-seat1:3000
     var random_openbox_host = getRandomOpenboxHost();
     const gpt_endpoint = `http://${random_openbox_host}:3000`;
-    
-    return {random_openbox_host, gpt_endpoint};
+
+    return { random_openbox_host, gpt_endpoint };
   } catch (error) {
-    console.log('error geting random poe endpoint, return default poe-seat')
-    console.log(error)
-    return 'http://openbox-poe-seat1:3000'
+    console.log('error geting random poe endpoint, return default poe-seat');
+    console.log(error);
+    return 'http://openbox-poe-seat1:3000';
   }
 }
 
-
 module.exports = Queue => {
-
   Queue.process('poe', 1, async function (job, done) {
     try {
       console.log('\nProcessing job with id %s at %s', job.id, new Date());
@@ -40,11 +38,10 @@ module.exports = Queue => {
       const { working_dir, preprompts, question_list, callback_url } = data;
 
       const gpt_payload = { preprompts, question_list };
-      const {random_openbox_host, gpt_endpoint} = getRandomPoeEndpoint();
+      const { random_openbox_host, gpt_endpoint } = getRandomPoeEndpoint();
 
       // NOTE: log input
       console.log({ random_openbox_host, gpt_endpoint, data, gpt_payload });
-
 
       // NOTE: ask poe start
       var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
@@ -64,7 +61,7 @@ module.exports = Queue => {
         var result_cb_json = await result_cb_url.json();
       } else {
         console.log({ chatgpt_summarize_result_json });
-        const {chat_history }= chatgpt_summarize_result_json
+        const { chat_history } = chatgpt_summarize_result_json;
         console.log(chat_history.q_and_a.history);
         console.log('no callback url provided, showing here');
       }
@@ -92,7 +89,7 @@ module.exports = Queue => {
       await mySleepM(3);
       console.log('cooldown bot done');
 
-      done(null, { deliveredAt: new Date(),  data });
+      done(null, { deliveredAt: new Date(), data });
     } catch (error) {
       if (error.code == 'ECONNREFUSED' && error.message.indexOf('openbox-firefox') > -1) {
         done(new Error('the openbox-firefox server is not already, schedule retry'));
@@ -106,21 +103,19 @@ module.exports = Queue => {
   //listen on scheduler errors
   Queue.on('schedule error', function (error) {
     try {
-          //handle all scheduling errors here
-    console.log('schedule error');
-    console.log(error);
-    } catch (err) {
-      
-    }
+      //handle all scheduling errors here
+      console.log('schedule error');
+      console.log(error);
+    } catch (err) {}
   });
 
   //listen on success scheduling
   Queue.on('schedule success', function (job) {
     // NOTE: a highly recommended place to attach job instance level events listeners
-      
+
     // console.log({ QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
-      console.log({ state: 'Queue schedule success', QueueInactiveCount: count, });
+      console.log({ state: 'Queue schedule success', QueueInactiveCount: count });
     });
 
     job
@@ -140,6 +135,5 @@ module.exports = Queue => {
       .on('progress', function (progress, data) {
         console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
       });
-
   });
 };

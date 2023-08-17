@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     const { post_id } = req_body;
 
     var working_dir = `/share/${post_id}`;
-    console.log(`writing to ${working_dir}...`)
+    console.log(`writing to ${working_dir}...`);
     await createDirIfNotExists(working_dir);
     await storeJson(`${working_dir}/extract_result.json`, req_body);
 

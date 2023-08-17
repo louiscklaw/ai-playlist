@@ -1,12 +1,12 @@
 const fetch = require('node-fetch');
 
 const body = {
-  "version":"1.0",
-  "title":"JOBSDB_FOUND_NEW_JOB-http://bait:8080/jobsdb/hk/en/job/list_jobsdb.html",
-  "message":"(added)       /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402",
-  "attachments":[],
-  "type":"info"
-}
+  version: '1.0',
+  title: 'JOBSDB_FOUND_NEW_JOB-http://bait:8080/jobsdb/hk/en/job/list_jobsdb.html',
+  message: '(added)       /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402',
+  attachments: [],
+  type: 'info',
+};
 
 // const body = {
 //   "version":"1.0",
@@ -21,10 +21,10 @@ Array(1)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
 
-    const response = await fetch('http://diff-handler:3000/jobsdb_diff_handler',  {
-      method:'POST',
-      body:JSON.stringify(body),
-      headers: {'content-type': 'application/json'}
+    const response = await fetch('http://diff-handler:3000/jobsdb_diff_handler', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: { 'content-type': 'application/json' },
     });
 
     const res_text = await response.text();

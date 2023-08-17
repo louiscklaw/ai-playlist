@@ -10,12 +10,10 @@ Array(1)
     const response = await fetch('http://flow-handler:3000/report-job-complete', {
       method: 'post',
       body: JSON.stringify({
-        hello:'world'
+        hello: 'world',
       }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     console.log(await response.json());
-
   });
-

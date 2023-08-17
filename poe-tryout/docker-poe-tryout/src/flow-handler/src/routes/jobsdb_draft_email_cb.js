@@ -10,19 +10,19 @@ const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 
 // NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
 router.post('/', async (req, res) => {
-  var output = { state: 'INIT', debug: { }, error: {} };
+  var output = { state: 'INIT', debug: {}, error: {} };
   myLogger.info('receive callback from draft email ');
 
   try {
     var req_body = req.body;
-    output = {...output,state:'start', debug: req_body}
+    output = { ...output, state: 'start', debug: req_body };
 
     // assemble the new context
     var { working_dir } = req_body;
     if (!working_dir) {
-      myLogger.info('working_dir is not defined, default to /share/testing')
-      working_dir = '/share/testing'
-    };
+      myLogger.info('working_dir is not defined, default to /share/testing');
+      working_dir = '/share/testing';
+    }
     await createDirIfNotExists(working_dir);
     await storeJson(`${working_dir}/draft_email.json`, req_body);
 
@@ -36,10 +36,10 @@ router.post('/', async (req, res) => {
     await machine.storeResult();
     await machine.reportJobComplete();
 
-    output = {...output, state:'done'}
+    output = { ...output, state: 'done' };
   } catch (error) {
     console.log(error);
-    output = {...output,state:'error', error:error.message}
+    output = { ...output, state: 'error', error: error.message };
   }
 
   res.send(output);

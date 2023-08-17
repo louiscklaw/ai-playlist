@@ -17,4 +17,3 @@ Array(1)
     const res_text = await response.text();
     console.log({ res_text });
   });
-
