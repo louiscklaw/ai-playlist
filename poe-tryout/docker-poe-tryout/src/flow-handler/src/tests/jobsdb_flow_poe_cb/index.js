@@ -18,7 +18,7 @@ Array(1)
     const response = await fetch('http://flow-handler:3000/jobsdb_flow_poe_callback', {
       method: 'post',
       body: JSON.stringify({
-        state: 'ask_done',
+        state: 'ASK_DONE',
         json_input: {
           jobs_id: 'blablabla',
           preprompts: ['Summarze the below text for me.'],

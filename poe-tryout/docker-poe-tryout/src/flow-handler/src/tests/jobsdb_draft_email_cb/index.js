@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 // NOTE: expecting calling from poe-scheduler to flow-handler
 
 const payload = {
-  state: 'ask_done',
+  state: 'ASK_DONE',
   json_input: {
     preprompts: [
       'Forget everything and start a new talk.',

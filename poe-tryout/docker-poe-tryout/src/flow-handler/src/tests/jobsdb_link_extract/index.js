@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 
 // /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402
 const payload = {
-  jobsdb_job_url: `https://hk.jobsdb.com/hk/en/job/qa-engineer-automation-100003010496802`,
+  jobsdb_job_url: `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`,
   callback_url: 'http://flow-handler:3000/jobsdb_link_extract_cb',
 };
 
