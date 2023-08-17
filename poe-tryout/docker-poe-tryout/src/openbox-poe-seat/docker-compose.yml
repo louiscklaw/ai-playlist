@@ -26,7 +26,7 @@ services:
   #   # command: sleep infinity
 
   openbox-poe-seat1:
-    image: logickee/openbox-poe-seat
+    image: 192.168.10.61:5000/openbox-poe-seat
     container_name: openbox-poe-seat1
     shm_size: "1gb"
     ports:
@@ -57,7 +57,7 @@ services:
     # command: sleep infinity
 
   openbox-poe-seat2:
-    image: logickee/openbox-poe-seat
+    image: 192.168.10.61:5000/openbox-poe-seat
     container_name: openbox-poe-seat2
     shm_size: "1gb"
     ports:
@@ -86,7 +86,7 @@ services:
       - CHROME_DATA_DIR=/workspace/chrome-user-data
 
   openbox-poe-seat3:
-    image: logickee/openbox-poe-seat
+    image: 192.168.10.61:5000/openbox-poe-seat
     container_name: openbox-poe-seat3
     shm_size: "1gb"
     ports:
@@ -115,7 +115,7 @@ services:
       - CHROME_DATA_DIR=/workspace/chrome-user-data
 
   openbox-poe-seat4:
-    image: logickee/openbox-poe-seat
+    image: 192.168.10.61:5000/openbox-poe-seat
     container_name: openbox-poe-seat4
     shm_size: "1gb"
     ports:
@@ -144,7 +144,7 @@ services:
       - CHROME_DATA_DIR=/workspace/chrome-user-data
 
   openbox-poe-seat5:
-    image: logickee/openbox-poe-seat
+    image: 192.168.10.61:5000/openbox-poe-seat
     container_name: openbox-poe-seat5
     shm_size: "1gb"
     ports:
