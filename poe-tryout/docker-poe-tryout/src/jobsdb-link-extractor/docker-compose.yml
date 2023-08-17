@@ -17,6 +17,7 @@ services:
 
   link-extractor-chrome:
     image: browserless/chrome
+    shm_size: "1gb"
     restart: unless-stopped
     ports:
       - 13000:3000

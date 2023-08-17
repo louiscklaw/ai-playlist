@@ -61,6 +61,7 @@ services:
   changedetection-chrome:
     #  hostname: changedetection-chrome
     image: browserless/chrome
+    shm_size: "1gb"
     restart: unless-stopped
     ports:
       - 3053:3000
