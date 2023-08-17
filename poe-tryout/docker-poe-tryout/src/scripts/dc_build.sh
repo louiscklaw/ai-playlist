@@ -25,10 +25,8 @@ if [[ -v DOCKER_DEV ]]; then
   echo 
   read -p "Press Enter to continue..."
 
-  YML_S="
-  $YML_S
-  -f ./docker-compose.dev.yml
-  "
+  YML_S="$YML_S -f ./docker-compose.dev.yml"
+  
 else
   echo 
   echo 

@@ -7,11 +7,7 @@ services:
     command: ./dev.sh
   bait:
     command: ./dev.sh
-  changedetection:
-    command: ./dev.sh
   dbapi:
-    command: ./dev.sh
-  default:
     command: ./dev.sh
   diff-handler:
     command: ./dev.sh
@@ -23,8 +19,13 @@ services:
     command: ./dev.sh
   poe-scheduler-api:
     command: ./dev.sh
-  static-share:
-    command: ./dev.sh
+
+  # static-share:
+  #   command: ./dev.sh
+  # changedetection:
+  #   command: ./dev.sh
+
+
   # link-extractor-chrome:
   #   command: ./dev.sh
   # changedetection-chrome:
