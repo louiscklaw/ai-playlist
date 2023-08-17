@@ -7,11 +7,12 @@ const router = express.Router();
 // NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: { input: {} }, error: {} };
-  var req_body = req.body;
 
   try {
-    output.state = 'start';
     myLogger.info('init draft email ');
+    var req_body = req.body;
+    output = { ...output, state: 'start', debug: req_body };
+    // output.state = 'start';
 
     var machine = new jobsdbPoeDraftEmailMachine();
 
@@ -20,12 +21,15 @@ router.post('/', async (req, res) => {
     machine.context = { req_body };
     await machine.poeDraftEmail();
 
-    output.state = 'success';
+    // output.state = 'success';
+    output = { ...output, state: 'success' };
   } catch (error) {
-    output.state = 'error';
-    output.error = error;
-    console.log(error);
+    // output.state = 'error';
+    // output.error = error;
     // myLogger.error(output);
+
+    console.log(error);
+    output = { ...output, state: 'error', error: error.message };
   }
 
   res.send(output);

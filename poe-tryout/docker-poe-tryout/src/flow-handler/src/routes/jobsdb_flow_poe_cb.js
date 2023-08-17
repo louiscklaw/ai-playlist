@@ -15,7 +15,8 @@ router.post('/', async (req, res) => {
 
   try {
     console.log('receive callback from poe ');
-    output.state = 'start';
+    // output.state = 'start';
+    output = { ...output, state: 'start', debug: req_body };
 
     var jobsdb_poe_cb = new jobsdbPoeCallack({});
 
@@ -24,14 +25,17 @@ router.post('/', async (req, res) => {
     await jobsdb_poe_cb.draftEmail();
     await jobsdb_poe_cb.draftEmailDone();
 
-    output.state = 'success';
+    // output.state = 'success';
+    output = { ...output, state: 'success' };
   } catch (error) {
     console.log({ error });
-    output.state = 'error';
-    output.error = error;
-  } finally {
-    res.send(output);
+    // output.state = 'error';
+    // output.error = error;
+
+    output = { ...output, state: 'error', error: error.message };
   }
+
+  res.send(output);
 });
 
 module.exports = router;

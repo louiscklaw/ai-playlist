@@ -8,11 +8,10 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   var output = { state: 'init', debug: { input: {} }, error: {} };
   var req_body = req.body;
-  output = { ...output, input: req_body };
 
   try {
     console.log('summarize called');
-    output = { ...output, state: 'start' };
+    output = { ...output, state: 'start', debug: req_body };
 
     //   // NOTE: containue from summiarie done state
     var machine = new jobsdbPoeSummarizeMachine();
@@ -23,8 +22,10 @@ router.post('/', async (req, res) => {
     output = { ...output, state: 'scheduled' };
   } catch (error) {
     console.log({ error });
-    output.state = 'error';
-    output.error = error;
+    // output.state = 'error';
+    // output.error = error;
+
+    output = { ...output, state: 'error', error: error.message };
   }
   res.send(output);
 });

@@ -12,21 +12,26 @@ router.post('/', async (req, res) => {
 
   try {
     console.log('/postHelloworld');
-    output.state = STATE_START;
+    const req_body = req.body;
+    output = { ...output, state: 'start', debug: req_body };
 
     // process
-    const req_body = req.body;
+
     const { hello } = req_body;
     console.log({ hello });
     output.debug = { input: req_body };
 
     output.state = STATE_DONE;
+    output = { ...output, state: STATE_DONE };
   } catch (error) {
-    output.state = ERROR_ADDING_QUEUE;
-    err_msg = error;
-  } finally {
-    res.send(output);
+    console.log({ error });
+    // output.state = 'error';
+    // output.error = error;
+
+    output = { ...output, state: ERROR_ADDING_QUEUE, error: error.message };
   }
+
+  res.send(output);
 });
 
 module.exports = router;

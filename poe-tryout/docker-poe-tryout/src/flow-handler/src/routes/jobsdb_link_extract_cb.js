@@ -6,11 +6,13 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: {} };
-  var req_body = req.body;
 
   try {
     console.log('receive callback from link extract ');
-    output.state = 'start';
+    var req_body = req.body;
+
+    output = { ...output, state: 'start', debug: req_body };
+    // output.state = 'start';
 
     var machine = new jobsFoundCbMachine();
     machine.context = req_body;

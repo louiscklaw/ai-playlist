@@ -13,7 +13,8 @@ router.post('/', async (req, res) => {
 
   try {
     console.log('receive callback from poe summarize ');
-    output.state = 'start';
+    // output.state = 'start';
+    output = { ...output, state: 'start', debug: req_body };
 
     // NOTE: containue from summiarie done state
     var machine = new jobsdbPoeSummarizeCbMachine();
@@ -23,11 +24,14 @@ router.post('/', async (req, res) => {
     machine.context = { ...req_body, working_dir };
     await machine.poeSummarizeDone();
 
-    output.state = 'success';
+    // output.state = 'success';
+    output = { ...output, state: 'success' };
   } catch (error) {
     console.log({ error });
-    output.state = 'error';
-    output.error = error;
+    // output.state = 'error';
+    // output.error = error;
+
+    output = { ...output, state: 'error', error: error.message };
   }
 
   res.send(output);
