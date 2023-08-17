@@ -18,7 +18,7 @@ router.post('/',async (req, res) => {
   var output = {state: 'init', debug:req.body, error:{}}
 
   try {
-    // var {text} = req.body;
+    var {text} = req.body;
     // var result = await api.getMe()
     await api.sendMessage({
         chat_id: TELEGRAM_CHAT_ID,
