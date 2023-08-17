@@ -2,6 +2,10 @@
 
 
 ### redis
+
+docker compose -f ./docker-compose.gen \
+  exec -it redis bash
+
 redis-cli config set dir /data
 
 

@@ -2,9 +2,9 @@
 
 set -ex
 
-docker compose \
-  -f ./docker-compose.gen \
-  logs -f 
+docker compose -f ./docker-compose.gen \
+  logs -f diff-handler flow-handler
+  #  diff-handler page-handler
   # jobsdb-link-extractor
   # redis
   # diff-handler

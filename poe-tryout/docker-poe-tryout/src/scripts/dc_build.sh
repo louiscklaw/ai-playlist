@@ -35,15 +35,8 @@ set -ex
 
 docker compose $YML_S pull
 
-# NOTE: making of logickee/openbox-poe-seat
-if [[ -v DOCKER_DEV ]]; then
-  cd ./openbox-poe-seat
-    echo 'skip building save time... '
-    # ./build_docker.sh
-  cd -
-fi
-
 docker compose $YML_S config > docker-compose.gen
+
 docker compose $YML_S up -d --build
 
 exit 0

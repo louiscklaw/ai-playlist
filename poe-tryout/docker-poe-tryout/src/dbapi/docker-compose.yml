@@ -25,7 +25,8 @@ services:
       - mongo
 
   dbapi:
-    build: ./dbapi
+    # build: ./dbapi
+    image: logickee/poe-tryout-dbapi
     ports:
       - 3001:3001
     volumes:

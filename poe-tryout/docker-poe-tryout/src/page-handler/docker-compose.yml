@@ -1,7 +1,7 @@
 services:
   page-handler:
-    build: ./page-handler
-    # image: ubuntu:latest
+    # build: ./page-handler
+    image: logickee/poe-tryout-page-handler
     command: ./entry.sh
     # command: sleep infinity
     volumes:

@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     output = { ...output, state: 'success' };
   } catch (error) {
     console.log(error);
-    output = { ...output, state: 'error', error };
+    output = { ...output, state: 'error', error: error.message };
   }
 
   res.send(output);

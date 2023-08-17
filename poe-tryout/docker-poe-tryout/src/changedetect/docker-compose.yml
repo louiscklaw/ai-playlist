@@ -3,7 +3,8 @@ volumes:
 
 services:
   diff-handler:
-    build: ./changedetect/diff-handler
+    # build: ./changedetect/diff-handler
+    image: logickee/poe-tryout-diff-handler
     volumes:
       - ./changedetect/diff-handler/src:/app
       - ./volumes/changedetect/diff-handler:/share

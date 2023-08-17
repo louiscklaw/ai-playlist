@@ -1,7 +1,7 @@
 services:
   flow-handler:
-    build: ./flow-handler
-    # image: ubuntu:latest
+    # build: ./flow-handler
+    image: logickee/poe-tryout-flow-handler
     command: ./entry.sh
     # command: sleep infinity
     volumes:

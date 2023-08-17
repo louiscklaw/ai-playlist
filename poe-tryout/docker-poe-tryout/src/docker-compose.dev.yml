@@ -1,6 +1,6 @@
-networks:
-  default:
-    name: dev-poe-tryout
+# networks:
+#   default:
+#     name: dev-poe-tryout
 
 services:
   flow-handler:

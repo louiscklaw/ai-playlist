@@ -1,6 +1,7 @@
 services:
   static-share:
-    build: ./static-share
+    # build: ./static-share
+    image: logickee/poe-tryout-static-share
     volumes:
       - ./static-share:/app
       - ./volumes/static-share:/share

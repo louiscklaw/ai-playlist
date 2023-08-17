@@ -1,6 +1,7 @@
 services:
   bait:
-    build: ./bait
+    # build: ./bait
+    image: logickee/poe-tryout-bait
     volumes:
       - "./bait/src:/app"
     working_dir: /app

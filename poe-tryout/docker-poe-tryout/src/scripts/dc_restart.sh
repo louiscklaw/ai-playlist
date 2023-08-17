@@ -2,6 +2,6 @@
 
 set -ex
 
-docker compose \
-  -f ./docker-compose.gen \
-  restart bait
+docker compose -f ./docker-compose.gen restart \
+  flow-handler
+  # diff-handler 

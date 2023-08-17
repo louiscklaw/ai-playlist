@@ -22,7 +22,8 @@ services:
     restart: unless-stopped
 
   poe-scheduler-api:
-    build: ./poe-scheduler-api
+    # build: ./poe-scheduler-api
+    image: logickee/poe-tryout-poe-scheduler-api
     ports:
       - 3002:3002
     volumes:

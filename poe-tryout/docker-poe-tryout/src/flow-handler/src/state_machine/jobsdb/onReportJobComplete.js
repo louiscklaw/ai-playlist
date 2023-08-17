@@ -47,8 +47,9 @@ ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
 
       res();
     } catch (error) {
+      console.log(error)
       myLogger.error('error during report job complete...');
-      myLogger.error(error.message);
+      // myLogger.error(error.message);
 
       rej();
     }
