@@ -8,3 +8,5 @@ services:
     ports:
       - 18089:8080
     command: ./entry.sh
+    restart: unless-stopped
+    

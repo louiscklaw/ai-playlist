@@ -1,5 +1,5 @@
 volumes:
-  changedetection-data:
+  changedetection_data:
 
 services:
   diff-handler:
@@ -13,7 +13,8 @@ services:
       - 3052:3000
     command: ./entry.sh
     # command: sleep infinity
-
+    restart: unless-stopped
+    
   # apprise-api:
   #   # container_name: apprise-api
   #   image: lscr.io/linuxserver/apprise-api:latest
@@ -32,7 +33,7 @@ services:
     # container_name: changedetection
     # hostname: changedetection
     volumes:
-      - changedetection-data:/datastore
+      - changedetection_data:/datastore
       # Configurable proxy list support, see https://github.com/dgtlmoon/changedetection.io/wiki/Proxy-configuration#proxy-list-support
       # - ./proxies.json:/datastore/proxies.json
 

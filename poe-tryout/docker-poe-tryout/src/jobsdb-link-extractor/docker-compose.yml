@@ -14,7 +14,8 @@ services:
         condition: service_started
     ports:
       - 3003:3000
-
+    restart: unless-stopped
+    
   link-extractor-chrome:
     image: browserless/chrome
     shm_size: "1gb"

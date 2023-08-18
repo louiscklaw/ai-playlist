@@ -10,6 +10,7 @@ services:
     env_file: ./.env
     volumes:
       - ./:/src
+    restart: unless-stopped
   #   build: ./docker-ubuntu2
   # ubuntu3:
   #   build: ./docker-ubuntu3

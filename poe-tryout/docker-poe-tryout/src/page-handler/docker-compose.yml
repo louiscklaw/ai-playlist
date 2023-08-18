@@ -11,4 +11,5 @@ services:
     ports:
       - 3061:3000
     env_file: ./.env
+    restart: unless-stopped
     
