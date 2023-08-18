@@ -1,6 +1,6 @@
 var http = require('http');
 
-var AsyncLock = require('async-lock');
+// var AsyncLock = require('async-lock');
 const mongoose = require('mongoose');
 
 const express = require('express');
@@ -17,7 +17,7 @@ const { CustomerModel } = require('./models/Customer');
 const { InvoiceModel } = require('./models/Invoice');
 
 try {
-  var lock = new AsyncLock();
+  // var lock = new AsyncLock();
 
   mongoose.connect('mongodb://mongo:27017/database');
   console.log('connected to mongoose');
