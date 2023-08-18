@@ -32,10 +32,14 @@ try {
   app.use(bodyParser.json());
   app.use(methodOverride());
 
+  app.use('/Customer/addCount', require('./routes/Customer/addCount'));
+
   restify.serve(app, JobPostModel);
   restify.serve(app, HelloworldModel);
   restify.serve(app, CustomerModel);
   restify.serve(app, InvoiceModel);
+
+  app.use('/helloworld', require('./routes/helloworld'));
 
   app.use(router);
 
