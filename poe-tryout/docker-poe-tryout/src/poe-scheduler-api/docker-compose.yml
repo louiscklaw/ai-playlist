@@ -5,15 +5,17 @@ volumes:
   
 services:
   redis:
-    image: redis:6.0.7
+    # image: redis:6.0.7
+    build: ./redis
     ports:
       - 6379:6379
     volumes:
-      - ./volumes/redis/redis.conf:/redis.conf
-      - redis_etc_redis:/etc/redis
+      - ./volumes/redis/etc/redis/redis.conf:/etc/redis/redis.conf
+      # - redis_etc_redis:/etc/redis
       # NOTE: related to redis.conf
-      - redis_data:/data
-    command: redis-server /redis.conf
+      - ./volumes/redis/data:/data
+    command: redis-server /etc/redis/redis.conf
+    # command: sleep infinity
     restart: unless-stopped
 
   redisinsight:
