@@ -47,6 +47,9 @@ sleep 1
 docker volume rm -f src_redis_data
 docker volume rm -f src_redisinsight_store
 
+echo -e "\033[31m docker environment cleared !!! \033[0m"
+read -p "Press Enter to continue..."
+
 docker compose $YML_S config > docker-compose.gen
 docker compose $YML_S up -d --build
 
