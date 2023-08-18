@@ -4,6 +4,7 @@ set -ex
 
 docker compose -f ./docker-compose.gen exec -it redis redis-cli
 
+# https://blog.csdn.net/zhangjunli/article/details/103817837
 # NOTE: to check redis with data directory
 # need to match with redis.conf
 
