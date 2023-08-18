@@ -1,5 +1,3 @@
-var AsyncLock = require('async-lock');
-
 class Mutex {
   constructor() {
     this.locked = false;

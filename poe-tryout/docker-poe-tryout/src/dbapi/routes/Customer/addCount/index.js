@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const express = require('express');
 const router = express.Router();
 
-const { mutex } = require('./mutex');
+const { mutex } = require('../mutex');
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
