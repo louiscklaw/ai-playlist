@@ -48,7 +48,7 @@ docker volume rm -f src_redis_data
 docker volume rm -f src_redisinsight_store
 
 docker compose $YML_S config > docker-compose.gen
-# docker compose $YML_S up -d --build
+docker compose $YML_S up -d --build
 
 exit 0
 
