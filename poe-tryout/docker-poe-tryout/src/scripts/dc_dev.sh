@@ -40,9 +40,15 @@ set -ex
 
 docker compose $YML_S pull
 
-docker compose $YML_S config > docker-compose.gen
+docker compose $YML_S kill
+docker compose $YML_S down
+sleep 1
 
-docker compose $YML_S up -d --build
+docker volume rm -f src_redis_data
+docker volume rm -f src_redisinsight_store
+
+docker compose $YML_S config > docker-compose.gen
+# docker compose $YML_S up -d --build
 
 exit 0
 
