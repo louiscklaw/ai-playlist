@@ -9,30 +9,28 @@ var { PORT } = process.env;
 if (!PORT) PORT = 3000;
 
 const JobPostModel = require('./models/JobPost');
-// const HelloworldModel = require('./models/Helloworld');
+const HelloworldModel = require('./models/Helloworld');
 
-(async()=>{
-
+(async () => {
   try {
     const app = express();
-  const router = express.Router();
-  
-  app.use(bodyParser.json());
-  app.use(methodOverride());
+    const router = express.Router();
 
-  await mongoose.connect('mongodb://mongo:27017/database');
-  console.log('connected to mongoose');
+    app.use(bodyParser.json());
+    app.use(methodOverride());
 
-  restify.serve(router, JobPostModel);
-  // restify.serve(router, HelloworldModel);
-  
-  app.use(router);
+    await mongoose.connect('mongodb://mongo:27017/database');
+    console.log('connected to mongoose');
 
-  app.listen(PORT, () => {
-    console.log(`Express server listening on port ${PORT}`);
-  });
-} catch (error) {
-  console.log(error);
-}
+    restify.serve(router, JobPostModel);
+    restify.serve(router, HelloworldModel);
 
-})()
+    app.use(router);
+
+    app.listen(PORT, () => {
+      console.log(`Express server listening on port ${PORT}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+})();

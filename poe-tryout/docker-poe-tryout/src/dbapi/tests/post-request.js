@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 (async () => {
   const body = { name: 'customer name' };
 
-  const response = await fetch('http://localhost:3001/api/v1/Customer', {
+  const response = await fetch('http://dbapi:3001/api/v1/Helloworld', {
     method: 'post',
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json' },

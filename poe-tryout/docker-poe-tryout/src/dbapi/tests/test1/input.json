@@ -5,9 +5,7 @@
   "chatgpt_summarize_res_json": {
     "json_input": {
       "jobs_id": "new_jobs_id",
-      "question_list": [
-        "say 'hello 1' to me"
-      ]
+      "question_list": ["say 'hello 1' to me"]
     },
     "chat_history": {
       "q_and_a": {
