@@ -9,20 +9,24 @@ var { PORT } = process.env;
 if (!PORT) PORT = 3000;
 
 const JobPostModel = require('./models/JobPost');
-const HelloworldModel = require('./models/Helloworld');
+// const HelloworldModel = require('./models/Helloworld');
 
-try {
-  const app = express();
+(async()=>{
+
+  try {
+    const app = express();
   const router = express.Router();
-
+  
   app.use(bodyParser.json());
   app.use(methodOverride());
-  app.use(router);
 
-  mongoose.connect('mongodb://mongo:27017/database');
+  await mongoose.connect('mongodb://mongo:27017/database');
+  console.log('connected to mongoose');
 
   restify.serve(router, JobPostModel);
-  restify.serve(router, HelloworldModel);
+  // restify.serve(router, HelloworldModel);
+  
+  app.use(router);
 
   app.listen(PORT, () => {
     console.log(`Express server listening on port ${PORT}`);
@@ -30,3 +34,5 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+})()
