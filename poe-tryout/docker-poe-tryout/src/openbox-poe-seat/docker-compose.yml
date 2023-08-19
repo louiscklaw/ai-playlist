@@ -27,7 +27,7 @@ services:
 
   openbox-poe-seat1:
     # image: logickee/openbox-poe-seat
-    image: 192.168.10.61:5000/openbox-poe-seat
+    image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat1
     shm_size: "1gb"
     ports:
@@ -59,7 +59,7 @@ services:
 
   openbox-poe-seat2:
     # image: logickee/openbox-poe-seat
-    image: 192.168.10.61:5000/openbox-poe-seat
+    image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat2
     shm_size: "1gb"
     ports:
@@ -89,7 +89,7 @@ services:
 
   openbox-poe-seat3:
     # image: logickee/openbox-poe-seat
-    image: 192.168.10.61:5000/openbox-poe-seat
+    image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat3
     shm_size: "1gb"
     ports:
@@ -119,7 +119,7 @@ services:
 
   openbox-poe-seat4:
     # image: logickee/openbox-poe-seat
-    image: 192.168.10.61:5000/openbox-poe-seat
+    image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat4
     shm_size: "1gb"
     ports:
@@ -149,7 +149,7 @@ services:
 
   openbox-poe-seat5:
     # image: logickee/openbox-poe-seat
-    image: 192.168.10.61:5000/openbox-poe-seat
+    image: logickee/openbox-poe-seat
     container_name: openbox-poe-seat5
     shm_size: "1gb"
     ports:
