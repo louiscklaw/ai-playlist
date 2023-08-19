@@ -2,6 +2,19 @@
 
 set -ex
 
+myArray=("./openbox-poe-seat")
+
+# Run echo command with the array elements
+for element in "${myArray[@]}"
+do
+    cd "$element"
+      ./build_docker.sh
+    cd -
+done
+
+echo -e "\033[31m openbox-poe-seat !!! \033[0m"
+read -p "Press Enter to continue..."
+
 # Declare an array
 myArray=("./bait" "./dbapi" "./flow-handler" "./jobsdb-link-extractor")
 
