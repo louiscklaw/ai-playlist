@@ -23,3 +23,4 @@ do
     cd -
 done
 
+docker image ls

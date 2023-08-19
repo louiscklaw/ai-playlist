@@ -1,7 +1,7 @@
 services:
   bait:
     # build: ./bait
-    image: logickee/poe-tryout-bait
+    image: 192.168.10.61:5000/poe-tryout-bait 
     volumes:
       - "./bait/src:/app"
     working_dir: /app
@@ -9,4 +9,3 @@ services:
       - 18089:8080
     command: ./entry.sh
     restart: unless-stopped
-    
