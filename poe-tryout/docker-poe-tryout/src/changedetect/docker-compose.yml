@@ -20,11 +20,11 @@ services:
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
     volumes:
-      - ./changedetect/jobsdb-scraper/src:/app
+      - ./changedetect/jobsdb/scraper/src:/app
       - ./volumes/changedetect/jobsdb-scraper:/share
     working_dir: /app
     ports:
-      - 3052:3000
+      - 3054:3000
     command: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped

@@ -38,17 +38,17 @@ fi
 
 set -ex
 
-docker compose $YML_S pull
+# echo -e "\033[31m docker environment cleared !!! \033[0m"
+# read -p "Press Enter to continue..."
 
-docker compose $YML_S kill
-docker compose $YML_S down
-sleep 1
+# docker compose $YML_S pull
 
-docker volume rm -f src_redis_data
-docker volume rm -f src_redisinsight_store
+# docker compose $YML_S kill
+# docker compose $YML_S down
+# sleep 1
 
-echo -e "\033[31m docker environment cleared !!! \033[0m"
-read -p "Press Enter to continue..."
+# docker volume rm -f src_redis_data
+# docker volume rm -f src_redisinsight_store
 
 docker compose $YML_S config > docker-compose.gen
 docker compose $YML_S up -d 

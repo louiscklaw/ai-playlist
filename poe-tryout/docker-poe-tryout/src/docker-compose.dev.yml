@@ -11,6 +11,8 @@ services:
     command: ./dev.sh
   diff-handler:
     command: ./dev.sh
+  jobsdb-scraper:
+    command: ./dev.sh
   flow-handler:
     command: ./dev.sh
   jobsdb-link-extractor:
