@@ -11,10 +11,12 @@ try {
 
   // app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
   // process diffs and route to entry point of flow-handler
-  app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
 
   app.use('/fetchSearchResult', require('./routes/fetchSearchResult'));
+
+  app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
   app.use('/post_helloworld', require('./routes/post_helloworld'));
+
   app.use('/helloworld', require('./routes/helloworld'));
 
   // // Start the server

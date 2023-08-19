@@ -1,14 +1,41 @@
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
+const rp = require('request-promise');
 
-const HELLOWORLD_URL = 'http://jobsdb-scraper:3000/fetchSearchResult/helloworld';
+(async () => {
+  // https://hk.jobsdb.com/hk/search-jobs/validation-automation-engineer/1
+  var options = {
+    method: 'POST',
+    uri: `http://jobsdb-scraper:3000/fetchSearchResult/search`,
+    body: { search: ['validation', 'automation', 'engineer'] },
+    json: true,
+  };
 
-Array(1)
-  .fill(0)
-  .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+  result = await rp(options);
+  console.log({ result });
+})();
 
-    const response = await fetch(HELLOWORLD_URL);
+// const SEARCH_URL = 'http://jobsdb-scraper:3000/fetchSearchResult/search?s=validation';
 
-    const res_text = await response.text();
-    console.log({ res_text });
-  });
+// Array(1)
+//   .fill(0)
+//   .forEach(async (v, i) => {
+//     console.log(`posting ask ${i}...`);
+
+//     const response = await fetch(SEARCH_URL);
+
+//     const res_text = await response.text();
+//     console.log({ res_text });
+//   });
+
+// const HELLOWORLD_URL = 'http://jobsdb-scraper:3000/fetchSearchResult/helloworld';
+
+// Array(1)
+//   .fill(0)
+//   .forEach(async (v, i) => {
+//     console.log(`posting ask ${i}...`);
+
+//     const response = await fetch(HELLOWORLD_URL);
+
+//     const res_text = await response.text();
+//     console.log({ res_text });
+//   });

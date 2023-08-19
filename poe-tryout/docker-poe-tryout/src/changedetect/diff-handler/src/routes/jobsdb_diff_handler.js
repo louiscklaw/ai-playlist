@@ -18,6 +18,25 @@ function getPayloadToFlowHandlerJson(diff_link) {
   }
 }
 
+router.post('/dump', (req, res) => {
+  var output = { state: 'init', debug: {}, error: {} };
+
+  try {
+    var req_body = req.body;
+
+    console.log('dump called');
+    console.log({req_body});
+
+    output = { ...output, state: 'done', debug: req_body };
+  } catch (error) {
+    console.log('error occur in diff-handler');
+    console.log(error);
+    output = { ...output, state: 'error', error: error.message };
+  }
+
+  res.send(output);
+});
+
 router.post('/', (req, res) => {
   var output = { state: 'init', debug: {}, error: {} };
 
@@ -26,18 +45,31 @@ router.post('/', (req, res) => {
     // console.log({ req_body });
     output = { ...output, state: 'start', debug: req_body };
 
+    console.log('call to jobsdb_diff_handler')
+    console.log({req_body})
+
     const json_message = req_body.message;
     const messages = json_message.split(/\n/);
     const sainted_messages = getAddedLink(messages);
 
-    const flow_handler_payloads = sainted_messages.map(m => getPayloadToFlowHandlerJson(m.substring(1)));
+    const flow_handler_payloads = sainted_messages.map(m => {
+      console.log('blablabla');
+      console.log(m);
+      console.log(m.substring(1));
+      return getPayloadToFlowHandlerJson(m.substring(1))}
+      );
 
-    flow_handler_payloads.forEach(async j => {
+    flow_handler_payloads.forEach(async pl => {
       try {
-        await postJobsdbLinkExtract(j);
+        console.log(`going to send postJobsdbLinkExtract -> `)
+        console.log(pl);
+
+        await postJobsdbLinkExtract(pl);
+
       } catch (error) {
         console.log(error);
-        throw new Error(`error during posting to flow-handler ${j}`);
+        console.log(pl)
+        throw new Error(`error during posting to flow-handler`);
       }
     });
 
