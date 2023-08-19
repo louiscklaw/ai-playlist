@@ -6,6 +6,8 @@ const router = express.Router();
 
 const { getAddedLink } = require('../util/getAddedLink');
 
+var validUrl = require('valid-url');
+
 function getPayloadToFlowHandlerJson(diff_link) {
   try {
     return {

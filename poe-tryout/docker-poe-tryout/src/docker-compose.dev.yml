@@ -6,7 +6,7 @@ services:
   dbapi:
     command: ./entry.sh
   diff-handler:
-    command: ./entry.sh
+    command: ./dev.sh
   jobsdb-scraper:
     # command: sleep infinity
     command: ./entry.sh

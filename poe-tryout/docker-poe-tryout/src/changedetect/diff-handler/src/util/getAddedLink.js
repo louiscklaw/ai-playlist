@@ -1,3 +1,5 @@
+// var validUrl = require('valid-url');
+
 // src/changedetect/diff-handler/src/tests/getAddedLink/index.js
 
 function getAddedLink(messages) {
@@ -7,8 +9,8 @@ function getAddedLink(messages) {
     .filter(s => s.search(/(into|added)/g) > -1)
     .map(m => {
       var url_regex = [
-        /\((added|into)\) +"?(.+)\?.+/,
-        /\((added|into)\) +"?((\/|\w|-)+)"?/,
+        /\((added|into)\) +"\/?(.+)\?.+/,
+        /\((added|into)\) +"\/?((\/|\w|-)+)"?/,
       ]
 
       var output 
