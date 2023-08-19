@@ -20,7 +20,7 @@ services:
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
     volumes:
-      - ./changedetect/jobsdb/scraper/src:/app
+      - ./changedetect/scraper/jobsdb/src:/app
       - ./volumes/changedetect/jobsdb-scraper:/share
     working_dir: /app
     ports:

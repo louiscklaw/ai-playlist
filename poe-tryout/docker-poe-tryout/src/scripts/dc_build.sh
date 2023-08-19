@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -ex
-myArray=("./changedetect/diff-handler" "./changedetect/jobsdb/scraper")
+myArray=("./changedetect/diff-handler" "./changedetect/scraper/jobsdb" "./changedetect/scraper/ctgoodjob")
 
 # Run echo command with the array elements
 for element in "${myArray[@]}"

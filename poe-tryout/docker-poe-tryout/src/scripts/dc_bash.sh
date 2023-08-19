@@ -3,4 +3,4 @@
 set -ex
 
 docker compose -f ./docker-compose.gen \
-  exec -it redis bash
+  exec -it jobsdb-scraper bash

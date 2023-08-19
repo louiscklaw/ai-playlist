@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const HELLOWORLD_URL = 'http://jobsdb-scraper:3000/helloworld';
+const HELLOWORLD_URL = 'http://jobsdb-scraper:3000/fetchSearchResult/helloworld';
 
 Array(1)
   .fill(0)

@@ -4,23 +4,23 @@
 
 services:
   api-debug:
-    command: ./dev.sh
+    command: ./entry.sh
   bait:
-    command: ./dev.sh
+    command: ./entry.sh
   dbapi:
-    command: ./dev.sh
+    command: ./entry.sh
   diff-handler:
-    command: ./dev.sh
+    command: ./entry.sh
   jobsdb-scraper:
-    command: ./dev.sh
+    command: sleep infinity
   flow-handler:
-    command: ./dev.sh
+    command: ./entry.sh
   jobsdb-link-extractor:
-    command: ./dev.sh
+    command: ./entry.sh
   page-handler:
-    command: ./dev.sh
+    command: ./entry.sh
   poe-scheduler-api:
-    command: ./dev.sh
+    command: ./entry.sh
 
   # static-share:
   #   command: ./dev.sh
