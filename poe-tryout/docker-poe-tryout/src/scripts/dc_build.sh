@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
 set -ex
+myArray=("./changedetect/diff-handler" "./changedetect/jobsdb/scraper")
+
+# Run echo command with the array elements
+for element in "${myArray[@]}"
+do
+    cd "$element"
+      ./build_docker.sh
+    cd -
+done
+
+echo -e "\033[31m changedetect done !!! \033[0m"
+read -p "Press Enter to continue..."
 
 myArray=("./openbox-poe-seat")
 
@@ -12,8 +24,8 @@ do
     cd -
 done
 
-echo -e "\033[31m openbox-poe-seat !!! \033[0m"
-read -p "Press Enter to continue..."
+# echo -e "\033[31m openbox-poe-seat !!! \033[0m"
+# read -p "Press Enter to continue..."
 
 # Declare an array
 myArray=("./bait" "./dbapi" "./flow-handler" "./jobsdb-link-extractor")

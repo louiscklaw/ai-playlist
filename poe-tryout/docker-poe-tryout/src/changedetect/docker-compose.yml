@@ -2,6 +2,7 @@ volumes:
   changedetection_data:
 
 services:
+  # NOTE: phrase out
   diff-handler:
     # build: ./changedetect/diff-handler
     image: logickee/poe-tryout-diff-handler
@@ -14,19 +15,19 @@ services:
     command: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
-    
-  # apprise-api:
-  #   # container_name: apprise-api
-  #   image: lscr.io/linuxserver/apprise-api:latest
-  #   # environment:
-  #   #   - PUID=1000
-  #   #   - PGID=1000
-  #   #   - TZ=Etc/UTC
-  #   volumes:
-  #     - ./volumes/apprise-api/config:/config
-  #   ports:
-  #     - 8000:8000
-  #   restart: unless-stopped
+
+  jobsdb-scraper:
+    # build: ./changedetect/jobsdb-scraper
+    image: logickee/poe-tryout-jobsdb-scraper
+    volumes:
+      - ./changedetect/jobsdb-scraper/src:/app
+      - ./volumes/changedetect/jobsdb-scraper:/share
+    working_dir: /app
+    ports:
+      - 3052:3000
+    command: ./entry.sh
+    # command: sleep infinity
+    restart: unless-stopped
 
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
