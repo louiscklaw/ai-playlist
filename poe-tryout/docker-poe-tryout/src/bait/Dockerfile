@@ -3,7 +3,7 @@ FROM node:lts-buster-slim
 ENV DEBIAN_FRONTEND noninteractive
 RUN ln -fs /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 
-RUN apt update && apt install -y git curl wget sudo
+RUN apt update && apt install -qy git curl wget sudo
 
 RUN npm i -g live-server
 
