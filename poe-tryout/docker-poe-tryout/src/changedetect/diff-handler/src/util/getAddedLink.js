@@ -1,9 +1,26 @@
+// src/changedetect/diff-handler/src/tests/getAddedLink/index.js
+
 function getAddedLink(messages) {
   const temp = messages
     .filter(m => m != '')
     .filter(s => s.search(/(into|added)/g) > -1)
-    .map(m => m.replace(/\((into|added)\) /g, ''))
-    .map(m => m.split('?')[0].trim());
+    .map(m => {
+      var url_regex = [
+        /\((added|into)\) +"?(.+)\?.+/,
+        /\((added|into)\) +(.+)/,
+      ]
+
+      var output 
+      for (var i =0; i< url_regex.length; i++ ){
+        var r =m.match(url_regex[i])
+        if (r) {
+          output = r[2];
+          break
+        }
+      }
+
+      return output 
+    });
 
   return temp;
 }
