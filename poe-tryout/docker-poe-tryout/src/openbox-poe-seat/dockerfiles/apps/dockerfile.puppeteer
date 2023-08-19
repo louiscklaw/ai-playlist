@@ -1,12 +1,14 @@
-FROM openbox-poe-seat
+FROM logickee/openbox-poe-seat-apps
 
 
-RUN apt install -y curl
+RUN apt install -qy curl
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
 RUN apt update
-RUN apt install -y nodejs
+RUN apt install -qy nodejs
 RUN npm i -g yarn
+
+RUN mkdir -p /installed &&  touch /installed/puppeteer
 
 # RUN yarn add puppeteer-core
 
@@ -19,4 +21,4 @@ RUN npm i -g yarn
 # # # echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 # RUN apt update
-# RUN apt install -y firefox
+# RUN apt install -qy firefox

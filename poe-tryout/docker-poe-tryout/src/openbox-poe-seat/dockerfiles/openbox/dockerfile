@@ -1,4 +1,4 @@
-FROM openbox-poe-seat
+FROM logickee/openbox-poe-seat-base
 
 EXPOSE 5900
 
@@ -9,13 +9,13 @@ ENV PS1='# '
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PASSWORD="root"
 
-RUN apt install -qqy \
+RUN apt install -qy \
  supervisor \
  openbox tint2 \
  pcmanfm xfce4-terminal procps curl telnet iproute2
 
 # NOTE: vnc setup start
-RUN apt install -qqy \
+RUN apt install -qy \
  tigervnc-standalone-server
 
 RUN mkdir -p /root/.vnc
@@ -25,6 +25,8 @@ RUN chmod 600 /root/.vnc/passwd
 
 ADD etc/xdg/pcmanfm /root/.config/pcmanfm
 ADD etc /etc
+
+RUN mkdir -p /installed &&  touch /installed/openbox
 
 # # original openbox docker ends here
 

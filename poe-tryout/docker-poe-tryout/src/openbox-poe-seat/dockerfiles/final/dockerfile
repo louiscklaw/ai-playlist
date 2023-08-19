@@ -1,4 +1,4 @@
-FROM openbox-poe-seat
+FROM logickee/openbox-poe-seat-final
 
 ARG ANDROID_API_LEVEL=25
 ENV ANDROID_API_LEVEL ${ANDROID_API_LEVEL}
@@ -42,6 +42,8 @@ RUN chmod 600 /home/logic/.vnc/passwd
 ADD etc/xdg/pcmanfm /home/logic/.config/pcmanfm
 
 RUN chown 1000:1000 -R /home/logic
+
+RUN mkdir -p /installed &&  touch /installed/final_done
 
 USER 1000
 
