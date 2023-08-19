@@ -53,17 +53,17 @@ services:
     ports:
       - 5000:5000
     restart: unless-stopped
-    
+
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
     # and must wait before starting (substitute "browser-chrome" with "changedetection-chrome" if last one is used)
     depends_on:
-        changedetection-chrome:
-            condition: service_started
+      changedetection-chrome:
+        condition: service_started
 
   changedetection-chrome:
     #  hostname: changedetection-chrome
     image: browserless/chrome
-    shm_size: "1gb"
+    shm_size: '1gb'
     restart: unless-stopped
     ports:
       - 3053:3000
