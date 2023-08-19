@@ -7,6 +7,10 @@ services:
     #   MONGO_INITDB_ROOT_PASSWORD: admin
     ports:
       - 27017:27017
+
+    # TODO:
+    # find: ‘./src/volumes/mongo/data/db/diagnostic.data’: Permission denied
+    # find: ‘./src/volumes/mongo/data/db/journal’: Permission denied
     volumes:
       - ./volumes/mongo/data/db:/data/db
       - ./volumes/mongo/data/configdb:/data/configdb
