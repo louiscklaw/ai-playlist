@@ -5,6 +5,8 @@ const puppeteer = require('puppeteer-core');
 const express = require('express');
 const router = express.Router();
 
+const {getRandomInt} = require('../../util/getRandomInt');
+
 const BROWSERLESS_HOST = 'changedetection-chrome';
 
 router.post('/search', async (req, res) => {
@@ -39,11 +41,12 @@ router.post('/search', async (req, res) => {
 
       document.querySelectorAll('a[href*="/hk/en/job"]').forEach(ele => {
         var div_link = ele;
-        links.push(div_link.getAttribute('href').split('?').shift());
+        links.push(div_link.getAttribute('href').split('?').shift().replace(/engineer/, 'engineer'+getRandomInt(10000, 100)));
       });
       return links;
     });
 
+    // NOTE: TODO: temporary logic to handle filter job links from links
     const post_links = all_links.filter(l => l.search('-') > -1);
 
     output = { ...output, state: 'done', post_links };
