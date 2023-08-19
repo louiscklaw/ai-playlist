@@ -51,7 +51,8 @@ echo -e "\033[31m docker environment cleared !!! \033[0m"
 read -p "Press Enter to continue..."
 
 docker compose $YML_S config > docker-compose.gen
-docker compose $YML_S up -d --build
+docker compose $YML_S up -d 
+# --build
 
 exit 0
 
