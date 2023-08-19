@@ -7,5 +7,5 @@ services:
     working_dir: /app
     ports:
       - 18089:8080
-    command: ./entry.sh
+    command: ./dev.sh
     restart: unless-stopped
