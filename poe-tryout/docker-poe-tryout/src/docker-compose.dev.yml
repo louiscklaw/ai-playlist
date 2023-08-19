@@ -1,7 +1,3 @@
-# networks:
-#   default:
-#     name: dev-poe-tryout
-
 services:
   api-debug:
     command: ./entry.sh
@@ -12,7 +8,8 @@ services:
   diff-handler:
     command: ./entry.sh
   jobsdb-scraper:
-    command: sleep infinity
+    # command: sleep infinity
+    command: ./entry.sh
   flow-handler:
     command: ./entry.sh
   jobsdb-link-extractor:
