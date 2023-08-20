@@ -7,6 +7,7 @@ services:
     #   MONGO_INITDB_ROOT_PASSWORD: admin
     ports:
       - 27017:27017
+    restart: unless-stopped
 
     # TODO:
     # find: ‘./src/volumes/mongo/data/db/diagnostic.data’: Permission denied
@@ -27,6 +28,7 @@ services:
       - 8081:8081
     depends_on:
       - mongo
+    restart: unless-stopped
 
   dbapi:
     # build: ./dbapi
@@ -39,3 +41,4 @@ services:
       - mongo
     environment:
       - PORT=3001
+    restart: unless-stopped
