@@ -2,7 +2,5 @@
 
 set -ex
 
-docker compose \
-  -f ./docker-compose.gen \
-  exec -it test bash
+docker compose -f ./docker-compose.gen exec -it test bash
   
