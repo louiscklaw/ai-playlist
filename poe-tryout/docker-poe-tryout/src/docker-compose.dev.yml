@@ -19,7 +19,7 @@ services:
   page-handler:
     command: ./entry.sh
   poe-scheduler-api:
-    command: ./dev.sh
+    command: ./entry.sh
 
   # static-share:
   #   command: ./dev.sh
