@@ -6,7 +6,7 @@ const router = express.Router();
 
 const { getAddedLink } = require('../util/getAddedLink');
 
-var validUrl = require('valid-url');
+// var validUrl = require('valid-url');
 
 function getPayloadToFlowHandlerJson(diff_link) {
   try {
@@ -56,9 +56,7 @@ router.post('/', (req, res) => {
 
     const flow_handler_payloads = sainted_messages.map(m => {
       console.log('blablabla');
-      console.log(m);
-      console.log(m.substring(1));
-      return getPayloadToFlowHandlerJson(m.substring(1))}
+      return getPayloadToFlowHandlerJson(m)}
       );
 
     flow_handler_payloads.forEach(async pl => {
@@ -66,7 +64,8 @@ router.post('/', (req, res) => {
         console.log(`going to send postJobsdbLinkExtract -> `)
         console.log(pl);
 
-        await postJobsdbLinkExtract(pl);
+        // TODO: resume me
+        // await postJobsdbLinkExtract(pl);
 
       } catch (error) {
         console.log(error);

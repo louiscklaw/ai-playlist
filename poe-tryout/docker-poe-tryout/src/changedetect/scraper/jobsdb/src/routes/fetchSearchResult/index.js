@@ -41,7 +41,7 @@ router.post('/search', async (req, res) => {
 
       document.querySelectorAll('a[href*="/hk/en/job"]').forEach(ele => {
         var div_link = ele;
-        links.push(div_link.getAttribute('href').split('?').shift().replace(/engineer/, 'engineer'+getRandomInt(10000, 100)));
+        links.push(div_link.getAttribute('href').split('?').shift());
       });
       return links;
     });

@@ -9,7 +9,7 @@ services:
     command: ./dev.sh
   jobsdb-scraper:
     # command: sleep infinity
-    command: ./entry.sh
+    command: ./dev.sh
   flow-handler:
     command: ./entry.sh
   jobsdb-link-extractor:
@@ -23,7 +23,6 @@ services:
   #   command: ./dev.sh
   # changedetection:
   #   command: ./dev.sh
-
 
   # link-extractor-chrome:
   #   command: ./dev.sh

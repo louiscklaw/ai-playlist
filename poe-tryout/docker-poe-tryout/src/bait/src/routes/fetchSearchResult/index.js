@@ -21,11 +21,11 @@ router.post('/result1', async (req, res) => {
     },
     "error": {},
     "post_links": [
-      `/hk/en/job/job-job-job-11111111${random_int}`,
-      `/hk/en/job/job-job-job-22${random_int}`,
-      `/hk/en/job/job-333${random_int}`,
-      "/hk/en/job/job-job-100003010508305",
-      `/hk/en/job/automation-hardware-engineer-ai-lab-${random_int}-100003010505170`
+      // `/hk/en/job/job-job-job-11111111${random_int}`,
+      // `/hk/en/job/job-job-job-22${random_int}`,
+      // `/hk/en/job/job-333${random_int}`,
+      // "/hk/en/job/job-job-100003010508305",
+      `"/hk/en/job/automation-hardware-engineer-ai-lab-${random_int}-100003010505170"`,
     ],
     "state": "done",
     "url": "https://hk.jobsdb.com/hk/search-jobs/validation-automation-engineer/1"
