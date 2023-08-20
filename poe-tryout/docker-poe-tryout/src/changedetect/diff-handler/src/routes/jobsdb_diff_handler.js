@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
         console.log(pl);
 
         // TODO: resume me
-        // await postJobsdbLinkExtract(pl);
+        await postJobsdbLinkExtract(pl);
 
       } catch (error) {
         console.log(error);
