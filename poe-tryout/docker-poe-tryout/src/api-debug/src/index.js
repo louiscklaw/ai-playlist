@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const { myLogger } = require('./utils/myLogger');
 const PORT = 3000;
 
 try {
@@ -13,11 +13,14 @@ try {
   app.use('/post_helloworld', require('./routes/post_helloworld'));
   app.use('/helloworld', require('./routes/helloworld'));
 
+  myLogger.info('api-debug started');
+  myLogger.info('%o', { hello: 'world' });
+
   // // Start the server
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log('error during starting express');
-  console.log(error);
+  myLogger.info('error during starting express');
+  myLogger.info(error);
 }

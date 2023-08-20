@@ -1,11 +1,12 @@
 const fs = require('fs');
 
 const express = require('express');
+const { myLogger } = require('../utils/myLogger');
 const router = express.Router();
 
 router.post('/', (req, res) => {
   var req_body = req.body;
-  console.log({ req_body });
+  myLogger.info({ req_body });
 
   fs.writeFileSync('/share/diff.json', JSON.stringify(req_body), { encoding: 'utf8' });
 

@@ -1,21 +1,19 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
 
-const body = {
-  jobs_id: 'blablabla',
-  job_post: 'we are employing a teacher',
-  preprompts: ['we are employing a teacher, understand ?'],
-  question_list: ['what is the post employing?'],
-};
+const { API_DEBUG_ENDPOINT } = process.env;
+if (!API_DEBUG_ENDPOINT) throw new Error('API_ENDPOINT_NOT_DEFINED');
 
+console.log();
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
-    const response = await fetch('http://localhost:3003/helloworld');
+    const response = await fetch(`${API_DEBUG_ENDPOINT}/helloworld`);
 
     const res_text = await response.text();
-    console.log({ res_text });
+    myLogger.info('%o', { res_text });
   });
 
 console.log('helloworld');

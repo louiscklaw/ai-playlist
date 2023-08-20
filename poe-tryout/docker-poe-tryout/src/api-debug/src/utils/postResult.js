@@ -1,9 +1,10 @@
 'use strict';
 
 const fetch = require('node-fetch');
+const myLogger = require('./myLogger');
 
 function fetchPost(url, json_body) {
-  console.log('fetchPost ' + url + ' ... ');
+  myLogger.info('fetchPost ' + url + ' ... ');
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(json_body),
