@@ -18,7 +18,7 @@ Queue.clear();
 // require('./poe')(Queue);
 // require('./poe_dummy')(Queue);
 
-const {initQueue, getInactiveCount} = require('./poe')
+const { initQueue, getInactiveCount } = require('./poe');
 initQueue(Queue);
 
 module.exports = { Queue, getInactiveCount };

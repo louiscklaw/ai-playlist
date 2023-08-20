@@ -14,8 +14,8 @@ try {
   app.use('/fetchSearchResult', require('./routes/fetchSearchResult'));
 
   app.use('/helloworld', (req, res) => {
-    var random_int = getRandomInt(10000, 100)
-    res.send({ hello: 'world', random_int});
+    var random_int = getRandomInt(10000, 100);
+    res.send({ hello: 'world', random_int });
   });
 
   // Start the server

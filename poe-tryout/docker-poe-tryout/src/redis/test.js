@@ -9,8 +9,8 @@ client.on('connect', () => {
 
   Array(999)
     .fill(0)
-    .forEach((_,i) => {
-      console.log(i)
+    .forEach((_, i) => {
+      console.log(i);
       client.set('message', 'Hello World', (error, result) => {
         if (error) {
           console.error(error);

@@ -26,7 +26,7 @@ function getRandomPoeEndpoint() {
 }
 
 var queue_inactive_count = 0;
-function getInactiveCount (){
+function getInactiveCount() {
   return queue_inactive_count;
 }
 
@@ -122,7 +122,7 @@ function initQueue(Queue) {
     Queue.inactiveCount((err, count) => {
       console.log({ state: 'Queue schedule success', QueueInactiveCount: count });
       queue_inactive_count = count;
-      console.log(err)
+      console.log(err);
     });
 
     job
@@ -145,6 +145,4 @@ function initQueue(Queue) {
   });
 }
 
-module.exports = {initQueue, getInactiveCount}
-
-
+module.exports = { initQueue, getInactiveCount };

@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer-core');
 const express = require('express');
 const router = express.Router();
 
-const {getRandomInt} = require('../../util/getRandomInt');
+const { getRandomInt } = require('../../util/getRandomInt');
 
 const BROWSERLESS_HOST = 'changedetection-chrome';
 

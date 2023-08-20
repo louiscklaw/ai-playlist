@@ -27,7 +27,7 @@ router.post('/dump', (req, res) => {
     var req_body = req.body;
 
     console.log('dump called');
-    console.log({req_body});
+    console.log({ req_body });
 
     output = { ...output, state: 'done', debug: req_body };
   } catch (error) {
@@ -47,8 +47,8 @@ router.post('/', (req, res) => {
     // console.log({ req_body });
     output = { ...output, state: 'start', debug: req_body };
 
-    console.log('call to jobsdb_diff_handler')
-    console.log({req_body})
+    console.log('call to jobsdb_diff_handler');
+    console.log({ req_body });
 
     const json_message = req_body.message;
     const messages = json_message.split(/\n/);
@@ -56,20 +56,19 @@ router.post('/', (req, res) => {
 
     const flow_handler_payloads = sainted_messages.map(m => {
       console.log('blablabla');
-      return getPayloadToFlowHandlerJson(m)}
-      );
+      return getPayloadToFlowHandlerJson(m);
+    });
 
     flow_handler_payloads.forEach(async pl => {
       try {
-        console.log(`going to send postJobsdbLinkExtract -> `)
+        console.log(`going to send postJobsdbLinkExtract -> `);
         console.log(pl);
 
         // TODO: resume me
         await postJobsdbLinkExtract(pl);
-
       } catch (error) {
         console.log(error);
-        console.log(pl)
+        console.log(pl);
         throw new Error(`error during posting to flow-handler`);
       }
     });

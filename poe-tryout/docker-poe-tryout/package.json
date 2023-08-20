@@ -18,7 +18,7 @@
     "dc_redis_cli":"cd src && ./scripts/dc_redis_cli.sh",
     "gU": "git add . && git commit -m\"update docker-poe-tryout,\"",
     "update_readme": "github-markdown README.md > docs/index.html",
-    "tidy":"sleep 1 && npx prettier --write **/*.js"
+    "tidy": "npx prettier --write **/*.js"
   },
   "keywords": [],
   "author": "",

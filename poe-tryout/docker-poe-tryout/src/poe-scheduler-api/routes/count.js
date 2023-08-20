@@ -6,15 +6,12 @@ const { Queue, getInactiveCount } = require('../queue');
 router.get('/', (req, res) => {
   try {
     console.log('count called.');
-    
 
     res.send({
-        count: getInactiveCount()
+      count: getInactiveCount(),
     });
-
   } catch (error) {
     console.log(error);
-
   }
 });
 
