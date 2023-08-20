@@ -5,6 +5,7 @@ services:
     command: ./entry.sh
     # command: sleep infinity
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./flow-handler/src:/app
       
       # NOTE: store output
@@ -20,4 +21,5 @@ services:
     ports:
       - 3005:3000
     restart: unless-stopped
-    
+    environment:
+      - TZ=Asia/Hong_Kong

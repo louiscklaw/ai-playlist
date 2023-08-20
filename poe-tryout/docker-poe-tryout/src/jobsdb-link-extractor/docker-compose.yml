@@ -5,6 +5,7 @@ services:
     command: ./entry.sh
     # command: sleep infinity
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./jobsdb-link-extractor/src:/app
       - ./volumes/jobsdb-link-extractor/screenshot:/share/screenshot
       - ./volumes/jobsdb-link-extractor:/share
@@ -15,7 +16,9 @@ services:
     ports:
       - 3003:3000
     restart: unless-stopped
-    
+    environment:
+      - TZ=Asia/Hong_Kong
+      
   link-extractor-chrome:
     image: browserless/chrome
     shm_size: "1gb"
@@ -23,6 +26,7 @@ services:
     ports:
       - 13000:3000
     environment:
+      - TZ=Asia/Hong_Kong
       - SCREEN_WIDTH=1920
       - SCREEN_HEIGHT=1024
       - SCREEN_DEPTH=16
@@ -34,3 +38,5 @@ services:
       - DEFAULT_BLOCK_ADS=true
       - DEFAULT_STEALTH=true
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
+    volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

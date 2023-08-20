@@ -7,6 +7,7 @@ services:
     # build: ./changedetect/diff-handler
     image: logickee/poe-tryout-diff-handler
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/diff-handler/src:/app
       - ./volumes/changedetect/diff-handler:/share
     working_dir: /app
@@ -15,11 +16,14 @@ services:
     command: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
+    environment:
+      - TZ=Asia/Hong_Kong
 
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/scraper/jobsdb/src:/app
       - ./volumes/changedetect/jobsdb-scraper:/share
     working_dir: /app
@@ -28,17 +32,21 @@ services:
     command: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
+    environment:
+      - TZ=Asia/Hong_Kong
 
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
     # container_name: changedetection
     # hostname: changedetection
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./volumes/changedetection/datastore:/datastore
       # Configurable proxy list support, see https://github.com/dgtlmoon/changedetection.io/wiki/Proxy-configuration#proxy-list-support
       # - ./proxies.json:/datastore/proxies.json
 
     environment:
+      - TZ=Asia/Hong_Kong
       # Default listening port, can also be changed with the -p option
       - PORT=5000
       - PUID=1000
@@ -68,6 +76,7 @@ services:
     ports:
       - 3053:3000
     environment:
+      - TZ=Asia/Hong_Kong
       - SCREEN_WIDTH=1920
       - SCREEN_HEIGHT=1024
       - SCREEN_DEPTH=16
@@ -80,3 +89,5 @@ services:
       - DEFAULT_STEALTH=true
       # Ignore HTTPS errors, like for self-signed certs
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
+    volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

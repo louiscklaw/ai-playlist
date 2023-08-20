@@ -3,9 +3,12 @@ services:
     # build: ./bait
     image: logickee/poe-tryout-bait 
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - "./bait/src:/app"
     working_dir: /app
     ports:
       - 18089:8080
     command: ./dev.sh
     restart: unless-stopped
+    environment:
+      - TZ=Asia/Hong_Kong

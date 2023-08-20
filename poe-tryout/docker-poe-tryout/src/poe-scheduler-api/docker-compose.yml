@@ -22,29 +22,38 @@ services:
     ports:
       - '6379:6379'
     volumes: 
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - redis_data:/data
     command: redis-server --save 20 1 --loglevel warning --dir /data
     restart: always
+    environment:
+      - TZ=Asia/Hong_Kong
 
   redisinsight:
     image: redislabs/redisinsight:latest
     ports:
       - 8001:8001
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - redisinsight_store:/db
     depends_on:
       - redis
     restart: unless-stopped
-
+    environment:
+      - TZ=Asia/Hong_Kong
+      
   poe-scheduler-api:
     # build: ./poe-scheduler-api
     image: logickee/poe-tryout-poe-scheduler-api
     ports:
       - 3002:3002
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./poe-scheduler-api/:/app
       - ./volumes/static-share:/share
     depends_on:
       - redis
     restart: unless-stopped
     # command: sleep infinity
+    environment:
+      - TZ=Asia/Hong_Kong

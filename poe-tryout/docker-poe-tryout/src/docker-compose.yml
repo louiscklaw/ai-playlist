@@ -9,8 +9,11 @@ services:
     working_dir: /src
     env_file: ./.env
     volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./:/src
     restart: unless-stopped
+    environment:
+      - TZ=Asia/Hong_Kong
   #   build: ./docker-ubuntu2
   # ubuntu3:
   #   build: ./docker-ubuntu3
