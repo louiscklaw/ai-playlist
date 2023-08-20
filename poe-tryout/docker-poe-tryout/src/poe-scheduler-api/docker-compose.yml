@@ -57,3 +57,5 @@ services:
     # command: sleep infinity
     environment:
       - TZ=Asia/Hong_Kong
+    command: ./entry.sh
+    

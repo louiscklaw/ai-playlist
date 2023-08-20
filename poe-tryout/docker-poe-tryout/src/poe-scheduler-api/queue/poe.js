@@ -91,7 +91,7 @@ function initQueue(Queue) {
 
       // // NOTE: successful ask, cool down bot for slething
 
-      await mySleepM(3);
+      await mySleepM(1);
       console.log('cooldown bot done');
 
       done(null, { deliveredAt: new Date(), data });
