@@ -13,6 +13,10 @@ services:
 
       # - ./volumes/flow-handler/screenshot:/share/screenshot
     working_dir: /app
+
+    # TODO:
+    # depends_on:
+    #   - mongo
     depends_on:
       poe-scheduler-api:
         condition: service_started

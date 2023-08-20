@@ -51,8 +51,13 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./poe-scheduler-api/:/app
       - ./volumes/static-share:/share
+
+    # TODO:
+    # depends_on:
+    #   - mongo
     depends_on:
       - redis
+      
     restart: unless-stopped
     # command: sleep infinity
     environment:
