@@ -1,7 +1,9 @@
 services:
+  # NOTE: bait skipped as always use dev.sh
+  # bait:
+  #   command: ./entry.sh
+
   api-debug:
-    command: ./entry.sh
-  bait:
     command: ./entry.sh
   dbapi:
     command: ./entry.sh
