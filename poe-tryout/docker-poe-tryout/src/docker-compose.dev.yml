@@ -4,9 +4,9 @@ services:
   #   command: ./entry.sh
 
   api-debug:
-    command: ./entry.sh
+    command: ./dev.sh
   dbapi:
-    command: ./entry.sh
+    command: ./dev.sh
   diff-handler:
     command: ./entry.sh
   jobsdb-scraper:

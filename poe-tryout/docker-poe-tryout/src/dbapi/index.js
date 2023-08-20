@@ -15,12 +15,13 @@ const JobPostModel = require('./models/JobPost');
 const HelloworldModel = require('./models/Helloworld');
 const { CustomerModel } = require('./models/Customer');
 const { InvoiceModel } = require('./models/Invoice');
+const { myLogger } = require('./utils/myLogger');
 
 try {
   // var lock = new AsyncLock();
 
   mongoose.connect('mongodb://mongo:27017/database');
-  console.log('connected to mongoose');
+  myLogger.info('connected to mongoose');
 
   const app = express();
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,12 +45,14 @@ try {
   app.use(router);
 
   // app.listen(PORT, () => {
-  //   console.log(`Express server listening on port ${PORT}`);
+  //   myLogger.info(`Express server listening on port ${PORT}`);
   // });
 
+  myLogger.info('hello dbapi')
+  
   http.createServer(app).listen(PORT, function () {
-    console.log(`Express server listening on port ${PORT}`);
+    myLogger.info(`Express server listening on port ${PORT}`);
   });
 } catch (error) {
-  console.log(error);
+  myLogger.info(error);
 }

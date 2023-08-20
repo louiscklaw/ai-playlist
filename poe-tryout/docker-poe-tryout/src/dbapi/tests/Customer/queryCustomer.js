@@ -1,5 +1,6 @@
 const request = require('request');
 var rp = require('request-promise');
+const { myLogger } = require('../../utils/myLogger');
 
 async function queryCustomer() {
   try {
@@ -16,7 +17,7 @@ async function queryCustomer() {
 
     return JSON.parse(resp);
   } catch (error) {
-    console.log(error);
+    myLogger.info(error);
   }
 }
 

@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
 
 (async () => {
   const response = await fetch('http://localhost:3001/api/v1/Customer/64c9beba5dc9292b6471f638', {
@@ -6,7 +7,7 @@ const fetch = require('node-fetch');
   });
 
   // NOTE: if response.status == 204 means success
-  console.log(response.status);
+  myLogger.info(response.status);
 })();
 
 // request = require('request')

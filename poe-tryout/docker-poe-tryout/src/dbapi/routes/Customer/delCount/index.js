@@ -11,10 +11,10 @@ router.get('/:id', async (req, res) => {
 
   await mutex.acquire();
   try {
-    // console.log(`lock key_${id}`)
+    // myLogger.info(`lock key_${id}`)
 
     const customer = await rp({ uri: `http://dbapi:3001/api/v1/Customer/${id}`, json: true });
-    // console.log(customer);
+    // myLogger.info(customer);
 
     const updated_customer = { ...customer, count: customer.count - 1 };
 

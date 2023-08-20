@@ -3,7 +3,8 @@
 set -ex
 
 docker compose -f ./docker-compose.gen \
-  logs -f redis 
+  logs -f api-debug dbapi
+  # redis 
   # redisinsight
   # poe-scheduler-api jobsdb-link-extractor diff-handler flow-handler dbapi
   # jobsdb-scraper bait diff-handler

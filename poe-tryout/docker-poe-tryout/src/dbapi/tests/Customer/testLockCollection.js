@@ -1,9 +1,10 @@
 // https://florianholzapfel.github.io/express-restify-mongoose/
 
 var rp = require('request-promise');
+const { myLogger } = require('../../utils/myLogger');
 
 (async () => {
-  console.log('helloworld');
+  myLogger.info('helloworld');
   const id = `64df268c54d0ffb4ccd493f1`;
 
   var options;
@@ -22,5 +23,5 @@ var rp = require('request-promise');
       rp(options);
     });
 
-  // console.log(resp)
+  // myLogger.info(resp)
 })();

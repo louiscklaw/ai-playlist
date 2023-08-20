@@ -1,1 +1,1 @@
-console.log('hello backup');
+myLogger.info('hello backup');

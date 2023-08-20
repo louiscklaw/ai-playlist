@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
 
 (async () => {
   const body = { name: 'customer name' };
@@ -10,7 +11,7 @@ const fetch = require('node-fetch');
   });
   const data = await response.json();
 
-  console.log(data);
+  myLogger.info(data);
 })();
 
 // request = require('request')
