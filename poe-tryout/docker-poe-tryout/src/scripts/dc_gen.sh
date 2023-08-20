@@ -4,6 +4,7 @@ set -e
 
 YML_S='
 -f ./docker-compose.yml
+-f ./redis/docker-compose.yml
 -f ./api-debug/docker-compose.yml
 -f ./bait/docker-compose.yml
 -f ./changedetect/docker-compose.yml

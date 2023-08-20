@@ -1,0 +1,22 @@
+{
+  "name": "quickstart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker_network_prune": "docker network prune",
+    "docker_compose_pull": "docker compose pull",
+    "docker_compose_build": "docker compose build",
+    "docker_compose_kill": "docker compose kill",
+    "docker_compose_down": "docker compose down --remove-orphans ",
+    "docker_compose_up": "docker compose up -d",
+    "docker_rebuild": "npm run docker_compose_pull && npm run docker_compose_build && npm run docker_compose_kill && npm run docker_compose_down && npm run docker_compose_up && docker compose logs -f",
+    "gitUpdate": "git pull && git add . && git commit -m \"update\" ",
+    "gitSync": "git fetch --all && git pull --ff-only",
+    "docker_prune": "docker kill $(docker ps -qa) || true && docker system prune"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

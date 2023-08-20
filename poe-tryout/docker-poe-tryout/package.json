@@ -11,6 +11,7 @@
     "dc_prod": "cd src && ./scripts/dc_dev.sh",
     "dc_dev": "cd src && DOCKER_DEV=true ./scripts/dc_dev.sh",
     "dc_log":"cd src && ./scripts/dc_log.sh",
+    "dc_gen":"cd src && ./scripts/dc_gen.sh",
     "dc_debug":"cd src && ./scripts/dc_debug.sh",
     "dc_restart":"cd src && ./scripts/dc_restart.sh",
     "dc_test":"cd src && ./scripts/dc_test.sh",
