@@ -25,12 +25,7 @@ function getRandomPoeEndpoint() {
   }
 }
 
-var queue_inactive_count = 0;
-function getInactiveCount (){
-  return queue_inactive_count;
-}
-
-function initQueue(Queue) {
+module.exports = Queue => {
   Queue.process('poe', 1, async function (job, done) {
     try {
       console.log('\nProcessing job with id %s at %s', job.id, new Date());
@@ -121,8 +116,6 @@ function initQueue(Queue) {
     // console.log({ QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
       console.log({ state: 'Queue schedule success', QueueInactiveCount: count });
-      queue_inactive_count = count;
-      console.log(err)
     });
 
     job
@@ -143,8 +136,4 @@ function initQueue(Queue) {
         console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
       });
   });
-}
-
-module.exports = {initQueue, getInactiveCount}
-
-
+};

@@ -8,10 +8,10 @@ services:
   dbapi:
     command: ./entry.sh
   diff-handler:
-    command: ./dev.sh
+    command: ./entry.sh
   jobsdb-scraper:
     # command: sleep infinity
-    command: ./dev.sh
+    command: ./entry.sh
   flow-handler:
     command: ./entry.sh
   jobsdb-link-extractor:
@@ -19,7 +19,7 @@ services:
   page-handler:
     command: ./entry.sh
   poe-scheduler-api:
-    command: ./entry.sh
+    command: ./dev.sh
 
   # static-share:
   #   command: ./dev.sh

@@ -15,7 +15,10 @@ var Queue = kue.createQueue({
 Queue.clear();
 
 // require('./now')(Queue);
-require('./poe')(Queue);
+// require('./poe')(Queue);
 // require('./poe_dummy')(Queue);
 
-module.exports = { Queue };
+const {initQueue, getInactiveCount} = require('./poe')
+initQueue(Queue);
+
+module.exports = { Queue, getInactiveCount };

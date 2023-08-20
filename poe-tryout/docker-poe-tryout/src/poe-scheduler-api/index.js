@@ -9,6 +9,7 @@ const app = express();
 try {
   app.use(bodyParser.json());
 
+  app.use('/count', require('./routes/count'));
   app.use('/ask_poe', require('./routes/ask_poe'));
   app.use('/process_new_job_post', require('./routes/process_new_job_post'));
   app.use('/ask_jobsdb_post', require('./routes/ask_jobsdb_post'));
