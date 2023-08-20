@@ -48,8 +48,8 @@ try {
   //   myLogger.info(`Express server listening on port ${PORT}`);
   // });
 
-  myLogger.info('hello dbapi')
-  
+  myLogger.info('hello dbapi');
+
   http.createServer(app).listen(PORT, function () {
     myLogger.info(`Express server listening on port ${PORT}`);
   });
