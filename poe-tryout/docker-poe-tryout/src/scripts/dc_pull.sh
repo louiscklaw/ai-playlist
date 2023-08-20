@@ -10,7 +10,8 @@ docker pull mzz2017/v2raya                            &
 docker pull node:latest                               &
 docker pull redis:6.2-alpine                          &    
 docker pull redislabs/redisinsight:latest             &    
-             
+wait
+
 docker pull logickee/openbox-poe-seat-final           &                   
 docker pull logickee/poe-tryout-bait                  &            
 docker pull logickee/poe-tryout-dbapi                 &             
