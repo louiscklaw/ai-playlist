@@ -1,5 +1,5 @@
 {
-  "name": "logdb-helloworld",
+  "name": "dbapi",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "start": "node ./index.js",
     "dev": "nodemon --exec \"npm run start\"",
     "gitUpdate": "git add . && git commit -m\"update dbapi,\"",
-    "tidy": "npx pretter --write **/*.js"
+    "tidy": "npx prettier --write **/*.js"
   },
   "keywords": [],
   "author": "",
