@@ -2,6 +2,8 @@
 
 set -ex
 
+docker pull logickee/openbox-poe-seat-final           &                   
+
 docker pull browserless/chrome                        &          
 docker pull ghcr.io/dgtlmoon/changedetection.io       &                       
 docker pull mongo-express:latest                      &        
@@ -14,7 +16,6 @@ docker pull redis:6.2-alpine                          &
 docker pull redislabs/redisinsight:latest             &    
 wait
 
-docker pull logickee/openbox-poe-seat-final           &                   
 docker pull logickee/poe-tryout-bait                  &            
 docker pull logickee/poe-tryout-dbapi                 &             
 wait
@@ -28,6 +29,5 @@ docker pull logickee/poe-tryout-jobsdb-scraper        &
 docker pull logickee/poe-tryout-page-handler          &                    
 docker pull logickee/poe-tryout-poe-scheduler-api     &                         
 docker pull logickee/poe-tryout-static-share          &                    
-
 wait 
 
