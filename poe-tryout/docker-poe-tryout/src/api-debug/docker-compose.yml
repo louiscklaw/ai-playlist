@@ -11,3 +11,6 @@ services:
     working_dir: /app
     ports:
       - 3051:3000
+    depends_on:
+      - redis
+      - mongo

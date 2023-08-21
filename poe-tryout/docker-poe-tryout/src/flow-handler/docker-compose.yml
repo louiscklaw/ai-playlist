@@ -19,10 +19,9 @@ services:
     # depends_on:
     #   - mongo
     depends_on:
-      poe-scheduler-api:
-        condition: service_started
-      link-extractor-chrome:
-        condition: service_started
+      - poe-scheduler-api
+      - jobsdb-link-extractor
+      - page-handler
     ports:
       - 3005:3000
     restart: unless-stopped

@@ -18,6 +18,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+    depends_on:
+      - jobsdb-scraper
 
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
@@ -65,8 +67,8 @@ services:
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
     # and must wait before starting (substitute "browser-chrome" with "changedetection-chrome" if last one is used)
     depends_on:
-      changedetection-chrome:
-        condition: service_started
+      - changedetection-chrome
+      - diff-handler
 
   changedetection-chrome:
     #  hostname: changedetection-chrome
