@@ -17,6 +17,7 @@ const SEND_MESSAGE_DONE = 'SEND_MESSAGE_DONE';
 // saintize text to markdown compatable text string
 function saintizeText(in_text) {
   return in_text.replace(/\./g,'\\.')
+    .replace(/\-/g,'\\-')
 }
 
 router.post('/', async (req, res) => {

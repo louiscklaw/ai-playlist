@@ -4,7 +4,7 @@ const { myLogger } = require('../../utils/myLogger');
 
 var message = `
 🔔🔔🔔 job done 🔔🔔🔔
-job url: http://www.google.com
+job url: https://hk.jobsdb.com/hk/en/job/automation-hardware-engineer-ai-lab-879952-100003010505170
 job working_dir: ${'working_dir'} :
 
 \`\`\`javascript
