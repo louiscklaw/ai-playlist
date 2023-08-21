@@ -16,7 +16,7 @@ Array(1)
     const response = await fetch('http://jobsdb-link-extractor:3000/helloworld');
 
     const res_text = await response.text();
-    myLogger.info({ res_text });
+    myLogger.info('%o', { res_text });
   });
 
 console.log('helloworld');

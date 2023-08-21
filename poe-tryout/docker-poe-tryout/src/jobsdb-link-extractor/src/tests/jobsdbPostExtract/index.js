@@ -14,5 +14,5 @@ urls.map(async (v, i) => {
 
   const res_json = await response.json();
   const { extracted } = res_json;
-  myLogger.info({ extracted });
+  myLogger.info('%o', { extracted });
 });

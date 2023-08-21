@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
       // NOTE: input validation, may be set a schema here ?
       const req_body = req.body;
       const { url } = req_body;
-      myLogger.info({ url });
+      myLogger.info('%o', { url });
 
       if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`);
 
