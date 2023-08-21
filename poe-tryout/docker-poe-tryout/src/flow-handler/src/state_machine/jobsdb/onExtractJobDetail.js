@@ -1,6 +1,7 @@
 var validUrl = require('valid-url');
 
 const { postJobsdbPostExtract } = require('../../utils/fetchPost');
+const { myLogger } = require('../../utils/myLogger');
 
 module.exports = {
   onExtractJobDetail: function () {
@@ -8,7 +9,8 @@ module.exports = {
       try {
         retry_count = 5;
 
-        console.log(this.context);
+        // myLogger.info("%o",this.context);
+
         var { req_body } = this.context;
         var { jobsdb_job_url, callback_url } = req_body;
 
@@ -18,16 +20,18 @@ module.exports = {
           throw new Error(`invalid url ${jobsdb_job_url}`);
         }
 
+        // NOTE: receiver -> src/jobsdb-link-extractor/src/routes/jobsdbPostExtract.js
         var result = await postJobsdbPostExtract({
           url: jobsdb_job_url,
+          jobsdb_job_url,
           callback_url,
         });
         var result_json = await result.json();
-        console.log(result_json);
+        myLogger.info("%o",{result_json});
 
         res();
       } catch (error) {
-        console.log(error);
+        myLogger.error("%o",error);
         rej('extract job detail failed, url:' + jobsdb_job_url);
       }
     });

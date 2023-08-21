@@ -2,7 +2,7 @@ services:
   jobsdb-link-extractor:
     # build: ./jobsdb-link-extractor
     image: logickee/poe-tryout-jobsdb-link-extractor
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

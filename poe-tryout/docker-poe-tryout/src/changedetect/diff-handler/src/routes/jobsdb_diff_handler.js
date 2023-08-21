@@ -26,6 +26,7 @@ router.post('/dump', (req, res) => {
   try {
     var req_body = req.body;
 
+    // TODO: use myLogger,
     console.log('dump called');
     console.log({ req_body });
 
@@ -64,7 +65,6 @@ router.post('/', (req, res) => {
         console.log(`going to send postJobsdbLinkExtract -> `);
         console.log(pl);
 
-        // TODO: resume me
         await postJobsdbLinkExtract(pl);
       } catch (error) {
         console.log(error);

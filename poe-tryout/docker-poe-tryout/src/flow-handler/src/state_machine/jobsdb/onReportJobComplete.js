@@ -29,15 +29,18 @@ function onReportJobComplete() {
   return new Promise(async (res, rej) => {
     try {
       myLogger.info('report job complete...');
+
       const { working_dir } = this.context;
       // myLogger.info(this.context);
-      myLogger.info(working_dir);
+      var meta_json = await loadJson(`${working_dir}/meta.json`);
+      myLogger.info(`job url: ${meta_json.jobsdb_job_url}`)
 
       const { companyName, jobAddress, jobTitle } = await getJobInfo(working_dir);
-      //
-      //
+
       var message = `
-✔️ job email prepared in dir: ${working_dir} :
+✔️ job done !
+job url: ${meta_json.jobsdb_job_url}
+job working_dir: ${working_dir} :
 
 \`\`\`javascript
 ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
@@ -47,8 +50,8 @@ ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
 
       res();
     } catch (error) {
-      console.log(error);
       myLogger.error('error during report job complete...');
+      myLogger.error("%o",error);
       // myLogger.error(error.message);
 
       rej();

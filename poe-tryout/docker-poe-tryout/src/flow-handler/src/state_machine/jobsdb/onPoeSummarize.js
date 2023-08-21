@@ -1,5 +1,6 @@
 const { askPoePrepromptQuestion } = require('../../fetch/askPoePrepromptQuestion');
 const { postHelloworld } = require('../../fetch/postHelloworld');
+const { loadJson } = require('../../utils/loadJson');
 const { myLogger } = require('../../utils/myLogger');
 
 module.exports = {
@@ -9,8 +10,14 @@ module.exports = {
         console.log('I Summarize');
         const { req_body } = this.context;
         var payload = req_body;
+        var {working_dir} = payload;
 
-        // console.log({ payload });
+        console.log('input to summarize')
+        
+        var meta_json = await loadJson(`${working_dir}/meta.json`);
+        console.log({meta_json})
+
+        // receiver -> src/poe-scheduler-api/routes/ask_poe.js
         var result = await askPoePrepromptQuestion(payload);
 
         res();

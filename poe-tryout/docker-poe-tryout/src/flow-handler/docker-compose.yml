@@ -2,7 +2,7 @@ services:
   flow-handler:
     # build: ./flow-handler
     image: logickee/poe-tryout-flow-handler
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

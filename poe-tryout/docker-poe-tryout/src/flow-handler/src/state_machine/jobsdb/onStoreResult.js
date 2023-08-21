@@ -1,5 +1,6 @@
 const { myLogger } = require('../../utils/myLogger');
 const { storeJson } = require('../../utils/storeJson');
+const { loadJson } = require('../../utils/loadJson');
 const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
 
 module.exports = {
@@ -13,6 +14,9 @@ module.exports = {
           myLogger.info('working_dir is not defined, default to /share/testing');
           working_dir = '/share/testing';
         }
+
+        var test_json = await loadJson(`${working_dir}/meta.json`);
+        console.log(`job url: ${test_json.jobsdb_job_url}`)
 
         await createDirIfNotExists(working_dir);
         await storeJson(`${working_dir}/store_result.json`, this.context);

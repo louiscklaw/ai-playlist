@@ -16,7 +16,9 @@ const { myLogger } = require('../utils/myLogger');
 
 router.post('/', async (req, res) => {
   myLogger.info('/jobsdbPostExtract called');
-  const { callback_url } = req.body;
+
+  // NOTE: sender-> src/flow-handler/src/state_machine/jobsdb/onExtractJobDetail.js
+  const { jobsdb_job_url, callback_url } = req.body;
 
   res.send({ state: 'scheduled' });
 
@@ -30,12 +32,15 @@ router.post('/', async (req, res) => {
     try {
       // NOTE: input validation, may be set a schema here ?
       const req_body = req.body;
-      const { url } = req_body;
-      myLogger.info('%o', { url });
 
-      if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`);
+      // TODO: remove me 
+      // const { url } = req_body;
 
-      const post_id = url.replace('.html', '').split('-').pop();
+      myLogger.info('%o', { jobsdb_job_url });
+
+      if (!validUrl.isUri(jobsdb_job_url)) throw new Error(`invalid url ${jobsdb_job_url}`);
+
+      const post_id = jobsdb_job_url.replace('.html', '').split('-').pop();
       if (!post_id) throw new Error('post_id is required');
 
       // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
@@ -49,7 +54,7 @@ router.post('/', async (req, res) => {
         defaultViewport: { width: 1920, height: 1080 * 3 },
       });
       page = await browser.newPage();
-      await page.goto(url, { waitUntil: 'networkidle2' });
+      await page.goto(jobsdb_job_url, { waitUntil: 'networkidle2' });
 
       myLogger.info('browser started');
 
@@ -112,6 +117,7 @@ router.post('/', async (req, res) => {
       await jobPage.screenshot({ path: screenshot_path, fullPage: true });
 
       var extracted = {
+        jobsdb_job_url,
         post_id,
         __jobDescriptionRawProcessed,
         _debugList,
@@ -139,8 +145,8 @@ router.post('/', async (req, res) => {
       break;
     }
   }
-
-  // myLogger.info({output})
+  
+  // NOTE: receiver -> src/flow-handler/src/routes/jobsdb_link_extract_cb.js
   await postResult(callback_url, output.extracted);
 });
 

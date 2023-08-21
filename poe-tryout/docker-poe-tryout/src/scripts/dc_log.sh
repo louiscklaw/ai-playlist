@@ -3,7 +3,8 @@
 set -ex
 
 docker compose -f ./docker-compose.gen.yml \
-  logs -f poe-scheduler-api
+  logs -f flow-handler jobsdb-link-extractor
+  # poe-scheduler-api
   # redis 
   # redisinsight
   # poe-scheduler-api jobsdb-link-extractor diff-handler flow-handler dbapi
