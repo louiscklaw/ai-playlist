@@ -4,7 +4,7 @@ const { myLogger } = require('../../utils/myLogger');
 
 var message = `
 🔔🔔🔔 job done 🔔🔔🔔
-job url: ${'jobsdb_job_url'}
+job url: http://www.google.com
 job working_dir: ${'working_dir'} :
 
 \`\`\`javascript
