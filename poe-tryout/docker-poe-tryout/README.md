@@ -3,7 +3,7 @@
 
 ### redis
 
-docker compose -f ./docker-compose.gen \
+docker compose -f ./docker-compose.gen.yml \
   exec -it redis bash
 
 redis-cli config set dir /data

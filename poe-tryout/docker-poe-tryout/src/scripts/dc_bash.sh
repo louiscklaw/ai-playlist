@@ -2,5 +2,5 @@
 
 set -ex
 
-docker compose -f ./docker-compose.gen exec -it \
-  redis-test bash
+docker compose -f ./docker-compose.gen.yml exec -it \
+  jobsdb-link-extractor bash

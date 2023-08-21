@@ -1,8 +1,8 @@
 # ignore resolv.conf for v2raya
 **/resolv.conf
 
-# ignore docker-compose.gen, avoid leak by environment variable
-**/*.gen
+# ignore docker-compose.gen.yml, avoid leak by environment variable
+**/*.gen.yml
 
 **/*.key
 **/.config

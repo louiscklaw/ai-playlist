@@ -2,4 +2,4 @@
 
 set -ex
 
-docker compose -f ./docker-compose.gen exec -it bait bash
+docker compose -f ./docker-compose.gen.yml exec -it bait bash
