@@ -27,12 +27,14 @@ router.post('/', async (req, res) => {
     });
 
     output = { ...output, state: SEND_MESSAGE_DONE, debug: req.body };
-    res.send(output);
   } catch (error) {
     console.log(error);
     output = { ...output, state: SEND_MESSAGE_FAILED, error: error.message };
-    res.send(output);
+    
+    console.log({output})
   }
+
+  res.send(output);
 });
 
 module.exports = router;
