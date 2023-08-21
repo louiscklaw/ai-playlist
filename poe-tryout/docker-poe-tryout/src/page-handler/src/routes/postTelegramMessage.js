@@ -18,6 +18,8 @@ const SEND_MESSAGE_DONE = 'SEND_MESSAGE_DONE';
 function saintizeText(in_text) {
   return in_text.replace(/\./g,'\\.')
     .replace(/\-/g,'\\-')
+    .replace(/_/g,'\\_')
+
 }
 
 router.post('/', async (req, res) => {
