@@ -2,8 +2,18 @@ const fetch = require('node-fetch');
 
 const { myLogger } = require('../../utils/myLogger');
 
+var message = `
+✔️ job done 🔔🔔🔔
+job url: ${'jobsdb_job_url'}
+job working_dir: ${'working_dir'} :
+
+\`\`\`javascript
+${JSON.stringify({"Hello":"world"})}
+\`\`\`
+`.trim();
+
 const payload = {
-  text: 'blablabla',
+  text: message,
 };
 
 Array(1)
