@@ -64,6 +64,7 @@ async function chatGPTSolver(question_list, preprompts = []) {
     await clearChatHistory(page);
     await clearModalBox(page);
 
+    // TODO: need to handle "message cannot send"
     if (preprompts.length > 0) {
       for (var i = 0; i < preprompts.length; i++) {
         var question = preprompts[i];
