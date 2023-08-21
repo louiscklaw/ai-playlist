@@ -41,7 +41,7 @@ function onReportJobComplete() {
       var message = `
       🔔🔔🔔 job done  🔔🔔🔔
 job url: ${meta_json.jobsdb_job_url}
-job working_dir: ${working_dir} :
+job working_dir: ${meta_json.working_dir} :
 
 \`\`\`javascript
 ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
