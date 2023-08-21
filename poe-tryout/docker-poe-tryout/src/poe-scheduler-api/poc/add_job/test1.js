@@ -10,7 +10,7 @@ var gpt_payload = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`writing log ${i}...`);
+    myLogger.info(`writing log ${i}...`);
     const job_post = {
       job_link: 'http://www.google.com',
       position: 'info',
@@ -35,9 +35,9 @@ Array(1)
     });
 
     const process_res_json = await process_response.json();
-    console.log({ process_res_json });
+    myLogger.info('%o', { process_res_json });
 
-    // console.log({
+    // myLogger.info("%o", {
     //   // db_json,
     //   payload,
     //   process_res_json

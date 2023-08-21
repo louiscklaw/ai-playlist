@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
 
 const body = {
   preprompts: ['What is orange? please make your answer in below 20 words.'],
@@ -9,7 +10,7 @@ const body = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
     const url = 'http://poe-scheduler-api:3002/ask_jobsdb_post';
     const response = await fetch(url, {
       method: 'post',
@@ -18,5 +19,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

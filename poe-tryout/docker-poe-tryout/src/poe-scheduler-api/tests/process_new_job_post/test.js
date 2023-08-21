@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
 
 const body = {
   jobs_id: 'blablabla',
@@ -10,7 +11,7 @@ const body = {
 Array(3)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
     const response = await fetch('http://localhost:3002/process_new_job_post', {
       method: 'post',
@@ -19,5 +20,5 @@ Array(3)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

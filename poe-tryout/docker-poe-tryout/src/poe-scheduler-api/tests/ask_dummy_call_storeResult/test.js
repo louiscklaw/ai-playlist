@@ -22,7 +22,7 @@ const body = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
     const url = `${POE_SCHEDULER_API_ENDPOINT}/ask_dummy_call`;
     // const url = 'http://poe-scheduler-api:3002/helloworld';
@@ -33,5 +33,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

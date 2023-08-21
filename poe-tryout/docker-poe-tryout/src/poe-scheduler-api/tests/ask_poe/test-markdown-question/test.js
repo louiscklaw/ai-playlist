@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 const { htmlToMarkdown } = require('../../../utils/htmlToMarkdown');
+const { myLogger } = require('../../../utils/myLogger');
 
 const doc = fs.readFileSync('example.html', { encoding: 'utf8' });
 
@@ -22,7 +23,7 @@ ${markdown_content}
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
     const response = await fetch('http://poe-scheduler-api:3002/ask_poe', {
       method: 'post',
@@ -31,5 +32,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

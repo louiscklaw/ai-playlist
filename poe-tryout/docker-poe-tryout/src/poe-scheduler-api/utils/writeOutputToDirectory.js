@@ -13,9 +13,10 @@ const { createDirIfNotExists } = require('./createDirIfNotExists');
 
 async function writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_json) {
   var output = {};
+
   try {
     var chatgpt_output_filename = `${SHARE_DIR}/${new_job_post_id}/chatgpt_output.json`;
-    console.log('calling writeOutputToDirectory', chatgpt_output_filename);
+    myLogger.info('calling writeOutputToDirectory', chatgpt_output_filename);
 
     await createDirIfNotExists(path.dirname(chatgpt_output_filename));
 
@@ -29,9 +30,9 @@ async function writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_
     };
   } catch (error) {
     console.log(error);
-  } finally {
-    return output;
   }
+
+  return output;
 }
 
 module.exports = { writeOutputToDirectory };

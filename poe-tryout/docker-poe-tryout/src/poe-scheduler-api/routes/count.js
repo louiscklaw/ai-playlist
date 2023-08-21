@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const { Queue, getInactiveCount } = require('../queue');
+const { myLogger } = require('../utils/myLogger');
 
 router.get('/', (req, res) => {
   try {
-    console.log('count called.');
+    myLogger.info('count called.');
 
     res.send({
       count: getInactiveCount(),

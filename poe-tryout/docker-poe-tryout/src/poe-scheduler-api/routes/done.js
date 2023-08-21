@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const { myLogger } = require('../utils/myLogger');
 
 router.post('/', (req, res) => {
-  console.log('/done called');
+  myLogger.info('/done called');
   const req_body = req.body;
-  console.log({ req_body });
+  myLogger.info('%o', { req_body });
 
   res.send({ state: 'helloworld_done_called' });
 });

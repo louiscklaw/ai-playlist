@@ -5,13 +5,14 @@ const { ERROR_ADDING_QUEUE } = require('../constants/error');
 const { STATE_INIT, STATE_SCHEDULED } = require('../constants/states');
 
 const { Queue } = require('../queue');
+const { myLogger } = require('../utils/myLogger');
 
 router.post('/', async (req, res) => {
   var state = STATE_INIT;
   var err_msg = {};
 
   try {
-    console.log('/ask_dummy_call');
+    myLogger.info('/ask_dummy_call');
 
     const req_body = req.body;
     const { preprompts, question_list, callback_url, context } = req_body;

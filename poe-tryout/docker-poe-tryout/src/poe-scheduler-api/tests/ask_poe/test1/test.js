@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../../utils/myLogger');
 
 const body = {
   preprompts: ["say 'preprompt1' to me", "say 'preprompt2' to me"],
@@ -8,7 +9,7 @@ const body = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
     const response = await fetch('http://poe-scheduler-api:3002/ask_poe', {
       method: 'post',
@@ -17,5 +18,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

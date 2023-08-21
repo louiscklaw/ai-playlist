@@ -10,9 +10,9 @@ const { JOBPOST_ENDPOINT } = require('../constants');
 async function writeOutputToDB(new_job_post_id, update_job_state_payload) {
   var output = {};
   try {
-    console.log('calling writeOutputToDB', new_job_post_id);
+    myLogger.info('calling writeOutputToDB', new_job_post_id);
     var url = `${JOBPOST_ENDPOINT}/${new_job_post_id}`;
-    console.log({ url, update_job_state_payload });
+    myLogger.info('%o', { url, update_job_state_payload });
 
     var res = await fetch(url, {
       method: 'patch',

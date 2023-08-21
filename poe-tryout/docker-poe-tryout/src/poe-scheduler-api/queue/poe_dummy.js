@@ -8,18 +8,18 @@
 // const { mySleep } = require('../utils/mySleep');
 
 // module.exports = Queue => {
-//   console.log('poe_dummy Queue init');
+//   myLogger.info('poe_dummy Queue init');
 
 //   Queue.process('poe_dummy', 1, async function (job, done) {
 
 //     try {
-//       console.log('\nProcessing job with id %s at %s', job.id, new Date());
+//       myLogger.info('\nProcessing job with id %s at %s', job.id, new Date());
 
 //       var output = {};
 //       const { data } = job;
 //       const { preprompts, question_list, callback_url, context } = data;
 
-//       console.log('using poe_dummy');
+//       myLogger.info('using poe_dummy');
 //       console.log(data);
 
 //       // // const new_job_post_id = jobs_id;
@@ -31,7 +31,7 @@
 //       // // // // http://openbox-firefox:3000/test1
 //       // var random_openbox_host = getRandomOpenboxHost();
 //       // const gpt_endpoint = `http://${random_openbox_host}:3000`;
-//       // console.log({ random_openbox_host, gpt_endpoint, callback_url });
+//       // myLogger.info("%o", { random_openbox_host, gpt_endpoint, callback_url });
 
 //       // // NOTE: ask poe start
 //       // var chatgpt_summarize_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
@@ -57,7 +57,7 @@
 //           context,
 //         };
 
-//         console.log('calling callback_url');
+//         myLogger.info('calling callback_url');
 //         var result = await fetch(callback_url, {
 //           method: 'post',
 //           body: JSON.stringify(callback_payload),
@@ -65,15 +65,15 @@
 //         });
 //         if (result.status != 200) throw new Error(result);
 //         // var res_json = await result.json();
-//         console.log('callback done');
+//         myLogger.info('callback done');
 //       } else {
-//         console.log({ chatgpt_summarize_result_json });
-//         console.log('no callback url provided, skipping... ');
+//         myLogger.info("%o", { chatgpt_summarize_result_json });
+//         myLogger.info('no callback url provided, skipping... ');
 //       }
 
 //       done(null, { deliveredAt: new Date(), output, data });
 //     } catch (error) {
-//       console.log('error inside poe_dummy');
+//       myLogger.info('error inside poe_dummy');
 //       console.log(error);
 //       done(new Error(error.message));
 //     }
@@ -82,7 +82,7 @@
 //   //listen on scheduler errors
 //   Queue.on('schedule error', function (error) {
 //     //handle all scheduling errors here
-//     console.log('using dummy_poe, schedule error');
+//     myLogger.info('using dummy_poe, schedule error');
 //     console.log(error);
 //   });
 
@@ -91,10 +91,10 @@
 //     //a highly recommended place to attach
 //     //job instance level events listeners
 
-//     // console.log({ QueueInactiveCount: Queue.inactiveCount() });
+//     // myLogger.info("%o", { QueueInactiveCount: Queue.inactiveCount() });
 //     Queue.inactiveCount((err, count) => {
-//       console.log('using dummy_poe, inactiveCount:' + count);
-//       console.log({
+//       myLogger.info('using dummy_poe, inactiveCount:' + count);
+//       myLogger.info("%o", {
 //         state: 'Queue schedule success',
 //         QueueInactiveCount: count,
 //       });
@@ -102,20 +102,20 @@
 
 //     job
 //       .on('complete', function (result) {
-//         // console.log('Job completed with data ', result)
-//         console.log('using dummy_poe, Dequeue job', job.id);
+//         // myLogger.info('Job completed with data ', result)
+//         myLogger.info('using dummy_poe, Dequeue job', job.id);
 //         Queue.removeJob(job);
 //       })
 //       .on('failed attempt', function (errorMessage, doneAttempts) {
 //         console.log(errorMessage);
-//         console.log('using dummy_poe, Job failed');
+//         myLogger.info('using dummy_poe, Job failed');
 //       })
 //       .on('failed', function (errorMessage) {
 //         console.log(errorMessage);
-//         console.log('using dummy_poe, Job failed');
+//         myLogger.info('using dummy_poe, Job failed');
 //       })
 //       .on('progress', function (progress, data) {
-//         console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
+//         myLogger.info('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
 //       });
 //   });
 // };

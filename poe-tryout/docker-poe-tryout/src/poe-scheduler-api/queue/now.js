@@ -2,12 +2,13 @@
 
 const { gpt_endpoint } = require('../constants');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
+const { myLogger } = require('../utils/myLogger');
 
 module.exports = Queue => {
-  console.log('now Queue init');
+  myLogger.info('now Queue init');
   Queue.process('now', 1, async function (job, done) {
     try {
-      console.log('\nProcessing job with id %s at %s', job.id, new Date());
+      myLogger.info('\nProcessing job with id %s at %s', job.id, new Date());
 
       const { data } = job;
       const { jobs_id, job_post, preprompts, question_list } = data;
@@ -64,7 +65,7 @@ module.exports = Queue => {
   Queue.on('schedule error', function (error) {
     //handle all scheduling errors here
     console.log(error);
-    console.log('blablabla');
+    myLogger.info('blablabla');
   });
 
   //listen on success scheduling
@@ -72,9 +73,9 @@ module.exports = Queue => {
     //a highly recommended place to attach
     //job instance level events listeners
 
-    // console.log({ QueueInactiveCount: Queue.inactiveCount() });
+    // myLogger.info("%o", { QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
-      console.log({
+      myLogger.info('%o', {
         state: 'QUEUE_SCHEDULE_SUCCESS',
         QueueInactiveCount: count,
       });
@@ -82,18 +83,18 @@ module.exports = Queue => {
 
     job
       .on('complete', function (result) {
-        // console.log('Job completed with data ', result)
-        console.log('Dequeue job', job.id);
+        // myLogger.info('Job completed with data ', result)
+        myLogger.info('Dequeue job', job.id);
         Queue.removeJob(job);
       })
       .on('failed attempt', function (errorMessage, doneAttempts) {
-        console.log('Job failed');
+        myLogger.info('Job failed');
       })
       .on('failed', function (errorMessage) {
-        console.log('Job failed');
+        myLogger.info('Job failed');
       })
       .on('progress', function (progress, data) {
-        console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
+        myLogger.info('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
       });
   });
 };

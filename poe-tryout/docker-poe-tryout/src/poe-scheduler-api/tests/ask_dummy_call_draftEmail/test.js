@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 
 require('dotenv').config();
 const { FLOW_HANDLER_ENDPOINT, POE_SCHEDULER_API_ENDPOINT } = require('../../config');
+const { myLogger } = require('../../utils/myLogger');
 
 // NOTE: to see if callback from draft email callback.
 const body = {
@@ -17,7 +18,7 @@ const body = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
     const url = `${POE_SCHEDULER_API_ENDPOINT}/ask_dummy_call`;
     // const url = 'http://poe-scheduler-api:3002/helloworld';
@@ -28,5 +29,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

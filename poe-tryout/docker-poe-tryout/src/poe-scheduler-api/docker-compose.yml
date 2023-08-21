@@ -1,47 +1,4 @@
-# volumes:
-#   redisinsight_store:
-#   redis_data:
-#     driver: local
-#   redis_etc_redis:
-  
 services:
-  # redis:
-  #   image: redis:6.0.7
-  #   ports:
-  #     - 6379:6379
-  #   volumes:
-  #     - ./volumes/redis/redis.conf:/redis.conf
-  #     - redis_etc_redis:/etc/redis
-  #     # NOTE: related to redis.conf
-  #     - redis_data:/data
-  #   command: redis-server /redis.conf
-  #   restart: unless-stopped
-
-  # redis:
-  #   image: redis:6.2-alpine
-  #   ports:
-  #     - '6379:6379'
-  #   volumes: 
-  #     - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-  #     - redis_data:/data
-  #   command: redis-server --save 20 1 --loglevel warning --dir /data
-  #   restart: always
-  #   environment:
-  #     - TZ=Asia/Hong_Kong
-
-  # redisinsight:
-  #   image: redislabs/redisinsight:latest
-  #   ports:
-  #     - 8001:8001
-  #   volumes:
-  #     - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-  #     - redisinsight_store:/db
-  #   depends_on:
-  #     - redis
-  #   restart: unless-stopped
-  #   environment:
-  #     - TZ=Asia/Hong_Kong
-      
   poe-scheduler-api:
     # build: ./poe-scheduler-api
     image: logickee/poe-tryout-poe-scheduler-api
@@ -51,16 +8,17 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./poe-scheduler-api/:/app
       - ./volumes/static-share:/share
+      - ./volumes/logs:/logs
 
     # TODO:
     # depends_on:
     #   - mongo
     depends_on:
       - redis
-      
+    working_dir: /app
     restart: unless-stopped
-    # command: sleep infinity
+    entrypoint: ./dev.sh
+    env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
-    command: ./entry.sh
-    
+      - LOG_PREFIX=poe-scheduler-api

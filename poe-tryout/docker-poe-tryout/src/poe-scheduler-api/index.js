@@ -6,6 +6,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+const { myLogger } = require('./utils/myLogger');
+
 try {
   app.use(bodyParser.json());
 
@@ -22,15 +24,18 @@ try {
   app.use('/done', require('./routes/done'));
 
   app.use('/postHelloworld', require('./routes/postHelloworld'));
+  app.use('/ask_dummy_call', require('./routes/ask_dummy_call'));
   app.use('/helloworld', require('./routes/helloworld'));
+
+  myLogger.info('started');
 
   // Start the server
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    myLogger.info(`Server is running on port ${PORT}`);
   });
 
   // app.use('/postCbHelloworld', require('./routes/postCbHelloworld'));
 } catch (error) {
-  console.log('error during init poe-scheduler');
+  myLogger.info('error during init poe-scheduler');
   console.log(error);
 }

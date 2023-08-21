@@ -1,1 +1,3 @@
-console.log('test placeholder');
+const { myLogger } = require('../utils/myLogger');
+
+myLogger.info('test placeholder');

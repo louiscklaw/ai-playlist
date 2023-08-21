@@ -1,4 +1,7 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
+
+// TODO: use environment variable
 
 const body = {
   preprompts: ['a apple is a fruit in red', 'a apple is a orange in orange', 'a apple is a banana in yellow'],
@@ -18,7 +21,7 @@ const body = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`posting ask ${i}...`);
+    myLogger.info(`posting ask ${i}...`);
 
     const url = 'http://poe-scheduler-api:3002/ask_dummy_call';
     // const url = 'http://poe-scheduler-api:3002/helloworld';
@@ -29,5 +32,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

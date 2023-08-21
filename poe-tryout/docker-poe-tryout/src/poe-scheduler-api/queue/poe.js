@@ -8,8 +8,9 @@ const { writeOutputToDB } = require('../utils/writeOutputToDB');
 const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
 const { mySleep } = require('../utils/mySleep');
 const { mySleepM } = require('../utils/mySleepM');
+const { myLogger } = require('../utils/myLogger');
 
-console.log('poe Queue init');
+myLogger.info('poe Queue init');
 
 function getRandomPoeEndpoint() {
   try {
@@ -19,7 +20,7 @@ function getRandomPoeEndpoint() {
 
     return { random_openbox_host, gpt_endpoint };
   } catch (error) {
-    console.log('error geting random poe endpoint, return default poe-seat');
+    myLogger.info('error geting random poe endpoint, return default poe-seat');
     console.log(error);
     return 'http://openbox-poe-seat1:3000';
   }
@@ -33,7 +34,7 @@ function getInactiveCount() {
 function initQueue(Queue) {
   Queue.process('poe', 1, async function (job, done) {
     try {
-      console.log('\nProcessing job with id %s at %s', job.id, new Date());
+      myLogger.info('\nProcessing job with id %s at %s', job.id, new Date());
 
       // const new_job_post_id = jobs_id;
       // var chatgpt_output_filename = `/share/${new_job_post_id}/chatgpt_output.json`;
@@ -46,7 +47,7 @@ function initQueue(Queue) {
       const { random_openbox_host, gpt_endpoint } = getRandomPoeEndpoint();
 
       // NOTE: log input
-      console.log({ random_openbox_host, gpt_endpoint, data, gpt_payload });
+      myLogger.info('%o', { random_openbox_host, gpt_endpoint, data, gpt_payload });
 
       // NOTE: ask poe start
       var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
@@ -65,22 +66,22 @@ function initQueue(Queue) {
         });
         var result_cb_json = await result_cb_url.json();
       } else {
-        console.log({ chatgpt_summarize_result_json });
+        myLogger.info('%o', { chatgpt_summarize_result_json });
         const { chat_history } = chatgpt_summarize_result_json;
         console.log(chat_history.q_and_a.history);
-        console.log('no callback url provided, showing here');
+        myLogger.info('no callback url provided, showing here');
       }
 
       // TODO: remove me ??
       // // NOTE: asking should be completed before this line
-      // console.log('calling done url', url_after_done);
+      // myLogger.info('calling done url', url_after_done);
       // var done_result = await fetch(url_after_done, {
       //   method: 'post',
       //   body: JSON.stringify(chatgpt_summarize_result_json),
       //   headers: { 'Content-Type': 'application/json' },
       // });
       // var done_result_json = await done_result.json();
-      // console.log({ done_result_json });
+      // myLogger.info("%o", { done_result_json });
 
       // console.log(chatgpt_summarize_result_json);
       // var update_job_state_payload = await writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_json);
@@ -92,14 +93,14 @@ function initQueue(Queue) {
       // // NOTE: successful ask, cool down bot for slething
 
       await mySleepM(1);
-      console.log('cooldown bot done');
+      myLogger.info('cooldown bot done');
 
       done(null, { deliveredAt: new Date(), data });
     } catch (error) {
       if (error.code == 'ECONNREFUSED' && error.message.indexOf('openbox-firefox') > -1) {
         done(new Error('the openbox-firefox server is not already, schedule retry'));
       } else {
-        console.log({ error });
+        myLogger.info('%o', { error });
         done(new Error(error.message));
       }
     }
@@ -109,7 +110,7 @@ function initQueue(Queue) {
   Queue.on('schedule error', function (error) {
     try {
       //handle all scheduling errors here
-      console.log('schedule error');
+      myLogger.info('schedule error');
       console.log(error);
     } catch (err) {}
   });
@@ -118,29 +119,29 @@ function initQueue(Queue) {
   Queue.on('schedule success', function (job) {
     // NOTE: a highly recommended place to attach job instance level events listeners
 
-    // console.log({ QueueInactiveCount: Queue.inactiveCount() });
+    // myLogger.info("%o", { QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
-      console.log({ state: 'Queue schedule success', QueueInactiveCount: count });
+      myLogger.info('%o', { state: 'Queue schedule success', QueueInactiveCount: count });
       queue_inactive_count = count;
       console.log(err);
     });
 
     job
       .on('complete', function (result) {
-        // console.log('Job completed with data ', result)
-        console.log('Dequeue job', job.id);
+        // myLogger.info('Job completed with data ', result)
+        myLogger.info('Dequeue job', job.id);
         Queue.removeJob(job);
       })
       .on('failed attempt', function (errorMessage, doneAttempts) {
         console.log(errorMessage);
-        console.log('Job failed');
+        myLogger.info('Job failed');
       })
       .on('failed', function (errorMessage) {
         console.log(errorMessage);
-        console.log('Job failed');
+        myLogger.info('Job failed');
       })
       .on('progress', function (progress, data) {
-        console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
+        myLogger.info('\r  job #' + job.id + ' ' + progress + '% complete with data ', data);
       });
   });
 }
