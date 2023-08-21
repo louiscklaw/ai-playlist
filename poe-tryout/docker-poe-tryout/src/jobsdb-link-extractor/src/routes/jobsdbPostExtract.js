@@ -130,7 +130,7 @@ router.post('/', async (req, res) => {
 
       done = true;
     } catch (error) {
-      myLogger.info(error);
+      myLogger.error('%o', error);
       output = { ...output, state: 'extraction_error', error };
     }
 

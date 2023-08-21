@@ -21,5 +21,5 @@ try {
     myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  myLogger.info(error);
+  myLogger.error('%o', error);
 }

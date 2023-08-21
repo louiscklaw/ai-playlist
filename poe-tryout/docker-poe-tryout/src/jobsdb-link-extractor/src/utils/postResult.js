@@ -1,7 +1,7 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const {myLogger} = require('./myLogger');
+const { myLogger } = require('./myLogger');
 
 function fetchPost(url, json_body) {
   myLogger.info('fetchPost ' + url + ' ... ');
