@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+const { myLogger } = require('../../utils/myLogger');
+
 const body = {
   jobs_id: 'blablabla',
   job_post: 'we are employing a teacher',
@@ -10,12 +12,12 @@ const body = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`helloworld page-handler ${i}...`);
+    myLogger.info(`helloworld page-handler ${i}...`);
 
     const response = await fetch('http://page-handler:3000/helloworld');
 
     const res_text = await response.text();
-    console.log({ res_text });
+    myLogger.info('%o', { res_text });
   });
 
 console.log('helloworld');

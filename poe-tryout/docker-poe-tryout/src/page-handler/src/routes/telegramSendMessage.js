@@ -4,10 +4,8 @@ const express = require('express');
 const router = express.Router();
 
 const { TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } = process.env;
-
-const api = new TG({
-  token: TELEGRAM_TOKEN,
-});
+const { myLogger } = require('../utils/myLogger');
+const api = new TG({ token: TELEGRAM_TOKEN });
 
 const SEND_MESSAGE_FAILED = 'SEND_MESSAGE_FAILED';
 const SEND_MESSAGE_DONE = 'SEND_MESSAGE_DONE';
@@ -16,6 +14,8 @@ const SEND_MESSAGE_DONE = 'SEND_MESSAGE_DONE';
 
 router.get('/', async (req, res) => {
   var output = { state: 'init', debug: req.body, error: {} };
+
+  myLogger.info('telegramSendMessage called');
   try {
     // var result = await api.getMe()
     await api.sendMessage({

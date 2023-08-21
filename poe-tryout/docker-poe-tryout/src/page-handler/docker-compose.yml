@@ -7,9 +7,12 @@ services:
     volumes:
       - ./page-handler/src:/app
       - ./volumes/page-handler:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3061:3000
-    env_file: ./.env
     restart: unless-stopped
-    
+    env_file: ./.env
+    environment:
+      - TZ=Asia/Hong_Kong
+      - LOG_PREFIX=page-handler

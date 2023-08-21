@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+const { myLogger } = require('../../utils/myLogger');
+
 const payload = {
   text: 'blablabla',
 };
@@ -7,7 +9,7 @@ const payload = {
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
-    console.log(`post-telegram-message page-handler ${i}...`);
+    myLogger.info(`post-telegram-message page-handler ${i}...`);
 
     const response = await fetch('http://page-handler:3000/post-telegram-message', {
       method: 'post',
@@ -16,5 +18,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    console.log({ res_json });
+    myLogger.info('%o', { res_json });
   });

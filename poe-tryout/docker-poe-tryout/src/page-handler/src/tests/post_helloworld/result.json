@@ -1,1 +1,1 @@
-post api-debug Hello, World!
+{ "hello": "post api-debug Hello, World!" }

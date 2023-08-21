@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   var req_body = req.body;
-  console.log({ req_body });
+  myLogger.info('%o', { req_body });
 
   fs.writeFileSync('/share/diff.json', JSON.stringify(req_body), { encoding: 'utf8' });
 

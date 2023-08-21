@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const PORT = 3000;
 
+const { myLogger } = require('./utils/myLogger');
+
 try {
   const app = express();
   app.use(bodyParser.json());
@@ -16,11 +18,13 @@ try {
   app.use('/hw-telegram', require('./routes/hwTelegram'));
   app.use('/helloworld', require('./routes/helloworld'));
 
+  myLogger.info('page-handler started');
+
   // // Start the server
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log('error during starting express');
+  myLogger.info('error during starting express');
   console.log(error);
 }
