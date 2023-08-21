@@ -38,7 +38,7 @@ function htmlToMarkdown(html_string) {
 
     return output;
   } catch (error) {
-    console.log(error);
+    myLogger.info(error);
   }
 }
 

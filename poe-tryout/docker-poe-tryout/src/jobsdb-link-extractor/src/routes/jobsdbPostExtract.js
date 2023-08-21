@@ -8,12 +8,14 @@ const fs = require('fs'),
 const puppeteer = require('puppeteer-core');
 
 const express = require('express');
-const { postResult } = require('../util/postResult');
-const { htmlToMarkdown } = require('./htmlToMarkdown');
+const { postResult } = require('../utils/postResult');
+const { htmlToMarkdown } = require('../utils/htmlToMarkdown');
 const router = express.Router();
 
+const { myLogger } = require('../utils/myLogger');
+
 router.post('/', async (req, res) => {
-  console.log('/jobsdbPostExtract called');
+  myLogger.info('/jobsdbPostExtract called');
   const { callback_url } = req.body;
 
   res.send({ state: 'scheduled' });
@@ -29,7 +31,7 @@ router.post('/', async (req, res) => {
       // NOTE: input validation, may be set a schema here ?
       const req_body = req.body;
       const { url } = req_body;
-      console.log({ url });
+      myLogger.info({ url });
 
       if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`);
 
@@ -49,7 +51,7 @@ router.post('/', async (req, res) => {
       page = await browser.newPage();
       await page.goto(url, { waitUntil: 'networkidle2' });
 
-      console.log('browser started');
+      myLogger.info('browser started');
 
       const jobPage = page;
 
@@ -128,17 +130,17 @@ router.post('/', async (req, res) => {
 
       done = true;
     } catch (error) {
-      console.log(error);
+      myLogger.info(error);
       output = { ...output, state: 'extraction_error', error };
     }
 
     if (done) {
-      console.log('done exitting...');
+      myLogger.info('done exitting...');
       break;
     }
   }
 
-  // console.log({output})
+  // myLogger.info({output})
   await postResult(callback_url, output.extracted);
 });
 

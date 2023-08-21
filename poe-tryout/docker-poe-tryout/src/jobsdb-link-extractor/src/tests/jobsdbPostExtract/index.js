@@ -1,9 +1,10 @@
 const fetch = require('node-fetch');
+const { myLogger } = require('../../utils/myLogger');
 
 const urls = ['https://hk.jobsdb.com/hk/en/job/validation-engineer-qa-100003010527848'];
 
 urls.map(async (v, i) => {
-  console.log(`posting ask ${i}...`);
+  myLogger.info(`posting ask ${i}...`);
 
   const response = await fetch('http://jobsdb-link-extractor:3000/jobsdbPostExtract', {
     method: 'post',
@@ -13,5 +14,5 @@ urls.map(async (v, i) => {
 
   const res_json = await response.json();
   const { extracted } = res_json;
-  console.log({ extracted });
+  myLogger.info({ extracted });
 });

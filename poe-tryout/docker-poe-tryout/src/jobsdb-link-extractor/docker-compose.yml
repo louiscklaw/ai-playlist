@@ -6,9 +6,11 @@ services:
     # command: sleep infinity
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      - /run/docker.sock:/run/docker.sock:ro
       - ./jobsdb-link-extractor/src:/app
       - ./volumes/jobsdb-link-extractor/screenshot:/share/screenshot
       - ./volumes/jobsdb-link-extractor:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     depends_on:
       link-extractor-chrome:
@@ -18,10 +20,11 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
-      
+      - LOG_PREFIX=jobsdb-link-extractor
+
   link-extractor-chrome:
     image: browserless/chrome
-    shm_size: "1gb"
+    shm_size: '1gb'
     restart: unless-stopped
     ports:
       - 13000:3000
