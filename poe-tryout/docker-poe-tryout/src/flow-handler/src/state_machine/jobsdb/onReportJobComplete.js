@@ -5,6 +5,7 @@ const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
 const { postTelegramMessage } = require('../../utils/postTelegramMessage');
 
 const fs = require('fs');
+const { loadJson } = require('../../utils/loadJson');
 
 async function getJobInfo(working_dir) {
   var output = {};
