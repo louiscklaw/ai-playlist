@@ -10,7 +10,8 @@ services:
       
       # NOTE: store output
       - ./volumes/static-share/_output:/share
-
+      - ./volumes/logs:/logs
+      
       # - ./volumes/flow-handler/screenshot:/share/screenshot
     working_dir: /app
 
