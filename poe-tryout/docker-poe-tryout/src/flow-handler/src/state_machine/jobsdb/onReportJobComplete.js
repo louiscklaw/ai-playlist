@@ -39,7 +39,7 @@ function onReportJobComplete() {
       const { companyName, jobAddress, jobTitle } = await getJobInfo(working_dir);
 
       var message = `
-✔️ job done !
+      🔔🔔🔔 job done  🔔🔔🔔
 job url: ${meta_json.jobsdb_job_url}
 job working_dir: ${working_dir} :
 

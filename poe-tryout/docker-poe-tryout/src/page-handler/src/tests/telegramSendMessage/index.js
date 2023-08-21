@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const { myLogger } = require('../../utils/myLogger');
 
 var message = `
-✔️ job done !
+🔔🔔🔔 job done  🔔🔔🔔
 job url: ${meta_json.jobsdb_job_url}
 job working_dir: ${working_dir} :
 
