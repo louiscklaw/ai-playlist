@@ -17,11 +17,11 @@ const { myLogger } = require('../utils/myLogger');
 const { getFromEvaluateTextContent } = require('../utils/getFromEvaluateTextContent');
 const { helloworld_schema } = require('../schemas/helloworld_schema');
 
-const schema = Joi.object({
-  url: Joi.string().uri().required(),
-  jobsdb_job_url: Joi.string().uri().required(),
-  callback_url: Joi.string().uri().required(),
-});
+// const schema = Joi.object({
+//   url: Joi.string().uri().required(),
+//   jobsdb_job_url: Joi.string().uri().required(),
+//   callback_url: Joi.string().uri().required(),
+// });
 
 // TEST -> src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test1/index.js
 // handle call from 
