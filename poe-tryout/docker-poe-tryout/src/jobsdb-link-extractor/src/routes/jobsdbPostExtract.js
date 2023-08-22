@@ -80,8 +80,6 @@ router.post('/', async (req, res) => {
 
           myLogger.info('browser started');
 
-          var selector=''
-
           const jobPage = page;
           var selector = 'div[data-automation="detailsTitle"] h1';
           var { result } = await getFromEvaluateTextContent(jobPage, selector);
@@ -109,12 +107,17 @@ router.post('/', async (req, res) => {
             return output;
           });
 
-          const jobHighlight = await jobPage.evaluate(() => {
-            const title = document.querySelector(
-              'div[data-automation="job-details-job-highlights"] > div:nth-child(1) > div:nth-child(2)',
-            ).textContent;
-            return title;
-          });
+          // const jobHighlight = await jobPage.evaluate(() => {
+          //   const title = document.querySelector(
+          //     'div[data-automation="job-details-job-highlights"] > div:nth-child(1) > div:nth-child(2)',
+          //   ).textContent;
+          //   return title;
+          // });
+          var selector = 'div[data-automation="job-details-job-highlights"] > div:nth-child(1) > div:nth-child(2)';
+          var { result } = await getFromEvaluateTextContent(jobPage, selector);
+          var jobTitle = result;
+
+
           var { description, _jobDescriptionRaw, __jobDescriptionRawProcessed } = await jobPage.evaluate(() => {
             const _jobDescriptionRaw = document.querySelector('div[data-automation="jobDescription"]').outerHTML;
 
@@ -134,6 +137,7 @@ router.post('/', async (req, res) => {
           jobDescription = jobDescription.replace(/\n +/g, '\n');
           jobDescription = jobDescription.replace(/\n+/g, '\n');
           jobDescription = jobDescription.replace(/ /g, ' ');
+
 
           var _jobDescriptionMd = htmlToMarkdown(_jobDescriptionRaw);
           fs.writeFileSync('/share/screenshot/hello-html.html', _jobDescriptionRaw, { encoding: 'utf8' });
