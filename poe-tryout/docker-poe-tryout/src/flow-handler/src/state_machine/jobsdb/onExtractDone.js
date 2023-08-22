@@ -29,12 +29,12 @@ function inputCheck(in_o) {
   try {
     const jobSchema = Joi.object({
       working_dir: Joi.string().required(),
-      jobTitle: Joi.string().required(),
-      companyName: Joi.string().required(),
-      jobAddress: Joi.string().required(),
-      postDate: Joi.string().required(), // Assuming date format is ISO-8601
-      jobHighlight: Joi.string().required(),
-      jobDescription: Joi.string().required(),
+      jobTitle: Joi.string().allow('').required(),
+      companyName: Joi.string().allow('').required(),
+      jobAddress: Joi.string().allow('').required(),
+      postDate: Joi.string().allow(''),
+      jobHighlight: Joi.string().allow('').required(),
+      jobDescription: Joi.string().allow('').required(),
       _jobDescriptionMd: Joi.string().allow('', null), // Allowing empty or null values for this field
       jobsdb_job_url: Joi.string().uri({ allowRelative: false }).required(),
     }).unknown();
