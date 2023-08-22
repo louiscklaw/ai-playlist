@@ -5,6 +5,9 @@ const { myLogger } = require('../../utils/myLogger');
 
 const NO_NEED_SCAN_URL = 'NO_NEED_SCAN_URL';
 const INVALID_URL = 'INVALID_URL';
+const NO_NEED_EXTRACT_LIST = [
+  'https://hk.jobsdb.com/hk/en/Error/PageNotFound'
+]
 
 module.exports = {
   onExtractJobDetail: function () {
