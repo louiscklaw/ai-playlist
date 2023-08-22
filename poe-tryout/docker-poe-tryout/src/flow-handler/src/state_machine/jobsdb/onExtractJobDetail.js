@@ -27,11 +27,11 @@ module.exports = {
           callback_url,
         });
         var result_json = await result.json();
-        myLogger.info("%o",{result_json});
+        myLogger.info('%o', { result_json });
 
         res();
       } catch (error) {
-        myLogger.error("%o",error);
+        myLogger.error('%o', error);
         rej('extract job detail failed, url:' + jobsdb_job_url);
       }
     });
