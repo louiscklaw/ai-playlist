@@ -7,19 +7,19 @@ services:
     command: ./entry.sh
   dbapi:
     command: ./entry.sh
+
   diff-handler:
     entrypoint: ./entry.sh
   jobsdb-scraper:
-    # command: sleep infinity
-    command: ./entry.sh
+    entrypoint: ./dev.sh
   flow-handler:
     entrypoint: ./entry.sh
   jobsdb-link-extractor:
     entrypoint: ./entry.sh
   page-handler:
-    command: ./entry.sh
+    entrypoint: ./entry.sh
   poe-scheduler-api:
-    command: ./entry.sh
+    entrypoint: ./entry.sh
 
   # static-share:
   #   command: ./dev.sh
