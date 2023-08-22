@@ -137,13 +137,12 @@ ${_jobDescriptionMd}
 
         await storeJson(`${working_dir}/input_to_summarize.json`, input_to_summarize);
 
-        // TODO: resume me
         // // proceed to summarize
-        // await fetch(summarize_url, {
-        //   method: 'post',
-        //   body: JSON.stringify(input_to_summarize),
-        //   headers: { 'Content-Type': 'application/json' },
-        // });
+        await fetch(summarize_url, {
+          method: 'post',
+          body: JSON.stringify(input_to_summarize),
+          headers: { 'Content-Type': 'application/json' },
+        });
 
         res();
       } catch (error) {
