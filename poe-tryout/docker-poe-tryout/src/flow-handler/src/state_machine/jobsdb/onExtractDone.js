@@ -4,28 +4,13 @@ const fs = require('fs');
 
 const { storeJson } = require('../../utils/storeJson');
 const { myLogger } = require('../../utils/myLogger');
+const { calculateMD5 } = require('../../utils/calculateMD5');
 
 const summarize_url = 'http://flow-handler:3000/jobsdb_flow_summarize';
 
 const SAMPLE_PREPROMPTS = ['Forget everything and start a new talk.'];
 
 const JOB_TITLE_UNDEFINED = 'JOB_TITLE_UNDEFINED';
-
-const crypto = require('crypto');
-
-function calculateMD5(object) {
-  // Convert the object to a JSON string
-  const jsonString = JSON.stringify(object);
-
-  // Create a new Hash instance with 'md5' algorithm
-  const md5Hash = crypto.createHash('md5');
-
-  // Update the hash with the JSON string
-  md5Hash.update(jsonString);
-
-  // Calculate and return the hexadecimal representation of the hash digest
-  return md5Hash.digest('hex');
-}
 
 
 
