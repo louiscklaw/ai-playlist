@@ -15,6 +15,7 @@ const router = express.Router();
 
 const { myLogger } = require('../utils/myLogger');
 const { getFromEvaluateTextContent } = require('../utils/getFromEvaluateTextContent');
+const { helloworld_schema } = require('../schemas/helloworld_schema');
 
 const schema = Joi.object({
   url: Joi.string().uri().required(),
@@ -31,7 +32,7 @@ router.post('/', async (req, res) => {
 
   try {
     // NOTE: sender-> src/flow-handler/src/state_machine/jobsdb/onExtractJobDetail.js
-    const { error } = schema.validate(req.body);
+    const { error } = helloworld_schema.validate(req.body);
     if (error) throw new Error('input json is invalid');
 
     try {
