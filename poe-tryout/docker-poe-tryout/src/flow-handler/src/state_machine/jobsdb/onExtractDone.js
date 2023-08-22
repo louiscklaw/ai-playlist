@@ -63,7 +63,7 @@ function inputCheck(in_o) {
   } catch (error) {
     myLogger.error('%o', error);
     myLogger.error('%o', in_o);
-    fs.writeFileSync('./in_o.json',JSON.stringify(in_o), {encoding:'utf-8'});
+    fs.writeFileSync('/logs/error_sample/in_o.json',JSON.stringify(in_o), {encoding:'utf-8'});
     throw error;
   }
 }
