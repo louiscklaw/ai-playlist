@@ -11,7 +11,7 @@ services:
   diff-handler:
     entrypoint: ./entry.sh
   jobsdb-scraper:
-    entrypoint: ./dev.sh
+    entrypoint: ./entry.sh
   flow-handler:
     entrypoint: ./entry.sh
   jobsdb-link-extractor:
