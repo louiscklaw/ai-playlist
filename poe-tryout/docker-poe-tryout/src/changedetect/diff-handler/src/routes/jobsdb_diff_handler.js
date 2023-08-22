@@ -1,10 +1,10 @@
 const fs = require('fs');
-const { postJobsdbLinkExtract } = require('../util/postJobsdbLinkExtract');
+const { postJobsdbLinkExtract } = require('../utils/postJobsdbLinkExtract');
 
 const express = require('express');
 const router = express.Router();
 
-const { getAddedLink } = require('../util/getAddedLink');
+const { getAddedLink } = require('../utils/getAddedLink');
 
 // var validUrl = require('valid-url');
 
