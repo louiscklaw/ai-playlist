@@ -14,7 +14,7 @@ services:
     working_dir: /app
     ports:
       - 3052:3000
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
     environment:
