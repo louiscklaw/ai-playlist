@@ -22,16 +22,17 @@ const schema = Joi.object({
   callback_url: Joi.string().uri().required(),
 });
 
+// TEST -> src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test1/index.js
 router.post('/', async (req, res) => {
   myLogger.info('/jobsdbPostExtract called');
 
   try {
     // NOTE: sender-> src/flow-handler/src/state_machine/jobsdb/onExtractJobDetail.js
     const { error } = schema.validate(req.body);
-    if (error) throw new Error('input json is invalid')
-   
+    if (error) throw new Error('input json is invalid');
+
     const { jobsdb_job_url, callback_url } = req.body;
-    if (jobsdb_job_url.trim().search(/https:\/\/hk.jobsdb.com\/?$/) > -1) throw new Error('LINK_CONTAIN_NO_POST')    
+    if (jobsdb_job_url.trim().search(/https:\/\/hk.jobsdb.com\/?$/) > -1) throw new Error('LINK_CONTAIN_NO_POST');
 
     res.send({ state: 'scheduled' });
 
@@ -41,6 +42,7 @@ router.post('/', async (req, res) => {
 
     var retry = 3;
     var done = false;
+
     for (var i = 0; i < retry; i++) {
       try {
         // NOTE: input validation, may be set a schema here ?
@@ -145,15 +147,19 @@ router.post('/', async (req, res) => {
 
         output = { ...output, state: 'EXTRACT_DONE', extracted };
 
-        done = true;
+        if (jobTitle) {
+          done = true;
+        } else {
+          // NOTE: sometime job title is undefined even success
+        }
       } catch (error) {
         myLogger.error('%o', error);
         output = { ...output, state: 'EXTRACTION_ERROR', error };
       }
 
       if (done) {
-        myLogger.info(`${jobsdb_job_url} done exitting...`);
-        
+        myLogger.info(`${jobsdb_job_url} done exiting...`);
+
         break;
       }
     }
@@ -162,16 +168,13 @@ router.post('/', async (req, res) => {
     await postResult(callback_url, output.extracted);
   } catch (error) {
     if (error.message == 'LINK_CONTAIN_NO_POST') {
-      myLogger.warn (`link contain no post, skipping`)
-    }else{
-
+      myLogger.warn(`link contain no post, skipping`);
+    } else {
       myLogger.error(error.message);
       myLogger.error('req.body %o', req.body);
       myLogger.error('error %o', error);
     }
   }
-
-  
 });
 
 module.exports = router;

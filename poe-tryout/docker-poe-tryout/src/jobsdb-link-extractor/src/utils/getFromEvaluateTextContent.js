@@ -17,7 +17,6 @@ async function getFromEvaluateTextContent(jobPage, title_selector) {
 
     output = { ...output, result: o_jobTitle.result };
     if (o_jobTitle.result == '') throw new Error('getFromEvaluateTextContent found empty');
-    
   } catch (error) {
     myLogger.error('getFromEvaluateTextContent found empty');
     myLogger.error('"%o', {
