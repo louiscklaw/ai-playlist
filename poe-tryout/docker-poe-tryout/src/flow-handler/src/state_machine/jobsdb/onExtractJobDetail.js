@@ -3,6 +3,9 @@ var validUrl = require('valid-url');
 const { postJobsdbPostExtract } = require('../../utils/fetchPost');
 const { myLogger } = require('../../utils/myLogger');
 
+const NO_NEED_SCAN_URL = 'NO_NEED_SCAN_URL';
+const INVALID_URL = 'INVALID_URL';
+
 module.exports = {
   onExtractJobDetail: function () {
     return new Promise(async (res, rej) => {
@@ -14,10 +17,16 @@ module.exports = {
         var { req_body } = this.context;
         var { jobsdb_job_url, callback_url } = req_body;
 
+        // TODO: use joi here,
         if (validUrl.isUri(jobsdb_job_url)) {
           // NOTE: url checking pass
         } else {
           throw new Error(`invalid url ${jobsdb_job_url}`);
+        }
+
+        if (NO_NEED_EXTRACT_LIST.indexOf(jobsdb_job_url) > -1) {
+          // jobsdb_job_url in no need extract list, skipping
+          throw new Error(NO_NEED_SCAN_URL);
         }
 
         // NOTE: receiver -> src/jobsdb-link-extractor/src/routes/jobsdbPostExtract.js
@@ -31,6 +40,14 @@ module.exports = {
 
         res();
       } catch (error) {
+        if (error.message == NO_NEED_SCAN_URL) {
+          rej('no need scan url:' + jobsdb_job_url);
+        }
+
+        if (error.message == INVALID_URL) {
+          rej('invalid url:' + jobsdb_job_url);
+        }
+
         myLogger.error('%o', error);
         rej('extract job detail failed, url:' + jobsdb_job_url);
       }

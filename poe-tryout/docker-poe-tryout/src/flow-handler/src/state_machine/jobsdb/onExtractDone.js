@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const Joi = require('joi');
-const fs = require('fs')
+const fs = require('fs');
 
 const { storeJson } = require('../../utils/storeJson');
 const { myLogger } = require('../../utils/myLogger');
@@ -23,7 +23,7 @@ const JOB_TITLE_UNDEFINED = 'JOB_TITLE_UNDEFINED';
 // _jobDescriptionMd: Joi.string().allow('', null), // Allowing empty or null values for this field
 // jobsdb_job_url: Joi.string().uri({ allowRelative : false }).required()
 
-const INPUT_FROM_CONTEXT_IS_NOT_VALID = 'INPUT_FROM_CONTEXT_IS_NOT_VALID'
+const INPUT_FROM_CONTEXT_IS_NOT_VALID = 'INPUT_FROM_CONTEXT_IS_NOT_VALID';
 
 function inputCheck(in_o) {
   try {
@@ -63,9 +63,9 @@ function inputCheck(in_o) {
   } catch (error) {
     myLogger.error('%o', error);
     myLogger.error('%o', in_o);
-    
-    fs.writeFileSync('/logs/error/flow-handler/in_o.json',JSON.stringify(in_o), {encoding:'utf-8'});
-    myLogger.error('in_o.json write done')
+
+    fs.writeFileSync('/logs/error/flow-handler/in_o.json', JSON.stringify(in_o), { encoding: 'utf-8' });
+    myLogger.error('in_o.json write done');
 
     throw error;
   }
