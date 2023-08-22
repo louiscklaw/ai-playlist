@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const { storeJson } = require('../../utils/storeJson');
 
-const url = 'http://flow-handler:3000/jobsdb_flow_summarize';
+const summarize_url = 'http://flow-handler:3000/jobsdb_flow_summarize';
 
 const SAMPLE_PREPROMPTS = ['Forget everything and start a new talk.'];
 
@@ -49,7 +49,7 @@ ${_jobDescriptionMd}
         await storeJson(`${working_dir}/input_to_summarize.json`, input_to_summarize);
 
         // proceed to summarize
-        await fetch(url, {
+        await fetch(summarize_url, {
           method: 'post',
           body: JSON.stringify(input_to_summarize),
           headers: { 'Content-Type': 'application/json' },
