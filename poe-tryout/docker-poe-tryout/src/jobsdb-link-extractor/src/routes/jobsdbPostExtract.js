@@ -16,6 +16,10 @@ const router = express.Router();
 const { myLogger } = require('../utils/myLogger');
 const { getFromEvaluateTextContent } = require('../utils/getFromEvaluateTextContent');
 const { helloworld_schema } = require('../schemas/helloworld_schema');
+const { urlSchema } = require('../schemas/url_schema');
+const { getPostIdFromJobsdbUrl } = require('./getPostIdFromJobsdbUrl');
+
+const LINK_CONTAIN_NO_POST = 'LINK_CONTAIN_NO_POST';
 
 // const schema = Joi.object({
 //   url: Joi.string().uri().required(),
@@ -24,7 +28,7 @@ const { helloworld_schema } = require('../schemas/helloworld_schema');
 // });
 
 // TEST -> src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test1/index.js
-// handle call from 
+// handle call from
 // src/flow-handler/src/state_machine/jobsdb/onExtractJobDetail.js
 // postJobsdbPostExtract
 router.post('/', async (req, res) => {
@@ -37,7 +41,7 @@ router.post('/', async (req, res) => {
 
     try {
       const { jobsdb_job_url, callback_url } = req.body;
-      if (jobsdb_job_url.trim().search(/https:\/\/hk.jobsdb.com\/?$/) > -1) throw new Error('LINK_CONTAIN_NO_POST');
+      if (jobsdb_job_url.trim().search(/https:\/\/hk.jobsdb.com\/?$/) > -1) throw new Error(LINK_CONTAIN_NO_POST);
 
       res.send({ state: 'scheduled' });
 
@@ -50,17 +54,11 @@ router.post('/', async (req, res) => {
 
       for (var i = 0; i < retry; i++) {
         try {
-          // NOTE: input validation, may be set a schema here ?
-          const req_body = req.body;
-
-          // TODO: remove me
-          // const { url } = req_body;
-
           myLogger.info('%o', { jobsdb_job_url });
 
-          if (!validUrl.isUri(jobsdb_job_url)) throw new Error(`invalid url ${jobsdb_job_url}`);
+          if (urlSchema.validate(jobsdb_job_url).error) throw new Error(`invalid url ${jobsdb_job_url}`);
 
-          const post_id = jobsdb_job_url.replace('.html', '').split('-').pop();
+          const post_id = getPostIdFromJobsdbUrl(jobsdb_job_url);
           if (!post_id) throw new Error('post_id is required');
 
           // const url = `https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868`;
@@ -176,7 +174,7 @@ router.post('/', async (req, res) => {
       throw error;
     }
   } catch (error) {
-    if (error.message == 'LINK_CONTAIN_NO_POST') {
+    if (error.message == LINK_CONTAIN_NO_POST) {
       myLogger.warn(`link contain no post, skipping`);
     } else {
       myLogger.error(error.message);
