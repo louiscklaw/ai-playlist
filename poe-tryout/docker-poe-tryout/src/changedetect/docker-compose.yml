@@ -10,6 +10,7 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/diff-handler/src:/app
       - ./volumes/changedetect/diff-handler:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3052:3000
@@ -28,6 +29,7 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/scraper/jobsdb/src:/app
       - ./volumes/changedetect/jobsdb-scraper:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3054:3000
@@ -69,6 +71,7 @@ services:
     depends_on:
       - changedetection-chrome
       - diff-handler
+      - jobsdb-scraper
 
   changedetection-chrome:
     #  hostname: changedetection-chrome
