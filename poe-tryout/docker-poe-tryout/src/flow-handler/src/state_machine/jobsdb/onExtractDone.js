@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const Joi = require('joi');
+const fs = require('fs')
 
 const { storeJson } = require('../../utils/storeJson');
 const { myLogger } = require('../../utils/myLogger');
@@ -21,6 +22,8 @@ const JOB_TITLE_UNDEFINED = 'JOB_TITLE_UNDEFINED';
 // jobDescription: Joi.string().required(),
 // _jobDescriptionMd: Joi.string().allow('', null), // Allowing empty or null values for this field
 // jobsdb_job_url: Joi.string().uri({ allowRelative : false }).required()
+
+const INPUT_FROM_CONTEXT_IS_NOT_VALID = 'INPUT_FROM_CONTEXT_IS_NOT_VALID'
 
 function inputCheck(in_o) {
   try {
@@ -51,7 +54,7 @@ function inputCheck(in_o) {
     var { jobsdb_job_url, jobTitle } = in_o;
 
     const { error } = jobSchema.validate(in_o);
-    if (error) throw new Error('input from context is not valid');
+    if (error) throw new Error(INPUT_FROM_CONTEXT_IS_NOT_VALID);
 
     if (!jobTitle) {
       myLogger.error(`job title undefined, url: -> ${jobsdb_job_url}`);
@@ -60,6 +63,7 @@ function inputCheck(in_o) {
   } catch (error) {
     myLogger.error('%o', error);
     myLogger.error('%o', in_o);
+    fs.writeFileSync('./in_o.json',JSON.stringify(in_o), {encoding:'utf-8'});
     throw error;
   }
 }
