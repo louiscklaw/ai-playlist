@@ -1,5 +1,6 @@
 'use strict';
 var validUrl = require('valid-url');
+const Joi = require('joi');
 
 const { SRC_ROOT, BROWSERLESS_HOST, SCREENSHOT_ROOT } = require('../config');
 
@@ -15,13 +16,22 @@ const router = express.Router();
 const { myLogger } = require('../utils/myLogger');
 const { getFromEvaluateTextContent } = require('../utils/getFromEvaluateTextContent');
 
+const schema = Joi.object({
+  url: Joi.string().uri().required(),
+  jobsdb_job_url: Joi.string().uri().required(),
+  callback_url: Joi.string().uri().required(),
+});
+
 router.post('/', async (req, res) => {
   myLogger.info('/jobsdbPostExtract called');
 
   try {
     // NOTE: sender-> src/flow-handler/src/state_machine/jobsdb/onExtractJobDetail.js
+    const { error } = schema.validate(req.body);
+    if (error) throw new Error('input json is invalid')
+   
     const { jobsdb_job_url, callback_url } = req.body;
-    if (!jobsdb_job_url) throw new Error('jobsdb job url is undefined');
+    if (jobsdb_job_url.trim().search(/https:\/\/hk.jobsdb.com\/?$/) > -1) throw new Error('LINK_CONTAIN_NO_POST')    
 
     res.send({ state: 'scheduled' });
 
@@ -133,16 +143,17 @@ router.post('/', async (req, res) => {
           postDate,
         };
 
-        output = { ...output, state: 'extract_done', extracted };
+        output = { ...output, state: 'EXTRACT_DONE', extracted };
 
         done = true;
       } catch (error) {
         myLogger.error('%o', error);
-        output = { ...output, state: 'extraction_error', error };
+        output = { ...output, state: 'EXTRACTION_ERROR', error };
       }
 
       if (done) {
-        myLogger.info('done exitting...');
+        myLogger.info(`${jobsdb_job_url} done exitting...`);
+        
         break;
       }
     }
@@ -150,9 +161,14 @@ router.post('/', async (req, res) => {
     // NOTE: receiver -> src/flow-handler/src/routes/jobsdb_link_extract_cb.js
     await postResult(callback_url, output.extracted);
   } catch (error) {
-    myLogger.error(error.message);
-    myLogger.error('req.body %o', req.body);
-    myLogger.error('error %o', error);
+    if (error.message == 'LINK_CONTAIN_NO_POST') {
+      myLogger.warn (`link contain no post, skipping`)
+    }else{
+
+      myLogger.error(error.message);
+      myLogger.error('req.body %o', req.body);
+      myLogger.error('error %o', error);
+    }
   }
 });
 
