@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
     const sainted_messages = getAddedLink(messages);
 
     const flow_handler_payloads = sainted_messages.map(m => {
-      console.log('blablabla');
+
       return getPayloadToFlowHandlerJson(m);
     });
 
