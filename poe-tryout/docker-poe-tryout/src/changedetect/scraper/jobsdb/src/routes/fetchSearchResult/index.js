@@ -5,7 +5,8 @@ const puppeteer = require('puppeteer-core');
 const express = require('express');
 const router = express.Router();
 
-const { getRandomInt } = require('../../util/getRandomInt');
+const { getRandomInt } = require('../../utils/getRandomInt');
+const { myLogger } = require('../../utils/myLogger');
 
 const BROWSERLESS_HOST = 'changedetection-chrome';
 
@@ -17,7 +18,7 @@ router.post('/search', async (req, res) => {
     output = { ...output, state: 'start', debug: { search } };
     // if (!validUrl.isUri(url)) throw new Error(`invalid url ${url}`);
 
-    console.log('start browserless');
+    myLogger.info('start browserless');
     browser = await puppeteer.connect({
       browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
       defaultViewport: { width: 1920, height: 1080 * 3 },
@@ -29,11 +30,11 @@ router.post('/search', async (req, res) => {
     var string_search = search.join('-');
 
     var url = `https://hk.jobsdb.com/hk/search-jobs/${string_search}/1`;
-    console.log(`go to url ${url}`);
+    myLogger.info(`go to url ${url}`);
     output = { ...output, url };
     await page.goto(url, { waitUntil: 'networkidle2' });
 
-    console.log('take screenshot');
+    myLogger.info('take screenshot');
     await page.screenshot({ path: '/share/helloworld.png', fullPage: true });
 
     const all_links = await page.evaluate(() => {
@@ -51,7 +52,7 @@ router.post('/search', async (req, res) => {
 
     output = { ...output, state: 'done', post_links };
   } catch (error) {
-    console.log(error);
+    myLogger.error('%o', error);
     output = { ...output, state: 'error', error: error.message };
   }
   res.send(output);

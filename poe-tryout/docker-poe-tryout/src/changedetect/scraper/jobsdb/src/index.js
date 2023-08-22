@@ -3,6 +3,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { myLogger } = require('./utils/myLogger');
+
 const PORT = 3000;
 
 try {
@@ -21,9 +23,9 @@ try {
 
   // // Start the server
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log('error during starting express');
-  console.log(error);
+  myLogger.error('error during starting express');
+  myLogger.error('%o', error);
 }

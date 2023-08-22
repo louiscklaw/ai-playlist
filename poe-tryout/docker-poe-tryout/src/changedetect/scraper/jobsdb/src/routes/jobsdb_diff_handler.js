@@ -1,10 +1,11 @@
 const fs = require('fs');
-const { postJobsdbLinkExtract } = require('../util/postJobsdbLinkExtract');
+const { postJobsdbLinkExtract } = require('../utils/postJobsdbLinkExtract');
 
 const express = require('express');
 const router = express.Router();
 
-const { getAddedLink } = require('../util/getAddedLink');
+const { getAddedLink } = require('../utils/getAddedLink');
+const { myLogger } = require('../utils/myLogger');
 
 function getPayloadToFlowHandlerJson(diff_link) {
   try {
@@ -13,8 +14,8 @@ function getPayloadToFlowHandlerJson(diff_link) {
       callback_url: 'http://flow-handler:3000/jobsdb_link_extract_cb',
     };
   } catch (error) {
-    console.log(error);
-    console.log({ diff_link });
+    myLogger.error('%o', error);
+    myLogger.error('%o', { diff_link });
   }
 }
 
@@ -36,15 +37,15 @@ router.post('/', (req, res) => {
       try {
         await postJobsdbLinkExtract(j);
       } catch (error) {
-        console.log(error);
+        myLogger.error('%o', error);
         throw new Error(`error during posting to flow-handler ${j}`);
       }
     });
 
     output = { ...output, state: 'done' };
   } catch (error) {
-    console.log('error occur in diff-handler');
-    console.log(error);
+    myLogger.error('error occur in diff-handler');
+    myLogger.error('%o', error);
     output = { ...output, state: 'error', error: error.message };
   }
 
