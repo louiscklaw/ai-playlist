@@ -3,6 +3,7 @@ const { postJobsdbLinkExtract } = require('../utils/postJobsdbLinkExtract');
 
 const express = require('express');
 const router = express.Router();
+const {myLogger} = require('../utils/myLogger')
 
 const { getAddedLink } = require('../utils/getAddedLink');
 
@@ -48,21 +49,21 @@ router.post('/', (req, res) => {
     // console.log({ req_body });
     output = { ...output, state: 'start', debug: req_body };
 
-    console.log('call to jobsdb_diff_handler');
-    console.log({ req_body });
+    myLogger.info('call to jobsdb_diff_handler');
+    myLogger.info("%o",{ req_body });
 
     const json_message = req_body.message;
     const messages = json_message.split(/\n/);
     const sainted_messages = getAddedLink(messages);
 
     const flow_handler_payloads = sainted_messages.map(m => {
-
       return getPayloadToFlowHandlerJson(m);
     });
+    myLogger.info("%o",{ flow_handler_payloads });
 
     flow_handler_payloads.forEach(async pl => {
       try {
-        console.log(`going to send postJobsdbLinkExtract -> `);
+        myLogger.info(`going to send postJobsdbLinkExtract -> `)
         console.log(pl);
 
         await postJobsdbLinkExtract(pl);

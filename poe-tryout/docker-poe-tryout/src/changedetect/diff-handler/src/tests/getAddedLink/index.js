@@ -7,6 +7,7 @@ const message = [
   '(into)         "/hk/en/job/job-job-job-11111111508987",\n',
   '(into)         "/hk/en/job/automation-hardware-engineer-ai-lab-508987-100003010505170"',
   '(into)         "/hk/en/job/automation-hardware-engineer-ai-lab-508987-100003010505170',
+  "(added)       /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402"
 ];
 
 var result = getAddedLink(message);
