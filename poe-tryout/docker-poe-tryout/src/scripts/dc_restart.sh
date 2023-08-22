@@ -2,6 +2,8 @@
 
 set -ex
 
+docker compose -f ./docker-compose.gen.yml build
+
 # docker compose -f ./docker-compose.gen.yml kill redis poe-scheduler-api
 docker compose -f ./docker-compose.gen.yml kill
 
