@@ -115,7 +115,7 @@ router.post('/', async (req, res) => {
           // });
           var selector = 'div[data-automation="job-details-job-highlights"] > div:nth-child(1) > div:nth-child(2)';
           var { result } = await getFromEvaluateTextContent(jobPage, selector);
-          var jobTitle = result;
+          var jobHighlight = result;
 
 
           var { description, _jobDescriptionRaw, __jobDescriptionRawProcessed } = await jobPage.evaluate(() => {
