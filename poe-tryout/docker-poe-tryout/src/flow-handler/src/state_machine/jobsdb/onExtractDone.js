@@ -11,6 +11,24 @@ const SAMPLE_PREPROMPTS = ['Forget everything and start a new talk.'];
 
 const JOB_TITLE_UNDEFINED = 'JOB_TITLE_UNDEFINED';
 
+const crypto = require('crypto');
+
+function calculateMD5(object) {
+  // Convert the object to a JSON string
+  const jsonString = JSON.stringify(object);
+
+  // Create a new Hash instance with 'md5' algorithm
+  const md5Hash = crypto.createHash('md5');
+
+  // Update the hash with the JSON string
+  md5Hash.update(jsonString);
+
+  // Calculate and return the hexadecimal representation of the hash digest
+  return md5Hash.digest('hex');
+}
+
+
+
 // jobTitle: Joi.string().required(),
 // companyName: Joi.string().required(),
 // jobAddress: Joi.string().required(),
@@ -62,10 +80,12 @@ function inputCheck(in_o) {
     }
   } catch (error) {
     myLogger.error('%o', error);
-    myLogger.error('%o', in_o);
 
-    fs.writeFileSync('/logs/error/flow-handler/in_o.json', JSON.stringify(in_o), { encoding: 'utf-8' });
+    const md5Hash = calculateMD5(in_o);
+    fs.writeFileSync(`/logs/error/flow-handler/${md5Hash}.json`, JSON.stringify(in_o), { encoding: 'utf-8' });
     myLogger.error('in_o.json write done');
+
+    myLogger.error('%o', in_o);
 
     throw error;
   }
