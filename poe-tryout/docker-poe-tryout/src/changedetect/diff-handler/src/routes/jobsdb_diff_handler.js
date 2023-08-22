@@ -6,6 +6,7 @@ const router = express.Router();
 const { myLogger } = require('../utils/myLogger');
 
 const { getAddedLink } = require('../utils/getAddedLink');
+const { FLOW_HANDLER_ENDPOINT } = require('../config');
 
 // var validUrl = require('valid-url');
 
@@ -13,7 +14,7 @@ function getPayloadToFlowHandlerJson(diff_link) {
   try {
     return {
       jobsdb_job_url: `https://hk.jobsdb.com/${diff_link}`,
-      callback_url: 'http://flow-handler:3000/jobsdb_link_extract_cb',
+      callback_url: `${FLOW_HANDLER_ENDPOINT}/jobsdb_link_extract_cb`,
     };
   } catch (error) {
     myLogger.error(error.message);

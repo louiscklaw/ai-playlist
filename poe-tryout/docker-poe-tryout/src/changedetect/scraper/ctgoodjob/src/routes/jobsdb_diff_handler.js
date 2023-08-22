@@ -5,12 +5,14 @@ const express = require('express');
 const router = express.Router();
 
 const { getAddedLink } = require('../util/getAddedLink');
+const { FLOW_HANDLER_ENDPOINT } = require('../config');
 
 function getPayloadToFlowHandlerJson(diff_link) {
+  
   try {
     return {
       jobsdb_job_url: `https://hk.jobsdb.com/${diff_link}`,
-      callback_url: 'http://flow-handler:3000/jobsdb_link_extract_cb',
+      callback_url: `${FLOW_HANDLER_ENDPOINT}/jobsdb_link_extract_cb`,
     };
   } catch (error) {
     console.log(error);

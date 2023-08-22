@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { FLOW_HANDLER_ENDPOINT } = require('../config');
 
 function fetchPost(url, json_body) {
   console.log('fetchPost ' + json_body.jobsdb_job_url + ' ... ');
@@ -13,8 +14,9 @@ function fetchPost(url, json_body) {
 function postJobsdbLinkExtract(json_body) {
   console.log('postJobsdbLinkExtract');
   console.log({ json_body });
+  
   // return ;
-  return fetchPost(`http://flow-handler:3000/jobsdb_link_extract`, json_body);
+  return fetchPost(`${FLOW_HANDLER_ENDPOINT}/jobsdb_link_extract`, json_body);
 }
 
 module.exports = { postJobsdbLinkExtract };
