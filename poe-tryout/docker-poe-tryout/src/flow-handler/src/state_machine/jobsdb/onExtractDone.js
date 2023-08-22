@@ -55,8 +55,6 @@ function inputCheck(in_o){
   const { error } = jobSchema.validate(in_o);
   if (error) throw new Error('input from context is not valid')
 
-  jobTitle = undefined;
-
   if (!jobTitle) {
     myLogger.error(`job title undefined, url: -> ${jobsdb_job_url}`);
     throw new Error(JOB_TITLE_UNDEFINED);
