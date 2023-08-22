@@ -6,9 +6,9 @@ function getAddedLink(messages) {
     .filter(s => s.search(/(into|added)/g) > -1)
     .map(m => {
       var url_regex = [
-        /\((added|into)\) +"\/?(.+)\?.+/, 
-        /\((added|into)\) +"\/?((\/|\w|-)+)"?/,         // TODO: add sample here
-        /\((added|into)\) +\/?((\/|\w|-)+)"?/,          // (added)       /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402
+        /\((added|into)\) +"\/?(.+)\?.+/,
+        /\((added|into)\) +"\/?((\/|\w|-)+)"?/, // TODO: add sample here
+        /\((added|into)\) +\/?((\/|\w|-)+)"?/, // (added)       /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402
       ];
 
       var output;
