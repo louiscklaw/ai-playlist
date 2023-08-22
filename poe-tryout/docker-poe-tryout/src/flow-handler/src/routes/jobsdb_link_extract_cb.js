@@ -5,14 +5,16 @@ const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 const { myLogger } = require('../utils/myLogger');
 const router = express.Router();
 
+// /jobsdb_link_extract_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: {} };
 
   try {
     myLogger.info('receive callback from link extract ');
     var req_body = req.body;
-    myLogger.error('see below')
-    myLogger.info("%o", {req_body})
+
+    // myLogger.info('see below')
+    // myLogger.info("%o", {req_body})
 
     output = { ...output, state: 'start', debug: req_body };
     // output.state = 'start';
@@ -35,8 +37,8 @@ router.post('/', async (req, res) => {
 
     output = { ...output, state: 'success' };
   } catch (error) {
-    myLogger.info(error);
-    output = { ...output, state: 'error', error: error.message };
+    myLogger.info("%o",error);
+    output = { ...output, state: 'error', error };
   }
 
   res.send(output);

@@ -7,15 +7,15 @@ module.exports = {
   onPoeSummarize: function () {
     return new Promise(async (res, rej) => {
       try {
-        console.log('I Summarize');
+        myLogger.info('I Summarize');
         const { req_body } = this.context;
         var payload = req_body;
-        var {working_dir} = payload;
+        var { working_dir } = payload;
 
-        console.log('input to summarize')
-        
+        myLogger.info('input to summarize');
+
         var meta_json = await loadJson(`${working_dir}/meta.json`);
-        console.log({meta_json})
+        myLogger.info("%o",{ meta_json });
 
         // receiver -> src/poe-scheduler-api/routes/ask_poe.js
         var result = await askPoePrepromptQuestion(payload);
@@ -23,7 +23,7 @@ module.exports = {
         res();
       } catch (error) {
         myLogger.error('error during summarize');
-        console.log(error);
+        myLogger.error("%o",error);
 
         rej();
       }
@@ -32,7 +32,7 @@ module.exports = {
   onPoeSummarizeDone: function () {
     return new Promise(async (res, rej) => {
       try {
-        console.log('I SummarizeDone');
+        myLogger.info('I SummarizeDone');
 
         const { working_dir } = this.context;
         const job_summary = this.context.chat_history.q_and_a.history[1].answer;

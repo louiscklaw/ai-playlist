@@ -34,7 +34,7 @@ function onReportJobComplete() {
       const { working_dir } = this.context;
       // myLogger.info(this.context);
       var meta_json = await loadJson(`${working_dir}/meta.json`);
-      myLogger.info(`job url: ${meta_json.jobsdb_job_url}`)
+      myLogger.info(`job url: ${meta_json.jobsdb_job_url}`);
 
       const { companyName, jobAddress, jobTitle } = await getJobInfo(working_dir);
 
@@ -52,7 +52,7 @@ ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
       res();
     } catch (error) {
       myLogger.error('error during report job complete...');
-      myLogger.error("%o",error);
+      myLogger.error('%o', error);
       // myLogger.error(error.message);
 
       rej();

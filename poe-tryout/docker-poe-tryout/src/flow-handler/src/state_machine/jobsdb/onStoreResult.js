@@ -16,7 +16,7 @@ module.exports = {
         }
 
         var test_json = await loadJson(`${working_dir}/meta.json`);
-        console.log(`job url: ${test_json.jobsdb_job_url}`)
+        myLogger.info(`job url: ${test_json.jobsdb_job_url}`);
 
         await createDirIfNotExists(working_dir);
         await storeJson(`${working_dir}/store_result.json`, this.context);
@@ -24,7 +24,7 @@ module.exports = {
         res();
       } catch (error) {
         myLogger.error('error during saving result...');
-        console.log(error);
+        myLogger.error("%o",error);
 
         rej();
       }
