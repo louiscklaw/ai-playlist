@@ -23,6 +23,9 @@ const schema = Joi.object({
 });
 
 // TEST -> src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test1/index.js
+// handle call from 
+// src/flow-handler/src/state_machine/jobsdb/onExtractJobDetail.js
+// postJobsdbPostExtract
 router.post('/', async (req, res) => {
   myLogger.info('/jobsdbPostExtract called');
 
