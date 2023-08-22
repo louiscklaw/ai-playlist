@@ -6,6 +6,7 @@ var Customer = new Schema({
   comment: { type: String },
   count: { type: Number, default: 1 },
 });
+
 var CustomerModel = mongoose.model('Customer', Customer);
 
 module.exports = { Customer, CustomerModel };

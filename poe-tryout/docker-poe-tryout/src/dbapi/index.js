@@ -15,6 +15,7 @@ const JobPostModel = require('./models/JobPost');
 const HelloworldModel = require('./models/Helloworld');
 const { CustomerModel } = require('./models/Customer');
 const { InvoiceModel } = require('./models/Invoice');
+const { JobsdbDoneListModel } = require('./models/JobsdbDoneList');
 const { myLogger } = require('./utils/myLogger');
 
 try {
@@ -39,6 +40,7 @@ try {
   restify.serve(app, HelloworldModel);
   restify.serve(app, CustomerModel);
   restify.serve(app, InvoiceModel);
+  restify.serve(app, JobsdbDoneListModel);
 
   app.use('/helloworld', require('./routes/helloworld'));
 
