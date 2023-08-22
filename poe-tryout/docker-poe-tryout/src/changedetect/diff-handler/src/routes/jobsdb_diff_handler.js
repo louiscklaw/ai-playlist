@@ -17,7 +17,7 @@ function getPayloadToFlowHandlerJson(diff_link) {
     };
   } catch (error) {
     myLogger.error(error.message);
-    myLogger.error("%o",{ diff_link });
+    myLogger.error('%o', { diff_link });
   }
 }
 
@@ -29,12 +29,12 @@ router.post('/dump', (req, res) => {
 
     // TODO: use myLogger,
     myLogger.info('dump called');
-    myLogger.info("%o",{ req_body });
+    myLogger.info('%o', { req_body });
 
     output = { ...output, state: 'done', debug: req_body };
   } catch (error) {
     myLogger.error('error occur in diff-handler');
-    myLogger.error("%o",error);
+    myLogger.error('%o', error);
     output = { ...output, state: 'error', error: error.message };
   }
 
@@ -64,12 +64,12 @@ router.post('/', (req, res) => {
     flow_handler_payloads.forEach(async pl => {
       try {
         myLogger.info(`going to send postJobsdbLinkExtract -> `);
-        myLogger.info("%o",pl);
+        myLogger.info('%o', pl);
 
         await postJobsdbLinkExtract(pl);
       } catch (error) {
-        myLogger.error("%o",error);
-        myLogger.error("%o",pl);
+        myLogger.error('%o', error);
+        myLogger.error('%o', pl);
         throw new Error(`error during posting to flow-handler`);
       }
     });
@@ -77,7 +77,7 @@ router.post('/', (req, res) => {
     output = { ...output, state: 'done' };
   } catch (error) {
     myLogger.error('error occur in diff-handler');
-    myLogger.error("%o",error);
+    myLogger.error('%o', error);
     output = { ...output, state: 'error', error: error.message };
   }
 

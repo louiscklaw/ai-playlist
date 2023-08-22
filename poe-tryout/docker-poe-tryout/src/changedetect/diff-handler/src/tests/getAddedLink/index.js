@@ -10,7 +10,6 @@ const message = [
   '(added)       /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402',
   '(added)       /hk/en/job/software-automation-qa-engineer%7C-multimedia-100003010533122',
   '(added)       "/hk/en/job/software-automation-qa-engineer%7C-multimedia-100003010533122"',
-  
 ];
 
 var result = getAddedLink(message);
