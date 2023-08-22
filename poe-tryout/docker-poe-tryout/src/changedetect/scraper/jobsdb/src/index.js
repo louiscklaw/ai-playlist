@@ -16,6 +16,7 @@ try {
 
   app.use('/fetchSearchResult', require('./routes/fetchSearchResult'));
 
+  // TODO: remove me ?
   app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
   app.use('/post_helloworld', require('./routes/post_helloworld'));
 

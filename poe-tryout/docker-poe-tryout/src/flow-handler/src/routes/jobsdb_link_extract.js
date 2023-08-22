@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
     output = { ...output, state: 'scheduled' };
   } catch (error) {
-    myLogger.error("%o",{error});
+    myLogger.error('%o', { error });
     output = { ...output, state: 'error', error };
   }
 
