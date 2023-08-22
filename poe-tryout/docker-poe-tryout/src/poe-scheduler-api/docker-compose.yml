@@ -17,7 +17,7 @@ services:
       - redis
     working_dir: /app
     restart: unless-stopped
-    entrypoint: ./dev.sh
+    entrypoint: ./entry.sh
     env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
