@@ -2,8 +2,8 @@ const fetch = require('node-fetch');
 const { myLogger } = require('../../../utils/myLogger');
 
 const urls = [
-  'http://bait:8080/jobsdb/hk/en/job/missing_jobtitle-10001000.html',
-  // 'https://hk.jobsdb.com/hk/en/job/validation-engineer-qa-100003010527848',
+  // 'http://bait:8080/jobsdb/hk/en/job/missing_jobtitle-10001000.html',
+  'https://hk.jobsdb.com/hk/en/job/validation-engineer-qa-100003010527848',
   // 'https://hk.jobsdb.com',
   // 'https://hk.jobsdb.com/',
 ];

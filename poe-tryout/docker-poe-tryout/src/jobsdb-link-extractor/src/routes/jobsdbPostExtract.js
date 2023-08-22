@@ -1,4 +1,7 @@
 'use strict';
+
+// TEST: src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test2/index.js
+
 var validUrl = require('valid-url');
 const Joi = require('joi');
 
@@ -18,6 +21,7 @@ const { getFromEvaluateTextContent } = require('../utils/getFromEvaluateTextCont
 const { helloworld_schema } = require('../schemas/helloworld_schema');
 const { urlSchema } = require('../schemas/url_schema');
 const { getPostIdFromJobsdbUrl } = require('./getPostIdFromJobsdbUrl');
+const { getFromEvaluateOuterHtml } = require('../utils/getFromEvaluateOuterHtml');
 
 const LINK_CONTAIN_NO_POST = 'LINK_CONTAIN_NO_POST';
 
@@ -76,15 +80,21 @@ router.post('/', async (req, res) => {
 
           myLogger.info('browser started');
 
+          var selector=''
+
           const jobPage = page;
-          var title_selector = 'div[data-automation="detailsTitle"] h1';
-          var { result } = await getFromEvaluateTextContent(jobPage, title_selector);
+          var selector = 'div[data-automation="detailsTitle"] h1';
+          var { result } = await getFromEvaluateTextContent(jobPage, selector);
           var jobTitle = result;
 
-          const _jobDetailsHeaderRawHTML = await jobPage.evaluate(() => {
-            const title = document.querySelector('div[data-automation="jobDetailsHeader"]').outerHTML;
-            return title;
-          });
+          // const _jobDetailsHeaderRawHTML = await jobPage.evaluate(() => {
+          //   const title = document.querySelector('div[data-automation="jobDetailsHeader"]').outerHTML;
+          //   return title;
+          // });
+          var selector = 'div[data-automation="jobDetailsHeader"]';
+          var { result } = await getFromEvaluateOuterHtml(jobPage, selector);
+          var _jobDetailsHeaderRawHTML = result;
+          myLogger.error(_jobDetailsHeaderRawHTML)
 
           const { companyName, jobAddress, postDate, _debugList } = await jobPage.evaluate(() => {
             var output = {};
