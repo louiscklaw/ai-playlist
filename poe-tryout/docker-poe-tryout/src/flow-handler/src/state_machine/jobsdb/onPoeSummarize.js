@@ -15,7 +15,7 @@ module.exports = {
         myLogger.info('input to summarize');
 
         var meta_json = await loadJson(`${working_dir}/meta.json`);
-        myLogger.info("%o",{ meta_json });
+        myLogger.info('%o', { meta_json });
 
         // receiver -> src/poe-scheduler-api/routes/ask_poe.js
         var result = await askPoePrepromptQuestion(payload);
@@ -23,7 +23,7 @@ module.exports = {
         res();
       } catch (error) {
         myLogger.error('error during summarize');
-        myLogger.error("%o",error);
+        myLogger.error('%o', error);
 
         rej();
       }

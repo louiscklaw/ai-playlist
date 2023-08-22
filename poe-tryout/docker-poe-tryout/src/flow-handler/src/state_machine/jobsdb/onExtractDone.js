@@ -10,9 +10,6 @@ const SAMPLE_PREPROMPTS = ['Forget everything and start a new talk.'];
 
 const JOB_TITLE_UNDEFINED = 'JOB_TITLE_UNDEFINED';
 
-const jobSchema = Joi.object({
-  working_dir: Joi.string().required(),
-});
 // jobTitle: Joi.string().required(),
 // companyName: Joi.string().required(),
 // jobAddress: Joi.string().required(),
@@ -25,41 +22,46 @@ const jobSchema = Joi.object({
 // _jobDescriptionMd: Joi.string().allow('', null), // Allowing empty or null values for this field
 // jobsdb_job_url: Joi.string().uri({ allowRelative : false }).required()
 
-function inputCheck(in_o){
-  const jobSchema = Joi.object({
-    working_dir: Joi.string().required(),
-    jobTitle: Joi.string().required(),
-    companyName: Joi.string().required(),
-    jobAddress: Joi.string().required(),
-    postDate: Joi.string().required(), // Assuming date format is ISO-8601
-    jobHighlight: Joi.string().required(),
-    jobDescription: Joi.string().required(),
-    _jobDescriptionMd: Joi.string().allow('', null), // Allowing empty or null values for this field
-    jobsdb_job_url: Joi.string().uri({ allowRelative: false }).required()
-  }).unknown();
+function inputCheck(in_o) {
+  try {
+    const jobSchema = Joi.object({
+      working_dir: Joi.string().required(),
+      jobTitle: Joi.string().required(),
+      companyName: Joi.string().required(),
+      jobAddress: Joi.string().required(),
+      postDate: Joi.string().required(), // Assuming date format is ISO-8601
+      jobHighlight: Joi.string().required(),
+      jobDescription: Joi.string().required(),
+      _jobDescriptionMd: Joi.string().allow('', null), // Allowing empty or null values for this field
+      jobsdb_job_url: Joi.string().uri({ allowRelative: false }).required(),
+    }).unknown();
 
-  // const example = {
-  //   working_dir: 'path/to/working/dir',
-  //   jobTitle: 'Software Engineer',
-  //   companyName: 'ABC Company',
-  //   jobAddress: '123 Main St, City',
-  //   postDate: '2022-01-01', // Assuming ISO-8601 date format
-  //   jobHighlight: 'Flexible Working Hours',
-  //   jobDescription: 'Lorem ipsum dolor sit amet...',
-  //   _jobDescriptionMd: '',
-  //   jobsdb_job_url: 'https://example.com'
-  // };
+    // const example = {
+    //   working_dir: 'path/to/working/dir',
+    //   jobTitle: 'Software Engineer',
+    //   companyName: 'ABC Company',
+    //   jobAddress: '123 Main St, City',
+    //   postDate: '2022-01-01', // Assuming ISO-8601 date format
+    //   jobHighlight: 'Flexible Working Hours',
+    //   jobDescription: 'Lorem ipsum dolor sit amet...',
+    //   _jobDescriptionMd: '',
+    //   jobsdb_job_url: 'https://example.com'
+    // };
 
-  var {jobsdb_job_url, jobTitle} = in_o 
+    var { jobsdb_job_url, jobTitle } = in_o;
 
-  const { error } = jobSchema.validate(in_o);
-  if (error) throw new Error('input from context is not valid')
+    const { error } = jobSchema.validate(in_o);
+    if (error) throw new Error('input from context is not valid');
 
-  if (!jobTitle) {
-    myLogger.error(`job title undefined, url: -> ${jobsdb_job_url}`);
-    throw new Error(JOB_TITLE_UNDEFINED);
+    if (!jobTitle) {
+      myLogger.error(`job title undefined, url: -> ${jobsdb_job_url}`);
+      throw new Error(JOB_TITLE_UNDEFINED);
+    }
+  } catch (error) {
+    myLogger.error('%o', error);
+    myLogger.error('%o', in_o);
+    throw error;
   }
-
 }
 
 module.exports = {
@@ -79,7 +81,7 @@ module.exports = {
           _jobDescriptionMd,
           jobsdb_job_url,
         } = this.context;
-        
+
         inputCheck(this.context);
 
         var input_to_summarize = {
@@ -118,11 +120,10 @@ ${_jobDescriptionMd}
 
         res();
       } catch (error) {
-        myLogger.error('error during processing Extract callback ...')
+        myLogger.error('error during processing Extract callback ...');
         if (error.message == JOB_TITLE_UNDEFINED) {
-          myLogger.error('error as jobtitle is undefined, skipping process')
-        }else{
-
+          myLogger.error('error as jobtitle is undefined, skipping process');
+        } else {
           myLogger.error('%o', error);
         }
         rej();
