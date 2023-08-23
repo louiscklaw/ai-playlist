@@ -36,10 +36,7 @@ router.post('/', async (req, res) => {
     output = { ...output, state: 'success' };
   } catch (error) {
     myLogger.error("%o",{ error });
-    // output.state = 'error';
-    // output.error = error;
-
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error };
   }
 
   res.send(output);
