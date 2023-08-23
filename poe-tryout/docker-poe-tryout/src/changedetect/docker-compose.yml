@@ -21,6 +21,7 @@ services:
       - TZ=Asia/Hong_Kong
     depends_on:
       - jobsdb-scraper
+    env_file: ./.env
 
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
@@ -38,6 +39,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+    env_file: ./.env
 
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
@@ -72,6 +74,7 @@ services:
       - changedetection-chrome
       - diff-handler
       - jobsdb-scraper
+    env_file: ./.env
 
   changedetection-chrome:
     #  hostname: changedetection-chrome

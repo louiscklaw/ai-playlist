@@ -18,3 +18,4 @@ services:
     environment:
       - V2RAYA_LOG_FILE=/tmp/v2raya.log
       - V2RAYA_ADDRESS=0.0.0.0:2017
+    env_file: ./.env

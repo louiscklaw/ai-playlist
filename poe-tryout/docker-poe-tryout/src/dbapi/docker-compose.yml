@@ -44,3 +44,4 @@ services:
       - PORT=3001
     restart: unless-stopped
     entrypoint: ./entry.sh
+    env_file: ./.env

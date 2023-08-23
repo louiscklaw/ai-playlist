@@ -12,4 +12,4 @@ services:
       - 8080:8080
     user: 1000:1000
     restart: unless-stopped
-    
+    env_file: ./.env

@@ -27,3 +27,4 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+    env_file: ./.env

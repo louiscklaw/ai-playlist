@@ -20,7 +20,8 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=jobsdb-link-extractor
-
+    env_file: ./.env
+    
   link-extractor-chrome:
     image: browserless/chrome
     shm_size: '1gb'

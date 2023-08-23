@@ -50,6 +50,7 @@ services:
 
       # NOTE: source code
       - "./openbox-poe-seat/src:/app"
+    env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
       - FIREFOX_DATA_DIR=/workspace/firefox-user-data

@@ -18,7 +18,7 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
       - ALLOW_EMPTY_PASSWORD=yes
-
+    
   redisinsight:
     image: 192.168.10.61:5000/redislabs/redisinsight:latest
     # expose:
@@ -47,3 +47,4 @@ services:
       - TZ=Asia/Hong_Kong
     depends_on:
       - redis
+    env_file: ./.env
