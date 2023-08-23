@@ -1,7 +1,9 @@
-const { askPoePrepromptQuestion } = require('../../fetch/askPoePrepromptQuestion');
-const { postHelloworld } = require('../../fetch/postHelloworld');
-const { loadJson } = require('../../utils/loadJson');
-const { myLogger } = require('../../utils/myLogger');
+const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
+const { postHelloworld } = require('../../../fetch/postHelloworld');
+const { loadJson } = require('../../../utils/loadJson');
+const { myLogger } = require('../../../utils/myLogger');
+const { getWorkingDirFromPayload } = require('./getWorkingDirFromPayload');
+
 
 module.exports = {
   onPoeSummarize: function () {
@@ -10,7 +12,8 @@ module.exports = {
         myLogger.info('I Summarize');
         const { req_body } = this.context;
         var payload = req_body;
-        var { working_dir } = payload;
+        // var { working_dir } = payload;
+        var working_dir = getWorkingDirFromPayload(payload)
 
         myLogger.info('input to summarize');
 
