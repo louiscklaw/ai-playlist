@@ -29,7 +29,7 @@ const {
 const { checkIfOutOfQuota }= require(`${UTILS_ROOT}/checkIfOutOfQuota`);
 
 async function chatGPTSolver(question_list, preprompts = []) {
-  var chat_history = { preprompts: [], history: [] };
+  var chat_history = {state:'INIT', preprompts: [], history: [] };
   var answer_idx = -1;
 
   const browser = await initBrowser();
@@ -71,12 +71,15 @@ async function chatGPTSolver(question_list, preprompts = []) {
       await gptBotCooldown(getRandomSecond(5, 15), page);
     }
 
+    output = {...output, state:'done'}
+
     await browser.close();
   } catch (error) {
+    chat_history = {...chat_history, state:'error', error}
     throw error;
-  } finally {
-    if (browser?.close) await browser.close();
-  }
+  } 
+  
+  if (browser?.close) await browser.close();
 
   return chat_history;
 }
