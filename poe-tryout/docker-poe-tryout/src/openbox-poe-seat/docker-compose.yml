@@ -50,6 +50,8 @@ services:
 
       # NOTE: source code
       - "./openbox-poe-seat/src:/app"
+
+      - ./volumes/logs:/logs
     env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong

@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 // const puppeteer = require('puppeteer-core');
 const puppeteer = require('puppeteer-extra');
 
-myLogger.info('helloworld')
 
 try {
   const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -49,8 +48,8 @@ try {
 
   // Start the server
   app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+    myLogger.info('Server is running on port 3000')
   });
 } catch (error) {
-  console.log({ error });
+  myLogger.error("%o",{ error });
 }

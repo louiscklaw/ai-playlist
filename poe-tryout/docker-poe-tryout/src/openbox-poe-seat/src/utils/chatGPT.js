@@ -1,3 +1,5 @@
+const { myLogger } = require('./myLogger');
+
 var assert = require('chai').assert;
 
 async function botCooldown(time_s, page) {
@@ -176,7 +178,7 @@ function helloworld(test_call = '') {
 
 async function checkLoginState(page) {
   try {
-    console.log('chatGPT.js: checkLoginState');
+    myLogger.info('chatGPT.js: checkLoginState')
 
     const selector = 'textarea[placeholder="Talk to ChatGPT on Poe"]';
     await page.waitForSelector(selector);
