@@ -1,7 +1,10 @@
+// TEST: src/flow-handler/src/tests/jobsdb_flow_summarize/index.js
+
 const express = require('express');
 
 // const { mySleep } = require('../utils/mySleep');
 const { jobsdbPoeSummarizeMachine } = require('../state_machine/jobsdb/jobsdbMachine');
+const { myLogger } = require('../utils/myLogger');
 
 const router = express.Router();
 
@@ -10,7 +13,7 @@ router.post('/', async (req, res) => {
   var req_body = req.body;
 
   try {
-    console.log('summarize called');
+    myLogger.info('summarize called');
     output = { ...output, state: 'start', debug: req_body };
 
     //   // NOTE: containue from summiarie done state
@@ -21,7 +24,7 @@ router.post('/', async (req, res) => {
 
     output = { ...output, state: 'scheduled' };
   } catch (error) {
-    console.log({ error });
+    myLogger.error("%o",{ error });
     // output.state = 'error';
     // output.error = error;
 
