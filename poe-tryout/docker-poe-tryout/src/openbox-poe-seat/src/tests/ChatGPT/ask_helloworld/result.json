@@ -1,1 +1,1 @@
-{"state":"unknown error","error_messge":"OUT_OF_QUOTA"}
+{"state":"ask_init","input":{"question_list":["say 'hello 1' to me","say 'hello 2' to me"]},"error":{},"chat_history":{"q_and_a":{"preprompts":[],"history":[]}}}
