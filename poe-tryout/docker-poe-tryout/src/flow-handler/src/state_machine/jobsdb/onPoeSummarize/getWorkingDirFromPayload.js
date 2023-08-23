@@ -13,17 +13,17 @@ const { myLogger } = require('../../../utils/myLogger');
 function getWorkingDirFromPayload(payload) {
   // Destructuring assignment to extract 'working_dir' property from 'payload' object
   var { working_dir } = payload;
-  
+
   // Log value of 'working_dir'
   myLogger.error(working_dir);
-  
+
   if (!working_dir) {
     // Check if 'working_dir' is falsy (undefined, null, empty string)
     myLogger.warn('self testing ? working_dir undefined');
-    
+
     // Set a fallback default value for 'working_dir'
     working_dir = `/share/testing`;
-    
+
     // Log the fallback value
     myLogger.warn(`fallback to default working_dir ${working_dir}`);
   }
@@ -31,4 +31,4 @@ function getWorkingDirFromPayload(payload) {
   return working_dir; // Return the value of 'working_d
 }
 
-module.exports = {getWorkingDirFromPayload}
+module.exports = { getWorkingDirFromPayload };

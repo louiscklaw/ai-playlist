@@ -12,7 +12,7 @@ module.exports = {
         const { req_body } = this.context;
         var payload = req_body;
         // var { working_dir } = payload;
-        var working_dir = getWorkingDirFromPayload(payload)
+        var working_dir = getWorkingDirFromPayload(payload);
 
         myLogger.info('input to summarize');
 
@@ -31,5 +31,4 @@ module.exports = {
       }
     });
   },
-
-};   
+};
