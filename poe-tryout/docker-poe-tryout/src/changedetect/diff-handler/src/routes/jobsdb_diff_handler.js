@@ -6,7 +6,9 @@ const router = express.Router();
 const { myLogger } = require('../utils/myLogger');
 
 const { getAddedLink } = require('../utils/getAddedLink');
+
 const { FLOW_HANDLER_ENDPOINT } = require('../config');
+if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured')
 
 // var validUrl = require('valid-url');
 
