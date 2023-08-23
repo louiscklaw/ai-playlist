@@ -5,12 +5,16 @@ require('dotenv').config();
 // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 const { PROMPT_ROOT, ERROR_ROOT } = require('./config');
 
+const {myLogger} = require('./utils/myLogger')
+
 const app = express();
 app.use(bodyParser.json());
 
 // NOTE: original use puppeteer core only
 // const puppeteer = require('puppeteer-core');
 const puppeteer = require('puppeteer-extra');
+
+myLogger.info('helloworld')
 
 try {
   const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -33,7 +37,11 @@ try {
   // helloworldBrowser();
 
   // Register the routes
+
+  // NOTE: abonded ?
   app.use('/summarize', summarizeRoutes);
+  // NOTE: abonded ?
+
   app.use('/chatGPT', chatGPTRoutes);
   app.use('/googlePalm', googlePalmRoutes);
   app.use('/stealthCheck', require('./routes/stealthCheck'));
