@@ -9,6 +9,7 @@ services:
       - ./poe-scheduler-api/:/app
       - ./volumes/static-share:/share
       - ./volumes/logs:/logs
+    env_file: ./.env
 
     # TODO:
     # depends_on:
@@ -18,7 +19,6 @@ services:
     working_dir: /app
     restart: unless-stopped
     entrypoint: ./entry.sh
-    env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=poe-scheduler-api

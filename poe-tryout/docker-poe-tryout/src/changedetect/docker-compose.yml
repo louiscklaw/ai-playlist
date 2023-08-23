@@ -23,6 +23,7 @@ services:
       - jobsdb-scraper
     env_file: ./.env
 
+
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
@@ -40,6 +41,7 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
     env_file: ./.env
+
 
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
@@ -74,7 +76,7 @@ services:
       - changedetection-chrome
       - diff-handler
       - jobsdb-scraper
-    env_file: ./.env
+
 
   changedetection-chrome:
     #  hostname: changedetection-chrome
