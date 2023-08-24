@@ -5,7 +5,7 @@ const router = express.Router();
 const { postTelegramMessage } = require('../utils/postTelegramMessage');
 
 router.post('/', async (req, res) => {
-  var output = { state: 'INIT', debug: {}, error: "" };
+  var output = { state: 'INIT', debug: {}, error: '' };
 
   try {
     var req_body = req.body;

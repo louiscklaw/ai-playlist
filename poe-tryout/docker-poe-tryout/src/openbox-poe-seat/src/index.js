@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 // NOTE: original use puppeteer core only
 // const puppeteer = require('puppeteer-core');
 const puppeteer = require('puppeteer-extra');
+const { reportOffline } = require('./utils/reportPoeSeatOffline');
+const { reportOnline } = require('./utils/reportPoeSeatOnline');
 
 
 try {
@@ -22,20 +24,13 @@ try {
   const StealthPlugin = require('puppeteer-extra-plugin-stealth');
   puppeteer.use(StealthPlugin());
 
-  // const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
-
-  require(`${PROMPT_ROOT}`);
-  require(`${ERROR_ROOT}`);
+  // TODO: remove me ?
+  // require(`${PROMPT_ROOT}`);
+  // require(`${ERROR_ROOT}`);
 
   const summarizeRoutes = require('./routes/summarize');
   const chatGPTRoutes = require('./routes/chatGPT');
   const googlePalmRoutes = require('./routes/googlePalm');
-
-  // TODO: remove me ?
-  // const { helloworldBrowser } = require('./utils/initBrowser');
-  // helloworldBrowser();
-
-  // Register the routes
 
   // NOTE: abonded ?
   app.use('/summarize', summarizeRoutes);
@@ -45,6 +40,8 @@ try {
   app.use('/googlePalm', googlePalmRoutes);
   app.use('/stealthCheck', require('./routes/stealthCheck'));
   app.use('/hello', require('./routes/hello'));
+  
+  reportOnline();
 
   // Start the server
   app.listen(3000, () => {
@@ -52,4 +49,8 @@ try {
   });
 } catch (error) {
   myLogger.error("%o",{ error });
+
+  reportOffline()
+  
+  
 }

@@ -17,6 +17,7 @@ puppeteer.use(StealthPlugin());
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
 const { myLogger } = require('../../utils/myLogger');
 const { checkInput } = require('./checkInput');
+const { reportOffline } = require('../../utils/reportPoeSeatOffline');
 const { ASK_INIT, ASK_DONE } = require(`${SRC_ROOT}/constants`);
 const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
@@ -52,6 +53,7 @@ router.post('/ask', async (req, res) => {
   } catch (error) {
     myLogger.error('%o', error);
     output = { ...output, state: 'error', error: JSON.stringify(error) };
+    reportOffline()
   }
 
   res.send(output);

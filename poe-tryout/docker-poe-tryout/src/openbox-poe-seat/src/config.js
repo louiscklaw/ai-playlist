@@ -27,6 +27,11 @@ if (!CANONICAL_HOSTNAME) {
   throw new Error('CANONICAL_HOSTNAME not defined !!')
 }
 
+if (!DBAPI_ENDPOINT) {
+  myLogger.error('DBAPI_ENDPOINT not defined !!')
+  throw new Error('DBAPI_ENDPOINT not defined !!')
+}
+
 module.exports = {
   SRC_ROOT,
   UTILS_ROOT,

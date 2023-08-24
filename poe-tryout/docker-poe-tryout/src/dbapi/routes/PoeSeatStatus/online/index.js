@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const express = require('express');
 const { myLogger } = require('../../../utils/myLogger');
 const { mutex } = require('../../Customer/mutex');
-const { PoeSeatStatusModel } = require('../../../models/PoeSeatStatus');
+const { PoeSeatStatusModel, POE_SEAT_ONLINE } = require('../../../models/PoeSeatStatus');
 const router = express.Router();
 
 // const { mutex } = require('../../mutex');
@@ -29,6 +29,8 @@ router.patch('/:poe_host_name', async (req, res) => {
       record = new PoeSeatStatusModel({ name: poe_host_name });
       output = { ...output, state: 'CREATED' };
     }
+
+    record.status = POE_SEAT_ONLINE;
 
     output = { ...output, state: 'DONE', record };
     await record.save();
