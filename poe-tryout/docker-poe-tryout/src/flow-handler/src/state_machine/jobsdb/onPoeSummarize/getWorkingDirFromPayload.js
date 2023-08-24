@@ -15,7 +15,7 @@ function getWorkingDirFromPayload(payload) {
   var { working_dir } = payload;
 
   // Log value of 'working_dir'
-  myLogger.error(working_dir);
+  myLogger.info(working_dir);
 
   if (!working_dir) {
     // Check if 'working_dir' is falsy (undefined, null, empty string)
