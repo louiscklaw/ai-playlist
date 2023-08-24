@@ -4,9 +4,7 @@ const { myLogger } = require('../../utils/myLogger');
 
 var message =
   '🔔🔔🔔 something wrong  🔔🔔🔔\n' +
-  'poe seat down\n' +
-  '```';
-// .trim();
+  'poe seat down\n';
 
 const payload = {
   text: message,
