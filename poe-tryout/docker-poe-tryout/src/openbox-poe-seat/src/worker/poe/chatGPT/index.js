@@ -1,5 +1,5 @@
 // const express = require('express');
-
+const fs = require('fs')
 const puppeteer = require('puppeteer-extra');
 
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -17,6 +17,7 @@ const { gptBotCooldown } = require('./gptBotCooldown');
 const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
 const { testLanding } = require('./testLanding');
 const { OUT_OF_QUOTA } = require('./error');
+const { calculateMD5 } = require('../../../utils/calculateMD5');
 
 const {
   initChatGptPage,
@@ -29,6 +30,7 @@ const {
 const { checkIfOutOfQuota } = require(`${UTILS_ROOT}/checkIfOutOfQuota`);
 
 async function chatGPTSolver(question_list, preprompts = []) {
+
   var chat_history = { state: 'INIT', preprompts: [], history: [] };
   var answer_idx = -1;
 
@@ -36,6 +38,7 @@ async function chatGPTSolver(question_list, preprompts = []) {
   const page = (await browser.pages())[0];
 
   try {
+
     await initChatGptPage(page);
     await checkLoginState(page);
 
@@ -76,6 +79,14 @@ async function chatGPTSolver(question_list, preprompts = []) {
     await browser.close();
   } catch (error) {
     chat_history = { ...chat_history, state: 'error', error };
+
+    var md5 = calculateMD5(error)
+    var content = JSON.stringify({question_list, preprompts, error, chat_history})
+    var filename = `/logs/error/openbox-poe-seat/${md5},json`
+    fs.writeFileSync(filename, content, {encoding:'utf8'})
+
+    if (browser?.close) await browser.close();
+
     throw error;
   }
 
