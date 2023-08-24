@@ -26,7 +26,9 @@ try {
 
   app.use('/postHelloworld', require('./routes/postHelloworld'));
   app.use('/ask_dummy_call', require('./routes/ask_dummy_call'));
+
   app.use('/helloworld', require('./routes/helloworld'));
+  app.use('/healthcheck', require('./routes/healthcheck'));
 
   myLogger.info('started');
 

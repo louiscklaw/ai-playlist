@@ -10,16 +10,17 @@ services:
       - ./volumes/static-share:/share
       - ./volumes/logs:/logs
     env_file: ./.env
-    depends_on:
-      redis:
-        condition: service_healthy
+
     working_dir: /app
     restart: unless-stopped
     entrypoint: ./entry.sh
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=poe-scheduler-api
-      
+
+    depends_on:
+      redis:
+        condition: service_healthy      
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3002/healthcheck']
       interval: 10s
