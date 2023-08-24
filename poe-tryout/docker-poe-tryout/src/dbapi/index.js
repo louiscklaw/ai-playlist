@@ -17,10 +17,15 @@ const { CustomerModel } = require('./models/Customer');
 const { InvoiceModel } = require('./models/Invoice');
 const { myLogger } = require('./utils/myLogger');
 
+const { PoeSeatStatusModel } = require('./models/PoeSeatStatus');
+
 try {
   // var lock = new AsyncLock();
 
   mongoose.connect('mongodb://mongo:27017/database');
+
+  // TODO: mongoose.set('strictQuery', true);
+
   myLogger.info('connected to mongoose');
 
   const app = express();
@@ -37,10 +42,31 @@ try {
 
   restify.serve(app, JobPostModel);
   restify.serve(app, HelloworldModel);
+
   restify.serve(app, CustomerModel);
   restify.serve(app, InvoiceModel);
 
-  app.use('/helloworld', require('./routes/helloworld'));
+  // http://dbapi:3001/PoeSeatStatus/online/hello_poe_host
+  // tests/PoeSeatStatus/poe_online.js
+  app.use('/PoeSeatStatus/online', require('./routes/PoeSeatStatus/online'));
+  app.use('/PoeSeatStatus/offline', require('./routes/PoeSeatStatus/offline'));
+  app.use('/PoeSeatStatus/getStatus', require('./routes/PoeSeatStatus/getStatus'));
+  app.use('/PoeSeatStatus/clearAll', require('./routes/PoeSeatStatus/clearAll'));
+
+  // restify.serve(app, PoeSeatStatusModel, {
+  //   preRead: (req, res, next) => {
+  //     myLogger.info('pre-read')
+  //     next()
+  //   },
+  //   preUpdate: (req, res, next) => {
+  //     myLogger.info('pre-update')
+
+  //     next()
+  //   }
+  // });
+  // // app.use('/PoeSeatStatus/addCount', require('./routes/PoeSeatStatus/addCount'));
+
+  // app.use('/helloworld', require('./routes/helloworld'));
 
   app.use(router);
 
@@ -50,9 +76,9 @@ try {
 
   myLogger.info('hello dbapi');
 
-  http.createServer(app).listen(PORT, function () {
+  http.createServer(app).listen(3001, function () {
     myLogger.info(`Express server listening on port ${PORT}`);
   });
 } catch (error) {
-  myLogger.info(error);
+  myLogger.error(error);
 }
