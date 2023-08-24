@@ -48,7 +48,7 @@ router.post('/search', async (req, res) => {
     });
 
     // NOTE: TODO: temporary logic to handle filter job links from links
-    const post_links = all_links.filter(l => l.search('-') > -1);
+    const post_links = all_links.filter(l => l.search('-') > -1).sort();
 
     output = { ...output, state: 'done', post_links };
   } catch (error) {
