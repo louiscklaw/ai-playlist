@@ -137,7 +137,8 @@ async function questionAndAnswer(page, question, answer_idx) {
 
     if (countdown > 0 && reply.trim() == '...') {
       // bot not answer yet
-      myLogger.info({ countdown, reply });
+      myLogger.info(JSON.stringify({ countdown, reply }));
+      
       await page.waitForTimeout(1 * 1000);
     } else {
       if (isFirstCheck()) {

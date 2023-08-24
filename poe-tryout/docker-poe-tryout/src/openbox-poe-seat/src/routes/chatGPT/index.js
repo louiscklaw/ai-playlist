@@ -51,7 +51,7 @@ router.post('/ask', async (req, res) => {
       chat_history: { q_and_a: { preprompts, history } },
     };
   } catch (error) {
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
     output = { ...output, state: 'error', error: JSON.stringify(error) };
     reportOffline()
   }
