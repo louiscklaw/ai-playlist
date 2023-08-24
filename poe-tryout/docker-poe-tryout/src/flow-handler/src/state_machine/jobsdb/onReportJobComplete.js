@@ -19,7 +19,7 @@ async function getJobInfo(working_dir) {
     output = { companyName, jobAddress, jobTitle };
   } catch (error) {
     myLogger.error('error during getting job info');
-    myLogger.error(error.message);
+    myLogger.error(JSON.stringify(error));
     output = { companyName: '', jobAddress: '', jobTitle: '' };
   }
 
@@ -53,7 +53,7 @@ ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
     } catch (error) {
       myLogger.error('error during report job complete...');
       myLogger.error('%o', error);
-      // myLogger.error(error.message);
+      // myLogger.error(JSON.stringify(error));
 
       rej();
     }

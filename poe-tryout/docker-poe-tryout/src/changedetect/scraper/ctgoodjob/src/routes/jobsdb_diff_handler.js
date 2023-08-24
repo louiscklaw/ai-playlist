@@ -21,7 +21,7 @@ function getPayloadToFlowHandlerJson(diff_link) {
 }
 
 router.post('/', (req, res) => {
-  var output = { state: 'init', debug: {}, error: {} };
+  var output = { state: 'init', debug: {}, error: "" };
 
   try {
     var req_body = req.body;
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
   } catch (error) {
     console.log('error occur in diff-handler');
     console.log(error);
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 
   res.send(output);

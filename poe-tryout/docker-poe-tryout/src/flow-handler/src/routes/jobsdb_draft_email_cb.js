@@ -10,7 +10,7 @@ const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 
 // NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
 router.post('/', async (req, res) => {
-  var output = { state: 'INIT', debug: {}, error: {} };
+  var output = { state: 'INIT', debug: {}, error: "" };
   myLogger.info('receive callback from draft email ');
 
   try {
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
     output = { ...output, state: 'done' };
   } catch (error) {
     console.log(error);
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 
   res.send(output);

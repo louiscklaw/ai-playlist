@@ -1,7 +1,7 @@
 const { myLogger } = require('./myLogger');
 
 async function getFromEvaluateTextContent(jobPage, title_selector) {
-  var output = { result: '', error: {} };
+  var output = { result: '', error: "" };
 
   try {
     const o_jobTitle = await jobPage.evaluate(selector => {
@@ -10,7 +10,7 @@ async function getFromEvaluateTextContent(jobPage, title_selector) {
         const title = document.querySelector(selector).textContent;
         output = { ...output, result: title };
       } catch (error) {
-        output = { ...output, error: error.message };
+        output = { ...output, error: JSON.stringify(error) };
       }
       return output;
     }, title_selector);
@@ -27,7 +27,7 @@ async function getFromEvaluateTextContent(jobPage, title_selector) {
       url: jobPage.url(),
     });
     
-    output = { ...output, error: error.message };
+    output = { ...output, error: JSON.stringify(error) };
   }
   return output;
 }

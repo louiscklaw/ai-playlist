@@ -25,7 +25,7 @@ router.post('/ask', async (req, res) => {
   var output = {
     state: ASK_INIT,
     input: json_input,
-    error: {},
+    error: "",
     chat_history: { q_and_a: { preprompts: [], history: [] } },
   };
 
@@ -51,7 +51,7 @@ router.post('/ask', async (req, res) => {
     };
   } catch (error) {
     myLogger.error('%o', error);
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 
   res.send(output);

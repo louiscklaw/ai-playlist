@@ -9,7 +9,7 @@ const { myLogger } = require('../utils/myLogger');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  var output = { state: 'init', debug: { input: {} }, error: {} };
+  var output = { state: 'init', debug: { input: {} }, error: "" };
   var req_body = req.body;
 
   try {
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
     // output.state = 'error';
     // output.error = error;
 
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
   res.send(output);
 });

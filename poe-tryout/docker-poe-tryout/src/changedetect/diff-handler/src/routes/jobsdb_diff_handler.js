@@ -19,13 +19,13 @@ function getPayloadToFlowHandlerJson(diff_link) {
       callback_url: `${FLOW_HANDLER_ENDPOINT}/jobsdb_link_extract_cb`,
     };
   } catch (error) {
-    myLogger.error(error.message);
+    myLogger.error(JSON.stringify(error));
     myLogger.error('%o', { diff_link });
   }
 }
 
 router.post('/dump', (req, res) => {
-  var output = { state: 'init', debug: {}, error: {} };
+  var output = { state: 'init', debug: {}, error: "" };
 
   try {
     var req_body = req.body;
@@ -38,14 +38,14 @@ router.post('/dump', (req, res) => {
   } catch (error) {
     myLogger.error('error occur in diff-handler');
     myLogger.error('%o', error);
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 
   res.send(output);
 });
 
 router.post('/', (req, res) => {
-  var output = { state: 'init', debug: {}, error: {} };
+  var output = { state: 'init', debug: {}, error: "" };
 
   try {
     var req_body = req.body;
@@ -81,7 +81,7 @@ router.post('/', (req, res) => {
   } catch (error) {
     myLogger.error('error occur in diff-handler');
     myLogger.error('%o', error);
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 
   res.send(output);

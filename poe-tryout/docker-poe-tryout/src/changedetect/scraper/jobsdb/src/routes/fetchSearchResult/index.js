@@ -11,7 +11,7 @@ const { myLogger } = require('../../utils/myLogger');
 const BROWSERLESS_HOST = 'changedetection-chrome';
 
 router.post('/search', async (req, res) => {
-  var output = { state: 'init', debug: {}, error: {} };
+  var output = { state: 'init', debug: {}, error: "" };
   try {
     var { body } = req;
     var { search } = body;
@@ -53,7 +53,7 @@ router.post('/search', async (req, res) => {
     output = { ...output, state: 'done', post_links };
   } catch (error) {
     myLogger.error('%o', error);
-    output = { ...output, state: 'error', error: error.message };
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
   res.send(output);
 });

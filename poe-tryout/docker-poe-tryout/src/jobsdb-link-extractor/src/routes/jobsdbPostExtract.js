@@ -184,14 +184,14 @@ router.post('/', async (req, res) => {
       // NOTE: receiver -> src/flow-handler/src/routes/jobsdb_link_extract_cb.js
       await postResult(callback_url, output.extracted);
     } catch (error) {
-      myLogger.error(error.message);
+      myLogger.error(JSON.stringify(error));
       throw error;
     }
   } catch (error) {
     if (error.message == LINK_CONTAIN_NO_POST) {
       myLogger.warn(`link contain no post, skipping`);
     } else {
-      myLogger.error(error.message);
+      myLogger.error(JSON.stringify(error));
       // myLogger.error('req.body %o', req.body);
       // myLogger.error('%o', error);
       throw error;
