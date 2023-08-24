@@ -15,7 +15,7 @@ const SEND_MESSAGE_INIT = 'SEND_MESSAGE_INIT';
 // https://core.telegram.org/bots/api#available-methods
 
 router.get('/', async (req, res) => {
-  var output = { state: SEND_MESSAGE_INIT, debug: req.body, error: "" };
+  var output = { state: SEND_MESSAGE_INIT, debug: req.body, error: '' };
 
   myLogger.info('telegramSendAlert called');
 
