@@ -1,6 +1,8 @@
 services:
   mongo:
     image: mongo:latest
+    # build: 
+    #   dockerfile: ./dbapi/Dockerfile.mongo
     # container_name: mongo
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: admin
@@ -15,6 +17,11 @@ services:
     volumes:
       - ./volumes/mongo/data/db:/data/db
       - ./volumes/mongo/data/configdb:/data/configdb
+    healthcheck:
+        test: echo 'db.stats().ok' | mongosh localhost:27017/test --quiet
+        interval: 10s
+        timeout: 10s
+        retries: 5
 
   mongo-express:
     image: mongo-express:latest
@@ -27,7 +34,9 @@ services:
     ports:
       - 8081:8081
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+
     restart: unless-stopped
 
   dbapi:
@@ -39,7 +48,9 @@ services:
       - ./dbapi:/app
       - ./volumes/logs:/logs
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+
     environment:
       - PORT=3001
     restart: unless-stopped

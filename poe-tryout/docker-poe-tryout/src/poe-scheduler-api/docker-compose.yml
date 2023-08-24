@@ -11,11 +11,10 @@ services:
       - ./volumes/logs:/logs
     env_file: ./.env
 
-    # TODO:
-    # depends_on:
-    #   - mongo
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+
     working_dir: /app
     restart: unless-stopped
     entrypoint: ./entry.sh

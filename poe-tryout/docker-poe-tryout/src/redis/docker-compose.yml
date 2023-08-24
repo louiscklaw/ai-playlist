@@ -14,11 +14,15 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - redis_data:/data
     command: redis-server --save 5 1 --loglevel warning --dir /data
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
       - ALLOW_EMPTY_PASSWORD=yes
-    
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      retries: 5
+      timeout: 5s
+
   redisinsight:
     image: 192.168.10.61:5000/redislabs/redisinsight:latest
     # expose:
@@ -29,7 +33,8 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - redisinsight_store:/db
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
@@ -46,5 +51,6 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     env_file: ./.env

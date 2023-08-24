@@ -14,4 +14,5 @@ services:
     depends_on:
       - redis
       - mongo
+
     env_file: ./.env
