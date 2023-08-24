@@ -15,21 +15,21 @@ const { getRandomSecond } = require('../../../utils/getRandomSecond');
 const { getRandomInt } = require('../../../utils/getRandomInt');
 const { gptBotCooldown } = require('./gptBotCooldown');
 const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
-const {testLanding} = require('./testLanding')
-const {OUT_OF_QUOTA} = require('./error');
+const { testLanding } = require('./testLanding');
+const { OUT_OF_QUOTA } = require('./error');
 
 const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
-  checkLoginState
+  checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
-const { checkIfOutOfQuota }= require(`${UTILS_ROOT}/checkIfOutOfQuota`);
+const { checkIfOutOfQuota } = require(`${UTILS_ROOT}/checkIfOutOfQuota`);
 
 async function chatGPTSolver(question_list, preprompts = []) {
-  var chat_history = {state:'INIT', preprompts: [], history: [] };
+  var chat_history = { state: 'INIT', preprompts: [], history: [] };
   var answer_idx = -1;
 
   const browser = await initBrowser();
@@ -38,8 +38,8 @@ async function chatGPTSolver(question_list, preprompts = []) {
   try {
     await initChatGptPage(page);
     await checkLoginState(page);
-    
-    await checkIfOutOfQuota(page)
+
+    await checkIfOutOfQuota(page);
 
     await clearChatHistory(page);
     await clearModalBox(page);
@@ -71,14 +71,14 @@ async function chatGPTSolver(question_list, preprompts = []) {
       await gptBotCooldown(getRandomSecond(5, 15), page);
     }
 
-    output = {...output, state:'done'}
+    chat_history = { ...chat_history, state: 'done' };
 
     await browser.close();
   } catch (error) {
-    chat_history = {...chat_history, state:'error', error}
+    chat_history = { ...chat_history, state: 'error', error };
     throw error;
-  } 
-  
+  }
+
   if (browser?.close) await browser.close();
 
   return chat_history;

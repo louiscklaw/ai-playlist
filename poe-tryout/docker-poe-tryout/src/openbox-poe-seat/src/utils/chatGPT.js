@@ -60,7 +60,7 @@ async function clearChatHistory(page) {
 
 async function clearModalBox(page) {
   // NOTE: clear modal box if any
-  console.log('chatGPT.js: clear modal box');
+  myLogger.info('chatGPT.js: clear modal box');
 
   await page.waitForTimeout(1 * 1000);
   await page.evaluate(() => {
@@ -68,7 +68,7 @@ async function clearModalBox(page) {
       document.querySelector('.ReactModal__Content').style.display = 'none';
       document.querySelector('.ReactModal__Overlay').style.display = 'none';
     } catch (error) {
-      console.log(error);
+      console.error('%o', error);
     }
   });
   await page.waitForTimeout(1 * 1000);
@@ -93,9 +93,9 @@ async function questionAndAnswer(page, question, answer_idx) {
     await page.keyboard.up('ShiftLeft');
   }
 
-  console.log('chatGPT.js: wait for send button ready');
+  myLogger.info('chatGPT.js: wait for send button ready');
   await page.waitForSelector('button[class*="sendButton"]:not([disabled])');
-  console.log('chatGPT.js: press send button');
+  myLogger.info('chatGPT.js: press send button');
   await page?.evaluate(() => {
     document.querySelector('button[class*="sendButton"]:not([disabled])').click();
   });
@@ -114,7 +114,7 @@ async function questionAndAnswer(page, question, answer_idx) {
       await page.waitForTimeout(1 * 1000);
     }
   }
-  console.log({ current_answer_bubble_length, new_answer_bubble_length });
+  myLogger.info('%o', { current_answer_bubble_length, new_answer_bubble_length });
 
   // NOTE: wait for text type complete
   await page.waitForTimeout(3 * 1000);
@@ -137,23 +137,23 @@ async function questionAndAnswer(page, question, answer_idx) {
 
     if (countdown > 0 && reply.trim() == '...') {
       // bot not answer yet
-      console.log({ countdown, reply });
+      myLogger.info({ countdown, reply });
       await page.waitForTimeout(1 * 1000);
     } else {
       if (isFirstCheck()) {
-        console.log('chatGPT.js: first check found');
+        myLogger.info('chatGPT.js: first check found');
         old_reply = reply;
         await page.waitForTimeout(1 * 1000);
       } else {
         // is the bot still typing ?
         if (isTheBotStillTyping(reply, old_reply)) {
           old_reply = reply;
-          console.log(`chatGPT.js: bot still typing, countdown:${countdown}`);
-          // console.log({ countdown, reply });
+          myLogger.info(`chatGPT.js: bot still typing, countdown:${countdown}`);
+          // myLogger.info({ countdown, reply });
           await page.waitForTimeout(3 * 1000);
         } else {
           // bot not typing
-          console.log('chatGPT.js: bot typing done');
+          myLogger.info('chatGPT.js: bot typing done');
           break;
         }
       }
@@ -172,19 +172,19 @@ function assertKeyWord(to_check, keyword_wanted) {
 }
 
 function helloworld(test_call = '') {
-  console.log(test_call);
-  console.log('chatGPT.js: helloworld');
+  myLogger.info(test_call);
+  myLogger.info('chatGPT.js: helloworld');
 }
 
 async function checkLoginState(page) {
   try {
-    myLogger.info('chatGPT.js: checkLoginState')
+    myLogger.info('chatGPT.js: checkLoginState');
 
     const selector = 'textarea[placeholder="Talk to ChatGPT on Poe"]';
     await page.waitForSelector(selector);
     await page.waitForTimeout(1 * 1000);
   } catch (error) {
-    // console.log('chatGPT.js: gpt input box not found, check if logged out')
+    // myLogger.info('chatGPT.js: gpt input box not found, check if logged out')
     throw new Error('gpt input box not found, check if logged out');
   }
 }
