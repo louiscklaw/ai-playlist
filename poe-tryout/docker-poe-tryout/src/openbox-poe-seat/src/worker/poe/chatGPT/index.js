@@ -18,6 +18,8 @@ const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
 const { testLanding } = require('./testLanding');
 const { OUT_OF_QUOTA } = require('./error');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
+const { poeDownAlert } = require('../../../utils/poeDownAlert');
+const {CANONICAL_HOSTNAME}=require('../../../config')
 
 const {
   initChatGptPage,
@@ -38,7 +40,6 @@ async function chatGPTSolver(question_list, preprompts = []) {
   const page = (await browser.pages())[0];
 
   try {
-
     await initChatGptPage(page);
     await checkLoginState(page);
 
@@ -84,6 +85,8 @@ async function chatGPTSolver(question_list, preprompts = []) {
     var content = JSON.stringify({question_list, preprompts, error, chat_history})
     var filename = `/logs/error/openbox-poe-seat/${md5},json`
     fs.writeFileSync(filename, content, {encoding:'utf8'})
+
+    poeDownAlert(CANONICAL_HOSTNAME)
 
     if (browser?.close) await browser.close();
 
