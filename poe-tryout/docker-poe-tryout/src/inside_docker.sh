@@ -11,6 +11,9 @@ pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
   bash -c ./test.sh
 popd
 
+# pushd openbox-poe-seat/src/tests/googlePalm/ask_helloworld
+#   bash -c ./test.sh
+# popd
 
 # src/flow-handler/src/tests/jobsdb_flow_summarize/index.js
 # pushd /src/flow-handler/src/tests/jobsdb_flow_summarize
