@@ -53,6 +53,10 @@ try {
   app.use('/PoeSeatStatus/getStatus', require('./routes/PoeSeatStatus/getStatus'));
   app.use('/PoeSeatStatus/clearAll', require('./routes/PoeSeatStatus/clearAll'));
 
+  app.use('/VisitedLink/clearAll', require('./routes/VisitedLink/clearAll'));
+  app.use('/VisitedLink/addLink', require('./routes/VisitedLink/addLink'));
+
+
   app.use(router);
   
   app.use('/healthcheck', require('./routes/healthcheck'));
