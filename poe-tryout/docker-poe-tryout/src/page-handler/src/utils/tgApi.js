@@ -19,6 +19,14 @@ async function tgSendMarkDownMessage(md_content) {
   });
 }
 
+async function tgSendMarkDownAlert(md_content) {
+  return api.sendMessage({
+    chat_id: TELEGRAM_CHAT_ID,
+    text: md_content,
+    parse_mode: 'MarkdownV2',
+  });
+}
+
 async function tgSendMessage(txt_content) {
   return api.sendMessage({
     chat_id: TELEGRAM_CHAT_ID,
@@ -26,4 +34,4 @@ async function tgSendMessage(txt_content) {
   });
 }
 
-module.exports = { api, tgApi, tgSendMarkDownMessage, tgSendMessage };
+module.exports = { api, tgApi, tgSendMarkDownMessage, tgSendMessage, tgSendMarkDownAlert };
