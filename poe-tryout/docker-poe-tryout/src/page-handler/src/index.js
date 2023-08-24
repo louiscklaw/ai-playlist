@@ -26,5 +26,5 @@ try {
   });
 } catch (error) {
   myLogger.info('error during starting express');
-  console.log(error);
+  myLogger.error('%o', error);
 }

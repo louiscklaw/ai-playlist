@@ -2,14 +2,19 @@
 
 set -ex
 
+# src/page-handler/src/tests/telegramSendMessage
+pushd page-handler/src/tests/telegramSendMessage
+  node ./index.js
+popd
+
 # pushd /src/changedetect/diff-handler/src/tests/jobsdb_diff_handler/test3
 #   node helloworld.js
 # popd
 
-# src/openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
-pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
-  bash -c ./test.sh
-popd
+# # src/openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
+#   bash -c ./test.sh
+# popd
 
 # pushd openbox-poe-seat/src/tests/googlePalm/ask_helloworld
 #   bash -c ./test.sh

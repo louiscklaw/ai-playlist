@@ -2,15 +2,15 @@ const fetch = require('node-fetch');
 
 const { myLogger } = require('../../utils/myLogger');
 
-var message = `
-🔔🔔🔔 job done  🔔🔔🔔
-job url: ${meta_json.jobsdb_job_url}
-job working_dir: ${working_dir} :
+// var message = `
+// 🔔🔔🔔 job done  🔔🔔🔔
+// job url: ${meta_json.jobsdb_job_url}
+// job working_dir: ${working_dir} :
 
-\`\`\`javascript
-${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
-\`\`\`
-`.trim();
+// \`\`\`javascript
+// ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
+// \`\`\`
+// `.trim();
 
 Array(1)
   .fill(0)
