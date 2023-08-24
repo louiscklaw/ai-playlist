@@ -7,6 +7,17 @@ set -ex
 #   node ./index.js
 # popd
 
+pushd dbapi/tests/PoeSeatStatus
+  node ./poe_clear_all.js
+  node ./poe_offline.js
+
+  node ./poe_clear_all.js
+  node ./poe_online.js
+  node ./poe_get_status.js
+
+  node ./poe_clear_all.js
+  node ./poe_get_status.js
+popd
 
 # src/page-handler/src/tests/telegramSendAlert
 # pushd page-handler/src/tests/postTelegramAlert
@@ -28,9 +39,9 @@ set -ex
 # popd
 
 # # src/openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
-pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
-  bash -c ./test.sh
-popd
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
+#   bash -c ./test.sh
+# popd
 
 # pushd openbox-poe-seat/src/tests/googlePalm/ask_helloworld
 #   bash -c ./test.sh
