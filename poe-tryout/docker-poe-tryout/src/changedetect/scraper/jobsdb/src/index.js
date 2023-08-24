@@ -21,6 +21,7 @@ try {
   app.use('/post_helloworld', require('./routes/post_helloworld'));
 
   app.use('/helloworld', require('./routes/helloworld'));
+  app.use('/healthcheck', require('./routes/healthcheck'));
 
   // // Start the server
   app.listen(PORT, () => {

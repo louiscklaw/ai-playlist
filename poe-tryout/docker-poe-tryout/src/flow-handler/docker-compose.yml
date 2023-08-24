@@ -15,16 +15,23 @@ services:
       # - ./volumes/flow-handler/screenshot:/share/screenshot
     working_dir: /app
 
-    # TODO:
-    # depends_on:
-    #   - mongo
-    depends_on:
-      - poe-scheduler-api
-      - jobsdb-link-extractor
-      - page-handler
     ports:
       - 3005:3000
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
     env_file: ./.env
+
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+    depends_on:
+      poe-scheduler-api:
+        condition: service_healthy
+      jobsdb-link-extractor:
+        condition: service_healthy
+      page-handler:
+        condition: service_healthy

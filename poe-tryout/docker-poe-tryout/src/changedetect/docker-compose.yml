@@ -19,9 +19,15 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
-    depends_on:
-      - jobsdb-scraper
+    # depends_on:
+    #   jobsdb-scraper:
+    #     condition: service_healthy
     env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
 
   jobsdb-scraper:
@@ -41,6 +47,11 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
     env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
 
   changedetection:
@@ -73,10 +84,12 @@ services:
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
     # and must wait before starting (substitute "browser-chrome" with "changedetection-chrome" if last one is used)
     depends_on:
-      - changedetection-chrome
-      - diff-handler
-      - jobsdb-scraper
-
+      changedetection-chrome:
+        condition: service_started
+      diff-handler:
+        condition: service_healthy
+      jobsdb-scraper:
+        condition: service_healthy
 
   changedetection-chrome:
     #  hostname: changedetection-chrome

@@ -41,6 +41,8 @@ try {
   app.use('/stealthCheck', require('./routes/stealthCheck'));
   app.use('/hello', require('./routes/hello'));
   
+  app.use('/healthcheck', require('./routes/healthcheck'));
+
   reportOnline();
 
   // Start the server

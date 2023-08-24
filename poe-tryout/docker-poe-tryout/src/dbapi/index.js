@@ -53,28 +53,11 @@ try {
   app.use('/PoeSeatStatus/getStatus', require('./routes/PoeSeatStatus/getStatus'));
   app.use('/PoeSeatStatus/clearAll', require('./routes/PoeSeatStatus/clearAll'));
 
-  // restify.serve(app, PoeSeatStatusModel, {
-  //   preRead: (req, res, next) => {
-  //     myLogger.info('pre-read')
-  //     next()
-  //   },
-  //   preUpdate: (req, res, next) => {
-  //     myLogger.info('pre-update')
-
-  //     next()
-  //   }
-  // });
-  // // app.use('/PoeSeatStatus/addCount', require('./routes/PoeSeatStatus/addCount'));
-
-  // app.use('/helloworld', require('./routes/helloworld'));
-
   app.use(router);
-
-  // app.listen(PORT, () => {
-  //   myLogger.info(`Express server listening on port ${PORT}`);
-  // });
-
-  myLogger.info('hello dbapi');
+  
+  app.use('/healthcheck', require('./routes/healthcheck'));
+  
+  myLogger.info('init dbapi done');
 
   http.createServer(app).listen(3001, function () {
     myLogger.info(`Express server listening on port ${PORT}`);

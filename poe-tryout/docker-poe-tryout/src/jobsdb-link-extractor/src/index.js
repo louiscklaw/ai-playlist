@@ -14,6 +14,8 @@ try {
   app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
   app.use('/helloworld', require('./routes/helloworld'));
 
+  app.use('/healthcheck', require('./routes/healthcheck'));
+
   myLogger.info('jobsdb-link-extractor start');
 
   // Start the server

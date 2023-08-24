@@ -47,12 +47,19 @@ services:
     volumes:
       - ./dbapi:/app
       - ./volumes/logs:/logs
+
     depends_on:
       mongo:
         condition: service_healthy
 
     environment:
       - PORT=3001
+      
     restart: unless-stopped
     entrypoint: ./entry.sh
     env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3001/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 10
