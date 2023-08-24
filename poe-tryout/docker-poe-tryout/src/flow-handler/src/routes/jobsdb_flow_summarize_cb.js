@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
   output = { ...output, debug: { input: { ...req_body } } };
 
   var { working_dir } = req.body;
-  myLogger.error(working_dir)
+  myLogger.info(working_dir);
   if (!working_dir) {
     myLogger.warn('self testing ? working_dir undefined')
     working_dir = `/share/testing`
