@@ -20,9 +20,10 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
       retries: 5
-      timeout: 5s
-
+      
   redisinsight:
     image: 192.168.10.61:5000/redislabs/redisinsight:latest
     # expose:
