@@ -6,6 +6,9 @@ module.exports = mongoose.model(
     {
       name: { type: String, required: true },
     },
-    { timestamps: true },
+    {
+      collection: 'helloworld',
+      timestamps: true,
+    },
   ),
 );
