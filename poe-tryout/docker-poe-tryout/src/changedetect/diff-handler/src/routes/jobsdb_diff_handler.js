@@ -44,7 +44,6 @@ router.post('/dump', (req, res) => {
   try {
     var req_body = req.body;
 
-    // TODO: use myLogger,
     myLogger.info('dump called');
     myLogger.info('%o', { req_body });
 
