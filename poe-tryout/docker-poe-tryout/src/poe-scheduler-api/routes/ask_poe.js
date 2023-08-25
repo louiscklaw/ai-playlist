@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
       .backoff({ delay: 15 * 1000, type: 'fixed' })
       .priority('normal');
 
+    // TODO: add poe seat checking here ?
     Queue.now(job);
     output = { ...output, state: STATE_SCHEDULED };
   } catch (error) {
