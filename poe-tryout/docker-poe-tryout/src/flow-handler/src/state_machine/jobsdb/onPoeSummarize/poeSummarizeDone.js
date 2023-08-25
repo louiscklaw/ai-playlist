@@ -1,3 +1,4 @@
+const ERROR_LOG_DIR = `/logs/error/poeSummarizeDone`;
 const { FLOW_HANDLER_ENDPOINT } = require('../../../config');
 const { myLogger } = require('../../../utils/myLogger');
 const SummaryPrompts = require('./SummaryPrompts');
@@ -34,7 +35,15 @@ module.exports = {
 
         res();
       } catch (error) {
-        // console.log(error);
+        // console.log(error);SummarizeDone
+        await createDirIfNotExists(ERROR_LOG_DIR);
+
+        var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+        var payload = this.context;
+
+        fs.writeFileSync(filename, JSON.stringify({ payload, error }), { encoding: 'utf8' });
+
+        myLogger.error('error during summarize');
         myLogger.error('%o', error);
         rej();
       }

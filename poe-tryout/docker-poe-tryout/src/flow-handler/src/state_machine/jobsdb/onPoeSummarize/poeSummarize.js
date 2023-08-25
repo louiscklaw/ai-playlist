@@ -1,5 +1,6 @@
+const ERROR_LOG_DIR = `/logs/error/poeSummarize`;
 const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
-const { postHelloworld } = require('../../../fetch/postHelloworld');
+// const { postHelloworld } = require('../../../fetch/postHelloworld');
 const { loadJson } = require('../../../utils/loadJson');
 const { myLogger } = require('../../../utils/myLogger');
 const { getWorkingDirFromPayload } = require('./getWorkingDirFromPayload');
@@ -12,7 +13,7 @@ module.exports = {
         const { req_body } = this.context;
         var payload = req_body;
         // var { working_dir } = payload;
-        var working_dir = getWorkingDirFromPayload(payload);
+        var working_dir = await getWorkingDirFromPayload(payload);
 
         myLogger.info('input to summarize');
 
@@ -24,7 +25,13 @@ module.exports = {
 
         res();
       } catch (error) {
-        myLogger.error('error during summarize');
+        await createDirIfNotExists(ERROR_LOG_DIR);
+        var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+        var payload = this.context;
+
+        fs.writeFileSync(filename, JSON.stringify({ payload, error }), { encoding: 'utf8' });
+
+        myLogger.error('error during Summarize');
         myLogger.error('%o', error);
 
         rej();
