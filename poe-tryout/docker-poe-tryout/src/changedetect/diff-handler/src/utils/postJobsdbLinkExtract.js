@@ -14,7 +14,7 @@ function fetchPost(url, json_body) {
 function postJobsdbLinkExtract(json_body) {
   console.log('postJobsdbLinkExtract');
   console.log({ json_body });
-  
+
   // return ;
   return fetchPost(`${FLOW_HANDLER_ENDPOINT}/jobsdb_link_extract`, json_body);
 }

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { postJobsdbLinkExtract } = require('../utils/postJobsdbLinkExtract');
-
+const { createClient } = require('redis');
 const express = require('express');
 const router = express.Router();
 const { myLogger } = require('../utils/myLogger');
@@ -8,7 +8,30 @@ const { myLogger } = require('../utils/myLogger');
 const { getAddedLink } = require('../utils/getAddedLink');
 
 const { FLOW_HANDLER_ENDPOINT } = require('../config');
-if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured')
+const { isNewLink } = require('../utils/isNewLink');
+if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
+
+const client = createClient({
+  url: 'redis://:123456@diff-handler-redis:6379',
+});
+
+client.on('error', err => console.log('Redis Client Error', err));
+client.connect();
+
+async function filterAlreadySeenLink(links, client) {
+  var output = [];
+
+  for (var i = 0; i < links.length; i++) {
+    var x = links[i].toString();
+    if (await isNewLink(x, client)) {
+      output.push(x);
+    } else {
+      console.log(`already seen, skipping ${x}`);
+    }
+  }
+
+  return output;
+}
 
 // var validUrl = require('valid-url');
 
@@ -25,7 +48,7 @@ function getPayloadToFlowHandlerJson(diff_link) {
 }
 
 router.post('/dump', (req, res) => {
-  var output = { state: 'init', debug: {}, error: "" };
+  var output = { state: 'init', debug: {}, error: '' };
 
   try {
     var req_body = req.body;
@@ -45,7 +68,7 @@ router.post('/dump', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  var output = { state: 'init', debug: {}, error: "" };
+  var output = { state: 'init', debug: {}, error: '' };
 
   try {
     var req_body = req.body;
@@ -57,10 +80,13 @@ router.post('/', (req, res) => {
 
     const json_message = req_body.message;
     const messages = json_message.split(/\n/);
-    const sainted_messages = getAddedLink(messages);
+    const sainted_links = getAddedLink(messages);
 
-    const flow_handler_payloads = sainted_messages.map(m => {
-      return getPayloadToFlowHandlerJson(m);
+    // filter out done here ?
+    const new_links = filterAlreadySeenLink(sainted_links);
+
+    const flow_handler_payloads = new_links.map(link => {
+      return getPayloadToFlowHandlerJson(link);
     });
     myLogger.info('%o', { flow_handler_payloads });
 
