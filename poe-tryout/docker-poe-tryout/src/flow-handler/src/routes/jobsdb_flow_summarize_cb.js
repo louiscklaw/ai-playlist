@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     // NOTE: containue from summiarie done state
     var machine = new jobsdbPoeSummarizeCbMachine();
 
-    await storeJson(`${working_dir}/summarize_result.json`, req_body);
+    await storeJson(`${working_dir}/300_summarize_result.json`, req_body);
 
     machine.context = { ...req_body, working_dir };
     await machine.poeSummarizeDone();
