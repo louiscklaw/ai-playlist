@@ -9,6 +9,7 @@ const { getAddedLink } = require('../utils/getAddedLink');
 
 const { FLOW_HANDLER_ENDPOINT } = require('../config');
 const { isNewLink } = require('../utils/isNewLink');
+const { filterAlreadySeenLink } = require('../utils/filterAlreadySeenLink');
 if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
 
 const client = createClient({
@@ -16,9 +17,10 @@ const client = createClient({
 });
 
 client.on('error', err => console.log('Redis Client Error', err));
+// used to initialize connection
 client.connect();
 
-async function filterAlreadySeenLink(links, client) {
+async function filterAlreadySeenLink1(links, client) {
   var output = [];
 
   for (var i = 0; i < links.length; i++) {

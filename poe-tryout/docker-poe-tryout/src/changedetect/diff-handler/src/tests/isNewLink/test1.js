@@ -8,12 +8,12 @@ const client = createClient({
 
 client.on('error', err => console.log('Redis Client Error', err));
 
-async function filterAleadySeenLink(links, client) {
+async function filterAleadySeenLink(links, redis_client) {
   var output = [];
 
   for (var i = 0; i < links.length; i++) {
     var x = links[i].toString();
-    if (await isNewLink(x, client)) {
+    if (await isNewLink(x, redis_client)) {
       output.push(x);
     } else {
       console.log(`already seen, skipping ${x}`);
