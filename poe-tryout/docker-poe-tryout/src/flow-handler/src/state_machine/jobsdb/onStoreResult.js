@@ -19,7 +19,7 @@ module.exports = {
         myLogger.info(`job url: ${test_json.jobsdb_job_url}`);
 
         await createDirIfNotExists(working_dir);
-        await storeJson(`${working_dir}/store_result.json`, this.context);
+        await storeJson(`${working_dir}/999_store_result.json`, this.context);
 
         res();
       } catch (error) {
