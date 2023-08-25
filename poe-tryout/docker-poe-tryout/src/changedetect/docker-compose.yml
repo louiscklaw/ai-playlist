@@ -1,5 +1,6 @@
 volumes:
   changedetection_data:
+  diff_handler_redis:
 
 services:
   # NOTE: phrase out
@@ -19,6 +20,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+      - REDIS_ENDPOINT_URI=redis://diff-handler-redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     # depends_on:
     #   jobsdb-scraper:
     #     condition: service_healthy
@@ -114,3 +117,20 @@ services:
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+
+  diff-handler-redis:
+    image: 192.168.10.61:5000/redis:6.0.20
+    hostname: diff-handler-redis
+    volumes: 
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      - diff_handler_redis:/data
+    command: redis-server --save 5 1 --loglevel warning --dir /data --requirepass ${REDIS_PASSWORD}
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Hong_Kong
+      - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
