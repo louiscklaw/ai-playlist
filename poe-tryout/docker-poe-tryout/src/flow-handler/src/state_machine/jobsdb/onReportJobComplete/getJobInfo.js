@@ -20,4 +20,4 @@ async function getJobInfo(working_dir) {
   return output;
 }
 
-module.exports = {getJobInfo}
+module.exports = { getJobInfo };
