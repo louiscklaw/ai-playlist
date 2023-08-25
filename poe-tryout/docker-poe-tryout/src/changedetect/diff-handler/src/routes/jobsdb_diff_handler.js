@@ -11,6 +11,7 @@ const { FLOW_HANDLER_ENDPOINT } = require('../config');
 const { isNewLink } = require('../utils/isNewLink');
 const { filterAlreadySeenLink } = require('../utils/filterAlreadySeenLink');
 const { calculateMD5 } = require('../utils/calculateMD5');
+const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
 
 const {REDIS_PASSWORD} = process.env
@@ -65,6 +66,7 @@ router.post('/',async (req, res) => {
     // console.log({ req_body });
     output = { ...output, state: 'start', debug: req_body };
 
+    await createDirIfNotExists(`/logs/error/jobsdb_diff_handler`);
     var filename = `/logs/error/jobsdb_diff_handler/${calculateMD5(req_body)}.json`;
     var payload = {req_body}
     await fs.writeFileSync(
