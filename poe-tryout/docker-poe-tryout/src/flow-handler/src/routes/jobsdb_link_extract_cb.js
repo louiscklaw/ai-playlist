@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     var working_dir = `/share/${post_id}`;
     myLogger.info(`writing to working_dir: ${working_dir}...`);
     await createDirIfNotExists(working_dir);
-    await storeJson(`${working_dir}/extract_result.json`, req_body);
+    await storeJson(`${working_dir}/100_extract_result.json`, req_body);
     await storeJson(`${working_dir}/meta.json`, {
       jobsdb_job_url,
       working_dir,

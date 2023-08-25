@@ -5,7 +5,7 @@ async function getJobInfo(working_dir) {
   var output = {};
 
   try {
-    const extract_result = await fs.readFileSync(`${working_dir}/extract_result.json`, { encoding: 'utf8' });
+    const extract_result = await fs.readFileSync(`${working_dir}/100_extract_result.json`, { encoding: 'utf8' });
     const extract_result_json = JSON.parse(extract_result);
     // console.log(extract_result_json)
 
