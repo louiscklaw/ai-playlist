@@ -14,6 +14,7 @@ if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not config
 
 const client = createClient({
   url: 'redis://:123456@diff-handler-redis:6379',
+  
 });
 
 client.on('error', err => console.log('Redis Client Error', err));
@@ -69,7 +70,7 @@ router.post('/dump', (req, res) => {
   res.send(output);
 });
 
-router.post('/', (req, res) => {
+router.post('/',async (req, res) => {
   var output = { state: 'init', debug: {}, error: '' };
 
   try {
@@ -85,7 +86,7 @@ router.post('/', (req, res) => {
     const sainted_links = getAddedLink(messages);
 
     // filter out done here ?
-    const new_links = filterAlreadySeenLink(sainted_links);
+    const new_links = await filterAlreadySeenLink(sainted_links, client);
 
     const flow_handler_payloads = new_links.map(link => {
       return getPayloadToFlowHandlerJson(link);

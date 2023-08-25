@@ -4,11 +4,21 @@ const { getRandomInt } = require('../../utils/getRandomInt');
 
 const client = createClient({
   url: 'redis://:123456@diff-handler-redis:6379',
+  retry_strategy: (options) => {
+    if (options.error && options.error.code === 'ECONNREFUSED') {
+      // Connection refused error, wait and try reconnecting after 5 seconds
+      return 5000;
+    }
+    
+    // Retry immediately or after some delay depending on your requirements.
+    // For example, return null to retry immediately or specify a delay in milliseconds.
+    return null;
+  },
 });
 
 client.on('error', err => console.log('Redis Client Error', err));
 
-async function filterAleadySeenLink(links, redis_client) {
+async function filterAlreadySeenLink(links, redis_client) {
   var output = [];
 
   for (var i = 0; i < links.length; i++) {
@@ -25,6 +35,7 @@ async function filterAleadySeenLink(links, redis_client) {
 
 (async () => {
   await client.connect();
+  if (client.sta)
 
   console.log(await isNewLink('1', client));
   console.log(await isNewLink('1', client));
@@ -44,7 +55,7 @@ async function filterAleadySeenLink(links, redis_client) {
   //     console.log('already seen, skipping')
   //   }
   // }
-  output = await filterAleadySeenLink(input, client);
+  output = await filterAlreadySeenLink(input, client);
   console.log(output);
 
   await client.disconnect();
