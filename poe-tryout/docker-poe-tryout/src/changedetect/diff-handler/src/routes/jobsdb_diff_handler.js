@@ -65,8 +65,12 @@ router.post('/',async (req, res) => {
     // console.log({ req_body });
     output = { ...output, state: 'start', debug: req_body };
 
-    var filename = calculateMD5(req_body);
-    await fs.writeFileSync(filename,JSON.stringify(req_body),{encoding:'utf8'});
+    var filename = `/logs/error/jobsdb_diff_handler/${calculateMD5(req_body)}.json`;
+    var payload = {req_body}
+    await fs.writeFileSync(
+      filename,
+      JSON.stringify(payload),
+      {encoding:'utf8'});
 
     myLogger.info('call to jobsdb_diff_handler');
     myLogger.info('%o', { req_body });
