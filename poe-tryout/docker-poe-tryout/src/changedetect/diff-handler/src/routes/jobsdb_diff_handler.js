@@ -10,6 +10,7 @@ const { getAddedLink } = require('../utils/getAddedLink');
 const { FLOW_HANDLER_ENDPOINT } = require('../config');
 const { isNewLink } = require('../utils/isNewLink');
 const { filterAlreadySeenLink } = require('../utils/filterAlreadySeenLink');
+const { calculateMD5 } = require('../utils/calculateMD5');
 if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
 
 const {REDIS_PASSWORD} = process.env
@@ -63,6 +64,9 @@ router.post('/',async (req, res) => {
     var req_body = req.body;
     // console.log({ req_body });
     output = { ...output, state: 'start', debug: req_body };
+
+    var filename = calculateMD5(req_body);
+    await fs.writeFileSync(filename,JSON.stringify(req_body),{encoding:'utf8'});
 
     myLogger.info('call to jobsdb_diff_handler');
     myLogger.info('%o', { req_body });
