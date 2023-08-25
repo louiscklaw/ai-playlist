@@ -34,7 +34,7 @@ module.exports = {
           _jobDescriptionMd,
         );
 
-        await storeJson(`${working_dir}/input_to_summarize.json`, input_to_summarize);
+        await storeJson(`${working_dir}/200_input_to_summarize.json`, input_to_summarize);
         await postToSummarize({
           working_dir,
           preprompts: prompts.getSamplePreprompts(),
