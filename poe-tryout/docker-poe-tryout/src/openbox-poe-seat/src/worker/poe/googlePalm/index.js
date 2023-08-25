@@ -14,6 +14,7 @@ const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../../config');
 const { myLogger } = require('../../../utils/myLogger');
+const { calculateMD5 } = require('../../../utils/calculateMD5');
 const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 
 const {

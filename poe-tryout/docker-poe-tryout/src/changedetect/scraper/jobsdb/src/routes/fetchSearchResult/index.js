@@ -11,6 +11,7 @@ const router = express.Router();
 const { getRandomInt } = require('../../utils/getRandomInt');
 const { myLogger } = require('../../utils/myLogger');
 const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
+const { calculateMD5 } = require('../../utils/calculateMD5');
 
 const BROWSERLESS_HOST = 'changedetection-chrome';
 

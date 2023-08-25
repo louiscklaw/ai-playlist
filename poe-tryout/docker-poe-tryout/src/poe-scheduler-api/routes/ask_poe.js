@@ -1,3 +1,8 @@
+// const fs = require('fs'),
+//   path = require('path');
+const fs = require('fs');
+const ERROR_LOG_DIR = '/logs/error/fetchSearchResult';
+
 const express = require('express');
 const router = express.Router();
 
@@ -6,6 +11,8 @@ const { STATE_INIT, STATE_SCHEDULED } = require('../constants/states');
 
 const { Queue } = require('../queue');
 const { myLogger } = require('../utils/myLogger');
+const { calculateMD5 } = require('../utils/calculateMD5');
+const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 
 router.post('/', async (req, res) => {
   var state = STATE_INIT;
@@ -32,7 +39,13 @@ router.post('/', async (req, res) => {
     Queue.now(job);
     output = { ...output, state: STATE_SCHEDULED };
   } catch (error) {
-    output = { ...output, state: ERROR_ADDING_QUEUE, error };
+    await createDirIfNotExists(ERROR_LOG_DIR);
+    var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+
+    output = { ...output, state: ERROR_ADDING_QUEUE, error:JSON.stringify(error) };
+    fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
+
+    myLogger.error(JSON.stringify(error));
   }
 
   res.send(output);

@@ -1,5 +1,6 @@
 const ERROR_LOG_DIR = `/logs/error/poeSummarize`;
 const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
+const { calculateMD5 } = require('../../../utils/calculateMD5');
 // const { postHelloworld } = require('../../../fetch/postHelloworld');
 const { loadJson } = require('../../../utils/loadJson');
 const { myLogger } = require('../../../utils/myLogger');
