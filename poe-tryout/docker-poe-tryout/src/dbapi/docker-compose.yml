@@ -7,9 +7,9 @@ services:
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: admin
     #   MONGO_INITDB_ROOT_PASSWORD: admin
+    restart: unless-stopped
     ports:
       - 27017:27017
-    restart: unless-stopped
 
     # TODO:
     # find: ‘./src/volumes/mongo/data/db/diagnostic.data’: Permission denied
