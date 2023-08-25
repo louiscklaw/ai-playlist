@@ -7,17 +7,23 @@ set -ex
 #   node ./index.js
 # popd
 
-pushd dbapi/tests/PoeSeatStatus
-  node ./poe_clear_all.js
-  node ./poe_offline.js
-
-  node ./poe_clear_all.js
-  node ./poe_online.js
-  node ./poe_get_status.js
-
-  node ./poe_clear_all.js
-  node ./poe_get_status.js
+pushd dbapi/tests/VisitedLink
+  node ./clearall.js
+  node ./addLink.js
 popd
+
+
+# pushd dbapi/tests/PoeSeatStatus
+#   node ./poe_clear_all.js
+#   node ./poe_offline.js
+
+#   node ./poe_clear_all.js
+#   node ./poe_online.js
+#   node ./poe_get_status.js
+
+#   node ./poe_clear_all.js
+#   node ./poe_get_status.js
+# popd
 
 # src/page-handler/src/tests/telegramSendAlert
 # pushd page-handler/src/tests/postTelegramAlert
