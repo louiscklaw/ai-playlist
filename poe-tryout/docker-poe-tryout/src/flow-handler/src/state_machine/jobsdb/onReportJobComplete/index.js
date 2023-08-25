@@ -17,12 +17,20 @@ function onReportJobComplete() {
       const { companyName, jobAddress, jobTitle } = await getJobInfo(working_dir);
 
       var message = `
-      🔔🔔🔔 job done  🔔🔔🔔
+🎉🎉🎉 job done  
 job url: ${meta_json.jobsdb_job_url}
 job working_dir: ${meta_json.working_dir} :
 
 \`\`\`javascript
-${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
+${JSON.stringify(
+  {
+    companyName,
+    jobAddress,
+    jobTitle,
+  },
+  null,
+  2,
+)}
 \`\`\`
 `.trim();
       await postTelegramMessage(message);
