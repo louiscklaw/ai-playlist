@@ -1,5 +1,4 @@
 'use strict';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -18,8 +17,8 @@ try {
 
   // TODO: remove me ?
   app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
+  
   app.use('/post_helloworld', require('./routes/post_helloworld'));
-
   app.use('/helloworld', require('./routes/helloworld'));
   app.use('/healthcheck', require('./routes/healthcheck'));
 
