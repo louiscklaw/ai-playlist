@@ -17,7 +17,7 @@ const { CustomerModel } = require('./models/Customer');
 const { InvoiceModel } = require('./models/Invoice');
 const { myLogger } = require('./utils/myLogger');
 
-const { PoeSeatStatusModel } = require('./models/PoeSeatStatus');
+// const { PoeSeatStatusModel } = require('./models/PoeSeatStatus');
 
 try {
   // var lock = new AsyncLock();
