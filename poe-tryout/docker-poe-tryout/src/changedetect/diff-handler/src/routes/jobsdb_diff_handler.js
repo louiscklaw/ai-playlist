@@ -12,29 +12,15 @@ const { isNewLink } = require('../utils/isNewLink');
 const { filterAlreadySeenLink } = require('../utils/filterAlreadySeenLink');
 if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
 
+const {REDIS_PASSWORD} = process.env
+if (!REDIS_PASSWORD) throw new Error('REDIS_PASSWORD is not defined')
 const client = createClient({
-  url: 'redis://:123456@diff-handler-redis:6379',
-  
+  url: `redis://:${REDIS_PASSWORD}@diff-handler-redis:6379`,
 });
 
 client.on('error', err => console.log('Redis Client Error', err));
 // used to initialize connection
 client.connect();
-
-async function filterAlreadySeenLink1(links, client) {
-  var output = [];
-
-  for (var i = 0; i < links.length; i++) {
-    var x = links[i].toString();
-    if (await isNewLink(x, client)) {
-      output.push(x);
-    } else {
-      console.log(`already seen, skipping ${x}`);
-    }
-  }
-
-  return output;
-}
 
 // var validUrl = require('valid-url');
 
