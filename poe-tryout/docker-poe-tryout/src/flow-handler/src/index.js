@@ -38,5 +38,5 @@ try {
     myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log(error);
+  myLogger.error(JSON.stringify(error));
 }
