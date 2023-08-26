@@ -81,7 +81,7 @@ services:
 
     # Comment out ports: when using behind a reverse proxy , enable networks: etc.
     ports:
-      - 5000:5000
+      - 55000:5000
     restart: unless-stopped
 
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
