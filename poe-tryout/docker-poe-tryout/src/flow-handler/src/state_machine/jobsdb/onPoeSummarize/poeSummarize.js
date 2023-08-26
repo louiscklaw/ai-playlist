@@ -1,4 +1,7 @@
-const ERROR_LOG_DIR = `/logs/error/poeSummarize`;
+const fs = require('fs'),
+  path = require('path');
+const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
+
 const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
 // const { postHelloworld } = require('../../../fetch/postHelloworld');
@@ -9,6 +12,8 @@ const { getWorkingDirFromPayload } = require('./getWorkingDirFromPayload');
 module.exports = {
   poeSummarize: function () {
     return new Promise(async (res, rej) => {
+      var output = { state: 'init', debug: this.context, error: '' };
+
       try {
         myLogger.info('I Summarize');
         const { req_body } = this.context;
@@ -26,11 +31,12 @@ module.exports = {
 
         res();
       } catch (error) {
-        await createDirIfNotExists(ERROR_LOG_DIR);
-        var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
-        var payload = this.context;
+        output = { ...output, state: 'error', error: JSON.stringify(error) };
 
-        fs.writeFileSync(filename, JSON.stringify({ payload, error }), { encoding: 'utf8' });
+        await createDirIfNotExists(ERROR_LOG_DIR);
+
+        var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+        fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
         myLogger.error('error during Summarize');
         myLogger.error('%o', error);

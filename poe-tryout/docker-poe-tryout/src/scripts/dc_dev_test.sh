@@ -2,6 +2,8 @@
 
 set -e
 
+export DOCKER_DEV=1
+
 ./scripts/dc_gen.sh
 
 echo 
@@ -13,4 +15,3 @@ docker compose -f ./docker-compose.gen.yml up -d --remove-orphans test
 # --build
 
 exit 0
-

@@ -1,10 +1,13 @@
 // const fetch = require('node-fetch');
 const Joi = require('joi');
-const fs = require('fs');
+const fs = require('fs'),
+  path = require('path');
+const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
 
 // const { storeJson } = require('../../../utils/storeJson');
 const { myLogger } = require('../../../utils/myLogger');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
+const { createDirIfNotExists } = require('../../../utils/createDirIfNotExists');
 
 // const summarize_url = 'http://flow-handler:3000/jobsdb_flow_summarize';
 // const SAMPLE_PREPROMPTS = ['Forget everything and start a new talk.'];
@@ -12,6 +15,7 @@ const JOB_TITLE_UNDEFINED = 'JOB_TITLE_UNDEFINED';
 const INPUT_FROM_CONTEXT_IS_NOT_VALID = 'INPUT_FROM_CONTEXT_IS_NOT_VALID';
 
 function inputSchema(in_o) {
+  var output = {state:"init", debug:in_o, error:""}
   try {
     const jobSchema = Joi.object({
       working_dir: Joi.string().required(),
@@ -47,13 +51,13 @@ function inputSchema(in_o) {
       throw new Error(JOB_TITLE_UNDEFINED);
     }
   } catch (error) {
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
 
-    const md5Hash = calculateMD5(in_o);
-    fs.writeFileSync(`/logs/error/flow-handler/${md5Hash}.json`, JSON.stringify(in_o), { encoding: 'utf-8' });
-    myLogger.error('in_o.json write done');
+    createDirIfNotExists(ERROR_LOG_DIR);
 
-    myLogger.error('%o', in_o);
+    var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+    fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
     throw error;
   }

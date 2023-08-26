@@ -1,5 +1,7 @@
-const fs = require('fs');
-const ERROR_LOG_DIR = '/logs/error/onExtractDone';
+const fs = require('fs'),
+  path = require('path');
+const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
+
 const { storeJson } = require('../../../utils/storeJson');
 const { myLogger } = require('../../../utils/myLogger');
 const { inputSchema } = require('./inputSchema');
@@ -19,6 +21,8 @@ module.exports = {
     myLogger.info('onExtractDone called ....');
 
     return new Promise(async (res, rej) => {
+      var output = { state: 'init', debug: this.context, error: '' };
+
       try {
         var { working_dir, jobTitle, companyName, jobAddress, postDate, jobHighlight, _jobDescriptionMd } =
           this.context;
@@ -39,13 +43,15 @@ module.exports = {
           preprompts: prompts.getSamplePreprompts(),
           question_list: prompts.getSampleQuestions(),
           callback_url: summarize_cb_url,
-        }
+        };
 
         await storeJson(`${working_dir}/200_input_to_summarize.json`, input_to_summarize);
         await postToSummarize(input_to_summarize);
 
         res();
       } catch (error) {
+        output = { ...output, state: 'error', error: JSON.stringify(error) };
+
         myLogger.error('error during processing Extract callback ...');
 
         if (error.message == JOB_TITLE_UNDEFINED) {
@@ -54,9 +60,8 @@ module.exports = {
           await createDirIfNotExists(ERROR_LOG_DIR);
 
           var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
-          var payload = this.context;
+          fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
-          fs.writeFileSync(filename, JSON.stringify({ payload, error }), { encoding: 'utf8' });
           myLogger.error('%o', error);
         }
 

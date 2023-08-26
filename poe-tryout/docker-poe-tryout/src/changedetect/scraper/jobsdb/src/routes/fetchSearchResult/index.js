@@ -1,7 +1,6 @@
-// const fs = require('fs'),
-//   path = require('path');
-const fs = require('fs');
-const ERROR_LOG_DIR = '/logs/error/fetchSearchResult';
+const fs = require('fs'),
+  path = require('path');
+const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
 
 const puppeteer = require('puppeteer-core');
 
@@ -16,7 +15,8 @@ const { calculateMD5 } = require('../../utils/calculateMD5');
 const BROWSERLESS_HOST = 'changedetection-chrome';
 
 router.post('/search', async (req, res) => {
-  var output = { state: 'init', debug: {}, error: '' };
+  var output = { state: 'init', debug: req.body, error: '' };
+
   try {
     var { body } = req;
     var { search } = body;
@@ -57,14 +57,14 @@ router.post('/search', async (req, res) => {
 
     output = { ...output, state: 'done', post_links };
   } catch (error) {
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
+
     await createDirIfNotExists(ERROR_LOG_DIR);
 
     var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
-
-    output = { ...output, state: 'error', error: JSON.stringify(error) };
-
     fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
-    myLogger.error('%o', error);
+
+    myLogger.error(JSON.stringify(error));
   }
   res.send(output);
 });
