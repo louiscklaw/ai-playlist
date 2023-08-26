@@ -1,8 +1,9 @@
-const fs = require('fs');
-const { loadJson } = require('../../utils/loadJson');
+// const fs = require('fs');
+// const { loadJson } = require('../../utils/loadJson');
 const { getJobInfo } = require('./getJobInfo');
 const { postTelegramMessage } = require('../../../utils/postTelegramMessage');
 const { myLogger } = require('../../../utils/myLogger');
+const { loadJson } = require('../../../utils/loadJson');
 
 function onReportJobComplete() {
   return new Promise(async (res, rej) => {
