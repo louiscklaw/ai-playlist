@@ -37,7 +37,8 @@ const transitions = [
 const { onExtractJobDetail } = require('./onExtractJobDetail');
 const { onExtractDone } = require('./onExtractDone');
 const { onPoeSummarize, onPoeSummarizeDone } = require('./onPoeSummarize');
-const { onPoeDraftEmail, onPoeDraftEmailDone } = require('./onPoeDraftEmail');
+const { onPoeDraftEmail } = require('./onPoeDraftEmail');
+const { onPoeDraftEmailDone } = require('./onPoeDraftEmailDone');
 const { onStoreResult } = require('./onStoreResult');
 const { onReportJobComplete } = require('./onReportJobComplete');
 
