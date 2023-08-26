@@ -34,13 +34,15 @@ module.exports = {
           _jobDescriptionMd,
         );
 
-        await storeJson(`${working_dir}/200_input_to_summarize.json`, input_to_summarize);
-        await postToSummarize({
+        var input_to_summarize = {
           working_dir,
           preprompts: prompts.getSamplePreprompts(),
           question_list: prompts.getSampleQuestions(),
           callback_url: summarize_cb_url,
-        });
+        }
+
+        await storeJson(`${working_dir}/200_input_to_summarize.json`, input_to_summarize);
+        await postToSummarize(input_to_summarize);
 
         res();
       } catch (error) {
