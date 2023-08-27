@@ -47,4 +47,4 @@ RUN mkdir -p /installed &&  touch /installed/final_done
 
 USER 1000
 
-CMD ["/etc/run.sh"]
+CMD ["/etc/run_supervisord.sh"]
