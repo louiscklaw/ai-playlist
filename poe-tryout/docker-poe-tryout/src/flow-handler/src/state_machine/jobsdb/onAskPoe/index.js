@@ -1,5 +1,5 @@
-const { postHelloworld } = require('../../fetch/postHelloworld');
-const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../utils/fetchOpenboxSeat');
+const { postHelloworld } = require('../../../fetch/postHelloworld');
+const { poeSchedulerHellworld, poeProcessNewJobPost } = require('../../../utils/fetchOpenboxSeat');
 
 module.exports = {
   onAskPoe: function () {

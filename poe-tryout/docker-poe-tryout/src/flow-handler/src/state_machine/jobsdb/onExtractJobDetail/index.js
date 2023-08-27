@@ -1,7 +1,7 @@
 var validUrl = require('valid-url');
 
-const { postJobsdbPostExtract } = require('../../utils/fetchPost');
-const { myLogger } = require('../../utils/myLogger');
+const { postJobsdbPostExtract } = require('../../../utils/fetchPost');
+const { myLogger } = require('../../../utils/myLogger');
 
 const NO_NEED_SCAN_URL = 'NO_NEED_SCAN_URL';
 const INVALID_URL = 'INVALID_URL';

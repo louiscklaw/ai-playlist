@@ -1,7 +1,7 @@
-const { myLogger } = require('../../utils/myLogger');
-const { storeJson } = require('../../utils/storeJson');
-const { loadJson } = require('../../utils/loadJson');
-const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
+const { myLogger } = require('../../../utils/myLogger');
+const { storeJson } = require('../../../utils/storeJson');
+const { loadJson } = require('../../../utils/loadJson');
+const { createDirIfNotExists } = require('../../../utils/createDirIfNotExists');
 
 module.exports = {
   onStoreResult: function () {
