@@ -21,6 +21,11 @@ services:
   poe-scheduler-api:
     entrypoint: ./entry.sh
 
+  # NOTE:
+  # openbox-poe-seat1:
+  # NOTE: configure here -> openbox-poe-seat/dockerfopenbox-poe-seat/dockerfiles/final/etc/supervisord-app.confiles/final/etc/supervisord-app.conf
+
+
   # static-share:
   #   command: ./dev.sh
   # changedetection:
