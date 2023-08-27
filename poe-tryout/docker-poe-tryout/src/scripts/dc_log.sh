@@ -13,5 +13,4 @@ docker compose -f ./docker-compose.gen.yml \
   jobsdb-link-extractor \
   jobsdb-scraper \
   page-handler poe-scheduler-api 
-  
-  # openbox-poe-seat1
+  openbox-poe-seat1

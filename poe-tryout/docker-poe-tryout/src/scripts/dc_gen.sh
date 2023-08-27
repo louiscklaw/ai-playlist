@@ -15,12 +15,12 @@ YML_S='
 -f ./static-share/docker-compose.yml
 -f ./page-handler/docker-compose.yml
 -f ./v2raya/docker-compose.yml
-'
-
-YML_OPENBOX_S='
--f ./docker-compose.yml
 -f ./openbox-poe-seat/docker-compose.yml
 '
+
+# YML_OPENBOX_S='
+# -f ./docker-compose.yml
+# '
 
 if [[ -v DOCKER_DEV ]]; then
   echo 
@@ -38,4 +38,4 @@ else
 fi
 
 docker compose $YML_S config > docker-compose.gen.yml
-docker compose $YML_OPENBOX_S config > docker-compose-openbox.gen.yml
+# docker compose $YML_OPENBOX_S config > docker-compose-openbox.gen.yml
