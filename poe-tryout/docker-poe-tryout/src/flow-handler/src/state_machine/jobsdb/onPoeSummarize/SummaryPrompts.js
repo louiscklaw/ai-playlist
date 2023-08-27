@@ -6,8 +6,10 @@ class SummaryPrompts {
   getSampleQuestions() {
     return [
       `
-can you draft me a cover letter ? Thanks. 
-please try to make it in less than 100 words
+Can you draft me a cover letter ? Thanks. 
+Please try to make it in less than 200 words.
+Please output it in markdown format.
+Please output email content only.
 `.trim(),
     ];
   }
