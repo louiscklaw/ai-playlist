@@ -18,6 +18,10 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     env_file: ./.env
 
+  busybox: 
+    image: busybox 
+    command: sleep infinity
+
   #   build: ./docker-ubuntu2
   # ubuntu3:
   #   build: ./docker-ubuntu3
