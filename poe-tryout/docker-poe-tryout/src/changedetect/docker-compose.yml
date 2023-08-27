@@ -6,7 +6,8 @@ services:
   # NOTE: phrase out
   diff-handler:
     # build: ./changedetect/diff-handler
-    image: logickee/poe-tryout-diff-handler
+    image: 192.168.10.61:5000/poe-tryout-diff-handler
+    # image: logickee/poe-tryout-diff-handler
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/diff-handler/src:/app

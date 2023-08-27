@@ -4,7 +4,8 @@ volumes:
 services:
   poe-scheduler-api:
     # build: ./poe-scheduler-api
-    image: logickee/poe-tryout-poe-scheduler-api
+    image: 192.168.10.61:5000/poe-tryout-poe-scheduler-api
+    # image: logickee/poe-tryout-poe-scheduler-api
     ports:
       - 3002:3002
     volumes:

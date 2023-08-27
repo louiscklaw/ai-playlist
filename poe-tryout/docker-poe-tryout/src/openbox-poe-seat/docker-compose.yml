@@ -2,6 +2,7 @@ services:
   openbox-poe-seat1:
     # image: logickee/openbox-poe-seat
     image: 192.168.10.61:5000/logickee/openbox-poe-seat-final
+    # image: logickee/logickee/openbox-poe-seat-final
 
     # TODO ? do i need this ?
     container_name: openbox-poe-seat1
