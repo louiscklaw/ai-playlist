@@ -90,10 +90,14 @@ router.post('/', async (req, res) => {
           //   return title;
           // });
           var selector = 'div[data-automation="jobDetailsHeader"]';
+          await page.waitForSelector(selector);
           var { result } = await getFromEvaluateOuterHtml(jobPage, selector);
           var _jobDetailsHeaderRawHTML = result;
           myLogger.error(_jobDetailsHeaderRawHTML)
 
+
+          var selector = 'div[data-automation="jobDetailsHeader"] span';
+          await page.waitForSelector(selector);
           const { companyName, jobAddress, postDate, _debugList } = await jobPage.evaluate(() => {
             var output = {};
             var debugList = [];
@@ -114,10 +118,12 @@ router.post('/', async (req, res) => {
           //   return title;
           // });
           var selector = 'div[data-automation="job-details-job-highlights"] > div:nth-child(1) > div:nth-child(2)';
+          await page.waitForSelector(selector);
           var { result } = await getFromEvaluateTextContent(jobPage, selector);
           var jobHighlight = result;
 
-
+          var selector = 'div[data-automation="jobDescription"]';
+          await page.waitForSelector(selector);
           var { description, _jobDescriptionRaw, __jobDescriptionRawProcessed } = await jobPage.evaluate(() => {
             const _jobDescriptionRaw = document.querySelector('div[data-automation="jobDescription"]').outerHTML;
 
