@@ -1,6 +1,6 @@
 services:
   page-handler:
-    cpus: 0.1
+    cpus: 0.05
     # build: ./page-handler
     image: 192.168.10.61:5000/poe-tryout-page-handler
     # image: logickee/poe-tryout-page-handler
