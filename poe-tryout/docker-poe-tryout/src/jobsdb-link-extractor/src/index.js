@@ -23,5 +23,5 @@ try {
     myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  myLogger.error('%o', error);
+  myLogger.error(JSON.stringify(error));
 }

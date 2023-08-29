@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
   } catch (error) {
     output = { ...output, state: SEND_MESSAGE_FAILED, error: JSON.stringify(error) };
 
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
     myLogger.error('%o', { output });
 
     storeErrorJson(output, '/logs/error/page-handler');

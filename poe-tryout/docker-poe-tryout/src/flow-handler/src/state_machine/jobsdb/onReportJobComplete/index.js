@@ -39,7 +39,7 @@ ${JSON.stringify(
       res();
     } catch (error) {
       myLogger.error('error during report job complete...');
-      myLogger.error('%o', error);
+      myLogger.error(JSON.stringify(error));
       // myLogger.error(JSON.stringify(error));
 
       rej();

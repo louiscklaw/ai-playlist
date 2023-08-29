@@ -41,7 +41,7 @@ function inputCheck(in_o) {
       throw new Error(JOB_TITLE_UNDEFINED);
     }
   } catch (error) {
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
     myLogger.error('%o', in_o);
     
     // fs.writeFileSync('/logs/error/flow-handler/in_o.json',JSON.stringify(in_o), {encoding:'utf-8'});

@@ -38,7 +38,7 @@ function htmlToMarkdown(html_string) {
 
     return output;
   } catch (error) {
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
   }
 }
 

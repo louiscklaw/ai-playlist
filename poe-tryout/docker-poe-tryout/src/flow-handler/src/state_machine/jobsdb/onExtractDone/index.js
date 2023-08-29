@@ -62,7 +62,7 @@ module.exports = {
           var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
           fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
-          myLogger.error('%o', error);
+          myLogger.error(JSON.stringify(error));
         }
 
         rej();

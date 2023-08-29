@@ -14,7 +14,7 @@ const { myLogger } = require('../utils/myLogger');
 //       callback_url: 'http://flow-handler:3000/jobsdb_link_extract_cb',
 //     };
 //   } catch (error) {
-//     myLogger.error('%o', error);
+//     myLogger.error(JSON.stringify(error));
 //     myLogger.error('%o', { diff_link });
 //   }
 // }
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
   //     try {
   //       await postJobsdbLinkExtract(j);
   //     } catch (error) {
-  //       myLogger.error('%o', error);
+  //       myLogger.error(JSON.stringify(error));
   //       throw new Error(`error during posting to flow-handler ${j}`);
   //     }
   //   });
@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
   //   output = { ...output, state: 'done' };
   // } catch (error) {
   //   myLogger.error('error occur in diff-handler');
-  //   myLogger.error('%o', error);
+  //   myLogger.error(JSON.stringify(error));
   //   output = { ...output, state: 'error', error: error.message };
   // }
 

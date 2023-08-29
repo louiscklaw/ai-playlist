@@ -47,7 +47,7 @@ async function getWorkingDirFromPayload(payload) {
     fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
     myLogger.error('error during getWorkingDirFromPayload');
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
   }
 }
 

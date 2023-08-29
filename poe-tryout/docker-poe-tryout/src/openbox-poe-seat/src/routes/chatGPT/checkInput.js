@@ -51,7 +51,7 @@ function inputSchema1(in_o) {
       throw new Error(JOB_TITLE_UNDEFINED);
     }
   } catch (error) {
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
 
     const md5Hash = calculateMD5(in_o);
     fs.writeFileSync(`/logs/error/flow-handler/${md5Hash}.json`, JSON.stringify(in_o), { encoding: 'utf-8' });

@@ -49,7 +49,7 @@ module.exports = {
         fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
         myLogger.error('error during summarize');
-        myLogger.error('%o', error);
+        myLogger.error(JSON.stringify(error));
         rej();
       }
     });

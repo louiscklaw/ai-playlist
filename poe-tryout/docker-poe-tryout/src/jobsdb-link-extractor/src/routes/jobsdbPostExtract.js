@@ -176,7 +176,7 @@ router.post('/', async (req, res) => {
             // NOTE: sometime job title is undefined even success
           }
         } catch (error) {
-          myLogger.error('%o', error);
+          myLogger.error(JSON.stringify(error));
           output = { ...output, state: 'EXTRACTION_ERROR', error };
         }
 
@@ -199,7 +199,7 @@ router.post('/', async (req, res) => {
     } else {
       myLogger.error(JSON.stringify(error));
       // myLogger.error('req.body %o', req.body);
-      // myLogger.error('%o', error);
+      // myLogger.error(JSON.stringify(error));
       throw error;
     }
   }

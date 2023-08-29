@@ -1,9 +1,15 @@
+const fs = require('fs'),
+  path = require('path');
+const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
+
 const { jobsdbPoeSummarizeCbMachine } = require('../state_machine/jobsdb/jobsdbMachine');
 
 // const { mySleep } = require('../utils/mySleep');
 const express = require('express');
 const { storeJson } = require('../utils/storeJson');
 const { myLogger } = require('../utils/myLogger');
+const { calculateMD5 } = require('../utils/calculateMD5');
+const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -36,7 +42,13 @@ router.post('/', async (req, res) => {
     output = { ...output, state: 'success' };
   } catch (error) {
     myLogger.error("%o",{ error });
-    output = { ...output, state: 'error', error };
+    output = { ...output, state: 'error', error:JSON.stringify(error) };
+
+    await createDirIfNotExists(ERROR_LOG_DIR);
+    var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+    fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
+
+    myLogger.error(JSON.stringify(error));
   }
 
   res.send(output);

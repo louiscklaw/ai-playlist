@@ -51,7 +51,7 @@ module.exports = {
           rej('invalid url:' + jobsdb_job_url);
         }
 
-        myLogger.error('%o', error);
+        myLogger.error(JSON.stringify(error));
         rej('extract job detail failed, url:' + jobsdb_job_url);
       }
     });

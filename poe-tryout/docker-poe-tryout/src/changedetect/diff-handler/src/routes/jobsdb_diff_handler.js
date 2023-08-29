@@ -50,7 +50,7 @@ router.post('/dump', (req, res) => {
     output = { ...output, state: 'done', debug: req_body };
   } catch (error) {
     myLogger.error('error occur in diff-handler');
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
     output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 
@@ -95,7 +95,7 @@ router.post('/',async (req, res) => {
 
         await postJobsdbLinkExtract(pl);
       } catch (error) {
-        myLogger.error('%o', error);
+        myLogger.error(JSON.stringify(error));
         myLogger.error('%o', pl);
         throw new Error(`error during posting to flow-handler`);
       }
@@ -104,7 +104,7 @@ router.post('/',async (req, res) => {
     output = { ...output, state: 'done' };
   } catch (error) {
     myLogger.error('error occur in diff-handler');
-    myLogger.error('%o', error);
+    myLogger.error(JSON.stringify(error));
     output = { ...output, state: 'error', error: JSON.stringify(error) };
   }
 

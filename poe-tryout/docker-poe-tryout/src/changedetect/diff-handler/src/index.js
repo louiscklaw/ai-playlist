@@ -25,5 +25,5 @@ try {
   });
 } catch (error) {
   myLogger.error('error during starting express');
-  myLogger.error('%o', error);
+  myLogger.error(JSON.stringify(error));
 }

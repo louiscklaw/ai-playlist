@@ -24,7 +24,7 @@ module.exports = {
         res();
       } catch (error) {
         myLogger.error('error during saving result...');
-        myLogger.error('%o', error);
+        myLogger.error(JSON.stringify(error));
 
         rej();
       }
