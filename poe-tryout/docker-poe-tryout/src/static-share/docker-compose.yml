@@ -1,5 +1,6 @@
 services:
   static-share:
+    cpus: 0.1
     # build: ./static-share
     image: logickee/poe-tryout-static-share
     volumes:

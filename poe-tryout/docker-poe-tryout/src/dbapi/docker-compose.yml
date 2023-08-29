@@ -1,5 +1,6 @@
 services:
   mongo:
+    cpus: 0.1
     image: mongo:latest
     # build: 
     #   dockerfile: ./dbapi/Dockerfile.mongo
@@ -24,6 +25,7 @@ services:
         retries: 5
 
   mongo-express:
+    cpus: 0.1
     image: mongo-express:latest
     # container_name: mongo-express
     environment:
@@ -40,6 +42,7 @@ services:
     restart: unless-stopped
 
   dbapi:
+    cpus: 0.1
     # build: ./dbapi
     image: logickee/poe-tryout-dbapi
     ports:

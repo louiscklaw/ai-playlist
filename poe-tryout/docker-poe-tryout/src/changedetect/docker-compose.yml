@@ -5,6 +5,7 @@ volumes:
 services:
   # NOTE: phrase out
   diff-handler:
+    cpus: 0.1
     # build: ./changedetect/diff-handler
     image: 192.168.10.61:5000/poe-tryout-diff-handler
     # image: logickee/poe-tryout-diff-handler
@@ -35,6 +36,7 @@ services:
 
 
   jobsdb-scraper:
+    cpus: 0.1
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
     volumes:
@@ -59,6 +61,7 @@ services:
 
 
   changedetection:
+    cpus: 0.1
     image: ghcr.io/dgtlmoon/changedetection.io
     # container_name: changedetection
     # hostname: changedetection
@@ -96,6 +99,7 @@ services:
         condition: service_healthy
 
   changedetection-chrome:
+    cpus: 0.1
     #  hostname: changedetection-chrome
     image: browserless/chrome
     shm_size: '1gb'

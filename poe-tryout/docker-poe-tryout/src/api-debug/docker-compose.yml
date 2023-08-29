@@ -1,6 +1,7 @@
 services:
   api-debug:
     build: ./api-debug
+    cpus: 0.1
     # image: ubuntu:latest
     entrypoint: ./dev.sh
     # command: sleep infinity
