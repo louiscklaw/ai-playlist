@@ -16,7 +16,7 @@ function onPoeDraftEmail(hello) {
       const { req_body } = this.context;
       var output = {state:"INIT", debug: req_body, error:"" }
 
-      console.log('I DraftEmail');
+      myLogger.info('I DraftEmail');
       var payload = req_body;
 
       var result = await askPoePrepromptQuestion(payload);
