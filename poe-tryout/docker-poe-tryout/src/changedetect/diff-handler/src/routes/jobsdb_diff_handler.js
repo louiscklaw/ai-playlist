@@ -74,7 +74,7 @@ router.post('/',async (req, res) => {
       {encoding:'utf8'});
 
     myLogger.info('call to jobsdb_diff_handler');
-    myLogger.info('%o', { req_body });
+    myLogger.info(JSON.stringify(req_body));
 
     const json_message = req_body.message;
     const messages = json_message.split(/\n/);
@@ -86,17 +86,18 @@ router.post('/',async (req, res) => {
     const flow_handler_payloads = new_links.map(link => {
       return getPayloadToFlowHandlerJson(link);
     });
-    myLogger.info('%o', { flow_handler_payloads });
+    myLogger.info(JSON.stringify(flow_handler_payloads));
 
-    flow_handler_payloads.forEach(async pl => {
+    flow_handler_payloads.forEach(async (pl) => {
       try {
         myLogger.info(`going to send postJobsdbLinkExtract -> `);
-        myLogger.info('%o', pl);
+        myLogger.info(JSON.stringify(pl));
 
         await postJobsdbLinkExtract(pl);
       } catch (error) {
-        myLogger.error('%o', error);
-        myLogger.error('%o', pl);
+        myLogger.error(JSON.stringify(error));
+        myLogger.error(JSON.stringify(pl));
+        console.log(error)
         throw new Error(`error during posting to flow-handler`);
       }
     });
