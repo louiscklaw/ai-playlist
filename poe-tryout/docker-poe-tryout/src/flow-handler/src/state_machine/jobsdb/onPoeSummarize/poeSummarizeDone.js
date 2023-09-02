@@ -6,6 +6,7 @@ const { FLOW_HANDLER_ENDPOINT } = require('../../../config');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
 const { myLogger } = require('../../../utils/myLogger');
 const SummaryPrompts = require('./SummaryPrompts');
+const { createDirIfNotExists } = require('../../../utils/createDirIfNotExists');
 
 module.exports = {
   poeSummarizeDone: function () {
