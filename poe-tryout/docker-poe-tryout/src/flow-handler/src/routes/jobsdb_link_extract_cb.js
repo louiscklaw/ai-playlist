@@ -5,7 +5,7 @@ const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 const { myLogger } = require('../utils/myLogger');
 const router = express.Router();
 
-// /jobsdb_link_extract_cb
+// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_link_extract_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: {} };
 
