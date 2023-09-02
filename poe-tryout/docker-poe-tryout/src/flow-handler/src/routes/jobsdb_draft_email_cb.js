@@ -8,7 +8,7 @@ const router = express.Router();
 const fs = require('fs');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 
-// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
+// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_draft_email_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: "" };
   myLogger.info('receive callback from draft email ');
