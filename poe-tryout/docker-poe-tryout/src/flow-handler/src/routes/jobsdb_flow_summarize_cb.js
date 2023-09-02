@@ -6,6 +6,7 @@ const { storeJson } = require('../utils/storeJson');
 const { myLogger } = require('../utils/myLogger');
 const router = express.Router();
 
+// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: {} };
   var req_body = req.body;
