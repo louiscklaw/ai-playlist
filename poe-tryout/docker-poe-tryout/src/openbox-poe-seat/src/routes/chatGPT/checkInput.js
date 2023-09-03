@@ -4,7 +4,6 @@ const fs = require('fs'),
   path = require('path');
 const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
 
-
 // const { storeJson } = require('../../../utils/storeJson');
 const { myLogger } = require('../../utils/myLogger');
 const { calculateMD5 } = require('../../utils/calculateMD5');
@@ -64,7 +63,7 @@ function inputSchema1(in_o) {
 }
 
 function checkInput(in_o) {
-  var output = {output:'init', debug:in_o,error:""}
+  var output = { output: 'init', debug: in_o, error: '' };
 
   try {
     const jobSchema = Joi.object({
@@ -86,7 +85,7 @@ function checkInput(in_o) {
     output = { ...output, state: 'error', error: JSON.stringify(error) };
 
     createDirIfNotExists(ERROR_LOG_DIR);
-    
+
     var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
     fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 

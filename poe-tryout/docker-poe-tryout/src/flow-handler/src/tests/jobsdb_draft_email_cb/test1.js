@@ -38,8 +38,10 @@ const payload = {
       history: [
         {
           question: 'can you draft me a cover letter ? Thanks. \nplease try to make it in less than 100 words',
-          answer:
-            "Dear Hiring Manager,\nI am writing to express my keen interest in the QA Engineer (Automation) position at Forex Forest Limited. With a strong background in testing web and mobile applications, I am confident in my ability to ensure top-quality products. My expertise in creating test cases, conducting various tests, and implementing system automation aligns perfectly with the requirements of the role. I am a proactive learner, possess excellent communication skills, and thrive both independently and as part of a team. I am excited about the opportunity to contribute to Forex Forest Limited's innovative projects. Thank you for considering my application.\nSincerely,\n[Your Name]",
+          answer: {
+            reply: "Dear Hiring Manager,\nI am writing to express my keen interest in the QA Engineer (Automation) position at Forex Forest Limited. With a strong background in testing web and mobile applications, I am confident in my ability to ensure top-quality products. My expertise in creating test cases, conducting various tests, and implementing system automation aligns perfectly with the requirements of the role. I am a proactive learner, possess excellent communication skills, and thrive both independently and as part of a team. I am excited about the opportunity to contribute to Forex Forest Limited's innovative projects. Thank you for considering my application.\nSincerely,\n[Your Name]",
+          }
+            
         },
       ],
     },

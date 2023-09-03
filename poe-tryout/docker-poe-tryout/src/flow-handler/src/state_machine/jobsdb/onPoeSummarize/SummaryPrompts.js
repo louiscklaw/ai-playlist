@@ -1,6 +1,12 @@
+
+
 class SummaryPrompts {
-  constructor(a) {
-    this.a = a;
+  constructor(job_summary) {
+    this.job_summary = job_summary;
+
+    if (Object.keys(job_summary,'reply')>-1){
+      this.job_summary = job_summary.reply;
+    }
   }
 
   getSampleQuestions() {
@@ -21,7 +27,7 @@ Please output email content only.
 I will input the summary of the position, please try to analyze it.
 Please try your best to make a summary in less than 100 words. 
 `.trim(),
-      this.a,
+      this.job_summary,
     ];
   }
 }

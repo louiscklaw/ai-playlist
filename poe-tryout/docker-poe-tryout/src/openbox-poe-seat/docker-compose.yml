@@ -43,6 +43,15 @@ services:
       timeout: 10s
       retries: 10
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+
   # openbox-firefox:
   #   image: openbox-poe-seat
   #   ports:

@@ -32,4 +32,4 @@ async function gptBotCooldown(time_s, page) {
   }
 }
 
-module.exports = {gptBotCooldown}
+module.exports = { gptBotCooldown };

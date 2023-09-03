@@ -14,10 +14,31 @@ async function loadJson(filepath) {
     output = JSON.parse(temp_raw);
   } catch (error) {
     myLogger.error('error during loadJson');
+    console.log({filepath});
     console.log(error);
+    throw error
   }
 
   return output;
 }
 
-module.exports = { loadJson };
+async function loadMetaJson(filepath) {
+  var output = {};
+  try {
+    if (!filepath) {
+      myLogger.info('filepath is not defined, default to /share/testing/meta.json');
+      filepath = '/share/testing';
+    }
+    output = loadJson(`${filepath}/meta.json`)
+
+  } catch (error) {
+    myLogger.error('error during loadMetaJson');
+    console.log({filepath});
+    console.log(error);
+    throw error
+  }
+
+  return output;
+}
+
+module.exports = { loadJson, loadMetaJson };

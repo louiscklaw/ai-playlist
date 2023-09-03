@@ -75,6 +75,7 @@ async function clearModalBox(page) {
 }
 
 async function questionAndAnswer(page, question, answer_idx) {
+
   const countAnswerBubble = page => {
     return page.evaluate(() => {
       return document.querySelectorAll('[class*="Message_botMessageBubble__"]').length;
@@ -100,11 +101,10 @@ async function questionAndAnswer(page, question, answer_idx) {
     document.querySelector('button[class*="sendButton"]:not([disabled])').click();
   });
 
-  var reply = '...';
   await page.waitForSelector(`[class*="Message_botMessageBubble__"]`, { waitUntil: 'networkidle0' });
   // console.log({ current_answer_bubble_length, new_answer_bubble_length });
 
-  for (var countdown = 10; countdown > 0; countdown--) {
+  for (var countdown = 20; countdown > 0; countdown--) {
     var new_answer_bubble_length = await countAnswerBubble(page);
     if (new_answer_bubble_length > current_answer_bubble_length) {
       // NOTE: new answer bubble appear
@@ -130,15 +130,32 @@ async function questionAndAnswer(page, question, answer_idx) {
     return first_check;
   };
 
+  var result = {};
   for (var countdown = 60; countdown > 0; countdown--) {
-    reply = await page.evaluate(answer_idx => {
-      return document.querySelectorAll('[class*="Message_botMessageBubble__"]').item(answer_idx).textContent;
+    result = await page.evaluate(answer_idx => {
+      var browser_md_reply = [];
+      var txt_reply = '';
+
+      var ele_answer = document.querySelectorAll('[class*="Message_botMessageBubble__"]').item(answer_idx);
+      txt_reply = ele_answer.textContent;
+
+      if (ele_answer) {
+        var md_ele_len = ele_answer.querySelectorAll('[class*="MarkdownCodeBlock_preTag"]').length;
+        for (var i = 0; i < md_ele_len; i++) {
+          var ele_mdContext = ele_answer.querySelectorAll('[class*="MarkdownCodeBlock_preTag"]').item(i).textContent;
+          browser_md_reply.push(ele_mdContext);
+        }
+      }
+
+      return { reply: txt_reply, md_reply: browser_md_reply };
     }, new_answer_bubble_length - 1);
+
+    var { reply, md_reply } = result;
 
     if (countdown > 0 && reply.trim() == '...') {
       // bot not answer yet
       myLogger.info(JSON.stringify({ countdown, reply }));
-      
+
       await page.waitForTimeout(1 * 1000);
     } else {
       if (isFirstCheck()) {
@@ -161,7 +178,8 @@ async function questionAndAnswer(page, question, answer_idx) {
     }
   }
 
-  return reply;
+  console.log({ result });
+  return result;
 }
 
 function assertKeyWord(to_check, keyword_wanted) {

@@ -11,6 +11,8 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./:/src
       - /run/docker.sock:/run/docker.sock:ro
+      - ./volumes/static-share/_output:/share
+
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong

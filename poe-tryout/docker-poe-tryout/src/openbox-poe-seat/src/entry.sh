@@ -15,4 +15,17 @@ npm i puppeteer-core \
   puppeteer-extra-plugin-adblocker \
   puppeteer-proxy
 
-npm run start
+# npm run start
+
+# export PUPPETEER_PRODUCT=firefox
+# npm install
+
+# npm i puppeteer-core \
+#   express \
+#   dotenv \
+#   puppeteer-extra \
+#   puppeteer-extra-plugin-stealth \
+#   puppeteer-extra-plugin-adblocker \
+#   puppeteer-proxy
+
+npm run dev

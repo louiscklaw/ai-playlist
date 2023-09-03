@@ -18,6 +18,7 @@ const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
 const { myLogger } = require('../../utils/myLogger');
 const { checkInput } = require('./checkInput');
 const { reportOffline } = require('../../utils/reportPoeSeatOffline');
+const { DONE, ERROR } = require('../../constants');
 const { ASK_INIT, ASK_DONE } = require(`${SRC_ROOT}/constants`);
 const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
@@ -26,11 +27,14 @@ router.post('/ask', async (req, res) => {
   var output = {
     state: ASK_INIT,
     input: json_input,
-    error: "",
+    error: '',
     chat_history: { q_and_a: { preprompts: [], history: [] } },
   };
 
   try {
+    console.log(json_input)
+    throw new Error('debug /ask')
+    
     checkInput(json_input);
 
     var { question_list, preprompts } = json_input;
@@ -42,7 +46,7 @@ router.post('/ask', async (req, res) => {
 
     var temp_history = await chatGPTSolver(question_list, preprompts);
     var { state, preprompts, history } = temp_history;
-    if (state != 'done') throw new Error('error during ask ChatGPT');
+    if (state != DONE) throw new Error('error during ask ChatGPT');
 
     output = {
       ...output,
@@ -52,8 +56,8 @@ router.post('/ask', async (req, res) => {
     };
   } catch (error) {
     myLogger.error(JSON.stringify(error));
-    output = { ...output, state: 'error', error: JSON.stringify(error) };
-    reportOffline()
+    output = { ...output, state: ERROR, error: JSON.stringify(error) };
+    reportOffline();
   }
 
   res.send(output);

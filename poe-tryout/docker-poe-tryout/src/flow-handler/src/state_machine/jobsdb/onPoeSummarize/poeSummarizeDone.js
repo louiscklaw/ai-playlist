@@ -20,10 +20,10 @@ module.exports = {
         const job_summary = this.context.chat_history.q_and_a.history[1].answer;
 
         console.log(`TODO: replace ${FLOW_HANDLER_ENDPOINT}`);
-        const url = 'http://flow-handler:3000/jobsdb_draft_email';
-
+        
         const prompts = new SummaryPrompts(job_summary);
-
+        
+        const url = 'http://flow-handler:3000/jobsdb_draft_email';
         var input_to_draft_email = {
           working_dir,
           preprompts: prompts.getSamplePreprompts(),
@@ -32,6 +32,7 @@ module.exports = {
         };
 
         console.log(`TODO: replace ${FLOW_HANDLER_ENDPOINT}`);
+        console.log({input_to_draft_email})
 
         // proceed to summarize
         await fetch(url, {

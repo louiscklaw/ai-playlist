@@ -46,4 +46,4 @@ async function testLanding() {
   return result;
 }
 
-module.exports = {testLanding}
+module.exports = { testLanding };

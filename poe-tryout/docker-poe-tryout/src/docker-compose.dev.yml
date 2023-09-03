@@ -9,21 +9,22 @@ services:
     command: ./entry.sh
 
   diff-handler:
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
   jobsdb-scraper:
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
   flow-handler:
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
   jobsdb-link-extractor:
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
   page-handler:
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
   poe-scheduler-api:
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
 
   # NOTE:
   # openbox-poe-seat1:
-  # NOTE: configure here -> openbox-poe-seat/dockerfopenbox-poe-seat/dockerfiles/final/etc/supervisord-app.confiles/final/etc/supervisord-app.conf
+  # NOTE: configure here -> openbox-poe-seat/dockerfopenbox-poe-seat/dockerfiles/final/etc/supervisord-app.conf
+  # openbox-poe-seat/src/entry.sh
 
 
   # static-share:

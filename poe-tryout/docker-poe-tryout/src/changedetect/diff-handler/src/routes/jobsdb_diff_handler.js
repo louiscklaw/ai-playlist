@@ -97,7 +97,9 @@ router.post('/',async (req, res) => {
       } catch (error) {
         myLogger.error(JSON.stringify(error));
         myLogger.error(JSON.stringify(pl));
+
         console.log(error)
+
         throw new Error(`error during posting to flow-handler`);
       }
     });

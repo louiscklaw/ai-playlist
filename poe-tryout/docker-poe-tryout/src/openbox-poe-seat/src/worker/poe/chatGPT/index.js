@@ -1,5 +1,5 @@
 // const express = require('express');
-const fs = require('fs')
+const fs = require('fs');
 const puppeteer = require('puppeteer-extra');
 
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -19,7 +19,8 @@ const { testLanding } = require('./testLanding');
 const { OUT_OF_QUOTA } = require('./error');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
 const { poeDownAlert } = require('../../../utils/poeDownAlert');
-const {CANONICAL_HOSTNAME}=require('../../../config')
+const { CANONICAL_HOSTNAME } = require('../../../config');
+const { DONE, ERROR } = require('../../../constants');
 
 const {
   initChatGptPage,
@@ -32,7 +33,6 @@ const {
 const { checkIfOutOfQuota } = require(`${UTILS_ROOT}/checkIfOutOfQuota`);
 
 async function chatGPTSolver(question_list, preprompts = []) {
-
   var chat_history = { state: 'INIT', preprompts: [], history: [] };
   var answer_idx = -1;
 
@@ -55,6 +55,8 @@ async function chatGPTSolver(question_list, preprompts = []) {
         answer_idx++;
 
         var answer = await questionAndAnswer(page, question, answer_idx);
+        console.log({ answer });
+
         chat_history.preprompts.push({ question, answer });
 
         // TODO: remove this
@@ -75,18 +77,41 @@ async function chatGPTSolver(question_list, preprompts = []) {
       await gptBotCooldown(getRandomSecond(5, 15), page);
     }
 
-    chat_history = { ...chat_history, state: 'done' };
+    chat_history = { ...chat_history, state: DONE };
 
     await browser.close();
+    
   } catch (error) {
-    chat_history = { ...chat_history, state: 'error', error };
+    chat_history = {
+      ...chat_history,
+      state: ERROR,
+      error: JSON.stringify(error),
+    };
 
-    var md5 = calculateMD5(error)
-    var content = JSON.stringify({question_list, preprompts, error, chat_history})
-    var filename = `/logs/error/openbox-poe-seat/${md5},json`
-    fs.writeFileSync(filename, content, {encoding:'utf8'})
+    var md5 = calculateMD5(error);
+    var content = {
+      question_list,
+      preprompts,
+      error,
+      chat_history,
+    };
 
-    poeDownAlert(CANONICAL_HOSTNAME)
+    var filename = `/logs/error/openbox-poe-seat/${md5}.json`;
+    console.log({ filename });
+
+    fs.writeFileSync(
+      filename,
+      JSON.stringify(
+        {
+          content,
+        },
+        null,
+        2,
+      ),
+      { encoding: 'utf8' },
+    );
+
+    poeDownAlert(CANONICAL_HOSTNAME);
 
     if (browser?.close) await browser.close();
 
