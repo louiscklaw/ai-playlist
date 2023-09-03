@@ -23,7 +23,9 @@ services:
 
   # NOTE:
   # openbox-poe-seat1:
-  # NOTE: configure here -> openbox-poe-seat/dockerfopenbox-poe-seat/dockerfiles/final/etc/supervisord-app.confiles/final/etc/supervisord-app.conf
+  # NOTE: configure here -> 
+  # supervisord -> 
+  # openbox-poe-seat/src/entry.sh
 
 
   # static-share:
