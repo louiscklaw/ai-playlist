@@ -59,6 +59,7 @@ try {
 
   app.use(router);
   
+  app.use('/helloworld', require('./routes/helloworld'));
   app.use('/healthcheck', require('./routes/healthcheck'));
   
   myLogger.info('init dbapi done');
