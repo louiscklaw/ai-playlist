@@ -1,13 +1,16 @@
 services:
   mongo:
+    cpus: 0.2
     image: mongo:latest
+    # build: 
+    #   dockerfile: ./dbapi/Dockerfile.mongo
     # container_name: mongo
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: admin
     #   MONGO_INITDB_ROOT_PASSWORD: admin
+    restart: unless-stopped
     ports:
       - 27017:27017
-    restart: unless-stopped
 
     # TODO:
     # find: ‘./src/volumes/mongo/data/db/diagnostic.data’: Permission denied
@@ -15,8 +18,14 @@ services:
     volumes:
       - ./volumes/mongo/data/db:/data/db
       - ./volumes/mongo/data/configdb:/data/configdb
+    healthcheck:
+        test: echo 'db.stats().ok' | mongosh localhost:27017/test --quiet
+        interval: 10s
+        timeout: 10s
+        retries: 5
 
   mongo-express:
+    cpus: 0.2
     image: mongo-express:latest
     # container_name: mongo-express
     environment:
@@ -27,10 +36,13 @@ services:
     ports:
       - 8081:8081
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+
     restart: unless-stopped
 
   dbapi:
+    cpus: 0.2
     # build: ./dbapi
     image: logickee/poe-tryout-dbapi
     ports:
@@ -38,8 +50,19 @@ services:
     volumes:
       - ./dbapi:/app
       - ./volumes/logs:/logs
+
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+
     environment:
       - PORT=3001
+      
     restart: unless-stopped
+    entrypoint: ./entry.sh
+    env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3001/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 10

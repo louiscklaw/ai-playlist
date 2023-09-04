@@ -1,5 +1,5 @@
 // const express = require('express');
-
+const fs = require('fs');
 const puppeteer = require('puppeteer-extra');
 
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -13,7 +13,14 @@ require('dotenv').config();
 const { UTILS_ROOT } = require('../../../config');
 const { getRandomSecond } = require('../../../utils/getRandomSecond');
 const { getRandomInt } = require('../../../utils/getRandomInt');
+const { gptBotCooldown } = require('./gptBotCooldown');
 const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
+const { testLanding } = require('./testLanding');
+const { OUT_OF_QUOTA } = require('./error');
+const { calculateMD5 } = require('../../../utils/calculateMD5');
+const { poeDownAlert } = require('../../../utils/poeDownAlert');
+const { CANONICAL_HOSTNAME } = require('../../../config');
+const { DONE, ERROR } = require('../../../constants');
 
 const {
   initChatGptPage,
@@ -23,36 +30,11 @@ const {
   checkLoginState,
 } = require(`${UTILS_ROOT}/chatGPT`);
 
-function getNMinutesLater(n_minute = 0) {
-  // Get the current date and time
-  var currentTime = new Date();
-
-  // Add 2 minutes to the current time
-  var futureTime = new Date(currentTime.getTime() + n_minute * 60000);
-
-  // Extract hours and minutes from the future time
-  var hours = futureTime.getHours();
-  var minutes = futureTime.getMinutes();
-
-  // Format hours and minutes with leading zeros if necessary
-  hours = ('0' + hours).slice(-2);
-  minutes = ('0' + minutes).slice(-2);
-
-  // Display the future time in HH:MM format
-  console.log(hours + ':' + minutes);
-}
-
-async function gptBotCooldown(time_s, page) {
-  try {
-    await page.waitForTimeout(time_s * 1000);
-  } catch (error) {
-    console.log('error during gptBotCooldown');
-    throw error;
-  }
-}
+const { checkIfOutOfQuota } = require(`${UTILS_ROOT}/checkIfOutOfQuota`);
 
 async function chatGPTSolver(question_list, preprompts = []) {
-  var chat_history = { preprompts: [], history: [] };
+
+  var chat_history = { state: 'INIT', preprompts: [], history: [] };
   var answer_idx = -1;
 
   const browser = await initBrowser();
@@ -61,15 +43,21 @@ async function chatGPTSolver(question_list, preprompts = []) {
   try {
     await initChatGptPage(page);
     await checkLoginState(page);
+
+    await checkIfOutOfQuota(page);
+
     await clearChatHistory(page);
     await clearModalBox(page);
 
+    // TODO: need to handle "message cannot send"
     if (preprompts.length > 0) {
       for (var i = 0; i < preprompts.length; i++) {
         var question = preprompts[i];
         answer_idx++;
 
         var answer = await questionAndAnswer(page, question, answer_idx);
+        console.log({ answer });
+
         chat_history.preprompts.push({ question, answer });
 
         // TODO: remove this
@@ -90,36 +78,27 @@ async function chatGPTSolver(question_list, preprompts = []) {
       await gptBotCooldown(getRandomSecond(5, 15), page);
     }
 
+    chat_history = { ...chat_history, state: 'done' };
+
     await browser.close();
   } catch (error) {
-    throw error;
-  } finally {
+    chat_history = { ...chat_history, state: 'error', error };
+
+    var md5 = calculateMD5(error)
+    var content = JSON.stringify({question_list, preprompts, error, chat_history})
+    var filename = `/logs/error/openbox-poe-seat/${md5},json`
+    fs.writeFileSync(filename, content, {encoding:'utf8'})
+
+    poeDownAlert(CANONICAL_HOSTNAME)
+
     if (browser?.close) await browser.close();
+
+    throw error;
   }
+
+  if (browser?.close) await browser.close();
 
   return chat_history;
-}
-
-async function testLanding() {
-  var result = { status: 'done' };
-
-  const browser = await initBrowser();
-  const page = (await browser.pages())[0];
-
-  try {
-    await initChatGptPage(page);
-    await checkLoginState(page);
-    await clearChatHistory(page);
-    await clearModalBox(page);
-
-    await page.waitForTimeout(10 * 1000);
-  } catch (error) {
-    throw error;
-  } finally {
-    await browser.close();
-  }
-
-  return result;
 }
 
 module.exports = {

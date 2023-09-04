@@ -65,7 +65,7 @@ module.exports = Queue => {
   Queue.on('schedule error', function (error) {
     //handle all scheduling errors here
     console.log(error);
-    myLogger.info('blablabla');
+    myLogger.error('schedule error');
   });
 
   //listen on success scheduling

@@ -12,7 +12,10 @@ const PORT = 3000;
 
 try {
   app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
+
   app.use('/helloworld', require('./routes/helloworld'));
+
+  app.use('/healthcheck', require('./routes/healthcheck'));
 
   myLogger.info('jobsdb-link-extractor start');
 
@@ -21,5 +24,5 @@ try {
     myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  myLogger.error('%o', error);
+  myLogger.error(JSON.stringify(error));
 }

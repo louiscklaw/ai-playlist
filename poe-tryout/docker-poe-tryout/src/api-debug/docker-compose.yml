@@ -1,8 +1,9 @@
 services:
   api-debug:
     build: ./api-debug
+    cpus: 0.2
     # image: ubuntu:latest
-    command: ./dev.sh
+    entrypoint: ./dev.sh
     # command: sleep infinity
     volumes:
       - ./api-debug/src:/app
@@ -11,3 +12,8 @@ services:
     working_dir: /app
     ports:
       - 3051:3000
+    depends_on:
+      - redis
+      - mongo
+
+    env_file: ./.env

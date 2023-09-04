@@ -1,7 +1,9 @@
 services:
   bait:
+    cpus: 0.2
     # build: ./bait
-    image: logickee/poe-tryout-bait 
+    image: 192.168.10.61:5000/poe-tryout-bait 
+    # image: logickee/poe-tryout-bait 
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - "./bait/src:/app"
@@ -12,3 +14,4 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+    env_file: ./.env

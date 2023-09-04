@@ -31,11 +31,12 @@ try {
   app.use('/jobsdb_flow', require('./routes/jobsdb_flow'));
 
   app.use('/helloworld', require('./routes/helloworld'));
+  app.use('/healthcheck', require('./routes/healthcheck'));
 
   // Start the server
   app.listen(PORT, () => {
     myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log(error);
+  myLogger.error(JSON.stringify(error));
 }

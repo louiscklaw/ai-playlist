@@ -1,41 +1,67 @@
 volumes:
   changedetection_data:
+  diff_handler_redis:
 
 services:
   # NOTE: phrase out
   diff-handler:
+    cpus: 0.2
     # build: ./changedetect/diff-handler
-    image: logickee/poe-tryout-diff-handler
+    image: 192.168.10.61:5000/poe-tryout-diff-handler
+    # image: logickee/poe-tryout-diff-handler
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/diff-handler/src:/app
       - ./volumes/changedetect/diff-handler:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3052:3000
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+      - REDIS_ENDPOINT_URI=redis://diff-handler-redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    # depends_on:
+    #   jobsdb-scraper:
+    #     condition: service_healthy
+    env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
 
   jobsdb-scraper:
+    cpus: 0.2
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/scraper/jobsdb/src:/app
       - ./volumes/changedetect/jobsdb-scraper:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3054:3000
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+    env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
 
   changedetection:
+    cpus: 0.2
     image: ghcr.io/dgtlmoon/changedetection.io
     # container_name: changedetection
     # hostname: changedetection
@@ -59,7 +85,7 @@ services:
 
     # Comment out ports: when using behind a reverse proxy , enable networks: etc.
     ports:
-      - 5000:5000
+      - 55000:5000
     restart: unless-stopped
 
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
@@ -67,8 +93,13 @@ services:
     depends_on:
       changedetection-chrome:
         condition: service_started
+      diff-handler:
+        condition: service_healthy
+      jobsdb-scraper:
+        condition: service_healthy
 
   changedetection-chrome:
+    cpus: 1
     #  hostname: changedetection-chrome
     image: browserless/chrome
     shm_size: '1gb'
@@ -91,3 +122,21 @@ services:
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+
+  diff-handler-redis:
+    cpus: 0.5
+    image: 192.168.10.61:5000/redis:6.0.20
+    hostname: diff-handler-redis
+    volumes: 
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      - diff_handler_redis:/data
+    command: redis-server --save 5 1 --loglevel warning --dir /data --requirepass ${REDIS_PASSWORD}
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Hong_Kong
+      - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5

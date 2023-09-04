@@ -1,5 +1,6 @@
 services:
   static-share:
+    cpus: 0.2
     # build: ./static-share
     image: logickee/poe-tryout-static-share
     volumes:
@@ -12,4 +13,4 @@ services:
       - 8080:8080
     user: 1000:1000
     restart: unless-stopped
-    
+    env_file: ./.env

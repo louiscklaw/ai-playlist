@@ -1,6 +1,7 @@
 'use strict';
 const path = require('path');
 const fetch = require('node-fetch');
+const fs = require('fs');
 
 const { gpt_endpoint, getRandomOpenboxHost, JOBPOST_ENDPOINT } = require('../constants');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
@@ -65,6 +66,7 @@ function initQueue(Queue) {
           headers: { 'Content-Type': 'application/json' },
         });
         var result_cb_json = await result_cb_url.json();
+        await fs.writeFileSync('/share/hello_poe.json', JSON.stringify(result_cb_json),{encoding:'utf8'})
       } else {
         myLogger.info('%o', { chatgpt_summarize_result_json });
         const { chat_history } = chatgpt_summarize_result_json;
@@ -72,24 +74,8 @@ function initQueue(Queue) {
         myLogger.info('no callback url provided, showing here');
       }
 
-      // TODO: remove me ??
       // // NOTE: asking should be completed before this line
-      // myLogger.info('calling done url', url_after_done);
-      // var done_result = await fetch(url_after_done, {
-      //   method: 'post',
-      //   body: JSON.stringify(chatgpt_summarize_result_json),
-      //   headers: { 'Content-Type': 'application/json' },
-      // });
-      // var done_result_json = await done_result.json();
-      // myLogger.info("%o", { done_result_json });
-
-      // console.log(chatgpt_summarize_result_json);
-      // var update_job_state_payload = await writeOutputToDirectory(new_job_post_id, chatgpt_summarize_result_json);
-
-      // // NOTE: do long running task by this request ?
-      // console.log(update_job_state_payload);
-      // var res_json = await writeOutputToDB(new_job_post_id, update_job_state_payload);
-
+      
       // // NOTE: successful ask, cool down bot for slething
 
       await mySleepM(1);

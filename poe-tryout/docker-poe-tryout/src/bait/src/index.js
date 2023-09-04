@@ -5,9 +5,13 @@ const PORT = 8080;
 const express = require('express');
 const bodyParser = require('body-parser');
 const { getRandomInt } = require('./utils/getRandomInt');
+// const { sayHelloworldblablabla } = require('./utils/helloworld/blablabla/test');
+// const { sayHelloworldblablabla } = require('./utils/helloworld/blablabla/test');
+
 const app = express();
 
 try {
+  // sayHelloworldblablabla()
   app.use(bodyParser.json());
   app.use(express.static('public'));
 
@@ -25,6 +29,6 @@ try {
 
   // app.use('/postCbHelloworld', require('./routes/postCbHelloworld'));
 } catch (error) {
-  console.log('error during init');
+  console.log('error during init 111');
   console.log(error);
 }

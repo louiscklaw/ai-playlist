@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  try {
-    res.send('Hello, World!');
-  } catch (error) {}
+  res.send('poe-scheduler-api, Hello World!');
 });
 
 module.exports = router;
