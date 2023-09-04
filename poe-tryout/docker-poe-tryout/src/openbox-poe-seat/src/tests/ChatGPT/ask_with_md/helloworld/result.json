@@ -1,20 +1,25 @@
 {
   "state": "ASK_DONE",
-  "input": { "question_list": ["say 'hello 1' to me"] },
+  "input": {
+    "question_list": [
+      "draft me a \"#\" exampe in markdown, just show the markdown content is OK."
+    ]
+  },
   "error": "",
   "chat_history": {
     "q_and_a": {
       "preprompts": [],
       "history": [
         {
-          "question": "say 'hello 1' to me",
-          "answer": {
-            "reply": "Hello 1! How can I assist you today?",
-            "md_reply": []
-          }
+          "question": "draft me a \"#\" exampe in markdown, just show the markdown content is OK.",
+          "answer": "Certainly! Here's an example of a Markdown file with a heading using the \"#\" symbol:\napplescript Copy# Heading 1\n\nThis is some text under the heading.\n\n## Heading 2\n\nThis is some more text under the second heading.\n\n### Heading 3\n\nAnd here's another level of heading.\n\n#### Heading 4\n\nHeading 4 is smaller than Heading 3.\n\n##### Heading 5\n\nHeading 5 is even smaller.\n\n###### Heading 6\n\nHeading 6 is the smallest.\n\n\nIn Markdown, the \"#\" symbol is used to denote headings. The number of \"#\" symbols determines the level of the heading, with one \"#\" for Heading 1, two \"##\" for Heading 2, and so on. The text following the \"#\" symbol is the content of the heading."
         }
       ]
     }
   },
-  "json_input": { "question_list": ["say 'hello 1' to me"] }
+  "json_input": {
+    "question_list": [
+      "draft me a \"#\" exampe in markdown, just show the markdown content is OK."
+    ]
+  }
 }
