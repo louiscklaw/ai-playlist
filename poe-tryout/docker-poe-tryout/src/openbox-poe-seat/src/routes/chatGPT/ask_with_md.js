@@ -5,8 +5,8 @@
 // const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 // puppeteer.use(StealthPlugin());
 // require('dotenv').config();
+// const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
 
-const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
 const { myLogger } = require('../../utils/myLogger');
 const { checkInput } = require('./checkInput');
 const { reportOffline } = require('../../utils/reportPoeSeatOffline');
