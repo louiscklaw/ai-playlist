@@ -62,9 +62,9 @@ const chalk = require('chalk');
     response = await fetch(`http://openbox-poe-seat1:3000/helloworld`);
     res_text = await response.text();
     if (res_text == 'openbox-poe-seat, Hello World!') {
-        console.log('openbox-poe-seat'.padEnd(30,' ') + chalk.green('PASS !'));
+        console.log('openbox-poe-seat1'.padEnd(30,' ') + chalk.green('PASS !'));
     }else {
-        console.log('openbox-poe-seat'.padEnd(30,' ') + chalk.red('FAILED !'));
+        console.log('openbox-poe-seat1'.padEnd(30,' ') + chalk.red('FAILED !'));
     }
 
 })();
