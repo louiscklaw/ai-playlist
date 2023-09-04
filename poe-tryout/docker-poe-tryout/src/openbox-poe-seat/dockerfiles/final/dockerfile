@@ -4,8 +4,9 @@ ARG ANDROID_API_LEVEL=25
 ENV ANDROID_API_LEVEL ${ANDROID_API_LEVEL}
 
 COPY ./etc/ /etc/
-ADD ./etc/run_supervisord.sh /etc/run_supervisord.sh
-RUN chmod +x /etc/run_supervisord.sh
+
+ADD ./etc/run.sh /etc/run.sh
+RUN chmod +x /etc/run.sh
 
 # WORKDIR /root
 
@@ -46,4 +47,4 @@ RUN mkdir -p /installed &&  touch /installed/final_done
 
 USER 1000
 
-CMD ["/etc/run_supervisord.sh"]
+CMD ["/etc/run.sh"]

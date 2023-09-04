@@ -2,15 +2,12 @@ const fetch = require('node-fetch');
 
 const { myLogger } = require('../../utils/myLogger');
 
-// var message = `
-// 🔔🔔🔔 job done  🔔🔔🔔
-// job url: ${meta_json.jobsdb_job_url}
-// job working_dir: ${working_dir} :
-
-// \`\`\`javascript
-// ${JSON.stringify({ companyName, jobAddress, jobTitle }, null, 2)}
-// \`\`\`
-// `.trim();
+const body = {
+  jobs_id: 'blablabla',
+  job_post: 'we are employing a teacher',
+  preprompts: ['we are employing a teacher, understand ?'],
+  question_list: ['what is the post employing?'],
+};
 
 Array(1)
   .fill(0)

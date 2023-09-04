@@ -13,7 +13,6 @@ function fetchPost(url, json_body) {
 }
 
 async function postResult(url, json_body) {
-  myLogger.info(`postResult: ${url}`)
   return fetchPost(url, json_body);
 }
 

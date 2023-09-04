@@ -41,7 +41,7 @@ async function solverHelloworld(question_list, jobs_id) {
     headless: false,
     executablePath: '/usr/bin/firefox',
     userDataDir: FIREFOX_DATA_DIR,
- //   slowMo: 1,
+    slowMo: 1,
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,

@@ -8,7 +8,7 @@ const { Queue } = require('../queue');
 const { myLogger } = require('../utils/myLogger');
 
 router.post('/', async (req, res) => {
-  var output = { state: STATE_INIT, debug: {}, error: "" };
+  var output = { state: STATE_INIT, debug: {}, error: {} };
   var err_msg = {};
 
   try {
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     // output.state = 'error';
     // output.error = error;
 
-    output = { ...output, state: ERROR_ADDING_QUEUE, error: JSON.stringify(error) };
+    output = { ...output, state: ERROR_ADDING_QUEUE, error: error.message };
   }
 
   res.send(output);

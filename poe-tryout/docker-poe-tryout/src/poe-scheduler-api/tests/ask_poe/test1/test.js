@@ -18,5 +18,5 @@ Array(1)
     });
 
     const res_json = await response.json();
-    myLogger.info( JSON.stringify({ res_json }));
+    myLogger.info('%o', { res_json });
   });

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { jobsFoundMachine } = require('../state_machine/jobsdb/jobsdbMachine');
-const { myLogger } = require('../utils/myLogger');
 
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', extract_result: {}, debug: {}, error: {} };
@@ -16,7 +15,7 @@ router.post('/', async (req, res) => {
 
     output = { ...output, state: 'scheduled' };
   } catch (error) {
-    myLogger.error('%o', { error });
+    console.log(error);
     output = { ...output, state: 'error', error };
   }
 

@@ -1,7 +1,6 @@
 'use strict';
 
 const { getRandomInt } = require('./utils/getRandomInt');
-const { myLogger } = require('./utils/myLogger');
 
 // const gpt_endpoint = 'http://openbox-poe-seat1:3000';
 

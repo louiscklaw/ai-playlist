@@ -4,7 +4,6 @@ networks:
 
 services:
   test:
-    cpus: 0.2
     image: node:latest
     command: sleep infinity
     working_dir: /src
@@ -12,19 +11,10 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./:/src
       - /run/docker.sock:/run/docker.sock:ro
-      - ./volumes/static-share/_output:/share
-
     restart: unless-stopped
+    env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
-      - REDIS_ENDPOINT_URI=redis://diff-handler-redis:6379
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-    env_file: ./.env
-
-  busybox: 
-    image: busybox 
-    command: sleep infinity
-
   #   build: ./docker-ubuntu2
   # ubuntu3:
   #   build: ./docker-ubuntu3

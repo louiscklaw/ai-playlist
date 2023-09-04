@@ -5,29 +5,21 @@ services:
 
   api-debug:
     command: ./entry.sh
-
   dbapi:
-    command: ./dev.sh
-
+    command: ./entry.sh
   diff-handler:
-    entrypoint: ./dev.sh
+    command: ./entry.sh
   jobsdb-scraper:
-    entrypoint: ./dev.sh
+    # command: sleep infinity
+    command: ./entry.sh
   flow-handler:
-    entrypoint: ./dev.sh
+    command: ./entry.sh
   jobsdb-link-extractor:
-    entrypoint: ./dev.sh
+    command: ./entry.sh
   page-handler:
-    entrypoint: ./dev.sh
+    command: ./entry.sh
   poe-scheduler-api:
-    entrypoint: ./dev.sh
-
-  # NOTE:
-  # openbox-poe-seat1:
-  # NOTE: configure here -> 
-  # supervisord -> 
-  # openbox-poe-seat/src/entry.sh
-
+    command: ./dev.sh
 
   # static-share:
   #   command: ./dev.sh

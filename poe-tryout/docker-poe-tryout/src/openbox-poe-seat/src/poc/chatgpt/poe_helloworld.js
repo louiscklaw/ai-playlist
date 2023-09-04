@@ -12,7 +12,7 @@ const { FIREFOX_DATA_DIR } = process.env;
     headless: false,
     executablePath: '/usr/bin/firefox',
     userDataDir: FIREFOX_DATA_DIR,
-    // slowMo: 1,
+    slowMo: true,
   });
   const page = await browser.newPage();
 

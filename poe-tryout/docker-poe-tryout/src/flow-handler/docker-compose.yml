@@ -1,10 +1,8 @@
 services:
   flow-handler:
-    cpus: 0.2
     # build: ./flow-handler
-    image: 192.168.10.61:5000/poe-tryout-flow-handler
-    # image: logickee/poe-tryout-flow-handler
-    entrypoint: ./entry.sh
+    image: logickee/poe-tryout-flow-handler
+    command: ./entry.sh
     # command: sleep infinity
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
@@ -17,23 +15,16 @@ services:
       # - ./volumes/flow-handler/screenshot:/share/screenshot
     working_dir: /app
 
+    # TODO:
+    # depends_on:
+    #   - mongo
+    depends_on:
+      poe-scheduler-api:
+        condition: service_started
+      link-extractor-chrome:
+        condition: service_started
     ports:
       - 3005:3000
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
-    env_file: ./.env
-
-    healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
-      interval: 10s
-      timeout: 10s
-      retries: 5
-
-    depends_on:
-      poe-scheduler-api:
-        condition: service_healthy
-      jobsdb-link-extractor:
-        condition: service_healthy
-      page-handler:
-        condition: service_healthy

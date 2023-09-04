@@ -7,9 +7,6 @@ module.exports = mongoose.model(
       level: { type: String, required: true },
       comment: { type: String },
     },
-    {
-      collection: 'visited-link',
-      timestamps: true,
-    },
+    { timestamps: true },
   ),
 );

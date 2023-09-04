@@ -1,10 +1,8 @@
 services:
   jobsdb-link-extractor:
-    cpus: 0.2
     # build: ./jobsdb-link-extractor
-    image: 192.168.10.61:5000/poe-tryout-jobsdb-link-extractor
-    # image: logickee/poe-tryout-jobsdb-link-extractor
-    entrypoint: ./entry.sh
+    image: logickee/poe-tryout-jobsdb-link-extractor
+    command: ./entry.sh
     # command: sleep infinity
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
@@ -14,23 +12,17 @@ services:
       - ./volumes/jobsdb-link-extractor:/share
       - ./volumes/logs:/logs
     working_dir: /app
+    depends_on:
+      link-extractor-chrome:
+        condition: service_started
     ports:
       - 3003:3000
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=jobsdb-link-extractor
-    env_file: ./.env
-    healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
-      interval: 10s
-      timeout: 10s
-      retries: 10
-    depends_on:
-      - link-extractor-chrome
 
   link-extractor-chrome:
-    cpus: 1
     image: browserless/chrome
     shm_size: '1gb'
     restart: unless-stopped

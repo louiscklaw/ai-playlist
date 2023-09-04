@@ -3,10 +3,7 @@
 const ASK_DONE = 'ASK_DONE';
 const NO_QUESTION_FOUND = 'no question found';
 const QUESTION_LIST_NOT_FOUND = 'question list not found';
-const ASK_INIT = 'ASK_INIT';
-
-const DONE = 'DONE';
-const ERROR = 'ERROR';
+const ASK_INIT = 'ask_init';
 
 const BROWSER_STEALTH_CHECK_OK = 'BROWSER_STEALTH_CHECK_OK';
 const BROWSER_STEALTH_CHECK_FAIL = 'BROWSER_STEALTH_CHECK_FAIL';
@@ -20,6 +17,4 @@ module.exports = {
   BROWSER_STEALTH_CHECK_OK,
   BROWSER_STEALTH_CHECK_FAIL,
   BROWSER_STEALTH_CHECK_INIT,
-  DONE,
-  ERROR,
 };

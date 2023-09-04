@@ -5,14 +5,12 @@ const express = require('express');
 const router = express.Router();
 
 const { getAddedLink } = require('../util/getAddedLink');
-const { FLOW_HANDLER_ENDPOINT } = require('../config');
 
 function getPayloadToFlowHandlerJson(diff_link) {
-  
   try {
     return {
       jobsdb_job_url: `https://hk.jobsdb.com/${diff_link}`,
-      callback_url: `${FLOW_HANDLER_ENDPOINT}/jobsdb_link_extract_cb`,
+      callback_url: 'http://flow-handler:3000/jobsdb_link_extract_cb',
     };
   } catch (error) {
     console.log(error);
@@ -21,7 +19,7 @@ function getPayloadToFlowHandlerJson(diff_link) {
 }
 
 router.post('/', (req, res) => {
-  var output = { state: 'init', debug: {}, error: "" };
+  var output = { state: 'init', debug: {}, error: {} };
 
   try {
     var req_body = req.body;
@@ -47,7 +45,7 @@ router.post('/', (req, res) => {
   } catch (error) {
     console.log('error occur in diff-handler');
     console.log(error);
-    output = { ...output, state: 'error', error: JSON.stringify(error) };
+    output = { ...output, state: 'error', error: error.message };
   }
 
   res.send(output);

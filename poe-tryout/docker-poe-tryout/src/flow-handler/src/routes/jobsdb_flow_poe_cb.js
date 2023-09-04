@@ -6,7 +6,7 @@ const { jobsdbPoeCallack } = require('../state_machine/jobsdb/jobsdbMachine');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  var output = { state: 'init', debug: { input: {} }, error: "" };
+  var output = { state: 'init', debug: { input: {} }, error: {} };
   var req_body = req.body;
   output.debug = { input: req_body };
   console.log({ req_body });
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     // output.state = 'error';
     // output.error = error;
 
-    output = { ...output, state: 'error', error: JSON.stringify(error) };
+    output = { ...output, state: 'error', error: error.message };
   }
 
   res.send(output);

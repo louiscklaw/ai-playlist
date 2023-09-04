@@ -26,9 +26,6 @@ module.exports = mongoose.model(
         },
       },
     },
-    {
-      collection: 'job-post',
-      timestamps: true,
-    },
+    { timestamps: true },
   ),
 );

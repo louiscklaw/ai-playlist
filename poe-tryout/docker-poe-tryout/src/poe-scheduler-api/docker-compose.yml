@@ -1,12 +1,7 @@
-volumes:
-  redis_data:
-  
 services:
   poe-scheduler-api:
-    cpus: 0.2
     # build: ./poe-scheduler-api
-    image: 192.168.10.61:5000/poe-tryout-poe-scheduler-api
-    # image: logickee/poe-tryout-poe-scheduler-api
+    image: logickee/poe-tryout-poe-scheduler-api
     ports:
       - 3002:3002
     volumes:
@@ -14,43 +9,16 @@ services:
       - ./poe-scheduler-api/:/app
       - ./volumes/static-share:/share
       - ./volumes/logs:/logs
-    env_file: ./.env
 
+    # TODO:
+    # depends_on:
+    #   - mongo
+    depends_on:
+      - redis
     working_dir: /app
     restart: unless-stopped
-    entrypoint: ./entry.sh
+    entrypoint: ./dev.sh
+    env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=poe-scheduler-api
-
-    depends_on:
-      redis:
-        condition: service_healthy      
-    healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3002/healthcheck']
-      interval: 10s
-      timeout: 10s
-      retries: 5
-
-  redis:
-    cpus: 0.5
-    image: 192.168.10.61:5000/redis:6.0.20
-    hostname: redis
-    # expose:
-    #   - 6379
-    ports:
-      - 16379:6379
-    volumes: 
-      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-      - redis_data:/data
-    command: redis-server --save 5 1 --loglevel warning --dir /data
-    restart: unless-stopped
-    environment:
-      - TZ=Asia/Hong_Kong
-      - ALLOW_EMPTY_PASSWORD=yes
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      

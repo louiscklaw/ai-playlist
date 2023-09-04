@@ -12,7 +12,6 @@ try {
   // app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
   app.use('/post_helloworld', require('./routes/post_helloworld'));
   app.use('/helloworld', require('./routes/helloworld'));
-  app.use('/healthcheck', require('./routes/healthcheck'));
 
   myLogger.info('api-debug started');
   myLogger.info('%o', { hello: 'world' });

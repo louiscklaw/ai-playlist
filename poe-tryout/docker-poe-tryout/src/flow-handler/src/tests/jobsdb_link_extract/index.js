@@ -5,16 +5,15 @@ const fetch = require('node-fetch');
 // jobsdb_job_url: `https://hk.jobsdb.com/hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402`,
 // /hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402
 
-// '/hk/en/job/aml-manager-model-validation-100003010515017',
-// '/hk/en/job/aml-manager-model-validation-data-analytics-100003010541477',
-// '/hk/en/job/assistant-qc-supervisor-senior-qc-technician-ref.-no.%3Aaqcs-sqct-08-2023-100003010507061',
-// '/hk/en/job/assistant-vice-president-credit-risk-modeling-analytics-100003010513389',
-// '/hk/en/job/technical-officer-100003010512160',
-// '/hk/en/job/validation-assistant-100003010526705',
-// '/hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402',
-
 const link_list = [
   '/hk/en/job/validation-engineer-qa-100003010527848',
+  '/hk/en/job/aml-manager-model-validation-100003010515017',
+  '/hk/en/job/aml-manager-model-validation-data-analytics-100003010541477',
+  '/hk/en/job/assistant-qc-supervisor-senior-qc-technician-ref.-no.%3Aaqcs-sqct-08-2023-100003010507061',
+  '/hk/en/job/assistant-vice-president-credit-risk-modeling-analytics-100003010513389',
+  '/hk/en/job/technical-officer-100003010512160',
+  '/hk/en/job/validation-assistant-100003010526705',
+  '/hk/en/job/actuarial-intern-valuation-2024-jan-jun-100003010532402',
 ];
 
 const payload_1 = {

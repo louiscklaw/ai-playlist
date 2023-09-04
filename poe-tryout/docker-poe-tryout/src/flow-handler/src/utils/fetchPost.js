@@ -1,8 +1,7 @@
 const fetch = require('node-fetch');
-const { myLogger } = require('./myLogger');
 
 function fetchPost(url, json_body) {
-  myLogger.info('fetchPost ' + url + ' ... ');
+  console.log('fetchPost ' + url + ' ... ');
 
   return fetch(url, {
     method: 'POST',

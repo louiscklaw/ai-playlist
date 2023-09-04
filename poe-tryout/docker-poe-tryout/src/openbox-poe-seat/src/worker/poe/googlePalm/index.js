@@ -13,8 +13,6 @@ require('dotenv').config();
 const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../../config');
-const { myLogger } = require('../../../utils/myLogger');
-const { calculateMD5 } = require('../../../utils/calculateMD5');
 const { newChat, appendChat } = require(`${UTILS_ROOT}/chatHistory`);
 
 const {
@@ -44,8 +42,7 @@ async function googlePalmSolver(question_list, jobs_id) {
   const page = (await browser.pages())[0];
 
   try {
-    myLogger.info("%o",question_list);
-
+    console.log(question_list);
     await initGooglePaLMPage(page);
     await clearChatHistory(page);
     await clearModalBox(page);
@@ -61,19 +58,11 @@ async function googlePalmSolver(question_list, jobs_id) {
     await page.waitForTimeout(10 * 1000);
     await page.screenshot({ path: '/share/chrome_googlePalm_result.png', fullPage: true });
   } catch (error) {
-    chat_history = { ...chat_history, state: 'error', error };
-
-    var md5 = calculateMD5(error)
-    var content = JSON.stringify({question_list, preprompts, error, chat_history})
-    var filename = `/logs/error/openbox-poe-seat/${md5},json`
-    fs.writeFileSync(filename, content, {encoding:'utf8'})
-
-    if (browser?.close) await browser.close();
-
-    throw error;
-  } 
-  
-  if (browser?.close) await browser.close();
+    console.log(error);
+  } finally {
+    await page.close();
+    await browser.close();
+  }
 
   return chat_history;
 }

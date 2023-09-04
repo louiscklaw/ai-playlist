@@ -2,9 +2,9 @@ const fs = require('fs');
 
 async function createDirIfNotExists(chatgpt_output_filename) {
   try {
-    await fs.mkdirSync(chatgpt_output_filename, {recursive: true});
+    await fs.mkdirSync(chatgpt_output_filename);
   } catch (error) {
-    myLogger.warn(`${chatgpt_output_filename} already exists`);
+    myLogger.info(`${chatgpt_output_filename} already exists`);
   }
 }
 

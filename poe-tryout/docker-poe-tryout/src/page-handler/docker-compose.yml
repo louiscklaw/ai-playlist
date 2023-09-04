@@ -1,10 +1,8 @@
 services:
   page-handler:
-    cpus: 0.2
     # build: ./page-handler
-    image: 192.168.10.61:5000/poe-tryout-page-handler
-    # image: logickee/poe-tryout-page-handler
-    entrypoint: ./entry.sh
+    image: logickee/poe-tryout-page-handler
+    command: ./entry.sh
     # command: sleep infinity
     volumes:
       - ./page-handler/src:/app
@@ -14,13 +12,7 @@ services:
     ports:
       - 3061:3000
     restart: unless-stopped
+    env_file: ./.env
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=page-handler
-    env_file: ./.env
-    
-    healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
-      interval: 10s
-      timeout: 10s
-      retries: 10

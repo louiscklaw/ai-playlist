@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -x
 
 # TODO: resume me
 # docker image rm -f logickee/openbox-poe-seat-base

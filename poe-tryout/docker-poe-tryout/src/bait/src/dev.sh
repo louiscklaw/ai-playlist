@@ -2,6 +2,6 @@
 
 set -ex
 
-npm i -D
+npm i 
 
 npm run dev

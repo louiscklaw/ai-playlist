@@ -4,4 +4,4 @@ WORKDIR /app
 
 USER 1000:1000
 
-ENTRYPOINT ["./entry.sh"]
+# ENTRYPOINT ["./entry.sh"]
