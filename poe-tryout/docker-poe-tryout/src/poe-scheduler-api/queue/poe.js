@@ -10,22 +10,9 @@ const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
 const { mySleep } = require('../utils/mySleep');
 const { mySleepM } = require('../utils/mySleepM');
 const { myLogger } = require('../utils/myLogger');
+const { getRandomPoeEndpoint } = require('./getRandomPoeEndpoint');
 
 myLogger.info('poe Queue init');
-
-function getRandomPoeEndpoint() {
-  try {
-    // http://openbox-poe-seat1:3000
-    var random_openbox_host = getRandomOpenboxHost();
-    const gpt_endpoint = `http://${random_openbox_host}:3000`;
-
-    return { random_openbox_host, gpt_endpoint };
-  } catch (error) {
-    myLogger.info('error geting random poe endpoint, return default poe-seat');
-    console.log(error);
-    return 'http://openbox-poe-seat1:3000';
-  }
-}
 
 var queue_inactive_count = 0;
 function getInactiveCount() {
