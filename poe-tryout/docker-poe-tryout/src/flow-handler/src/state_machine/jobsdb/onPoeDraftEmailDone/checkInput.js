@@ -32,10 +32,11 @@ function checkInput(in_o) {
     output = { ...output, state: 'error', error: JSON.stringify(error) };
     console.error(JSON.stringify(error));
 
-      createDirIfNotExists(ERROR_LOG_DIR);
+    createDirIfNotExists(ERROR_LOG_DIR);
 
-      var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
-      fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
+    var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+    fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
+    myLogger.error(filename);
 
     console.error(JSON.stringify(output));
 

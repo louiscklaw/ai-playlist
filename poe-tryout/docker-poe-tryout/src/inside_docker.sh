@@ -2,15 +2,63 @@
 
 set -ex
 
+# pushd flow-handler/src/tests/jobsdb_flow_summarize_cb
+  # node index.js
+  # node test1.js
+  # node test2.js
+# popd
+
+
+pushd flow-handler/src/tests/jobsdb_draft_email
+  # node index.js
+  # node test1.js
+  node test2.js
+popd
+
+
+# pushd flow-handler/src/tests/state_machine/jobsdb/onReportJobComplete/getJobInfo
+#   node index.js
+#   # node test1.js
+#   # node test2.js
+# popd
+
+
+# pushd flow-handler/src/tests/utils/loadJson
+#   node index.js
+# popd
+
+# pushd flow-handler/src/tests/jobsdb_draft_email_cb
+  # node index.js
+  # node test1.js
+  # node test2.js
+# popd
+
 # openbox-poe-seat
 # pushd openbox-poe-seat/src/tests/poeDownAlert
 #   node ./index.js
 # popd
 
-pushd dbapi/tests/VisitedLink
-  node ./clearall.js
-  node ./addLink.js
-popd
+# flow-handler/src/tests/state_machine/jobsdb/onPoeDraftEmailDone
+
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
+#   ./test.sh
+#   npx prettier --write .
+# popd
+
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_markdown_example
+#   ./test.sh
+#   npx prettier --write .
+# popd
+
+# pushd flow-handler/src/tests/state_machine/jobsdb/onPoeDraftEmailDone/writeEmail
+#   npx nodemon ./test.js
+# popd
+
+
+# pushd dbapi/tests/VisitedLink
+#   node ./clearall.js
+#   node ./addLink.js
+# popd
 
 
 # pushd dbapi/tests/PoeSeatStatus
@@ -40,7 +88,7 @@ popd
 #   node ./index.js
 # popd
 
-# pushd /src/changedetect/diff-handler/src/tests/jobsdb_diff_handler/test3
+# pushd changedetect/diff-handler/src/tests/jobsdb_diff_handler/test3
 #   node helloworld.js
 # popd
 
@@ -63,6 +111,7 @@ popd
 # pushd /src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test2
   # node index.js
 # popd
+
 # pushd /src/jobsdb-link-extractor/src/tests/jobsdbPostExtract/test2
 #   node index.js
 # popd

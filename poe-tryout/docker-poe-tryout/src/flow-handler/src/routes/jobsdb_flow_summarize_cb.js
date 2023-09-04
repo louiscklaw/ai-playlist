@@ -12,6 +12,7 @@ const { calculateMD5 } = require('../utils/calculateMD5');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 const router = express.Router();
 
+// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: {} };
   var req_body = req.body;
@@ -20,9 +21,9 @@ router.post('/', async (req, res) => {
   var { working_dir } = req.body;
   myLogger.info(working_dir);
   if (!working_dir) {
-    myLogger.warn('self testing ? working_dir undefined')
-    working_dir = `/share/testing`
-    myLogger.warn(`fallback to default working_dir ${working_dir}`)
+    myLogger.warn('self testing ? working_dir undefined');
+    working_dir = `/share/testing`;
+    myLogger.warn(`fallback to default working_dir ${working_dir}`);
   }
 
   try {
@@ -41,8 +42,9 @@ router.post('/', async (req, res) => {
     // output.state = 'success';
     output = { ...output, state: 'success' };
   } catch (error) {
-    myLogger.error("%o",{ error });
-    output = { ...output, state: 'error', error:JSON.stringify(error) };
+    myLogger.error(JSON.stringify(error));
+
+    output = { ...output, state: 'error', error: JSON.stringify(error) };
 
     await createDirIfNotExists(ERROR_LOG_DIR);
     var filename = `${ERROR_LOG_DIR}/jobsdb_flow_summarize_cb.json`;
