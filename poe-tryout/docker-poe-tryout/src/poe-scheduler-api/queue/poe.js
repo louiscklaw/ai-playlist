@@ -1,13 +1,15 @@
-'use strict';
-const path = require('path');
-const fetch = require('node-fetch');
 const fs = require('fs');
+const fetch = require('node-fetch');
 
-const { gpt_endpoint, getRandomOpenboxHost, JOBPOST_ENDPOINT } = require('../constants');
-const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
-const { writeOutputToDB } = require('../utils/writeOutputToDB');
-const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
-const { mySleep } = require('../utils/mySleep');
+// TODO: remove me
+// 'use strict';
+// const path = require('path');
+// const { gpt_endpoint, getRandomOpenboxHost, JOBPOST_ENDPOINT } = require('../constants');
+// const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
+// const { writeOutputToDB } = require('../utils/writeOutputToDB');
+// const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
+// const { mySleep } = require('../utils/mySleep');
+
 const { mySleepM } = require('../utils/mySleepM');
 const { myLogger } = require('../utils/myLogger');
 const { getRandomPoeEndpoint } = require('./getRandomPoeEndpoint');
