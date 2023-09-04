@@ -23,6 +23,7 @@ const { ASK_INIT, ASK_DONE } = require(`${SRC_ROOT}/constants`);
 const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
 require('./helloworld')(router);
+require('./testLanding')(router);
 
 router.post('/ask', async (req, res) => {
   var json_input = req.body;
@@ -62,13 +63,6 @@ router.post('/ask', async (req, res) => {
   }
 
   res.send(output);
-});
-
-// NOTE: test with src/openbox-firefox/src/tests/chatGPT/helloworld
-router.get('/testLanding', async (req, res) => {
-  var result = await testLanding();
-  res.send(result);
-  // res.send('helloworld')
 });
 
 module.exports = router;
