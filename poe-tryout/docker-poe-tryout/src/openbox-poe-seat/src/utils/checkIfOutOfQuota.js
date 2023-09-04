@@ -4,7 +4,7 @@ const { myLogger } = require("./myLogger");
 
 async function checkIfOutOfQuota(page) {
     try {
-        myLogger.info('chatGPT.js: checkIfOutOfQuota')
+        myLogger.info('checkIfOutOfQuota.js: init')
 
         const [left_incidator] = await page.$x("//div[contains(., 'Standard bots: 0 left')]");
         if (left_incidator) throw new Error(OUT_OF_QUOTA);
