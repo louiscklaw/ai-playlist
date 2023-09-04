@@ -1,17 +1,21 @@
-const fs = require('fs'),
-  path = require('path');
+const fs = require('fs');
 
-const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
-
+// TODO: remove me
+// path = require('path');
+// const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
 // const { DRAFT_EMAIL_PREPROMPT } = require('./constants');
 
 const { myLogger } = require('../../../utils/myLogger');
-const { checkInput } = require('./checkInput');
 const { createDirIfNotExists } = require('../../../utils/createDirIfNotExists');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
-const { loadJson } = require('../../../utils/loadJson');
+
 const { CVTemplateMarkdown } = require('./CVTemplateMarkdown');
+
 const ERROR_LOG_DIR = __dirname.replace('/app', '/logs/error');
+
+// TODO: remove me
+// const { checkInput } = require('./checkInput');
+// const { loadJson } = require('../../../utils/loadJson');
 
 async function writeEmailMarkdown(working_dir, email_content) {
   output = { state: 'init', debug: { working_dir, email_content, error: '' } };

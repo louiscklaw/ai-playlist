@@ -1,15 +1,15 @@
-const fs = require('fs'),
-  path = require('path');
+const fs = require('fs');
 
-const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
-
+// TODO: remove me
+// path = require('path');
+// const { askPoePrepromptQuestion } = require('../../../fetch/askPoePrepromptQuestion');
 // const { DRAFT_EMAIL_PREPROMPT } = require('./constants');
+// const { checkInput } = require('./checkInput');
+// const { loadJson } = require('../../../utils/loadJson');
 
 const { myLogger } = require('../../../utils/myLogger');
-const { checkInput } = require('./checkInput');
 const { createDirIfNotExists } = require('../../../utils/createDirIfNotExists');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
-const { loadJson } = require('../../../utils/loadJson');
 const { CVTemplate } = require('./CVTemplate');
 const ERROR_LOG_DIR = __dirname.replace('/app', '/logs/error');
 
