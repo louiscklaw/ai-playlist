@@ -12,7 +12,12 @@
       "history": [
         {
           "question": "draft me a \"#\" exampe in markdown, just show the markdown content is OK.",
-          "answer": "Certainly! Here's an example of a Markdown document with a heading using the \"#\" symbol:\napplescript Copy# Heading 1\n\nThis is a paragraph of text.\n\n## Heading 2\n\nThis is another paragraph of text.\n\n### Heading 3\n\nThis is a third paragraph of text.\n\n#### Heading 4\n\nThis is a fourth paragraph of text.\n\n##### Heading 5\n\nThis is a fifth paragraph of text.\n\n###### Heading 6\n\nThis is a sixth paragraph of text.\n\nIn Markdown, the \"#\" symbol is used to indicate headings. The number of \"#\" symbols determines the level of the heading, with a single \"#\" representing the highest level and six \"#\" symbols representing the lowest level."
+          "answer": {
+            "reply": "Sure! Here's an example of a Markdown file with a heading:\nvbnet Copy# Heading Example\n\nThis is a Markdown file with a heading.\n\n## Subheading\n\nHere's some more content under the subheading.\n\n### Sub-subheading\n\nEven more content can be added under a sub-subheading.\n\n#### Sub-sub-subheading\n\nYou can keep nesting headings to create a hierarchical structure.\n\n##### Sub-sub-sub-subheading\n\nAnd you can go even deeper with sub-sub-sub-subheadings.\n\n###### Sub-sub-sub-sub-subheading\n\nThis is the deepest level of heading available in Markdown.\n\n\nThis example demonstrates the use of different levels of headings in Markdown, starting from the main heading represented by a single # symbol, followed by the subheadings with increasing numbers of # symbols. The text below each heading represents the content associated with that heading.\nPlease note that the actual rendering of Markdown may vary depending on the platform or Markdown parser you are using.",
+            "md_reply": [
+              "# Heading Example\n\nThis is a Markdown file with a heading.\n\n## Subheading\n\nHere's some more content under the subheading.\n\n### Sub-subheading\n\nEven more content can be added under a sub-subheading.\n\n#### Sub-sub-subheading\n\nYou can keep nesting headings to create a hierarchical structure.\n\n##### Sub-sub-sub-subheading\n\nAnd you can go even deeper with sub-sub-sub-subheadings.\n\n###### Sub-sub-sub-sub-subheading\n\nThis is the deepest level of heading available in Markdown.\n\n"
+            ]
+          }
         }
       ]
     }

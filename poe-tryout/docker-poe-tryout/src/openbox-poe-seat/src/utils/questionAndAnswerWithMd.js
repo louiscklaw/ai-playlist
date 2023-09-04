@@ -59,7 +59,7 @@ async function questionAndAnswerWithMd(page, question, answer_idx) {
 
     var result = {};
     for (var countdown = 60; countdown > 0; countdown--) {
-      reply = await page.evaluate(answer_idx => {
+      result = await page.evaluate(answer_idx => {
         var browser_md_reply = [];
         var txt_reply = '';
 
@@ -105,7 +105,7 @@ async function questionAndAnswerWithMd(page, question, answer_idx) {
       }
     }
 
-    return reply;
+    return result;
   } catch (error) {
     myLogger.error('error during questionAndAnswerWithMd');
     throw error;
