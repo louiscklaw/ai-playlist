@@ -30,7 +30,7 @@ services:
       - link-extractor-chrome
 
   link-extractor-chrome:
-    cpus: 1
+    cpus: 0.5
     image: browserless/chrome
     shm_size: '1gb'
     restart: unless-stopped

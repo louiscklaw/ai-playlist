@@ -99,7 +99,7 @@ services:
         condition: service_healthy
 
   changedetection-chrome:
-    cpus: 1
+    cpus: 0.5
     #  hostname: changedetection-chrome
     image: browserless/chrome
     shm_size: '1gb'
