@@ -24,7 +24,7 @@ module.exports = {
         myLogger.info('input to summarize');
 
         var meta_json = await loadJson(`${working_dir}/meta.json`);
-        myLogger.info('%o', { meta_json });
+        myLogger.info(JSON.stringify(meta_json));
 
         // receiver -> src/poe-scheduler-api/routes/ask_poe.js
         var result = await askPoePrepromptQuestion(payload);
