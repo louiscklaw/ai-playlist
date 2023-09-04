@@ -20,9 +20,9 @@ async function questionAndAnswerWithMd(page, question, answer_idx) {
       await page.keyboard.up('ShiftLeft');
     }
 
-    myLogger.info('chatGPT.js: wait for send button ready');
+    myLogger.info('questionAndAnswerWithMd.js: wait for send button ready');
     await page.waitForSelector('button[class*="sendButton"]:not([disabled])');
-    myLogger.info('chatGPT.js: press send button');
+    myLogger.info('questionAndAnswerWithMd.js: press send button');
     await page?.evaluate(() => {
       document.querySelector('button[class*="sendButton"]:not([disabled])').click();
     });
@@ -86,19 +86,19 @@ async function questionAndAnswerWithMd(page, question, answer_idx) {
         await page.waitForTimeout(1 * 1000);
       } else {
         if (isFirstCheck()) {
-          myLogger.info('chatGPT.js: first check found');
+          myLogger.info('questionAndAnswerWithMd.js: first check found');
           old_reply = reply;
           await page.waitForTimeout(1 * 1000);
         } else {
           // is the bot still typing ?
           if (isTheBotStillTyping(reply, old_reply)) {
             old_reply = reply;
-            myLogger.info(`chatGPT.js: bot still typing, countdown:${countdown}`);
+            myLogger.info(`questionAndAnswerWithMd.js: bot still typing, countdown:${countdown}`);
             // myLogger.info({ countdown, reply });
             await page.waitForTimeout(3 * 1000);
           } else {
             // bot not typing
-            myLogger.info('chatGPT.js: bot typing done');
+            myLogger.info('questionAndAnswerWithMd.js: bot typing done');
             break;
           }
         }
