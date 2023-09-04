@@ -1,36 +1,38 @@
 // const express = require('express');
+// const { getRandomInt } = require('../../../utils/getRandomInt');
+// const { OUT_OF_QUOTA } = require('./error');
+// const { DONE, ERROR } = require('../../../constants');
+
+// const puppeteer = require('puppeteer-extra');
+
+// const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
+// puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+
+// const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+// puppeteer.use(StealthPlugin());
+// const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
+// const { UTILS_ROOT } = require('../../../config');
+
 const fs = require('fs');
-const puppeteer = require('puppeteer-extra');
-
-const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
-puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
-
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-puppeteer.use(StealthPlugin());
 
 require('dotenv').config();
 
-const { UTILS_ROOT } = require('../../../config');
-const { getRandomSecond } = require('../../../utils/getRandomSecond');
-const { getRandomInt } = require('../../../utils/getRandomInt');
 const { gptBotCooldown } = require('./gptBotCooldown');
-const { initBrowser } = require(`${UTILS_ROOT}/initBrowser`);
 const { testLanding } = require('./testLanding');
-const { OUT_OF_QUOTA } = require('./error');
+const { CANONICAL_HOSTNAME } = require('../../../config');
+
+const { getRandomSecond } = require('../../../utils/getRandomSecond');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
 const { poeDownAlert } = require('../../../utils/poeDownAlert');
-const { CANONICAL_HOSTNAME } = require('../../../config');
-const { DONE, ERROR } = require('../../../constants');
-
+const { initBrowser } = require('../../../utils/initBrowser');
 const {
   initChatGptPage,
   clearChatHistory,
   clearModalBox,
   questionAndAnswer,
   checkLoginState,
-} = require(`${UTILS_ROOT}/chatGPT`);
-
-const { checkIfOutOfQuota } = require(`${UTILS_ROOT}/checkIfOutOfQuota`);
+} = require('../../../utils/chatGPT');
+const { checkIfOutOfQuota } = require('../../../utils/checkIfOutOfQuota');
 
 async function chatGPTSolver(question_list, preprompts = []) {
 
