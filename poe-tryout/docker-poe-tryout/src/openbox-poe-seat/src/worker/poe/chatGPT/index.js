@@ -1,5 +1,5 @@
 // const express = require('express');
-const fs = require('fs')
+const fs = require('fs');
 const puppeteer = require('puppeteer-extra');
 
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
@@ -19,7 +19,8 @@ const { testLanding } = require('./testLanding');
 const { OUT_OF_QUOTA } = require('./error');
 const { calculateMD5 } = require('../../../utils/calculateMD5');
 const { poeDownAlert } = require('../../../utils/poeDownAlert');
-const {CANONICAL_HOSTNAME}=require('../../../config')
+const { CANONICAL_HOSTNAME } = require('../../../config');
+const { DONE, ERROR } = require('../../../constants');
 
 const {
   initChatGptPage,
@@ -55,6 +56,8 @@ async function chatGPTSolver(question_list, preprompts = []) {
         answer_idx++;
 
         var answer = await questionAndAnswer(page, question, answer_idx);
+        console.log({ answer });
+
         chat_history.preprompts.push({ question, answer });
 
         // TODO: remove this

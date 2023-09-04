@@ -42,6 +42,7 @@ try {
   app.use('/hello', require('./routes/hello'));
   
   app.use('/healthcheck', require('./routes/healthcheck'));
+  app.use('/helloworld', require('./routes/helloworld'));
 
   reportOnline();
 

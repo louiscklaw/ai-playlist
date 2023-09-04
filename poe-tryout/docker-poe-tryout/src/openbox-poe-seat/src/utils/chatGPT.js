@@ -75,6 +75,7 @@ async function clearModalBox(page) {
 }
 
 async function questionAndAnswer(page, question, answer_idx) {
+
   const countAnswerBubble = page => {
     return page.evaluate(() => {
       return document.querySelectorAll('[class*="Message_botMessageBubble__"]').length;

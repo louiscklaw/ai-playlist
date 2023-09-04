@@ -15,4 +15,4 @@ npm i puppeteer-core \
   puppeteer-extra-plugin-adblocker \
   puppeteer-proxy
 
-npm run start
+npm run dev

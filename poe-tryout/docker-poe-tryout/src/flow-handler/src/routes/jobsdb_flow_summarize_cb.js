@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
     output = { ...output, state: 'error', error:JSON.stringify(error) };
 
     await createDirIfNotExists(ERROR_LOG_DIR);
-    var filename = `${ERROR_LOG_DIR}/${calculateMD5(error)}.json`;
+    var filename = `${ERROR_LOG_DIR}/jobsdb_flow_summarize_cb.json`;
     fs.writeFileSync(filename, JSON.stringify(output), { encoding: 'utf8' });
 
     myLogger.error(JSON.stringify(error));

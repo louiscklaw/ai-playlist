@@ -20,6 +20,7 @@ try {
   app.use('/hw-telegram', require('./routes/hwTelegram'));
 
   app.use('/helloworld', require('./routes/helloworld'));
+  
   app.use('/healthcheck', require('./routes/healthcheck'));
 
   myLogger.info('page-handler started');
