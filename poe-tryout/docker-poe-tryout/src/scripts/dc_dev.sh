@@ -2,6 +2,9 @@
 
 set -e
 
+echo 1 > ./src/volumes/logs/combined.log
+echo 1 > ./src/volumes/logs/error.log
+
 ./scripts/dc_gen.sh
 
 docker compose -f ./docker-compose.gen.yml pull
