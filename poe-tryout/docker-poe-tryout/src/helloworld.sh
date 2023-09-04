@@ -4,6 +4,7 @@
 set -ex
 
 pushd /src/tests
+  npm i
   watch -n 1 "node ./check_all.js"
 popd
 
