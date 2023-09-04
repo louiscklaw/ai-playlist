@@ -1,0 +1,20 @@
+{
+  "state": "ASK_DONE",
+  "input": { "question_list": ["say 'hello 1' to me"] },
+  "error": "",
+  "chat_history": {
+    "q_and_a": {
+      "preprompts": [],
+      "history": [
+        {
+          "question": "say 'hello 1' to me",
+          "answer": {
+            "reply": "Hello 1! How can I assist you today?",
+            "md_reply": []
+          }
+        }
+      ]
+    }
+  },
+  "json_input": { "question_list": ["say 'hello 1' to me"] }
+}

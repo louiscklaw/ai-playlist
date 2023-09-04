@@ -22,8 +22,9 @@ const router = express.Router();
 // const { ASK_INIT, ASK_DONE } = require(`${SRC_ROOT}/constants`);
 // const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
 
+require('./ask_with_md')(router);
+require('./ask')(router);
 require('./helloworld')(router);
 require('./testLanding')(router);
-require('./ask')(router);
 
 module.exports = router;
