@@ -2,26 +2,31 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 require('dotenv').config();
+
 // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
-const { PROMPT_ROOT, ERROR_ROOT } = require('./config');
+// const { PROMPT_ROOT, ERROR_ROOT } = require('./config');
 
 const { myLogger } = require('./utils/myLogger');
 
 const app = express();
 app.use(bodyParser.json());
 
-// NOTE: original use puppeteer core only
-// const puppeteer = require('puppeteer-core');
-const puppeteer = require('puppeteer-extra');
 const { reportOffline } = require('./utils/reportPoeSeatOffline');
 const { reportOnline } = require('./utils/reportPoeSeatOnline');
 
-try {
-  const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
-  puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+// TODO: remove me
+// NOTE: original use puppeteer core only
+// const puppeteer = require('puppeteer-core');
+// const puppeteer = require('puppeteer-extra');
 
-  const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-  puppeteer.use(StealthPlugin());
+
+try {
+  // TODO: remove me
+  // const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
+  // puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+
+  // const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+  // puppeteer.use(StealthPlugin());
 
   // TODO: remove me ?
   // require(`${PROMPT_ROOT}`);
