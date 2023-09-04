@@ -11,7 +11,10 @@ const { myLogger } = require('../../utils/myLogger');
 const { checkInput } = require('./checkInput');
 const { reportOffline } = require('../../utils/reportPoeSeatOffline');
 const { DONE, ERROR, ASK_INIT, ASK_DONE, NO_QUESTION_FOUND, QUESTION_LIST_NOT_FOUND } = require('../../constants');
-const { chatGPTSolver, testLanding } = require(`${WORKER_ROOT}/poe/chatGPT`);
+
+// const { chatGPTSolver } = require('../../worker/poe/chatGPT');
+const { chatGPTSolverAndParseMarkdown } = require('../../worker/poe/chatGPTSolverAndParseMarkdown');
+// const { chatGPTSolverAndParseMarkdown } = require(`${WORKER_ROOT}/poe/chatGPT/chatGPTSolverAndParseMarkdown`);
 
 
 module.exports = (router) =>{
@@ -32,11 +35,12 @@ module.exports = (router) =>{
       var { question_list, preprompts } = json_input;
       // res.send(question_list)
       // TODO: check using schema
+      
       if (!question_list) throw new Error(QUESTION_LIST_NOT_FOUND);
       if (question_list?.length < 1) throw new Error(NO_QUESTION_FOUND);
       // NOTE: question list valid after this line
   
-      var temp_history = await chatGPTSolver(question_list, preprompts);
+      var temp_history = await chatGPTSolverAndParseMarkdown(question_list, preprompts);
       var { state, preprompts, history } = temp_history;
       if (state != 'done') throw new Error('error during ask ChatGPT');
   
