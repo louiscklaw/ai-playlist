@@ -31,20 +31,29 @@ function initQueue(Queue) {
 
       // NOTE: collect input
       const { data } = job;
-      const { working_dir, preprompts, question_list, callback_url } = data;
+      const { working_dir, preprompts, question_list, callback_url, parse_md } = data;
 
       const gpt_payload = { preprompts, question_list };
       const { random_openbox_host, gpt_endpoint } = getRandomPoeEndpoint();
 
       // NOTE: log input
-      myLogger.info('%o', { random_openbox_host, gpt_endpoint, data, gpt_payload });
+      myLogger.info(JSON.stringify({ random_openbox_host, gpt_endpoint, data, gpt_payload }));
 
       // NOTE: ask poe start
-      var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
-        method: 'post',
-        body: JSON.stringify(gpt_payload),
-        headers: { 'Content-Type': 'application/json' },
-      });
+      if (parse_md) {
+        var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask_with_md`, {
+          method: 'post',
+          body: JSON.stringify(gpt_payload),
+          headers: { 'Content-Type': 'application/json' },
+        });
+      } else {
+        var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
+          method: 'post',
+          body: JSON.stringify(gpt_payload),
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
       var chatgpt_summarize_result_json = await poe_result.json();
       chatgpt_summarize_result_json = { ...chatgpt_summarize_result_json, working_dir };
 
@@ -55,7 +64,7 @@ function initQueue(Queue) {
           headers: { 'Content-Type': 'application/json' },
         });
         var result_cb_json = await result_cb_url.json();
-        await fs.writeFileSync('/share/hello_poe.json', JSON.stringify(result_cb_json),{encoding:'utf8'})
+        await fs.writeFileSync('/share/hello_poe.json', JSON.stringify(result_cb_json), { encoding: 'utf8' });
       } else {
         myLogger.info('%o', { chatgpt_summarize_result_json });
         const { chat_history } = chatgpt_summarize_result_json;
@@ -64,7 +73,7 @@ function initQueue(Queue) {
       }
 
       // // NOTE: asking should be completed before this line
-      
+
       // // NOTE: successful ask, cool down bot for slething
 
       await mySleepM(1);
