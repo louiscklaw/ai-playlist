@@ -1,12 +1,13 @@
-const { myLogger } = require('../utils/myLogger');
-const { jobsdbPoeDraftEmailMachine } = require('../state_machine/jobsdb/jobsdbMachine');
-
 const express = require('express');
 const router = express.Router();
 
+const { jobsdbPoeDraftEmailMachine } = require('../state_machine/jobsdb/jobsdbMachine');
+
+const { myLogger } = require('../utils/myLogger');
+
 // NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_draft_email
 router.post('/', async (req, res) => {
-  var output = { state: 'INIT', debug: { input: {} }, error: "" };
+  var output = { state: 'INIT', debug: { input: {} }, error: '' };
 
   try {
     myLogger.info('init draft email ');
