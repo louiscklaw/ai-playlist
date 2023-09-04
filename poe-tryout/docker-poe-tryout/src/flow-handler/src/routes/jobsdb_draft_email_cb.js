@@ -7,8 +7,11 @@ const router = express.Router();
 
 const fs = require('fs');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
+const { calculateMD5 } = require('../utils/calculateMD5');
 
-// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_flow_summarize_cb
+const ERROR_LOG_DIR = __dirname.replace('/app', '/logs/error');
+
+// NOTE: test using this -> /src/flow-handler/src/tests/jobsdb_draft_email_cb
 router.post('/', async (req, res) => {
   var output = { state: 'INIT', debug: {}, error: "" };
   myLogger.info('receive callback from draft email ');

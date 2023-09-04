@@ -9,3 +9,5 @@ docker compose -f ./docker-compose.gen.yml kill
 
 # docker volume rm src_redis_data
 docker compose -f ./docker-compose.gen.yml up -d
+
+sudo chown logic:logic -R .

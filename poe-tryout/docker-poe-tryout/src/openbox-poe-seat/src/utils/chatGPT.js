@@ -105,7 +105,7 @@ async function questionAndAnswer(page, question, answer_idx) {
   await page.waitForSelector(`[class*="Message_botMessageBubble__"]`, { waitUntil: 'networkidle0' });
   // console.log({ current_answer_bubble_length, new_answer_bubble_length });
 
-  for (var countdown = 10; countdown > 0; countdown--) {
+  for (var countdown = 20; countdown > 0; countdown--) {
     var new_answer_bubble_length = await countAnswerBubble(page);
     if (new_answer_bubble_length > current_answer_bubble_length) {
       // NOTE: new answer bubble appear
@@ -139,7 +139,7 @@ async function questionAndAnswer(page, question, answer_idx) {
     if (countdown > 0 && reply.trim() == '...') {
       // bot not answer yet
       myLogger.info(JSON.stringify({ countdown, reply }));
-      
+
       await page.waitForTimeout(1 * 1000);
     } else {
       if (isFirstCheck()) {
