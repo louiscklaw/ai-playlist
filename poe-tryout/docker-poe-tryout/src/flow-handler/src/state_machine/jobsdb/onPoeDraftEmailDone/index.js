@@ -23,7 +23,7 @@ function onPoeDraftEmailDone() {
 
     try {
       // http://flow-handler:3000/jobsdb_draft_email_cb
-      myLogger.info('DraftEmailDone... 111');
+      myLogger.info('DraftEmailDone...');
       const { working_dir } = this.context;
       const context = this.context;
       const email_md_filename = `${working_dir}/401_email.md`;
