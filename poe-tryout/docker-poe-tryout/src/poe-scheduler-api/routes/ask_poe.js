@@ -14,7 +14,7 @@ const { calculateMD5 } = require('../utils/calculateMD5');
 const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 
 router.post('/', async (req, res) => {
-  var output = { state: STATE_INIT, debug: req.body, error: {} };
+  var output = { state: STATE_INIT, debug: req.body, error: "" };
 
   try {
     myLogger.info(`/${__filename}`);
