@@ -18,8 +18,8 @@ and fresh graduates are welcome to apply.
 
 const SAMPLE_QUESTIONS = [
 `
-Please help to draft a email describing where do you live. in less than 50 words.\n
-Please try to output it in Markdown format.
+Please help to draft a email describing where do you live in less than 50 words.\n
+Please output the content in Markdown format.
 `
 ];
 

@@ -24,18 +24,25 @@ function onPoeDraftEmailDone() {
     try {
       // http://flow-handler:3000/jobsdb_draft_email_cb
       myLogger.info('DraftEmailDone...');
-      const { working_dir } = this.context;
+      var { working_dir } = this.context;
+      if (!working_dir) {
+        myLogger.warn('working_dir is not defined, deafult to testing')
+        working_dir = '/share/testing';
+      }
+
       const context = this.context;
       const email_md_filename = `${working_dir}/401_email.md`;
 
       var meta_json = await loadJson(`${working_dir}/meta.json`);
       myLogger.info(`job url: ${meta_json.jobsdb_job_url}`);
-
-      checkInput(context);
-      var email_content = context.chat_history.q_and_a.history[0].answer;
+      
+      // checkInput(context);
+      var {reply, md_reply} = context.chat_history.q_and_a.history[0].answer;
+      // md_reply contains the content to be written in email
+      console.log({md_reply});
 
       myLogger.info(`writing content into ${email_md_filename}`);
-      await fs.writeFileSync(email_md_filename, email_content, { encoding: 'utf8' });
+      await fs.writeFileSync(email_md_filename, md_reply.join(''), { encoding: 'utf8' });
 
       res();
     } catch (error) {

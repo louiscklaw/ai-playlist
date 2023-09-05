@@ -7,6 +7,8 @@ const { STATE_INIT, STATE_SCHEDULED } = require('../constants/states');
 const { Queue } = require('../queue');
 const { myLogger } = require('../utils/myLogger');
 
+const ASK_RETRY = 5;
+
 router.post('/', async (req, res) => {
   var state = STATE_INIT;
   var err_msg = {};
@@ -26,7 +28,7 @@ router.post('/', async (req, res) => {
       question_list,
       url_after_done,
     })
-      .attempts(5)
+      .attempts(ASK_RETRY)
       .backoff({ delay: 15 * 1000, type: 'fixed' })
       .priority('normal');
 

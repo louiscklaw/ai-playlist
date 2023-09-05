@@ -12,14 +12,16 @@ try {
   app.use(bodyParser.json());
 
   app.use('/count', require('./routes/count'));
+  
   app.use('/ask_poe', require('./routes/ask_poe'));
+  app.use('/ask_poe_parse_md', require('./routes/ask_poe_parse_md'));
+
   app.use('/process_new_job_post', require('./routes/process_new_job_post'));
   app.use('/ask_jobsdb_post', require('./routes/ask_jobsdb_post'));
   app.use('/healthcheck', require('./routes/healthcheck'));
 
   // TODO: remove dummy as debug only
   // app.use('/ask_dummy_call', require('./routes/ask_dummy_call'));
-
   // app.use('/askJobPostDummy', require('./routes/askJobPostDummy'));
 
   app.use('/done', require('./routes/done'));

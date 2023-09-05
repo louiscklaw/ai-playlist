@@ -138,38 +138,40 @@ async function questionAndAnswer(page, question, answer_idx) {
 
   await page.waitForSelector(`[class*="Message_botMessageBubble"]`);
   for (var countdown = 120; countdown > 0; countdown--) {
-    var { reply, error } = await page.evaluate(answer_idx => {
+    var { answer, error, _raw_html } = await page.evaluate(answer_idx => {
       try {
+        var ele = document.querySelectorAll('[class*="Message_botMessageBubble"]').item(answer_idx)
         return {
-          reply: document.querySelectorAll('[class*="Message_botMessageBubble"]').item(answer_idx).textContent,
+          answer: ele.textContent,
           error: false,
+          _raw_html: ele.outerHTML 
         };
       } catch (error) {
         console.log('chatGPT.js (obsoleted): error captured');
         console.error(JSON.stringify(error));
 
-        return { reply: '...', error };
+        return { answer: '...', error, _raw_html:"" };
       }
     }, new_answer_bubble_length - 1);
 
-    if (error) console.log(JSON.stringify(error))
+    if (error) console.log(JSON.stringify(error));
 
-    if (countdown > 0 && reply.trim() == '...') {
+    if (countdown > 0 && answer.trim() == '...') {
       // bot not answer yet
-      myLogger.info(JSON.stringify({ countdown, reply }));
+      myLogger.info(JSON.stringify({ countdown, answer }));
 
       await page.waitForTimeout(1 * 1000);
     } else {
       if (isFirstCheck()) {
         myLogger.info('chatGPT.js (obsoleted): first check found');
-        old_reply = reply;
+        old_answer = answer;
         await page.waitForTimeout(1 * 1000);
       } else {
         // is the bot still typing ?
-        if (isTheBotStillTyping(reply, old_reply)) {
-          old_reply = reply;
+        if (isTheBotStillTyping(answer, old_answer)) {
+          old_answer = answer;
           myLogger.info(`chatGPT.js (obsoleted): bot still typing, countdown:${countdown}`);
-          // myLogger.info({ countdown, reply });
+          // myLogger.info({ countdown, answer });
           await page.waitForTimeout(3 * 1000);
         } else {
           // bot not typing
@@ -180,7 +182,7 @@ async function questionAndAnswer(page, question, answer_idx) {
     }
   }
 
-  return reply;
+  return {answer, _raw_html};
 }
 
 function assertKeyWord(to_check, keyword_wanted) {

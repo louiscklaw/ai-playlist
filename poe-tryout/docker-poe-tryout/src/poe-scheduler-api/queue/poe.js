@@ -16,6 +16,8 @@ const { getRandomPoeEndpoint } = require('./getRandomPoeEndpoint');
 
 myLogger.info('poe Queue init');
 
+const SESSION_COOLDOWN_MINUTE = 1;
+
 var queue_inactive_count = 0;
 function getInactiveCount() {
   return queue_inactive_count;
@@ -66,7 +68,7 @@ function initQueue(Queue) {
         var result_cb_json = await result_cb_url.json();
         await fs.writeFileSync('/share/hello_poe.json', JSON.stringify(result_cb_json), { encoding: 'utf8' });
       } else {
-        myLogger.info('%o', { chatgpt_summarize_result_json });
+        myLogger.info(JSON.stringify(chatgpt_summarize_result_json));
         const { chat_history } = chatgpt_summarize_result_json;
         console.log(chat_history.q_and_a.history);
         myLogger.info('no callback url provided, showing here');
@@ -76,7 +78,7 @@ function initQueue(Queue) {
 
       // // NOTE: successful ask, cool down bot for slething
 
-      await mySleepM(1);
+      await mySleepM(SESSION_COOLDOWN_MINUTE);
       myLogger.info('cooldown bot done');
 
       done(null, { deliveredAt: new Date(), data });
@@ -84,7 +86,7 @@ function initQueue(Queue) {
       if (error.code == 'ECONNREFUSED' && error.message.indexOf('openbox-firefox') > -1) {
         done(new Error('the openbox-firefox server is not already, schedule retry'));
       } else {
-        myLogger.info('%o', { error });
+        myLogger.info(JSON.stringify(error));
         done(new Error(error.message));
       }
     }
@@ -105,7 +107,7 @@ function initQueue(Queue) {
 
     // myLogger.info("%o", { QueueInactiveCount: Queue.inactiveCount() });
     Queue.inactiveCount((err, count) => {
-      myLogger.info('%o', { state: 'Queue schedule success', QueueInactiveCount: count });
+      myLogger.info(JSON.stringify({ state: 'Queue schedule success', QueueInactiveCount: count }));
       queue_inactive_count = count;
       console.log(err);
     });

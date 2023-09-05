@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     myLogger.info(`/${__filename}`);
     const req_body = req.body;
     const { working_dir, preprompts, question_list, callback_url } = req_body;
-    var parse_md = false;
+    var parse_md = true;
 
     //prepare a job to perform
     //dont save it
