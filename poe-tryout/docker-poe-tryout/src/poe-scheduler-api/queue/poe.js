@@ -54,9 +54,15 @@ function initQueue(Queue) {
           body: JSON.stringify(gpt_payload),
           headers: { 'Content-Type': 'application/json' },
         });
+
+        var check_result = await poe_result.json();
+        var {answer} = check_result;
+        if (answer == 'error_found') throw new Error('error found from answer...')
+        
       }
 
       var chatgpt_summarize_result_json = await poe_result.json();
+
       chatgpt_summarize_result_json = { ...chatgpt_summarize_result_json, working_dir };
 
       if (callback_url) {
