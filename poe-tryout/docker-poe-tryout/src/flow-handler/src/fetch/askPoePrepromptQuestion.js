@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
 function askPoePrepromptQuestion(payload) {
+  // NOTE: exception throw outside directly
   // NOTE: expected response -> {"state":"state_scheduled","err_msg":{}}
   // return new Promise((res, rej) =>{
   //   res({json: () => {
