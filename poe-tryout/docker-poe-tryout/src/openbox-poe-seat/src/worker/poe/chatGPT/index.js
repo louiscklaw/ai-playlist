@@ -57,10 +57,10 @@ async function chatGPTSolver(question_list, preprompts = []) {
         var question = preprompts[i];
         answer_idx++;
 
-        var answer = await questionAndAnswer(page, question, answer_idx);
-        console.log({ answer });
+        var {answer, _raw_html} = await questionAndAnswer(page, question, answer_idx);
+        console.log({ answer, _raw_html });
 
-        chat_history.preprompts.push({ question, answer });
+        chat_history.preprompts.push({ question, answer, _raw_html });
 
         // TODO: remove this
         // await page.waitForTimeout(getRandomSecond(5, 15) * 1000);
