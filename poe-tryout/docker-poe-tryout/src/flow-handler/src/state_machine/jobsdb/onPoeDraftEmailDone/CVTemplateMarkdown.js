@@ -1,12 +1,12 @@
-const CVTemplateMarkdown = json_input => {
-  console.log(json_input);
-  json_input = json_input ||'';
+const CVTemplateMarkdown = content => {
+  console.log(content);
+  content = content ||'';
 
   return (
     `
 ## CV / Resume
 
-${json_input}
+${content}
 
 homepage: https://louiscklaw.github.io
 source: https://github.com/louiscklaw/ai-playlist
