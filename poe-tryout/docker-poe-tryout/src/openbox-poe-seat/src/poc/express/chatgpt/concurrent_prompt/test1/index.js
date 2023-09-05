@@ -33,7 +33,7 @@ var browser = {};
     headless: false,
     executablePath: '/usr/bin/firefox',
     userDataDir: FIREFOX_DATA_DIR,
- //   slowMo: 1,
+    //   slowMo: 1,
     // NOTE: https://wiki.mozilla.org/Firefox/CommandLineOptions
     defaultViewport: { width: 1024, height: 768 },
     ignoreHTTPSErrors: true,
@@ -42,6 +42,7 @@ var browser = {};
 console.log('browser init complete');
 
 async function chatGPTSolver(question_list, browser) {
+  var output = { state: 'init', debug: question_list, error: '' };
   var chat_history = { session_id, history: [] };
 
   const CHAT_SESSION = '1';
@@ -66,7 +67,7 @@ async function chatGPTSolver(question_list, browser) {
       chat_history.history.push({ question, answer });
     }
   } catch (error) {
-    res.send({ state: 'helloworld error', error });
+    res.send({ state: 'error', error });
     throw error;
   } finally {
     await page.close();
@@ -98,12 +99,10 @@ app.post('/chatgpt_role_play_helloworld', async (req, res) => {
     res.send({ state: 'helloworld done', json_input, chat_history });
   } catch (error) {
     if (error.message == NO_QUESTION_FOUND) {
-      res.send({ state: 'hello no question found' });
+      res.send({ state: NO_QUESTION_FOUND });
       return;
     }
-    res.send({ state: 'unknown error', error_messge: error.message });
-  } finally {
-    // close something
+    res.send({ state: 'error', error: JSON.stringify(error) });
   }
 });
 
