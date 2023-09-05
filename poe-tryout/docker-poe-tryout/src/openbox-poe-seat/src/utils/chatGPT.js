@@ -75,114 +75,121 @@ async function clearModalBox(page) {
 }
 
 async function questionAndAnswer(page, question, answer_idx) {
-  const countAnswerBubble = page => {
-    return page.evaluate(() => {
-      return document.querySelectorAll('[class*="Message_botMessageBubble__"]').length;
+  try {
+    const countAnswerBubble = page => {
+      return page.evaluate(() => {
+        return document.querySelectorAll('[class*="Message_botMessageBubble__"]').length;
+      });
+    };
+
+    var current_answer_bubble_length = await countAnswerBubble(page);
+    var new_answer_bubble_length = 0;
+
+    var list_lines = question.split('\n');
+    for (var i = 0; i < list_lines.length; i++) {
+      myLogger.info('typing question ...');
+
+      await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', list_lines[i], { delay: 0.01 });
+      await page.keyboard.down('ShiftLeft');
+      await page.keyboard.down('Enter');
+      await page.waitForTimeout(1);
+      await page.keyboard.up('Enter');
+      await page.keyboard.up('ShiftLeft');
+
+      await page.waitForTimeout(1);
+    }
+
+    myLogger.info('chatGPT.js (obsoleted): wait for send button ready');
+    await page.waitForSelector('button[class*="sendButton"]:not([disabled])');
+
+    myLogger.info('chatGPT.js (obsoleted): press send button');
+    await page?.evaluate(() => {
+      document.querySelector('button[class*="sendButton"]:not([disabled])').click();
     });
-  };
 
-  var current_answer_bubble_length = await countAnswerBubble(page);
-  var new_answer_bubble_length = 0;
+    var reply = '...';
+    await page.waitForSelector(`[class*="Message_botMessageBubble"]`, { waitUntil: 'networkidle0' });
+    // console.log({ current_answer_bubble_length, new_answer_bubble_length });
 
-  var list_lines = question.split('\n');
-  for (var i = 0; i < list_lines.length; i++) {
-    myLogger.info('typing question ...');
-
-    await page.type('textarea[placeholder="Talk to ChatGPT on Poe"]', list_lines[i], { delay: 0.1 });
-    await page.keyboard.down('ShiftLeft');
-    await page.keyboard.down('Enter');
-    await page.waitForTimeout(1);
-    await page.keyboard.up('Enter');
-    await page.keyboard.up('ShiftLeft');
-
-    await page.waitForTimeout(1);
-  }
-
-  myLogger.info('chatGPT.js (obsoleted): wait for send button ready');
-  await page.waitForSelector('button[class*="sendButton"]:not([disabled])');
-
-  myLogger.info('chatGPT.js (obsoleted): press send button');
-  await page?.evaluate(() => {
-    document.querySelector('button[class*="sendButton"]:not([disabled])').click();
-  });
-
-  var reply = '...';
-  await page.waitForSelector(`[class*="Message_botMessageBubble"]`, { waitUntil: 'networkidle0' });
-  // console.log({ current_answer_bubble_length, new_answer_bubble_length });
-
-  for (var countdown = 30; countdown > 0; countdown--) {
-    var new_answer_bubble_length = await countAnswerBubble(page);
-    if (new_answer_bubble_length > current_answer_bubble_length) {
-      // NOTE: new answer bubble appear
-      break;
-    } else {
-      // NOTE: no new answer bubble appear, keep waiting
-      await page.waitForTimeout(1 * 1000);
-    }
-  }
-  myLogger.info(JSON.stringify({ current_answer_bubble_length, new_answer_bubble_length }));
-
-  // NOTE: wait for text type complete
-  await page.waitForTimeout(3 * 1000);
-  var old_reply = '';
-  const isTheBotStillTyping = (reply, old_reply) => reply != old_reply; // return true if the bot is typing
-
-  var first_check = true;
-  const isFirstCheck = () => {
-    if (first_check) {
-      first_check = false;
-      return true;
-    }
-    return first_check;
-  };
-
-  await page.waitForSelector(`[class*="Message_botMessageBubble"]`);
-  for (var countdown = 120; countdown > 0; countdown--) {
-    var { answer, error, _raw_html } = await page.evaluate(answer_idx => {
-      try {
-        var ele = document.querySelectorAll('[class*="Message_botMessageBubble"]').item(answer_idx)
-        return {
-          answer: ele.textContent,
-          error: false,
-          _raw_html: ele.outerHTML 
-        };
-      } catch (error) {
-        console.log('chatGPT.js (obsoleted): error captured');
-        console.error(JSON.stringify(error));
-
-        return { answer: '...', error, _raw_html:"" };
+    for (var countdown = 30; countdown > 0; countdown--) {
+      var new_answer_bubble_length = await countAnswerBubble(page);
+      if (new_answer_bubble_length > current_answer_bubble_length) {
+        // NOTE: new answer bubble appear
+        break;
+      } else {
+        // NOTE: no new answer bubble appear, keep waiting
+        await page.waitForTimeout(1 * 1000);
       }
-    }, new_answer_bubble_length - 1);
+    }
+    myLogger.info(JSON.stringify({ current_answer_bubble_length, new_answer_bubble_length }));
 
-    if (error) console.log(JSON.stringify(error));
+    // NOTE: wait for text type complete
+    await page.waitForTimeout(3 * 1000);
+    var old_reply = '';
+    const isTheBotStillTyping = (reply, old_reply) => reply != old_reply; // return true if the bot is typing
 
-    if (countdown > 0 && answer.trim() == '...') {
-      // bot not answer yet
-      myLogger.info(JSON.stringify({ countdown, answer }));
+    var first_check = true;
+    const isFirstCheck = () => {
+      if (first_check) {
+        first_check = false;
+        return true;
+      }
+      return first_check;
+    };
 
-      await page.waitForTimeout(1 * 1000);
-    } else {
-      if (isFirstCheck()) {
-        myLogger.info('chatGPT.js (obsoleted): first check found');
-        old_answer = answer;
+    await page.waitForSelector(`[class*="Message_botMessageBubble"]`);
+    for (var countdown = 120; countdown > 0; countdown--) {
+      var { answer, error, _raw_html } = await page.evaluate(answer_idx => {
+        try {
+          var ele = document.querySelectorAll('[class*="Message_botMessageBubble"]').item(answer_idx);
+          return {
+            answer: ele.textContent,
+            error: false,
+            _raw_html: ele.outerHTML,
+          };
+        } catch (error) {
+          console.log('chatGPT.js (obsoleted): error captured');
+          console.error(JSON.stringify(error));
+
+          // return { answer: '...', error, _raw_html:"" };
+          return { answer: 'error_found', error, _raw_html: '' };
+        }
+      }, new_answer_bubble_length - 1);
+
+      if (error) console.log(error);
+
+      if (countdown > 0 && (answer.trim() == '...' || answer.trim() == 'error_found')) {
+        // bot not answer yet
+        myLogger.info(JSON.stringify({ countdown, answer, error }));
+
         await page.waitForTimeout(1 * 1000);
       } else {
-        // is the bot still typing ?
-        if (isTheBotStillTyping(answer, old_answer)) {
+        if (isFirstCheck()) {
+          myLogger.info('chatGPT.js (obsoleted): first check found');
           old_answer = answer;
-          myLogger.info(`chatGPT.js (obsoleted): bot still typing, countdown:${countdown}`);
-          // myLogger.info({ countdown, answer });
-          await page.waitForTimeout(3 * 1000);
+          await page.waitForTimeout(1 * 1000);
         } else {
-          // bot not typing
-          myLogger.info('chatGPT.js (obsoleted): bot typing done');
-          break;
+          // is the bot still typing ?
+          if (isTheBotStillTyping(answer, old_answer)) {
+            old_answer = answer;
+            myLogger.info(`chatGPT.js (obsoleted): bot still typing, countdown:${countdown}`);
+            // myLogger.info({ countdown, answer });
+            await page.waitForTimeout(3 * 1000);
+          } else {
+            // bot not typing
+            myLogger.info('chatGPT.js (obsoleted): bot typing done');
+            break;
+          }
         }
       }
     }
-  }
 
-  return {answer, _raw_html};
+    if (answer == 'error_found') throw new Error('cannot get answer from poe');
+
+    return { answer, _raw_html };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function assertKeyWord(to_check, keyword_wanted) {
