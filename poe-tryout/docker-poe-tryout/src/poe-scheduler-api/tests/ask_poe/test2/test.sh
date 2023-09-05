@@ -2,7 +2,7 @@
 
 set -ex
 
-curl -X POST http://poe-scheduler-api:3002/ask_poe \
+curl -X POST http://poe-scheduler-api:3002/ask_poe_parse_md \
    -H 'Content-Type: application/json' \
    -d @./input.json 
    # \

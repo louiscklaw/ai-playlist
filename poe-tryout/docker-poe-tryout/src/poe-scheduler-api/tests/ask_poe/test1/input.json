@@ -1,4 +1,8 @@
 {
   "preprompts": ["say 'preprompt1' to me", "say 'preprompt2' to me"],
-  "question_list": ["say 'question 1' to me", "say 'question 2' to me", "say 'question 3' to me"]
+  "question_list": [
+    "say 'question 1' to me",
+    "say 'question 2' to me",
+    "say 'question 3' to me"
+  ]
 }
