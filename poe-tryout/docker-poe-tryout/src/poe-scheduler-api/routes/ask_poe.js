@@ -16,7 +16,7 @@ const { createDirIfNotExists } = require('../utils/createDirIfNotExists');
 const ASK_RETRY = 5;
 
 router.post('/', async (req, res) => {
-  var output = { state: STATE_INIT, debug: req.body, error: "" };
+  var output = { state: STATE_INIT, debug: req.body, error: '' };
 
   try {
     myLogger.info(`/${__filename}`);
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
       preprompts,
       question_list,
       callback_url,
-      parse_md
+      parse_md,
     })
       .attempts(ASK_RETRY)
       .backoff({ delay: 15 * 1000, type: 'fixed' })

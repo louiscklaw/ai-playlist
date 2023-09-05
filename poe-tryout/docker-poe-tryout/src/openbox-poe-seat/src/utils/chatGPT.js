@@ -115,6 +115,7 @@ async function questionAndAnswer(page, question, answer_idx) {
       var new_answer_bubble_length = await countAnswerBubble(page);
       if (new_answer_bubble_length > current_answer_bubble_length) {
         // NOTE: new answer bubble appear
+        myLogger.info('wait for new answer bubble appear')
         break;
       } else {
         // NOTE: no new answer bubble appear, keep waiting
@@ -139,9 +140,10 @@ async function questionAndAnswer(page, question, answer_idx) {
 
     await page.waitForSelector(`[class*="Message_botMessageBubble__"]`);
     for (var countdown = 9999; countdown > 0; countdown--) {
-      var result_json = await page.evaluate(answer_idx => {
+      var result_json = await page.evaluate(() => {
         try {
-          var ele = document.querySelectorAll('[class*="Message_botMessageBubble__"]').item(answer_idx);
+          var last_bubble_idx = document.querySelectorAll('[class*="Message_botMessageBubble__"]').length - 1
+          var ele = document.querySelectorAll('[class*="Message_botMessageBubble__"]').item(last_bubble_idx);
           return JSON.stringify({
             answer: ele.textContent,
             error: false,
@@ -156,7 +158,7 @@ async function questionAndAnswer(page, question, answer_idx) {
           // return { answer: '...', error, _raw_html:"" };
           return JSON.stringify({ answer: 'error_found', error, _raw_html: '' });
         }
-      }, new_answer_bubble_length - 1);
+      });
       var { answer, error, _raw_html } = JSON.parse(result_json);
 
       if (error) console.log(error);

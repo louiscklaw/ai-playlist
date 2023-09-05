@@ -10,6 +10,8 @@ const fetch = require('node-fetch');
 // const { writeOutputToDirectory } = require('../utils/writeOutputToDirectory');
 // const { mySleep } = require('../utils/mySleep');
 
+// NOTE: test -> queoe how to test ?
+
 const { mySleepM } = require('../utils/mySleepM');
 const { myLogger } = require('../utils/myLogger');
 const { getRandomPoeEndpoint } = require('./getRandomPoeEndpoint');
@@ -34,6 +36,7 @@ function initQueue(Queue) {
       // NOTE: collect input
       const { data } = job;
       const { working_dir, preprompts, question_list, callback_url, parse_md } = data;
+      console.log({parse_md})
 
       const gpt_payload = { preprompts, question_list };
       const { random_openbox_host, gpt_endpoint } = getRandomPoeEndpoint();
@@ -42,30 +45,29 @@ function initQueue(Queue) {
       myLogger.info(JSON.stringify({ random_openbox_host, gpt_endpoint, data, gpt_payload }));
 
       // NOTE: ask poe start
-      if (parse_md) {
+      if (parse_md == true) {
+        myLogger.info('parse_md true, use /ask_with_md')
         var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask_with_md`, {
           method: 'post',
           body: JSON.stringify(gpt_payload),
           headers: { 'Content-Type': 'application/json' },
         });
       } else {
+        myLogger.info('parse_md false, use /ask')
         var poe_result = await fetch(`${gpt_endpoint}/chatGPT/ask`, {
           method: 'post',
           body: JSON.stringify(gpt_payload),
           headers: { 'Content-Type': 'application/json' },
         });
-
-        var check_result = await poe_result.json();
-        var {answer} = check_result;
-        if (answer == 'error_found') throw new Error('error found from answer...')
-        
       }
 
       var chatgpt_summarize_result_json = await poe_result.json();
+      var {answer} = chatgpt_summarize_result_json
+      if (answer == 'error_found') throw new Error('error_foudn in answer')
 
       chatgpt_summarize_result_json = { ...chatgpt_summarize_result_json, working_dir };
 
-      if (callback_url) {
+      if (callback_url && callback_url !='') {
         var result_cb_url = await fetch(callback_url, {
           method: 'post',
           body: JSON.stringify(chatgpt_summarize_result_json),
@@ -84,6 +86,7 @@ function initQueue(Queue) {
 
       // // NOTE: successful ask, cool down bot for slething
 
+      myLogger.info('starting cooldown');
       await mySleepM(SESSION_COOLDOWN_MINUTE);
       myLogger.info('cooldown bot done');
 
