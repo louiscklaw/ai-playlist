@@ -35,7 +35,6 @@ const {
 const { checkIfOutOfQuota } = require('../../../utils/checkIfOutOfQuota');
 
 async function chatGPTSolver(question_list, preprompts = []) {
-
   var chat_history = { state: 'INIT', preprompts: [], history: [] };
   var answer_idx = -1;
 
@@ -57,7 +56,7 @@ async function chatGPTSolver(question_list, preprompts = []) {
         var question = preprompts[i];
         answer_idx++;
 
-        var {answer, _raw_html} = await questionAndAnswer(page, question, answer_idx);
+        var { answer, _raw_html } = await questionAndAnswer(page, question, answer_idx);
         console.log({ answer, _raw_html });
 
         chat_history.preprompts.push({ question, answer, _raw_html });
@@ -72,8 +71,8 @@ async function chatGPTSolver(question_list, preprompts = []) {
       var question = question_list[i];
       answer_idx++;
 
-      var answer = await questionAndAnswer(page, question, answer_idx);
-      chat_history.history.push({ question, answer });
+      var { answer, _raw_html } = await questionAndAnswer(page, question, answer_idx);
+      chat_history.history.push({ question, answer, _raw_html });
 
       // TODO: remove this
       // await page.waitForTimeout(getRandomSecond(5, 15) * 1000);
@@ -86,12 +85,12 @@ async function chatGPTSolver(question_list, preprompts = []) {
   } catch (error) {
     chat_history = { ...chat_history, state: 'error', error };
 
-    var md5 = calculateMD5(error)
-    var content = JSON.stringify({question_list, preprompts, error, chat_history})
-    var filename = `/logs/error/openbox-poe-seat/${md5},json`
-    fs.writeFileSync(filename, content, {encoding:'utf8'})
+    var md5 = calculateMD5(error);
+    var content = JSON.stringify({ question_list, preprompts, error, chat_history });
+    var filename = `/logs/error/openbox-poe-seat/${md5},json`;
+    fs.writeFileSync(filename, content, { encoding: 'utf8' });
 
-    poeDownAlert(CANONICAL_HOSTNAME)
+    poeDownAlert(CANONICAL_HOSTNAME);
 
     if (browser?.close) await browser.close();
 
