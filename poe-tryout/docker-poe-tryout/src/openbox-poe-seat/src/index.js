@@ -4,12 +4,11 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const { myLogger } = require('./utils/myLogger');
+const { reportOffline } = require('./utils/reportPoeSeatOffline');
+const { reportOnline } = require('./utils/reportPoeSeatOnline');
 
 const app = express();
 app.use(bodyParser.json());
-
-const { reportOffline } = require('./utils/reportPoeSeatOffline');
-const { reportOnline } = require('./utils/reportPoeSeatOnline');
 
 try {
   const summarizeRoutes = require('./routes/summarize');
