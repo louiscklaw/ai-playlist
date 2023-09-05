@@ -13,6 +13,7 @@ const { loadJson, loadMetaJson } = require('../../../utils/loadJson');
 
 const { writeEmail } = require('./writeEmail');
 const { writeEmailMarkdown } = require('./writeEmailMarkdown');
+const { CVTemplateMarkdown } = require('./CVTemplateMarkdown');
 
 const ERROR_LOG_DIR = __dirname.replace('/app', '/logs/error');
 
@@ -26,7 +27,7 @@ function onPoeDraftEmailDone() {
       myLogger.info('DraftEmailDone...');
       var { working_dir } = this.context;
       if (!working_dir) {
-        myLogger.warn('working_dir is not defined, deafult to testing')
+        myLogger.warn('working_dir is not defined, deafult to testing');
         working_dir = '/share/testing';
       }
 
@@ -35,14 +36,14 @@ function onPoeDraftEmailDone() {
 
       var meta_json = await loadJson(`${working_dir}/meta.json`);
       myLogger.info(`job url: ${meta_json.jobsdb_job_url}`);
-      
+
       // checkInput(context);
-      var {reply, md_reply} = context.chat_history.q_and_a.history[0].answer;
+      var { reply, md_reply } = context.chat_history.q_and_a.history[0].answer;
       // md_reply contains the content to be written in email
-      console.log({md_reply});
+      console.log({ md_reply });
 
       myLogger.info(`writing content into ${email_md_filename}`);
-      await fs.writeFileSync(email_md_filename, md_reply.join(''), { encoding: 'utf8' });
+      await fs.writeFileSync(email_md_filename, CVTemplateMarkdown(md_reply.join('')), { encoding: 'utf8' });
 
       res();
     } catch (error) {
