@@ -108,7 +108,7 @@ async function questionAndAnswer(page, question, answer_idx) {
     });
 
     var reply = '...';
-    await page.waitForSelector(`[class*="Message_botMessageBubble"]`, { waitUntil: 'networkidle0' });
+    await page.waitForSelector(`[class*="Message_botMessageBubble__"]`, { waitUntil: 'networkidle0' });
     // console.log({ current_answer_bubble_length, new_answer_bubble_length });
 
     for (var countdown = 30; countdown > 0; countdown--) {
@@ -137,24 +137,27 @@ async function questionAndAnswer(page, question, answer_idx) {
       return first_check;
     };
 
-    await page.waitForSelector(`[class*="Message_botMessageBubble"]`);
-    for (var countdown = 120; countdown > 0; countdown--) {
-      var { answer, error, _raw_html } = await page.evaluate(answer_idx => {
+    await page.waitForSelector(`[class*="Message_botMessageBubble__"]`);
+    for (var countdown = 9999; countdown > 0; countdown--) {
+      var result_json = await page.evaluate(answer_idx => {
         try {
-          var ele = document.querySelectorAll('[class*="Message_botMessageBubble"]').item(answer_idx);
-          return {
+          var ele = document.querySelectorAll('[class*="Message_botMessageBubble__"]').item(answer_idx);
+          return JSON.stringify({
             answer: ele.textContent,
             error: false,
             _raw_html: ele.outerHTML,
-          };
+          });
         } catch (error) {
           console.log('chatGPT.js (obsoleted): error captured');
+
+          // NOTE: meaningless, just try best to capture the error
           console.error(JSON.stringify(error));
 
           // return { answer: '...', error, _raw_html:"" };
-          return { answer: 'error_found', error, _raw_html: '' };
+          return JSON.stringify({ answer: 'error_found', error, _raw_html: '' });
         }
       }, new_answer_bubble_length - 1);
+      var { answer, error, _raw_html } = JSON.parse(result_json);
 
       if (error) console.log(error);
 
