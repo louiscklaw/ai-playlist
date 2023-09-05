@@ -13,8 +13,8 @@ try {
 
   app.use('/count', require('./routes/count'));
   
-  app.use('/ask_poe', require('./routes/ask_poe'));
   app.use('/ask_poe_parse_md', require('./routes/ask_poe_parse_md'));
+  app.use('/ask_poe', require('./routes/ask_poe'));
 
   app.use('/process_new_job_post', require('./routes/process_new_job_post'));
   app.use('/ask_jobsdb_post', require('./routes/ask_jobsdb_post'));
