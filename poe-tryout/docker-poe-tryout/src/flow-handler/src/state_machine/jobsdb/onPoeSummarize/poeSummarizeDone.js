@@ -19,20 +19,29 @@ module.exports = {
         const { working_dir } = this.context;
         const job_summary = this.context.chat_history.q_and_a.history[1].answer;
 
+        console.log({job_summary});
         console.log(`TODO: replace ${FLOW_HANDLER_ENDPOINT}`);
-        
-        const prompts = new SummaryPrompts(job_summary);
-        
+        // const prompts = new SummaryPrompts(job_summary);
+
         const url = 'http://flow-handler:3000/jobsdb_draft_email';
         var input_to_draft_email = {
           working_dir,
-          preprompts: prompts.getSamplePreprompts(),
-          question_list: prompts.getSampleQuestions(),
+          preprompts: 
+[
+  'Forget everything and start a new talk.',
+  `I will input the summary of the position, please try to analyze it.`,
+  job_summary,
+],
+          question_list: 
+[
+  `Can you draft me a cover letter ? Thanks.
+Please output it in markdown format and keep it in under 200 words.`.trim(),
+],
           callback_url: 'http://flow-handler:3000/jobsdb_draft_email_cb',
         };
 
         console.log(`TODO: replace ${FLOW_HANDLER_ENDPOINT}`);
-        console.log({input_to_draft_email})
+        console.log({ input_to_draft_email });
 
         // proceed to summarize
         await fetch(url, {
