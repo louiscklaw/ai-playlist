@@ -2,6 +2,35 @@
 
 set -ex
 
+pushd poe-scheduler-api/tests/ask_poe/test2
+  ./test.sh
+  npx prettier --write .
+popd
+
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_with_md/test1
+#   ./test.sh
+#   npx prettier --write .
+# popd
+
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld/test1
+#   ./test.sh
+#   npx prettier --write .
+# popd
+
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld/test2
+#   ./test.sh
+#   npx prettier --write .
+# popd
+
+# pushd changedetect/diff-handler/src/tests/calculateMD5
+#   node index.js
+# popd
+
+# pushd openbox-poe-seat/src/tests/ChatGPT/ask_with_md/helloworld
+#   ./test.sh
+#   npx prettier --write .
+# popd
+
 # pushd flow-handler/src/tests/jobsdb_flow_summarize_cb
   # node index.js
   # node test1.js
@@ -9,11 +38,12 @@ set -ex
 # popd
 
 
-pushd flow-handler/src/tests/jobsdb_draft_email
-  # node index.js
-  # node test1.js
-  node test2.js
-popd
+# pushd flow-handler/src/tests/jobsdb_draft_email
+#   node test_md.js
+#   # node index.js
+#   # node test1.js
+#   # node test2.js
+# popd
 
 
 # pushd flow-handler/src/tests/state_machine/jobsdb/onReportJobComplete/getJobInfo
@@ -40,10 +70,6 @@ popd
 
 # flow-handler/src/tests/state_machine/jobsdb/onPoeDraftEmailDone
 
-# pushd openbox-poe-seat/src/tests/ChatGPT/ask_helloworld
-#   ./test.sh
-#   npx prettier --write .
-# popd
 
 # pushd openbox-poe-seat/src/tests/ChatGPT/ask_markdown_example
 #   ./test.sh
