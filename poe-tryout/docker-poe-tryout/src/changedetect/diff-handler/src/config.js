@@ -18,6 +18,8 @@ const {
   OPENBOX_POE_SEAT2_ENDPOINT,
 } = process.env;
 
+if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
+
 module.exports = {
   SRC_ROOT,
   SHARE_ROOT,
