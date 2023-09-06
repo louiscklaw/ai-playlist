@@ -59,7 +59,7 @@ services:
     entrypoint: ./entry.sh
     env_file: ./.env
     healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3001/healthcheck']
+      test: ['CMD', 'curl', '-f', 'http://dbapi:3001/healthcheck']
       interval: 10s
       timeout: 10s
       retries: 10
