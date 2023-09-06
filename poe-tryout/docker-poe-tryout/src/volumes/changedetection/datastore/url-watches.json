@@ -1,0 +1,1354 @@
+{
+    "note": "Hello! If you change this file manually, please be sure to restart your changedetection.io instance!",
+    "watching": {
+        "fa164b39-9f5c-4a2d-89aa-2ee691ea8ae4": {
+            "body": "{search: ['apple','orange']}",
+            "check_unique_lines": false,
+            "check_count": 2,
+            "date_created": 0,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": false,
+            "track_ldjson_price_data": null,
+            "headers": {},
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1692442084,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "POST",
+            "notification_body": "",
+            "notification_format": "System default",
+            "notification_muted": true,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [],
+            "paused": true,
+            "previous_md5": "2cdb86ee770b0c486605bf467f7b4c75",
+            "previous_md5_before_filters": "129b6ac6ace92a4ee5ddf7e09a2513f3",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "8e00aec6-93b5-48de-8d2c-1979c7c56e15"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": null,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "",
+            "trigger_text": [],
+            "url": "https://news.ycombinator.com/",
+            "uuid": "fa164b39-9f5c-4a2d-89aa-2ee691ea8ae4",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "last_notification_error": false,
+            "content_type": "text/html; charset=utf-8",
+            "last_check_status": 200,
+            "fetch_time": 0.884,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true
+        },
+        "b72a36c2-1fb4-40fd-bb43-28851b22c507": {
+            "body": null,
+            "check_unique_lines": false,
+            "check_count": 1,
+            "date_created": 1,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": 1,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {},
+            "ignore_text": [],
+            "in_stock_only": true,
+            "include_filters": [],
+            "last_checked": 1692435596,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "GET",
+            "notification_body": null,
+            "notification_format": "System default",
+            "notification_muted": true,
+            "notification_title": null,
+            "notification_screenshot": false,
+            "notification_urls": [],
+            "paused": true,
+            "previous_md5": "7b55c3b3384b430bc8e8b8fd76ba5659",
+            "previous_md5_before_filters": "c5fd9e71a209e46839d32a9c486a986f",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c9399d65-ec16-4bc0-9364-d800cf0a44c9"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": null,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": null,
+            "trigger_text": [],
+            "url": "https://changedetection.io/CHANGELOG.txt",
+            "uuid": "b72a36c2-1fb4-40fd-bb43-28851b22c507",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": null,
+            "last_notification_error": false,
+            "content_type": "text/plain",
+            "last_check_status": 200,
+            "fetch_time": 2.501
+        },
+        "1c6e85ce-d6f8-4aac-a3ac-1bc7d6f678f3": {
+            "body": "",
+            "check_unique_lines": false,
+            "check_count": 44,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {},
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1692468666,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "GET",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": true,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler/dump"
+            ],
+            "paused": true,
+            "previous_md5": "803604ee3f4419d21d265567e69c300e",
+            "previous_md5_before_filters": "803604ee3f4419d21d265567e69c300e",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "604059fb-9345-4ee7-9376-af13e564ca18"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "",
+            "trigger_text": [],
+            "url": "http://bait:8080/helloworld",
+            "uuid": "1c6e85ce-d6f8-4aac-a3ac-1bc7d6f678f3",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 0.042,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "6b09c386-c97e-472a-a0f2-174e86fed383": {
+            "body": "{ \"search\": [\"validation\", \"automation\", \"engineer\"] }",
+            "check_unique_lines": false,
+            "check_count": 343,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1693969632,
+            "last_error": false,
+            "last_viewed": 1693968798,
+            "method": "POST",
+            "notification_body": "{{diff_added}}",
+            "notification_format": "Text",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler"
+            ],
+            "paused": true,
+            "previous_md5": "ffdaeb7b9eed3caa6d7a02d69a7b57b2",
+            "previous_md5_before_filters": "ffdaeb7b9eed3caa6d7a02d69a7b57b2",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "604059fb-9345-4ee7-9376-af13e564ca18"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "",
+            "trigger_text": [],
+            "url": "http://bait:8080/fetchSearchResult/result1",
+            "uuid": "6b09c386-c97e-472a-a0f2-174e86fed383",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 0.186,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "fa2ea05f-f013-4db6-82ff-9b6f9417f301": {
+            "body": "{ \"search\": [\"appium\"] }",
+            "check_unique_lines": false,
+            "check_count": 75,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 0,
+            "last_error": false,
+            "last_viewed": 0,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler/dump"
+            ],
+            "paused": true,
+            "previous_md5": false,
+            "previous_md5_before_filters": "8c4174faf5e55b72c28d0a49f2a0e29e",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c31b470f-7640-4593-8582-ad8a672af583"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "search using \"appium\"",
+            "trigger_text": [],
+            "url": "http://jobsdb-scraper:3000/fetchSearchResult/search",
+            "uuid": "fa2ea05f-f013-4db6-82ff-9b6f9417f301",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 28.182,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "6ba4fcf8-6040-4b3c-a210-f9b051b2e0f6": {
+            "body": "{ \"search\": [\"validation\", \"automation\", \"engineer\"] }",
+            "check_unique_lines": false,
+            "check_count": 71,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 0,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler/dump"
+            ],
+            "paused": true,
+            "previous_md5": false,
+            "previous_md5_before_filters": "e4eed5b2af2da1044653014ccf73866d",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c31b470f-7640-4593-8582-ad8a672af583"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "",
+            "trigger_text": [],
+            "url": "http://jobsdb-scraper:3000/fetchSearchResult/search",
+            "uuid": "6ba4fcf8-6040-4b3c-a210-f9b051b2e0f6",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 26.628,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "48aa3b30-61fb-4449-83ef-fa632f50e5f8": {
+            "body": "{ \"search\": [\"selenium\"] }",
+            "check_unique_lines": false,
+            "check_count": 73,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1692690120,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "System default",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler"
+            ],
+            "paused": true,
+            "previous_md5": "5a764388247d0e6f33b64241cfb49dc3",
+            "previous_md5_before_filters": "5f7eea4d8187529fdfd1793f859973a2",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c31b470f-7640-4593-8582-ad8a672af583"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "search using \"selenium\"",
+            "trigger_text": [],
+            "url": "http://jobsdb-scraper:3000/fetchSearchResult/search",
+            "uuid": "48aa3b30-61fb-4449-83ef-fa632f50e5f8",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 9.388,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "f2efc8e8-242f-44a9-86bc-29348a6e333b": {
+            "body": "{ \"search\": [\"validation\", \"automation\"] }",
+            "check_unique_lines": false,
+            "check_count": 73,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1692690077,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler"
+            ],
+            "paused": true,
+            "previous_md5": "1ffe81362109051e4aeb6c7e02292f5d",
+            "previous_md5_before_filters": "7c2952455cba56a45700c02765ee40b6",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c31b470f-7640-4593-8582-ad8a672af583"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "search \"validation\", \"automation\"",
+            "trigger_text": [],
+            "url": "http://jobsdb-scraper:3000/fetchSearchResult/search",
+            "uuid": "f2efc8e8-242f-44a9-86bc-29348a6e333b",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 26.324,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "0d1ad880-a08e-4088-8466-e427bea61e43": {
+            "body": "{ \"search\": [\"validation\", \"automation\", \"engineer\"] }",
+            "check_unique_lines": false,
+            "check_count": 72,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 0,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler/dump"
+            ],
+            "paused": true,
+            "previous_md5": false,
+            "previous_md5_before_filters": "e4eed5b2af2da1044653014ccf73866d",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c31b470f-7640-4593-8582-ad8a672af583"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "search \"validation\", \"automation\", \"engineer\"",
+            "trigger_text": [],
+            "url": "http://jobsdb-scraper:3000/fetchSearchResult/search",
+            "uuid": "0d1ad880-a08e-4088-8466-e427bea61e43",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 26.552,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        },
+        "f1012607-0ef3-43cc-aa74-4a4648600fc2": {
+            "body": "{ \"search\": [\"Robot framework\"] }",
+            "check_unique_lines": false,
+            "check_count": 76,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1692733285,
+            "last_error": false,
+            "last_viewed": 1693681377,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": false,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/jobsdb_diff_handler/dump"
+            ],
+            "paused": true,
+            "previous_md5": "3c3c74d87e5b77ef28a6ae0e6500bdec",
+            "previous_md5_before_filters": "7743b6940ffc8bbb5d5ee5ebec246937",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "c31b470f-7640-4593-8582-ad8a672af583"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "search using \"Robot framework\"",
+            "trigger_text": [],
+            "url": "http://jobsdb-scraper:3000/fetchSearchResult/search",
+            "uuid": "f1012607-0ef3-43cc-aa74-4a4648600fc2",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 14.189,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
+        }
+    },
+    "settings": {
+        "headers": {},
+        "requests": {
+            "extra_proxies": [],
+            "jitter_seconds": 0,
+            "proxy": null,
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 3,
+                "minutes": null,
+                "seconds": null
+            },
+            "timeout": 45,
+            "workers": 10
+        },
+        "application": {
+            "api_access_token_enabled": true,
+            "base_url": "",
+            "empty_pages_are_a_change": false,
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "filter_failure_notification_threshold_attempts": 6,
+            "global_ignore_text": [],
+            "global_subtractive_selectors": [],
+            "ignore_whitespace": true,
+            "notification_body": "{{watch_url}} had a change.\n---\n{{diff}}\n---\n",
+            "notification_format": "Text",
+            "notification_title": "ChangeDetection.io Notification - {{watch_url}}",
+            "notification_urls": [],
+            "pager_size": 50,
+            "password": false,
+            "render_anchor_tag_content": false,
+            "schema_version": 12,
+            "shared_diff_access": false,
+            "webdriver_delay": null,
+            "tags": {
+                "8e00aec6-93b5-48de-8d2c-1979c7c56e15": {
+                    "body": null,
+                    "check_unique_lines": false,
+                    "check_count": 0,
+                    "date_created": 1692435592,
+                    "consecutive_filter_failures": 0,
+                    "extract_text": [],
+                    "extract_title_as_title": false,
+                    "fetch_backend": "system",
+                    "processor": "text_json_diff",
+                    "filter_failure_notification_send": 1,
+                    "filter_text_added": true,
+                    "filter_text_replaced": true,
+                    "filter_text_removed": true,
+                    "has_ldjson_price_data": null,
+                    "track_ldjson_price_data": null,
+                    "headers": {},
+                    "ignore_text": [],
+                    "in_stock_only": true,
+                    "include_filters": [],
+                    "last_checked": 0,
+                    "last_error": false,
+                    "last_viewed": 0,
+                    "method": "GET",
+                    "notification_body": null,
+                    "notification_format": "System default",
+                    "notification_muted": false,
+                    "notification_title": null,
+                    "notification_screenshot": false,
+                    "notification_urls": [],
+                    "paused": false,
+                    "previous_md5": false,
+                    "previous_md5_before_filters": false,
+                    "proxy": null,
+                    "subtractive_selectors": [],
+                    "tag": "",
+                    "tags": [],
+                    "text_should_not_be_present": [],
+                    "time_between_check": {
+                        "weeks": null,
+                        "days": null,
+                        "hours": null,
+                        "minutes": null,
+                        "seconds": null
+                    },
+                    "title": "Tech news",
+                    "trigger_text": [],
+                    "url": "",
+                    "uuid": "8e00aec6-93b5-48de-8d2c-1979c7c56e15",
+                    "webdriver_delay": null,
+                    "webdriver_js_execute_code": null
+                },
+                "c9399d65-ec16-4bc0-9364-d800cf0a44c9": {
+                    "body": null,
+                    "check_unique_lines": false,
+                    "check_count": 0,
+                    "date_created": 1692435592,
+                    "consecutive_filter_failures": 0,
+                    "extract_text": [],
+                    "extract_title_as_title": false,
+                    "fetch_backend": "system",
+                    "processor": "text_json_diff",
+                    "filter_failure_notification_send": 1,
+                    "filter_text_added": true,
+                    "filter_text_replaced": true,
+                    "filter_text_removed": true,
+                    "has_ldjson_price_data": null,
+                    "track_ldjson_price_data": null,
+                    "headers": {},
+                    "ignore_text": [],
+                    "in_stock_only": true,
+                    "include_filters": [],
+                    "last_checked": 0,
+                    "last_error": false,
+                    "last_viewed": 0,
+                    "method": "GET",
+                    "notification_body": null,
+                    "notification_format": "System default",
+                    "notification_muted": false,
+                    "notification_title": null,
+                    "notification_screenshot": false,
+                    "notification_urls": [],
+                    "paused": false,
+                    "previous_md5": false,
+                    "previous_md5_before_filters": false,
+                    "proxy": null,
+                    "subtractive_selectors": [],
+                    "tag": "",
+                    "tags": [],
+                    "text_should_not_be_present": [],
+                    "time_between_check": {
+                        "weeks": null,
+                        "days": null,
+                        "hours": null,
+                        "minutes": null,
+                        "seconds": null
+                    },
+                    "title": "changedetection.io",
+                    "trigger_text": [],
+                    "url": "",
+                    "uuid": "c9399d65-ec16-4bc0-9364-d800cf0a44c9",
+                    "webdriver_delay": null,
+                    "webdriver_js_execute_code": null
+                },
+                "c31b470f-7640-4593-8582-ad8a672af583": {
+                    "body": null,
+                    "check_unique_lines": false,
+                    "check_count": 0,
+                    "date_created": 1692442575,
+                    "consecutive_filter_failures": 0,
+                    "extract_text": [],
+                    "extract_title_as_title": false,
+                    "fetch_backend": "system",
+                    "processor": "text_json_diff",
+                    "filter_failure_notification_send": 1,
+                    "filter_text_added": true,
+                    "filter_text_replaced": true,
+                    "filter_text_removed": true,
+                    "has_ldjson_price_data": null,
+                    "track_ldjson_price_data": null,
+                    "headers": {},
+                    "ignore_text": [],
+                    "in_stock_only": true,
+                    "include_filters": [],
+                    "last_checked": 0,
+                    "last_error": false,
+                    "last_viewed": 0,
+                    "method": "GET",
+                    "notification_body": null,
+                    "notification_format": "System default",
+                    "notification_muted": false,
+                    "notification_title": null,
+                    "notification_screenshot": false,
+                    "notification_urls": [],
+                    "paused": false,
+                    "previous_md5": false,
+                    "previous_md5_before_filters": false,
+                    "proxy": null,
+                    "subtractive_selectors": [],
+                    "tag": "",
+                    "tags": [],
+                    "text_should_not_be_present": [],
+                    "time_between_check": {
+                        "weeks": null,
+                        "days": null,
+                        "hours": null,
+                        "minutes": null,
+                        "seconds": null
+                    },
+                    "title": "jobsdb-scraper",
+                    "trigger_text": [],
+                    "url": "",
+                    "uuid": "c31b470f-7640-4593-8582-ad8a672af583",
+                    "webdriver_delay": null,
+                    "webdriver_js_execute_code": null
+                },
+                "604059fb-9345-4ee7-9376-af13e564ca18": {
+                    "body": null,
+                    "check_unique_lines": false,
+                    "check_count": 0,
+                    "date_created": 1692442709,
+                    "consecutive_filter_failures": 0,
+                    "extract_text": [],
+                    "extract_title_as_title": false,
+                    "fetch_backend": "system",
+                    "processor": "text_json_diff",
+                    "filter_failure_notification_send": 1,
+                    "filter_text_added": true,
+                    "filter_text_replaced": true,
+                    "filter_text_removed": true,
+                    "has_ldjson_price_data": null,
+                    "track_ldjson_price_data": null,
+                    "headers": {},
+                    "ignore_text": [],
+                    "in_stock_only": true,
+                    "include_filters": [],
+                    "last_checked": 0,
+                    "last_error": false,
+                    "last_viewed": 0,
+                    "method": "GET",
+                    "notification_body": null,
+                    "notification_format": "System default",
+                    "notification_muted": false,
+                    "notification_title": null,
+                    "notification_screenshot": false,
+                    "notification_urls": [],
+                    "paused": false,
+                    "previous_md5": false,
+                    "previous_md5_before_filters": false,
+                    "proxy": null,
+                    "subtractive_selectors": [],
+                    "tag": "",
+                    "tags": [],
+                    "text_should_not_be_present": [],
+                    "time_between_check": {
+                        "weeks": null,
+                        "days": null,
+                        "hours": null,
+                        "minutes": null,
+                        "seconds": null
+                    },
+                    "title": "bait:8080",
+                    "trigger_text": [],
+                    "url": "",
+                    "uuid": "604059fb-9345-4ee7-9376-af13e564ca18",
+                    "webdriver_delay": null,
+                    "webdriver_js_execute_code": null
+                }
+            },
+            "rss_access_token": "4f4548fa916f7dea3ed3d1e7e00b88b4",
+            "api_access_token": "9f436154a69986fe8d3546bab22e1153"
+        }
+    },
+    "build_sha": "dee23709a951479c7a79849080291910d4e74af4\n",
+    "app_guid": "2a45e035-4661-4de9-a32a-7efd621142ef",
+    "version_tag": "0.44.2"
+}
