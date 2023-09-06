@@ -22,3 +22,8 @@ services:
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.01"
