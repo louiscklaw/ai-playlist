@@ -113,4 +113,8 @@ router.post('/',async (req, res) => {
   res.send(output);
 });
 
+router.get('/helloworld', (req, res) =>{
+  res.send('helloworld')
+})
+
 module.exports = router;
