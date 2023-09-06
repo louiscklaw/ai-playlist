@@ -2,10 +2,20 @@
 
 set -ex
 
-pushd poe-scheduler-api/tests/ask_poe/test2
-  ./test.sh
+pushd changedetect/scraper/glassdoor/src/tests/routes/fetchSearchResult
+  node ./index.js
   npx prettier --write .
 popd
+
+# pushd changedetect/scraper/jobsdb/src/tests/routes/fetchSearchResult
+#   node ./index.js
+#   npx prettier --write .
+# popd
+
+# pushd poe-scheduler-api/tests/ask_poe/test2
+#   ./test.sh
+#   npx prettier --write .
+# popd
 
 # pushd openbox-poe-seat/src/tests/ChatGPT/ask_with_md/test1
 #   ./test.sh

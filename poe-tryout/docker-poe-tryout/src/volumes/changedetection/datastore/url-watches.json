@@ -1330,6 +1330,122 @@
             "last_notification_error": false,
             "content_type": "application/json; charset=utf-8",
             "last_check_status": 200
+        },
+        "53ea1646-7a2d-43b9-9385-ae542fd6cc87": {
+            "body": "{ \r\n\"search\": [\"validation\", \"engineer\"] \r\n}",
+            "check_unique_lines": false,
+            "check_count": 129,
+            "date_created": null,
+            "consecutive_filter_failures": 0,
+            "extract_text": [],
+            "extract_title_as_title": false,
+            "fetch_backend": "html_requests",
+            "processor": "text_json_diff",
+            "filter_failure_notification_send": true,
+            "filter_text_added": true,
+            "filter_text_replaced": true,
+            "filter_text_removed": true,
+            "has_ldjson_price_data": null,
+            "track_ldjson_price_data": null,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "ignore_text": [],
+            "in_stock_only": false,
+            "include_filters": [],
+            "last_checked": 1693989759,
+            "last_error": false,
+            "last_viewed": 1693989742,
+            "method": "POST",
+            "notification_body": "{{diff}}",
+            "notification_format": "Text",
+            "notification_muted": true,
+            "notification_title": "",
+            "notification_screenshot": false,
+            "notification_urls": [
+                "json://diff-handler:3000/glassdoor_diff_handler"
+            ],
+            "paused": true,
+            "previous_md5": "5b2e87132f40dc831aaa789308e77057",
+            "previous_md5_before_filters": "1a456b367c359d32f3a051fafad65487",
+            "proxy": null,
+            "subtractive_selectors": [],
+            "tag": "",
+            "tags": [
+                "b707d3c3-7832-4113-bd35-2eeb3be3f544"
+            ],
+            "text_should_not_be_present": [],
+            "time_between_check": {
+                "weeks": null,
+                "days": null,
+                "hours": 1,
+                "minutes": null,
+                "seconds": null
+            },
+            "title": "search \"validation\", \"engineer\"",
+            "trigger_text": [],
+            "url": "http://glassdoor-scraper:3000/fetchSearchResult/search",
+            "uuid": "53ea1646-7a2d-43b9-9385-ae542fd6cc87",
+            "webdriver_delay": null,
+            "webdriver_js_execute_code": "",
+            "fetch_time": 8.107,
+            "ignore_status_codes": false,
+            "browser_steps": [
+                {
+                    "operation": null,
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                },
+                {
+                    "operation": "Choose one",
+                    "selector": "",
+                    "optional_value": ""
+                }
+            ],
+            "save_button": true,
+            "last_notification_error": false,
+            "content_type": "application/json; charset=utf-8",
+            "last_check_status": 200
         }
     },
     "settings": {
@@ -1595,6 +1711,58 @@
                     "trigger_text": [],
                     "url": "",
                     "uuid": "6448be4c-7ce4-4bc2-aa70-62cb5c13032d",
+                    "webdriver_delay": null,
+                    "webdriver_js_execute_code": null
+                },
+                "b707d3c3-7832-4113-bd35-2eeb3be3f544": {
+                    "body": null,
+                    "check_unique_lines": false,
+                    "check_count": 0,
+                    "date_created": 1693988512,
+                    "consecutive_filter_failures": 0,
+                    "extract_text": [],
+                    "extract_title_as_title": false,
+                    "fetch_backend": "system",
+                    "processor": "text_json_diff",
+                    "filter_failure_notification_send": 1,
+                    "filter_text_added": true,
+                    "filter_text_replaced": true,
+                    "filter_text_removed": true,
+                    "has_ldjson_price_data": null,
+                    "track_ldjson_price_data": null,
+                    "headers": {},
+                    "ignore_text": [],
+                    "in_stock_only": true,
+                    "include_filters": [],
+                    "last_checked": 0,
+                    "last_error": false,
+                    "last_viewed": 0,
+                    "method": "GET",
+                    "notification_body": null,
+                    "notification_format": "System default",
+                    "notification_muted": false,
+                    "notification_title": null,
+                    "notification_screenshot": false,
+                    "notification_urls": [],
+                    "paused": false,
+                    "previous_md5": false,
+                    "previous_md5_before_filters": false,
+                    "proxy": null,
+                    "subtractive_selectors": [],
+                    "tag": "",
+                    "tags": [],
+                    "text_should_not_be_present": [],
+                    "time_between_check": {
+                        "weeks": null,
+                        "days": null,
+                        "hours": null,
+                        "minutes": null,
+                        "seconds": null
+                    },
+                    "title": "glassdoor.com.hk",
+                    "trigger_text": [],
+                    "url": "",
+                    "uuid": "b707d3c3-7832-4113-bd35-2eeb3be3f544",
                     "webdriver_delay": null,
                     "webdriver_js_execute_code": null
                 }

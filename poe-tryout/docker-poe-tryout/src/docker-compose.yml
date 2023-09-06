@@ -6,8 +6,9 @@ networks:
 
 services:
   test:
-    image: node:latest
-    command: sleep infinity
+    # image: node:latest
+    # entrypoint: sleep infinity
+    build: ./tests
     working_dir: /src
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

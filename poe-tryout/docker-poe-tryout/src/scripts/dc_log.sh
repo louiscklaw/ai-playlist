@@ -14,4 +14,5 @@ docker compose -f ./docker-compose.gen.yml \
   flow-handler \
   jobsdb-link-extractor \
   jobsdb-scraper \
+  glassdoor-scraper \
   page-handler poe-scheduler-api

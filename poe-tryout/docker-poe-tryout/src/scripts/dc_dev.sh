@@ -15,8 +15,12 @@ read -p "Press Enter to continue..."
 echo 
 
 # docker compose -f ./docker-compose-openbox.gen.yml up -d
-docker compose -f ./docker-compose.gen.yml up -d
-# --build
+docker compose -f ./docker-compose.gen.yml up -d 
+# \
+#   browserless-chrome \
+#   glassdoor-scraper \
+#   test
+
 
 exit 0
 
