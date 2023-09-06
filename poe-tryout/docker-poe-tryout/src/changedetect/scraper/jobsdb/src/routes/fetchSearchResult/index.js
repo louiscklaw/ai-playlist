@@ -14,7 +14,6 @@ const { calculateMD5 } = require('../../utils/calculateMD5');
 
 const { PLAYWRIGHT_DRIVER_URL } = require('../../config');
 
-// const BROWSERLESS_HOST = 'changedetection-chrome';
 
 router.post('/search', async (req, res) => {
   var output = { state: 'init', debug: req.body, error: '' };
