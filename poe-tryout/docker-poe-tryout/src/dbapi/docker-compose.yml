@@ -23,6 +23,13 @@ services:
         timeout: 10s
         retries: 5
 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
+
   mongo-express:
     image: mongo-express:latest
     # container_name: mongo-express
@@ -38,6 +45,13 @@ services:
         condition: service_healthy
 
     restart: unless-stopped
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
 
   dbapi:
     # build: ./dbapi
@@ -63,3 +77,10 @@ services:
       interval: 10s
       timeout: 10s
       retries: 10
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"

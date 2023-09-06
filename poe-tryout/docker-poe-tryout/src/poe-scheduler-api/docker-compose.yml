@@ -31,6 +31,13 @@ services:
       timeout: 10s
       retries: 5
 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
+
   redis:
     image: 192.168.10.61:5000/redis:6.0.20
     hostname: redis
@@ -52,3 +59,9 @@ services:
       timeout: 10s
       retries: 5
       
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"

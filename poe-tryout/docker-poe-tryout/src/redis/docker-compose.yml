@@ -18,6 +18,13 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
+
   redis-test:
     image: 192.168.10.61:5000/node:latest
     command: sleep infinity
@@ -33,3 +40,10 @@ services:
       redis:
         condition: service_healthy
     env_file: ./.env
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
