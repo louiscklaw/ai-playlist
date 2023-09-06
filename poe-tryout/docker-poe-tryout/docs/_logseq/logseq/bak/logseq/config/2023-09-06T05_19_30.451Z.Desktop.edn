@@ -10,7 +10,7 @@
  ;; Available options:
  ;; - :now for NOW/LATER style (default)
  ;; - :todo for TODO/DOING style
- :preferred-workflow :todo
+ :preferred-workflow :now
 
  ;; Exclude directories/files.
  ;; Example usage:
@@ -292,7 +292,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["changedetection"]
+ :favorites []
 
  ;; Set flashcards interval.
  ;; Expected value:
@@ -411,8 +411,4 @@
  ;;   - :triple-lowbar (default)
  ;;      ;use triple underscore `___` for slash `/` in page title
  ;;      ;use Percent-encoding for other invalid characters
- :file/name-format :triple-lowbar
- :journal/page-title-format "EEE, yyyy/MM/dd"
- :editor/logical-outdenting? true
- :feature/enable-journals? false
- :graph/settings {:builtin-pages? false, :orphan-pages? false, :excluded-pages? false}}
+ :file/name-format :triple-lowbar}

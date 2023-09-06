@@ -292,7 +292,7 @@
  ;;  :journal?        false} ; Default value: false
 
  ;; Favorites to list on the left sidebar
- :favorites ["changedetection"]
+ :favorites []
 
  ;; Set flashcards interval.
  ;; Expected value:
@@ -415,4 +415,4 @@
  :journal/page-title-format "EEE, yyyy/MM/dd"
  :editor/logical-outdenting? true
  :feature/enable-journals? false
- :graph/settings {:builtin-pages? false, :orphan-pages? false, :excluded-pages? false}}
+ :graph/settings {:builtin-pages? true}}
