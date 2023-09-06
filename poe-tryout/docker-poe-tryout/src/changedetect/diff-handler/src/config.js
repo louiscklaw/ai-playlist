@@ -3,6 +3,9 @@ const SHARE_ROOT = '/share';
 const BROWSERLESS_HOST = 'link-extractor-chrome';
 const SCREENSHOT_ROOT = '/share/screenshot';
 
+const {REDIS_PASSWORD} = process.env
+if (!REDIS_PASSWORD) throw new Error('REDIS_PASSWORD is not defined')
+
 const {
   FLOW_HANDLER_ENDPOINT,
   API_DEBUG_ENDPOINT,
@@ -32,4 +35,6 @@ module.exports = {
   POE_SCHEDULER_API_ENDPOINT,
   OPENBOX_POE_SEAT1_ENDPOINT,
   OPENBOX_POE_SEAT2_ENDPOINT,
+
+  REDIS_PASSWORD,
 };
