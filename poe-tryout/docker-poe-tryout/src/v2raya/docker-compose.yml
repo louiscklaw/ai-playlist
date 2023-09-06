@@ -19,3 +19,10 @@ services:
       - V2RAYA_LOG_FILE=/tmp/v2raya.log
       - V2RAYA_ADDRESS=0.0.0.0:2017
     env_file: ./.env
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"

@@ -15,64 +15,30 @@ services:
       - ./volumes/logs:/logs
     working_dir: /app
     ports:
-      - 50501:3000
-    entrypoint: ./entry.sh
-    restart: unless-stopped
-    environment:
-      - TZ=Asia/Hong_Kong
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-    env_file: ./.env
-    healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
-      interval: 15s
-      timeout: 15s
-      retries: 6
-    depends_on:
-      diff-handler-redis:
-        condition: service_started
-    deploy:
-      resources:
-        limits:
-          cpus: "0.9"
-          memory: 1G
-        reservations:
-          cpus: "0.01"
-          memory: 64M
-
-  glassdoor-scraper:
-    # build: ./changedetect/glassdoor-scraper
-    image: logickee/poe-tryout-glassdoor-scraper
-    volumes:
-      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-      - ./changedetect/scraper/glassdoor/src:/app
-      - ./volumes/changedetect/glassdoor-scraper:/share
-      - ./volumes/logs:/logs
-    working_dir: /app
-    ports:
-      - 50500:3000
+      - 3052:3000
     entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
-      - PLAYWRIGHT_DRIVER_URL=ws://browserless-chrome:3000/?stealth=1&--disable-web-security=true
+      - REDIS_ENDPOINT_URI=redis://diff-handler-redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    # depends_on:
+    #   jobsdb-scraper:
+    #     condition: service_healthy
     env_file: ./.env
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
       interval: 10s
       timeout: 10s
       retries: 5
-    depends_on:
-      browserless-chrome:
-        condition: service_started
+
     deploy:
       resources:
         limits:
-          cpus: "0.9"
-          memory: 1G
+          cpus: "0.7"
         reservations:
           cpus: "0.01"
-          memory: 64M
 
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
@@ -84,7 +50,7 @@ services:
       - ./volumes/logs:/logs
     working_dir: /app
     ports:
-      - 50502:3000
+      - 3054:3000
     entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
@@ -97,17 +63,13 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
-    depends_on:
-      browserless-chrome:
-        condition: service_started
+
     deploy:
       resources:
         limits:
-          cpus: "0.9"
-          memory: 1G
+          cpus: "0.7"
         reservations:
           cpus: "0.01"
-          memory: 64M
 
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
@@ -145,14 +107,13 @@ services:
         condition: service_healthy
       jobsdb-scraper:
         condition: service_healthy
+
     deploy:
       resources:
         limits:
-          cpus: "0.9"
-          memory: 1G
+          cpus: "0.7"
         reservations:
           cpus: "0.01"
-          memory: 64M
 
   diff-handler-redis:
     image: 192.168.10.61:5000/redis:6.0.20
@@ -170,14 +131,13 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+
     deploy:
       resources:
         limits:
-          cpus: "0.9"
-          memory: 1G
+          cpus: "0.7"
         reservations:
           cpus: "0.01"
-          memory: 64M
 
   # changedetection-chrome:
   #   #  hostname: changedetection-chrome

@@ -29,6 +29,13 @@ services:
     depends_on:
       - browserless-chrome
 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
+
   # link-extractor-chrome:
   #   image: browserless/chrome
   #   shm_size: '1gb'
