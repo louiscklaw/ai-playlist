@@ -4,6 +4,7 @@ set -e
 
 YML_S='
 -f ./docker-compose.yml
+-f ./browserless-chrome/docker-compose.yml
 -f ./redis/docker-compose.yml
 -f ./poe-scheduler-api/docker-compose.yml
 -f ./api-debug/docker-compose.yml

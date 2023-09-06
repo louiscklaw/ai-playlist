@@ -19,6 +19,7 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
       - LOG_PREFIX=jobsdb-link-extractor
+      - PLAYWRIGHT_DRIVER_URL=ws://browserless-chrome:3000/?stealth=1&--disable-web-security=true
     env_file: ./.env
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
@@ -26,26 +27,26 @@ services:
       timeout: 10s
       retries: 10
     depends_on:
-      - link-extractor-chrome
+      - browserless-chrome
 
-  link-extractor-chrome:
-    image: browserless/chrome
-    shm_size: '1gb'
-    restart: unless-stopped
-    ports:
-      - 13000:3000
-    environment:
-      - TZ=Asia/Hong_Kong
-      - SCREEN_WIDTH=1920
-      - SCREEN_HEIGHT=1024
-      - SCREEN_DEPTH=16
-      - ENABLE_DEBUGGER=false
-      - PREBOOT_CHROME=true
-      - CONNECTION_TIMEOUT=300000
-      - MAX_CONCURRENT_SESSIONS=10
-      - CHROME_REFRESH_TIME=600000
-      - DEFAULT_BLOCK_ADS=true
-      - DEFAULT_STEALTH=true
-      - DEFAULT_IGNORE_HTTPS_ERRORS=true
-    volumes:
-      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+  # link-extractor-chrome:
+  #   image: browserless/chrome
+  #   shm_size: '1gb'
+  #   restart: unless-stopped
+  #   ports:
+  #     - 13000:3000
+  #   environment:
+  #     - TZ=Asia/Hong_Kong
+  #     - SCREEN_WIDTH=1920
+  #     - SCREEN_HEIGHT=1024
+  #     - SCREEN_DEPTH=16
+  #     - ENABLE_DEBUGGER=false
+  #     - PREBOOT_CHROME=true
+  #     - CONNECTION_TIMEOUT=300000
+  #     - MAX_CONCURRENT_SESSIONS=10
+  #     - CHROME_REFRESH_TIME=600000
+  #     - DEFAULT_BLOCK_ADS=true
+  #     - DEFAULT_STEALTH=true
+  #     - DEFAULT_IGNORE_HTTPS_ERRORS=true
+  #   volumes:
+  #     - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

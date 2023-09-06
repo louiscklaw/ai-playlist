@@ -1,0 +1,24 @@
+services:
+  browserless-chrome:
+    #  hostname: changedetection-chrome
+    image: browserless/chrome
+    shm_size: '2gb'
+    restart: unless-stopped
+    ports:
+      - 3055:3000
+    environment:
+      - TZ=Asia/Hong_Kong
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1024
+      - SCREEN_DEPTH=16
+      - ENABLE_DEBUGGER=false
+      - PREBOOT_CHROME=true
+      - CONNECTION_TIMEOUT=300000
+      - MAX_CONCURRENT_SESSIONS=10
+      - CHROME_REFRESH_TIME=600000
+      - DEFAULT_BLOCK_ADS=true
+      - DEFAULT_STEALTH=true
+      # Ignore HTTPS errors, like for self-signed certs
+      - DEFAULT_IGNORE_HTTPS_ERRORS=true
+    volumes:
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro

@@ -1,6 +1,8 @@
+name: jobsdb-poe
+
 networks:
   default:
-    name: poe-tryout
+    name: jobsdb-poe-network
 
 services:
   test:

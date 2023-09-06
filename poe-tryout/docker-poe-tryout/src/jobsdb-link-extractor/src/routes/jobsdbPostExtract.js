@@ -5,10 +5,10 @@
 var validUrl = require('valid-url');
 const Joi = require('joi');
 
-const { SRC_ROOT, BROWSERLESS_HOST, SCREENSHOT_ROOT } = require('../config');
+const { SRC_ROOT, BROWSERLESS_HOST, SCREENSHOT_ROOT, PLAYWRIGHT_DRIVER_URL } = require('../config');
 
-const fs = require('fs'),
-  path = require('path');
+const fs = require('fs');
+const path = require('path');
 const puppeteer = require('puppeteer-core');
 
 const express = require('express');
@@ -71,8 +71,9 @@ router.post('/', async (req, res) => {
           // const post_id = url.split('-').pop();
 
           // slowMo: 1,
+
           browser = await puppeteer.connect({
-            browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
+            browserWSEndpoint: PLAYWRIGHT_DRIVER_URL,
             defaultViewport: { width: 1920, height: 1080 * 3 },
           });
           page = await browser.newPage();
@@ -93,8 +94,7 @@ router.post('/', async (req, res) => {
           await page.waitForSelector(selector);
           var { result } = await getFromEvaluateOuterHtml(jobPage, selector);
           var _jobDetailsHeaderRawHTML = result;
-          myLogger.error(_jobDetailsHeaderRawHTML)
-
+          myLogger.error(_jobDetailsHeaderRawHTML);
 
           var selector = 'div[data-automation="jobDetailsHeader"] span';
           await page.waitForSelector(selector);
@@ -143,7 +143,6 @@ router.post('/', async (req, res) => {
           jobDescription = jobDescription.replace(/\n +/g, '\n');
           jobDescription = jobDescription.replace(/\n+/g, '\n');
           jobDescription = jobDescription.replace(/ /g, ' ');
-
 
           var _jobDescriptionMd = htmlToMarkdown(_jobDescriptionRaw);
           fs.writeFileSync('/share/screenshot/hello-html.html', _jobDescriptionRaw, { encoding: 'utf8' });
