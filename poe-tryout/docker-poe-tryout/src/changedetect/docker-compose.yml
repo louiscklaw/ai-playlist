@@ -49,6 +49,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+      - PLAYWRIGHT_DRIVER_URL=ws://browserless-chrome:3000/?stealth=1&--disable-web-security=true
     env_file: ./.env
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']

@@ -1,18 +1,20 @@
-const fs = require('fs'),
-  path = require('path');
-const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
+const fs = require('fs');
+const path = require('path');
 
 const puppeteer = require('puppeteer-core');
-
 const express = require('express');
 const router = express.Router();
+
+const ERROR_LOG_DIR = `/logs/error/${path.basename(__filename).replace('.js', '')}`;
 
 const { getRandomInt } = require('../../utils/getRandomInt');
 const { myLogger } = require('../../utils/myLogger');
 const { createDirIfNotExists } = require('../../utils/createDirIfNotExists');
 const { calculateMD5 } = require('../../utils/calculateMD5');
 
-const BROWSERLESS_HOST = 'changedetection-chrome';
+const { PLAYWRIGHT_DRIVER_URL } = require('../../config');
+
+// const BROWSERLESS_HOST = 'changedetection-chrome';
 
 router.post('/search', async (req, res) => {
   var output = { state: 'init', debug: req.body, error: '' };
@@ -25,7 +27,7 @@ router.post('/search', async (req, res) => {
 
     myLogger.info('start browserless');
     browser = await puppeteer.connect({
-      browserWSEndpoint: `ws://${BROWSERLESS_HOST}:3000`,
+      browserWSEndpoint: PLAYWRIGHT_DRIVER_URL,
       defaultViewport: { width: 1920, height: 1080 * 3 },
     });
 
@@ -56,6 +58,7 @@ router.post('/search', async (req, res) => {
     const post_links = all_links.filter(l => l.search('-') > -1).sort();
 
     output = { ...output, state: 'done', post_links };
+    myLogger.info(JSON.stringify(output));
   } catch (error) {
     output = { ...output, state: 'error', error: JSON.stringify(error) };
 

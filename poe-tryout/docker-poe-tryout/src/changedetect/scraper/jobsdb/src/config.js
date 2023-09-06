@@ -2,6 +2,11 @@ const SRC_ROOT = __dirname;
 const SHARE_ROOT = '/share';
 const BROWSERLESS_HOST = 'link-extractor-chrome';
 const SCREENSHOT_ROOT = '/share/screenshot';
+const {PLAYWRIGHT_DRIVER_URL} = process.env;
+
+if (!PLAYWRIGHT_DRIVER_URL) {
+  throw new Error('PLAYWRIGHT_DRIVER_URL not set')
+}
 
 const {
   FLOW_HANDLER_ENDPOINT,
@@ -32,4 +37,6 @@ module.exports = {
   POE_SCHEDULER_API_ENDPOINT,
   OPENBOX_POE_SEAT1_ENDPOINT,
   OPENBOX_POE_SEAT2_ENDPOINT,
+
+  PLAYWRIGHT_DRIVER_URL
 };

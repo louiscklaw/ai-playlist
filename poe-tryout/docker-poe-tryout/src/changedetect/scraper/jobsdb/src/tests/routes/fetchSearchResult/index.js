@@ -1,12 +1,12 @@
 // const fetch = require('node-fetch');
-const rp = require('request-promise');
+const rp = require("request-promise");
 
 (async () => {
   // https://hk.jobsdb.com/hk/search-jobs/validation-automation-engineer/1
   var options = {
-    method: 'POST',
+    method: "POST",
     uri: `http://jobsdb-scraper:3000/fetchSearchResult/search`,
-    body: { search: ['validation', 'automation', 'engineer'] },
+    body: { search: ["validation", "automation", "engineer"] },
     json: true,
   };
 
