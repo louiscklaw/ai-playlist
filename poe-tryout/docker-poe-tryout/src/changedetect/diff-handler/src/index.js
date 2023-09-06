@@ -13,6 +13,7 @@ try {
   // app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
   // process diffs and route to entry point of flow-handler
   app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
+  app.use('/glassdoor_diff_handler', require('./routes/glassdoor_diff_handler'));
 
   app.use('/post_helloworld', require('./routes/post_helloworld'));
 
@@ -25,5 +26,5 @@ try {
   });
 } catch (error) {
   myLogger.error('error during starting express');
-  myLogger.error(JSON.stringify(error));
+  myLogger.error(error.message);
 }

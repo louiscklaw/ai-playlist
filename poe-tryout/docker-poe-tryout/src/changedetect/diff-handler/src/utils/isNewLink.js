@@ -7,9 +7,6 @@ const path = require('path');
 
 const SEVEN_DAYS = 3600 * 24 * 7;
 
-if (!process.env.REDIS_ENDPOINT_URI) throw new Error('ENV REDIS_ENDPOINT_URI is not configured');
-if (!process.env.REDIS_PASSWORD) throw new Error('ENV REDIS_PASSWORD is not configured');
-
 async function isNewLink(link_to_lookup, client) {
   // return true if it is a new link
   // return false if it is not a new link

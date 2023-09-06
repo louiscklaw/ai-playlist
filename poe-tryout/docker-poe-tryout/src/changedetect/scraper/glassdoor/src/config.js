@@ -1,10 +1,10 @@
 const SRC_ROOT = __dirname;
 const SHARE_ROOT = '/share';
 const SCREENSHOT_ROOT = '/share/screenshot';
-const {PLAYWRIGHT_DRIVER_URL} = process.env;
+const { PLAYWRIGHT_DRIVER_URL, PORT } = process.env;
 
 if (!PLAYWRIGHT_DRIVER_URL) {
-  throw new Error('PLAYWRIGHT_DRIVER_URL not set')
+  throw new Error('PLAYWRIGHT_DRIVER_URL not set');
 }
 
 const {
@@ -36,5 +36,6 @@ module.exports = {
   OPENBOX_POE_SEAT1_ENDPOINT,
   OPENBOX_POE_SEAT2_ENDPOINT,
 
-  PLAYWRIGHT_DRIVER_URL
+  PLAYWRIGHT_DRIVER_URL,
+  PORT,
 };

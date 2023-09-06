@@ -2,9 +2,12 @@ const SRC_ROOT = __dirname;
 const SHARE_ROOT = '/share';
 const SCREENSHOT_ROOT = '/share/screenshot';
 
-const {REDIS_PASSWORD} = process.env
-if (!REDIS_PASSWORD) throw new Error('REDIS_PASSWORD is not defined')
+const ERROR_LOG_DIR = '/logs/error/glassdoor_diff_handler';
 
+const { REDIS_PASSWORD } = process.env;
+if (!REDIS_PASSWORD) throw new Error('REDIS_PASSWORD is not defined');
+
+// .env
 const {
   FLOW_HANDLER_ENDPOINT,
   API_DEBUG_ENDPOINT,
@@ -19,6 +22,8 @@ const {
 } = process.env;
 
 if (!FLOW_HANDLER_ENDPOINT) throw new Error('FLOW_HANDLER_ENDPOINT is not configured');
+
+const { REDIS_ENDPOINT_URI } = `redis://:${REDIS_PASSWORD}@diff-handler-redis:6379`;
 
 module.exports = {
   SRC_ROOT,
@@ -37,4 +42,7 @@ module.exports = {
   OPENBOX_POE_SEAT2_ENDPOINT,
 
   REDIS_PASSWORD,
+  REDIS_ENDPOINT_URI,
+
+  ERROR_LOG_DIR,
 };
