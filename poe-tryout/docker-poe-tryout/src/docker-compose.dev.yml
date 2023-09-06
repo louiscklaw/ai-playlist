@@ -9,9 +9,9 @@ services:
   dbapi:
     command: ./entry.sh
 
-  glassdoor-scraper:
-    entrypoint: ./dev.sh
   diff-handler:
+    entrypoint: ./dev.sh
+  glassdoor-scraper:
     entrypoint: ./entry.sh
   jobsdb-scraper:
     entrypoint: ./entry.sh
