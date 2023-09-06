@@ -1,13 +1,6 @@
 const fetch = require('node-fetch');
 const { myLogger } = require('../../utils/myLogger');
 
-const body = {
-  jobs_id: 'blablabla',
-  job_post: 'we are employing a teacher',
-  preprompts: ['we are employing a teacher, understand ?'],
-  question_list: ['what is the post employing?'],
-};
-
 Array(1)
   .fill(0)
   .forEach(async (v, i) => {
@@ -16,7 +9,7 @@ Array(1)
     const response = await fetch('http://jobsdb-link-extractor:3000/helloworld');
 
     const res_text = await response.text();
-    myLogger.info('%o', { res_text });
+    myLogger.info(JSON.stringify(res_text));
   });
 
 console.log('helloworld');
