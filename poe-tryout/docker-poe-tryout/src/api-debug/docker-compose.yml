@@ -16,3 +16,10 @@ services:
       - mongo
 
     env_file: ./.env
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"

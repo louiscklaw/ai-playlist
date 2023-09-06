@@ -33,6 +33,13 @@ services:
       timeout: 10s
       retries: 5
 
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
+
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
     image: logickee/poe-tryout-jobsdb-scraper
@@ -93,6 +100,13 @@ services:
         condition: service_healthy
       jobsdb-scraper:
         condition: service_healthy
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.7"
+        reservations:
+          cpus: "0.01"
 
   diff-handler-redis:
     image: 192.168.10.61:5000/redis:6.0.20
