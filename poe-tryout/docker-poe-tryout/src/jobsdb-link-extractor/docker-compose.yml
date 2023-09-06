@@ -1,6 +1,5 @@
 services:
   jobsdb-link-extractor:
-    cpus: 0.2
     # build: ./jobsdb-link-extractor
     image: 192.168.10.61:5000/poe-tryout-jobsdb-link-extractor
     # image: logickee/poe-tryout-jobsdb-link-extractor
@@ -30,7 +29,6 @@ services:
       - link-extractor-chrome
 
   link-extractor-chrome:
-    cpus: 0.5
     image: browserless/chrome
     shm_size: '1gb'
     restart: unless-stopped

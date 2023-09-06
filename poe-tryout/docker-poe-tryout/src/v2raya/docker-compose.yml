@@ -1,6 +1,5 @@
 services:
   v2raya:
-    cpus: 0.2
     image: mzz2017/v2raya
     restart: unless-stopped
     privileged: true

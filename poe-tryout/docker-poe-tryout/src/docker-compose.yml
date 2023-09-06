@@ -4,7 +4,6 @@ networks:
 
 services:
   test:
-    cpus: 0.2
     image: node:latest
     command: sleep infinity
     working_dir: /src

@@ -3,7 +3,6 @@ volumes:
 
 services:
   redisinsight:
-    cpus: 0.2
     image: 192.168.10.61:5000/redislabs/redisinsight:latest
     # expose:
     #   - 8001
@@ -20,7 +19,6 @@ services:
       - TZ=Asia/Hong_Kong
 
   redis-test:
-    cpus: 0.2
     image: 192.168.10.61:5000/node:latest
     command: sleep infinity
     working_dir: /src

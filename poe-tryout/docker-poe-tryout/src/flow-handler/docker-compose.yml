@@ -1,6 +1,5 @@
 services:
   flow-handler:
-    cpus: 0.2
     # build: ./flow-handler
     image: 192.168.10.61:5000/poe-tryout-flow-handler
     # image: logickee/poe-tryout-flow-handler
