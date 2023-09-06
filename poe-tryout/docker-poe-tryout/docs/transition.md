@@ -5,13 +5,12 @@
 
 
 ### summarize (S_READY_SUMMARIZE)
-  
-  P: `forget everything and start a new talk`
-  P: 
-```
-I will input some text, 
-please summarize it in around 50 words
-```
+
+Preprompt:
+> forget everything and start a new talk
+
+> I will input some text, 
+> please summarize it in around 50 words
 
   Q:
 ``` 
