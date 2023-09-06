@@ -32,6 +32,9 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    depends_on:
+      diff-handler-redis:
+        condition: service_started
 
   glassdoor-scraper:
     # build: ./changedetect/glassdoor-scraper
