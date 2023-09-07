@@ -415,4 +415,4 @@
  :journal/page-title-format "EEE, yyyy/MM/dd"
  :editor/logical-outdenting? true
  :feature/enable-journals? false
- :graph/settings {:builtin-pages? false, :orphan-pages? true, :excluded-pages? true}}
+ :graph/settings {:builtin-pages? false, :orphan-pages? false, :excluded-pages? true}}
