@@ -86,7 +86,7 @@ async function chatGPTSolver(question_list, preprompts = []) {
     chat_history = { ...chat_history, state: 'error', error };
 
     var md5 = calculateMD5(error);
-    var content = JSON.stringify({ question_list, preprompts, error, chat_history });
+    var content = JSON.stringify({ question_list, preprompts, error:JSON.stringify(error), chat_history });
     var filename = `/logs/error/openbox-poe-seat/${md5}.json`;
     fs.writeFileSync(filename, content, { encoding: 'utf8' });
 
