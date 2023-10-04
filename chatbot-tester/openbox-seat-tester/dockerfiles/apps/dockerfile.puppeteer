@@ -1,0 +1,30 @@
+FROM logickee/openbox-seat-tester-apps
+
+ENV NODE_MAJOR=20
+
+RUN apt install -qy curl
+
+RUN apt-get update
+RUN apt-get install -y ca-certificates curl gnupg
+
+RUN mkdir -p /etc/apt/keyrings
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
+RUN apt update
+RUN apt install -qy nodejs npm
+RUN npm i -g yarn
+
+RUN mkdir -p /installed &&  touch /installed/puppeteer
+
+# RUN yarn add puppeteer-core
+
+# RUN  echo ' \n\
+# Package: * \n\
+# Pin: release o=LP-PPA-mozillateam \n\
+# Pin-Priority: 1001 \n\
+# ' | tee /etc/apt/preferences.d/mozilla-firefox
+
+# # # echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+# RUN apt update
+# RUN apt install -qy firefox
