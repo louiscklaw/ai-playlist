@@ -1,0 +1,19 @@
+{
+  "flow_handler_payloads": [
+    {
+      "jobsdb_job_url": "https://hk.jobsdb.com/changed)     /hk/en/job/qa-engineer-automation-100003010496802",
+      "callback_url": "http://flow-handler:3000/jobsdb_link_extract_cb"
+    },
+    {
+      "jobsdb_job_url": "https://hk.jobsdb.com/into)     /hk/en/job/qa-engineer-automation-100003010533674",
+      "callback_url": "http://flow-handler:3000/jobsdb_link_extract_cb"
+    }
+  ],
+  "req_body": {
+    "version": "1.0",
+    "title": "JOBSDB_FOUND_NEW_JOB-http://bait:8080/jobsdb/hk/en/job/list_jobsdb.html",
+    "message": "(added)     /hk/en/job/qa-engineer-automation-100003010496802\n(changed)     /hk/en/job/qa-engineer-automation-100003010496802\n(into)     /hk/en/job/qa-engineer-automation-100003010533674",
+    "attachments": [],
+    "type": "info"
+  }
+}

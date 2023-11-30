@@ -1,0 +1,9 @@
+{
+    "req_body": {
+        "version": "1.0",
+        "title": "ChangeDetection.io Notification - http://jobsdb-scraper:3000/fetchSearchResult/search",
+        "message": "(removed)         \"/hk/en/job/customer-service-engineer-cloud-100003010453840\",\n(removed)         \"/hk/en/job/devops-engineer-100003010518517\",\n(removed)         \"/hk/en/job/devops-engineer-100003010526893\",\n(added)         \"/hk/en/job/devops-engineer-100003010563793\",\n(added)         \"/hk/en/job/it-specialist-application-release-management-100003010565091\",\n(added)         \"/hk/en/job/senior-devops-engineer-devops-engineer-100003010563224\",\n(changed)         \"/hk/en/job/system-engineer-server-and-cloudops-aws-azure-permanent-%2450k-100003010562798\"\n(into)         \"/hk/en/job/technical-manager-devops-insurance-inhouse%3B-perm%3B-up-to-65k-2-month-bonus-100003010565742\"",
+        "attachments": [],
+        "type": "info"
+    }
+}

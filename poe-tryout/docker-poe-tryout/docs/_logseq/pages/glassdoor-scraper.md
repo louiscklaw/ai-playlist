@@ -1,0 +1,4 @@
+- handle glassdoor job list change
+-
+- ### related container:
+	- - [[glassdoor-link-extractor]]

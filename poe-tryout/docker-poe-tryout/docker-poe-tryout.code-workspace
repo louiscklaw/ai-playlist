@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "docker-poe-tryout",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.autoSave": "off",
+		"editor.tabSize": 2
+	}
+}

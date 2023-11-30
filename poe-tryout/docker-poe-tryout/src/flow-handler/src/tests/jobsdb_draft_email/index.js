@@ -16,7 +16,12 @@ and fresh graduates are welcome to apply.
 `.trim(),
 ];
 
-const SAMPLE_QUESTIONS = ['please help to draft a email describing where do you live. in less than 50 words'];
+const SAMPLE_QUESTIONS = [
+`
+Please help to draft a email describing where do you live in less than 50 words.\n
+Please output the content in Markdown format.
+`
+];
 
 const payload = {
   preprompts: SAMPLE_PREPROMPTS,

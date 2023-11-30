@@ -1,4 +1,29 @@
-## draft
+## overview
+
+![](./docs/overview.png)
+![](docs/images/hand_draft.jpg)
+
+## to start running
+
+```bash
+$ npm run dc_prod
+$ npm run dc_test
+
+#inside test container
+$ ./helloworld.sh
+
+# wait for all containers online
+# ? screen capture here ?
+
+# browse http://localhost:55000 -> change detect
+
+```
+
+### TODO:
+
+  - status dashboard ?
+  - better telegram message
+    - link directly
 
 
 ### redis
@@ -51,7 +76,7 @@ $ docker compose restart openbox-poe-seat1
 ![](./docs/graphs/1/graph.png)
 
 ### system design
-![](./docs/hand_draft.jpg)
+![](docs/images/hand_draft.jpg)
 
 ### component introduction
 
@@ -115,7 +140,7 @@ $ npm run docker_dev
 
 ### tackle cloudflare bot preventation 
   - so i change my path to using google-chrome
-![](./docs/tackle_cloudflare.png)
+![](docs/images/tackle_cloudflare.png)
 
 ```bash
 $ npm install puppeteer-extra puppeteer-extra-plugin-stealth
@@ -153,10 +178,10 @@ remember you a person live in hong kong named louis
 question
 what is this person name ?
 
-![](./docs/test_preprompt.gif)
+![](docs/images/test_preprompt.gif)
 
 ### google-palm tryout
-![](./docs/google-palm.gif)
+![](docs/images/google-palm-ask.gif)
 
 ### start
 

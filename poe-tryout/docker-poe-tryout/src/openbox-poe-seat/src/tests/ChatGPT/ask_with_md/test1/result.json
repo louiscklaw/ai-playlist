@@ -1,0 +1,30 @@
+{
+  "state": "ASK_DONE",
+  "input": {
+    "question_list": [
+      "draft me a \"#\" exampe in markdown, just show the markdown content is OK."
+    ]
+  },
+  "error": "",
+  "chat_history": {
+    "q_and_a": {
+      "preprompts": [],
+      "history": [
+        {
+          "question": "draft me a \"#\" exampe in markdown, just show the markdown content is OK.",
+          "answer": {
+            "reply": "Sure! Here's an example of a Markdown content with a \"#\" heading:\n Copy# Heading 1\n\nSome text goes here.\n\n## Heading 2\n\nMore text goes here.\n\n### Heading 3\n\nEven more text goes here.\n\nIn Markdown, the \"#\" symbol is used to create headings of different levels. The number of \"#\" symbols determines the level of the heading, with a single \"#\" symbol indicating the highest level (Heading 1). The example above includes headings of levels 1 to 3. You can add more text or modify the content as needed.",
+            "md_reply": [
+              "# Heading 1\n\nSome text goes here.\n\n## Heading 2\n\nMore text goes here.\n\n### Heading 3\n\nEven more text goes here.\n"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "json_input": {
+    "question_list": [
+      "draft me a \"#\" exampe in markdown, just show the markdown content is OK."
+    ]
+  }
+}

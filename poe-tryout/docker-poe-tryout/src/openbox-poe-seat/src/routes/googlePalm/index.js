@@ -11,6 +11,8 @@ puppeteer.use(StealthPlugin());
 require('dotenv').config();
 // const { FIREFOX_DATA_DIR, CHROME_DATA_DIR } = process.env;
 
+const { myLogger } = require('../../utils/myLogger');
+
 const { SRC_ROOT, UTILS_ROOT, WORKER_ROOT } = require('../../config');
 const { googlePalmSolver, testLanding } = require(`${WORKER_ROOT}/poe/googlePalm`);
 
@@ -67,6 +69,6 @@ router.get('/helloworld', (req, res) => {
   res.send('googlePalm Hello, World!');
 });
 
-console.log('init googlePalm worker');
+myLogger.info('init googlePalm worker');
 
 module.exports = router;

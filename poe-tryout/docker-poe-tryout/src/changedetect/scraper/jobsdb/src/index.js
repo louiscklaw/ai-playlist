@@ -1,9 +1,8 @@
-'use strict';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const PORT = 3000;
+const { myLogger } = require('./utils/myLogger');
+const { PORT } = require('./config');
 
 try {
   const app = express();
@@ -14,16 +13,18 @@ try {
 
   app.use('/fetchSearchResult', require('./routes/fetchSearchResult'));
 
-  app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
-  app.use('/post_helloworld', require('./routes/post_helloworld'));
+  // TODO: remove me ?
+  // app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
 
   app.use('/helloworld', require('./routes/helloworld'));
+  app.use('/healthcheck', require('./routes/healthcheck'));
+  app.use('/post_helloworld', require('./routes/post_helloworld'));
 
   // // Start the server
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log('error during starting express');
-  console.log(error);
+  myLogger.error('error during starting express');
+  myLogger.error(error.message);
 }

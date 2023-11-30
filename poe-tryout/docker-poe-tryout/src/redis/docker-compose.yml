@@ -1,24 +1,7 @@
 volumes:
-  redis_data:
   redisinsight_store:
 
 services:
-  redis:
-    image: 192.168.10.61:5000/redis:6.0.20
-    hostname: redis
-    # expose:
-    #   - 6379
-    ports:
-      - 16379:6379
-    volumes: 
-      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
-      - redis_data:/data
-    command: redis-server --save 5 1 --loglevel debug --dir /data
-    restart: always
-    environment:
-      - TZ=Asia/Hong_Kong
-      - ALLOW_EMPTY_PASSWORD=yes
-
   redisinsight:
     image: 192.168.10.61:5000/redislabs/redisinsight:latest
     # expose:
@@ -29,7 +12,8 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - redisinsight_store:/db
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
@@ -45,3 +29,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+    depends_on:
+      redis:
+        condition: service_healthy
+    env_file: ./.env

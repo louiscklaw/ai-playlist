@@ -1,0 +1,24 @@
+FROM logickee/openbox-teamprompt-seat-apps
+
+
+RUN apt install -qy curl
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+
+RUN apt update
+RUN apt install -qy nodejs
+RUN npm i -g yarn
+
+RUN mkdir -p /installed &&  touch /installed/puppeteer
+
+# RUN yarn add puppeteer-core
+
+# RUN  echo ' \n\
+# Package: * \n\
+# Pin: release o=LP-PPA-mozillateam \n\
+# Pin-Priority: 1001 \n\
+# ' | tee /etc/apt/preferences.d/mozilla-firefox
+
+# # # echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+# RUN apt update
+# RUN apt install -qy firefox

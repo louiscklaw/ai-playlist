@@ -16,7 +16,7 @@ const myLogger = winston.createLogger({
   format: combine(
     format.colorize(),
     splat(),
-    label({ label: 'api-debug' }),
+    label({ label: 'flow-handler' }),
     timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     myFormat,
   ),

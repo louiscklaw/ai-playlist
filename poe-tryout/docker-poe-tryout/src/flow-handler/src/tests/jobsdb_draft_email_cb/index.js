@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+require('./prepare');
+
 // NOTE: expecting calling from poe-scheduler to flow-handler
 
 const payload = {
@@ -49,6 +51,9 @@ Array(1)
   .fill(0)
   .forEach(async (v, i) => {
     console.log(`posting ask ${i}...`);
+
+    // prepare meta json for test
+    // /share/100003010533674/meta.json
 
     const response = await fetch('http://flow-handler:3000/jobsdb_draft_email_cb', {
       method: 'post',

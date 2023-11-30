@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const { myLogger } = require('./utils/myLogger');
 
 const PORT = 3000;
 
@@ -12,15 +13,18 @@ try {
   // app.use('/jobsdbPostExtract', require('./routes/jobsdbPostExtract'));
   // process diffs and route to entry point of flow-handler
   app.use('/jobsdb_diff_handler', require('./routes/jobsdb_diff_handler'));
+  app.use('/glassdoor_diff_handler', require('./routes/glassdoor_diff_handler'));
 
   app.use('/post_helloworld', require('./routes/post_helloworld'));
+
   app.use('/helloworld', require('./routes/helloworld'));
+  app.use('/healthcheck', require('./routes/healthcheck'));
 
   // // Start the server
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    myLogger.info(`Server is running on port ${PORT}`);
   });
 } catch (error) {
-  console.log('error during starting express');
-  console.log(error);
+  myLogger.error('error during starting express');
+  myLogger.error(error.message);
 }

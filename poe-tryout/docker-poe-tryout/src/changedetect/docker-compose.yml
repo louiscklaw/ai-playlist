@@ -1,23 +1,37 @@
 volumes:
   changedetection_data:
+  diff_handler_redis:
 
 services:
   # NOTE: phrase out
   diff-handler:
     # build: ./changedetect/diff-handler
-    image: logickee/poe-tryout-diff-handler
+    image: 192.168.10.61:5000/poe-tryout-diff-handler
+    # image: logickee/poe-tryout-diff-handler
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/diff-handler/src:/app
       - ./volumes/changedetect/diff-handler:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3052:3000
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+      - REDIS_ENDPOINT_URI=redis://diff-handler-redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    # depends_on:
+    #   jobsdb-scraper:
+    #     condition: service_healthy
+    env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   jobsdb-scraper:
     # build: ./changedetect/jobsdb-scraper
@@ -26,14 +40,22 @@ services:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
       - ./changedetect/scraper/jobsdb/src:/app
       - ./volumes/changedetect/jobsdb-scraper:/share
+      - ./volumes/logs:/logs
     working_dir: /app
     ports:
       - 3054:3000
-    command: ./entry.sh
+    entrypoint: ./entry.sh
     # command: sleep infinity
     restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
+      - PLAYWRIGHT_DRIVER_URL=ws://browserless-chrome:3000/?stealth=1&--disable-web-security=true
+    env_file: ./.env
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/healthcheck']
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
@@ -51,7 +73,7 @@ services:
       - PORT=5000
       - PUID=1000
       - PGID=1000
-      - PLAYWRIGHT_DRIVER_URL=ws://changedetection-chrome:3000/?stealth=1&--disable-web-security=true
+      - PLAYWRIGHT_DRIVER_URL=ws://browserless-chrome:3000/?stealth=1&--disable-web-security=true
       # An exclude list (useful for notification URLs above) can be specified by with
       - NO_PROXY="localhost,192.168.10.0/24"
       # Hides the `Referer` header so that monitored websites can't see the changedetection.io hostname.
@@ -59,35 +81,57 @@ services:
 
     # Comment out ports: when using behind a reverse proxy , enable networks: etc.
     ports:
-      - 5000:5000
+      - 55000:5000
     restart: unless-stopped
 
     # If WEBDRIVER or PLAYWRIGHT are enabled, changedetection container depends on that
-    # and must wait before starting (substitute "browser-chrome" with "changedetection-chrome" if last one is used)
+    # and must wait before starting (substitute "browser-chrome" with "browserless-chrome" if last one is used)
     depends_on:
-      changedetection-chrome:
+      browserless-chrome:
         condition: service_started
+      diff-handler:
+        condition: service_healthy
+      jobsdb-scraper:
+        condition: service_healthy
 
-  changedetection-chrome:
-    #  hostname: changedetection-chrome
-    image: browserless/chrome
-    shm_size: '2gb'
+  diff-handler-redis:
+    image: 192.168.10.61:5000/redis:6.0.20
+    hostname: diff-handler-redis
+    volumes: 
+      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      - diff_handler_redis:/data
+    command: redis-server --save 5 1 --loglevel warning --dir /data --requirepass ${REDIS_PASSWORD}
     restart: unless-stopped
-    ports:
-      - 3053:3000
+    restart: unless-stopped
     environment:
       - TZ=Asia/Hong_Kong
-      - SCREEN_WIDTH=1920
-      - SCREEN_HEIGHT=1024
-      - SCREEN_DEPTH=16
-      - ENABLE_DEBUGGER=false
-      - PREBOOT_CHROME=true
-      - CONNECTION_TIMEOUT=300000
-      - MAX_CONCURRENT_SESSIONS=10
-      - CHROME_REFRESH_TIME=600000
-      - DEFAULT_BLOCK_ADS=true
-      - DEFAULT_STEALTH=true
-      # Ignore HTTPS errors, like for self-signed certs
-      - DEFAULT_IGNORE_HTTPS_ERRORS=true
-    volumes:
-      - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
+      - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  # changedetection-chrome:
+  #   #  hostname: changedetection-chrome
+  #   image: browserless/chrome
+  #   shm_size: '1gb'
+  #   restart: unless-stopped
+  #   ports:
+  #     - 3053:3000
+  #   environment:
+  #     - TZ=Asia/Hong_Kong
+  #     - SCREEN_WIDTH=1920
+  #     - SCREEN_HEIGHT=1024
+  #     - SCREEN_DEPTH=16
+  #     - ENABLE_DEBUGGER=false
+  #     - PREBOOT_CHROME=true
+  #     - CONNECTION_TIMEOUT=300000
+  #     - MAX_CONCURRENT_SESSIONS=10
+  #     - CHROME_REFRESH_TIME=600000
+  #     - DEFAULT_BLOCK_ADS=true
+  #     - DEFAULT_STEALTH=true
+  #     # Ignore HTTPS errors, like for self-signed certs
+  #     - DEFAULT_IGNORE_HTTPS_ERRORS=true
+  #   volumes:
+  #     - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
