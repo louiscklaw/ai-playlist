@@ -1,0 +1,12 @@
+# FROM ubuntu:22.04
+FROM logickee/openbox-teamprompt-seat-base
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN ln -fs /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+
+RUN sed -i 's/\/\/archive\.ubuntu\.com/\/\/hk\.archive\.ubuntu\.com/g' /etc/apt/sources.list && \
+  sed -i 's/\/\/security\.ubuntu\.com/\/\/hk\.archive\.ubuntu\.com/g' /etc/apt/sources.list
+
+RUN apt update 
+
+RUN mkdir -p /installed &&  touch /installed/ubuntu

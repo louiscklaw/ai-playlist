@@ -14,10 +14,3 @@ services:
     environment:
       - TZ=Asia/Hong_Kong
     env_file: ./.env
-
-    deploy:
-      resources:
-        limits:
-          cpus: "0.7"
-        reservations:
-          cpus: "0.01"

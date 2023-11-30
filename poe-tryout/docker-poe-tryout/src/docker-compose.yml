@@ -6,9 +6,8 @@ networks:
 
 services:
   test:
-    # image: node:latest
-    # entrypoint: sleep infinity
-    build: ./tests
+    image: node:latest
+    command: sleep infinity
     working_dir: /src
     volumes:
       - /usr/share/zoneinfo/Asia/Hong_Kong:/etc/localtime:ro
@@ -23,23 +22,9 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     env_file: ./.env
 
-    deploy:
-      resources:
-        limits:
-          cpus: "0.7"
-        reservations:
-          cpus: "0.01"
-
   busybox: 
     image: busybox 
     command: sleep infinity
-
-    deploy:
-      resources:
-        limits:
-          cpus: "0.7"
-        reservations:
-          cpus: "0.01"
 
   #   build: ./docker-ubuntu2
   # ubuntu3:

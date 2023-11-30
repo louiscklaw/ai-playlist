@@ -13,10 +13,3 @@ services:
     user: 1000:1000
     restart: unless-stopped
     env_file: ./.env
-
-    deploy:
-      resources:
-        limits:
-          cpus: "0.7"
-        reservations:
-          cpus: "0.01"

@@ -23,10 +23,3 @@ services:
       interval: 10s
       timeout: 10s
       retries: 10
-
-    deploy:
-      resources:
-        limits:
-          cpus: "0.7"
-        reservations:
-          cpus: "0.01"
