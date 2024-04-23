@@ -1,2 +1,8 @@
 *__pycahce__*
 *.pyc
+**/*pt
+*pt
+
+
+# models handled by huggingface
+models
