@@ -3,6 +3,7 @@
 **/*pt
 *pt
 
+runs/detect/train*
 
 # models handled by huggingface
 models
