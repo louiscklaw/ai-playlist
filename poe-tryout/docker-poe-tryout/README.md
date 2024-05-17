@@ -1,7 +1,10 @@
 ## overview
 
-![](./docs/overview.png)
-![](docs/images/hand_draft.jpg)
+- block diagram
+  ![](block_diag.jpg)
+
+- old draft
+  ![](docs/images/hand_draft.jpg)
 
 ## to start running
 
@@ -21,36 +24,31 @@ $ ./helloworld.sh
 
 ### TODO:
 
-  - status dashboard ?
-  - better telegram message
-    - link directly
-
+- status dashboard ?
+- better telegram message
+  - link directly
 
 ### redis
 
 docker compose -f ./docker-compose.gen.yml \
-  exec -it redis bash
+ exec -it redis bash
 
 redis-cli config set dir /data
-
 
 https://hk.jobsdb.com/hk/en/job/quality-engineer-100003010347214
 https://hk.jobsdb.com/hk/en/job/validation-assistant-100003010509868
 
 https://hk.jobsdb.com/hk/search-jobs/validation
 
-
 ### considerations:
-  - multithreaded
-    - if using puppeteer + express solution, the scheduler possibility need to implement by myself aswell
-    - use browserless to avoid implementing scheduler
-    
 
+- multithreaded
+  - if using puppeteer + express solution, the scheduler possibility need to implement by myself aswell
+  - use browserless to avoid implementing scheduler
 
-### v2raya in the middle, i add the proxy function to puppeteer already. 
-  - the remaining part should be integrate it into the main openbox-poe-seat program.
+### v2raya in the middle, i add the proxy function to puppeteer already.
 
-
+- the remaining part should be integrate it into the main openbox-poe-seat program.
 
 ### reseed user profile for google chrome
 
@@ -71,11 +69,10 @@ $ docker compose restart openbox-poe-seat1
 
 ```
 
-
-
 ![](./docs/graphs/1/graph.png)
 
 ### system design
+
 ![](docs/images/hand_draft.jpg)
 
 ### component introduction
@@ -87,8 +84,8 @@ $ tree -L 3 -d -a
 .
 ├── docs                          ( documentation )
 ├── _seeds                        ( seed for openbox-firefox )
-│   └── chrome-user-data-seed                        
-└── src                               
+│   └── chrome-user-data-seed
+└── src
     ├── bait                      ( hosting self bait page )
     ├── changedetect              ( changedetect container home )
     ├── dbapi                     ( dbapi container home )
@@ -101,23 +98,26 @@ $ tree -L 3 -d -a
 ```
 
 ### tags
-  - ai training ( poe / chatGPT / googlePalm)
-  - api testing ( expressjs )
-  - stealthing / automation / puppeteer
-  - ui testing (google chrome / chromium / firefox )
-  - stealthing
-  - queueing / state machine
-  - changedetect / browserless
-  - jobsdb
+
+- ai training ( poe / chatGPT / googlePalm)
+- api testing ( expressjs )
+- stealthing / automation / puppeteer
+- ui testing (google chrome / chromium / firefox )
+- stealthing
+- queueing / state machine
+- changedetect / browserless
+- jobsdb
 
 ### endpoints
-  - poe-scheduler
-    - /chatGPT/helloworld      ( poe chatGPT helloworld self-test )
-    - /chatGPT/ask             ( ask poe/chatGPT )
-    - /googlePalm/helloworld   ( poe/googlePalm helloworld self-test )
-    - /googlePalm/ask          ( ask poe/googlePalm )
+
+- poe-scheduler
+  - /chatGPT/helloworld ( poe chatGPT helloworld self-test )
+  - /chatGPT/ask ( ask poe/chatGPT )
+  - /googlePalm/helloworld ( poe/googlePalm helloworld self-test )
+  - /googlePalm/ask ( ask poe/googlePalm )
 
 ### steps to develop
+
 ```bash
 # in project root
 $ cp .env.example .env
@@ -128,19 +128,20 @@ $ ./build_image.sh
 $ ./push.sh
 # openbox-poe-seat build done
 
-$ npm run docker_dev 
+$ npm run docker_dev
 ```
 
-  - start firefox, import mitm certificate
-  - mitm is not used at the moment
-  - test poe login state by start_firefox.sh
-  - start ./test.sh at openbox-firefox container
-  - to ensuore you are good to go
-    - run `/workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src/tests/ChatGPT/ask_helloworld/test.sh` -> the simpleest helloworld question to poe chatgpt
+- start firefox, import mitm certificate
+- mitm is not used at the moment
+- test poe login state by start_firefox.sh
+- start ./test.sh at openbox-firefox container
+- to ensuore you are good to go
+  - run `/workspace/ai-playlist/poe-tryout/docker-poe-tryout/src/openbox-firefox/src/tests/ChatGPT/ask_helloworld/test.sh` -> the simpleest helloworld question to poe chatgpt
 
-### tackle cloudflare bot preventation 
-  - so i change my path to using google-chrome
-![](docs/images/tackle_cloudflare.png)
+### tackle cloudflare bot preventation
+
+- so i change my path to using google-chrome
+  ![](docs/images/tackle_cloudflare.png)
 
 ```bash
 $ npm install puppeteer-extra puppeteer-extra-plugin-stealth
@@ -152,7 +153,6 @@ $ npm install puppeteer-extra puppeteer-extra-plugin-stealth
 $ build.sh
 
 ```
-
 
 ### useful links
 
@@ -167,10 +167,10 @@ $ build.sh
       C-->D;
 ```
 
-
 ### preprompt tryout
 
 ### test 1 (testing on chatGPT)
+
 preprompt
 start a fresh talk
 remember you a person live in hong kong named louis
@@ -181,6 +181,7 @@ what is this person name ?
 ![](docs/images/test_preprompt.gif)
 
 ### google-palm tryout
+
 ![](docs/images/google-palm-ask.gif)
 
 ### start
@@ -196,24 +197,24 @@ $ docker compose restart mongo-express
 
 ### to run script inside src directory
 
-
 ### high level design
-  1. fetch (HLD)
-  1. draft (HLD)
-  1. review (HLD)
-  1. send (HLD)
 
+1. fetch (HLD)
+1. draft (HLD)
+1. review (HLD)
+1. send (HLD)
 
 ### References:
-  - https://github.com/f/awesome-chatgpt-prompts
-  - https://florianholzapfel.github.io/express-restify-mongoose
 
+- https://github.com/f/awesome-chatgpt-prompts
+- https://florianholzapfel.github.io/express-restify-mongoose
 
 ### logs
-  - 2023-08-01: add expres database to store log
-    - draft google-palm support
-    - update pre-prompt
 
+- 2023-08-01: add expres database to store log
+  - draft google-palm support
+  - update pre-prompt
 
 ### TODO:
-  - docker-compse.production.yml
+
+- docker-compse.production.yml
