@@ -1,0 +1,10 @@
+services:
+  coze_proxy:
+    build: .
+    image: bincooo/chatgpt-adapter:latest
+    restart: always
+    ports:
+      - "8089:8080"
+    volumes:
+      - ./config.yaml:/app/config.yaml
+      - ./test.sh:/app/test.sh
